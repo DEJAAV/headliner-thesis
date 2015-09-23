@@ -16,8 +16,8 @@
 
     $stateProvider
       .state('signup', {
-        templateUrl: 'app/auth/signup.html',
-        url: '/signup',
+        templateUrl: 'app/auth/signup-talent.html',
+        url: '/signup-talent/',
         controller: 'AuthController'
       })
       .state('landing', {
