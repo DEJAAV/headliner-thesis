@@ -1,11 +1,11 @@
 (function(){
 
   angular.module('headliner', [
+    'headliner.index',
     'headliner.service',
-    // 'headliner.auth', uncomment when auth.ctrl.js is done JW
+    'headliner.auth', 
     'ngRoute',
-    'ui.router',
-    'timer'
+    'ui.router'
   ])
   .config(config)
   .factory('AttachTokens', AttachTokens);

@@ -17,13 +17,13 @@
           <p ng-show="signForm.password.$error.required && signForm.password.$dirty" class="help-block">Password is required.</p>
           </br>
 
-          <!-- submmit button and signin option -->
+          <!-- submmit button and login option -->
           <div class="wrapper">
             <span class="group-btn">     
               <button class="btn btn-primary btn-block" ng-click="signup()" ng-disabled="signForm.$invalid">Signup <i class="fa fa-sign-in"></i></button>
             </span>
             <br>
-            <a href="#/signin">Already have an account? <strong>Signin</strong>...</a> 
+            <a href="#/login">Already have an account? <strong>login</strong>...</a> 
             <br>
             <p class="alert alert-danger" ng-if="user.err">{{ user.err }}</p>
           </div>

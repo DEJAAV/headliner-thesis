@@ -17,7 +17,7 @@
           // set user's localstorage token to allow user to be authorized to browser other web pages
           // also direct user to create their first project
           $window.localStorage.setItem('headliner', token);
-          $location.path('/create');
+          $location.path('/login');
         })
         .catch(function(error){
           console.log("error", error)
@@ -37,9 +37,9 @@
           // if user does not have WIP project, direct user to create a project
           $window.localStorage.setItem('headliner', data.token);
           if ( !!data.hasWIP ) {
-            $location.path('/dashboard');
+            $location.path('/landing');
           } else {
-            $location.path('/create');
+            $location.path('/landing');
           }
         })
         .catch(function(error) {
