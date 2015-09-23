@@ -1,7 +1,6 @@
 (function(){
 
   angular.module('headliner', [
-    'headliner.index',
     'headliner.service',
     'headliner.auth', 
     'ngRoute',
