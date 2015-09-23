@@ -31,3 +31,6 @@ bower_components/
 
 # Auth
 server/auth.js
+
+# Grayscale Bootstrap
+client/grayscale/
