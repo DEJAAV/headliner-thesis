@@ -17,7 +17,7 @@
 
   function config($routeProvider, $httpProvider, $stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/landing');
 
     $stateProvider
       .state('signup', {
@@ -25,43 +25,18 @@
         url: '/signup',
         controller: 'AuthController'
       })
-      .state('home', {
-        templateUrl: 'app/auth/home.html',
-        url: '/home',
+      .state('landing', {
+        templateUrl: 'app/auth/landing.html',
+        url: '/landing',
         controller: 'AuthController'
       })
       .state('signin', {
         templateUrl: 'app/auth/signin.html',
         url: '/signin',
         controller: 'AuthController'
-      })
-      .state('create', {
-        templateUrl: 'app/create/create.html',
-        url: '/create',
-        controller: 'CreateController'
-      })
-      .state('start', { //possibly remove (from previous group)
-        templateUrl: 'app/current/start.html',
-        url: '/start',
-        controller: 'CurrentController'
-      })
-      .state('current', {
-        templateUrl: 'app/current/current.html',
-        url: '/current',
-        controller: 'CurrentController'
-      })
-      .state('open', {
-        templateUrl: 'app/open/open.html',
-        url: '/open',
-        controller: 'OpenController'
-      })
-      .state('closed', {
-        templateUrl: 'app/closed/closed.html',
-        url: '/closed',
-        controller: 'ClosedController'
-      })            
+      })           
       .state('signout', {
-        templateUrl: 'app/auth/home.html',
+        templateUrl: 'app/auth/landing.html',
         url: '/signout',
         controller: 'AuthController',
         resolve: {function (Auth) {
