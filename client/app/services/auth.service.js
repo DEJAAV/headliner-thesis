@@ -20,11 +20,11 @@
       });
     };
 
-    // signin require server send over data with token and hasWIP and hand them over to controller
-    function signin (user) {
+    // login require server send over data with token and hasWIP and hand them over to controller
+    function login (user) {
       return $http({
         method: 'POST',
-        url: '/users/signin',
+        url: '/users/login',
         data: user
       })
       .then(function(resp) {
@@ -45,7 +45,7 @@
 
     return {
       signup: signup,
-      signin: signin,
+      login: login,
       isAuth: isAuth,
       signout: signout
     };

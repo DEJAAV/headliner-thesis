@@ -2,12 +2,7 @@
 
   angular.module('headliner', [
     'headliner.service',
-    'headliner.auth',
-    'headliner.create',
-    'headliner.current',
-    'headliner.open',
-    'headliner.closed',
-    'headliner.index',
+    // 'headliner.auth', uncomment when auth.ctrl.js is done JW
     'ngRoute',
     'ui.router',
     'timer'
@@ -30,9 +25,9 @@
         url: '/landing',
         controller: 'AuthController'
       })
-      .state('signin', {
-        templateUrl: 'app/auth/signin.html',
-        url: '/signin',
+      .state('login', {
+        templateUrl: 'app/auth/login.html',
+        url: '/login',
         controller: 'AuthController'
       })           
       .state('signout', {
