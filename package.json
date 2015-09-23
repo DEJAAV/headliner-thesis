@@ -1,0 +1,30 @@
+{
+  "name": "headliner",
+  "version": "1.0.0",
+  "description": "venue finder for bands",
+  "main": "index.js",
+  "dependencies": {
+    "chai": "^3.3.0",
+    "express": "^4.13.3",
+    "knex": "^0.8.6",
+    "passport": "^0.3.0",
+    "pg": "^4.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DEJAAV/Headliner.git"
+  },
+  "keywords": [
+    "headliner"
+  ],
+  "author": "dejaav",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DEJAAV/Headliner/issues"
+  },
+  "homepage": "https://github.com/DEJAAV/Headliner#readme"
+}
