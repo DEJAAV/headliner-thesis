@@ -6,7 +6,7 @@
       <div class="col-md-6">
         <div class="form-login">
           <h3>ARTIST SIGN UP FORM</h3>
-          <form name="signForm">
+          <form name="signUpForm" ng-submit="Auth.register()" role="artist-signUp">
             <!-- username input-->
             <label for="username">Username: </label>
             <input name="username" type="text"  class="form-control input-sm chat-input" placeholder="username" ng-model="user.username" required/>
@@ -14,6 +14,16 @@
             <label for="password">Password: </label>
             <input name="password" type="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" ng-model="user.password" required/>
             <br>
+            <label for="email">Email Address: </label>
+            <input name="artist-email" type="text" class="form-control input-sm chat-input" placeholder="email address" ng-model="user.email" required/>
+            <br>
+            <label for="phone number">Phone Number: </label>
+            <input name="phoneNum" type="text" class="form-controller input-sm chat-input" placeholder="valid phone number" ng-model="user.phoneNum" required/>
+            <br>
+            <label for="artist location">Artist Name: </label>
+            <input name="artist-name" type="text" class="form-controller input-sm chat-input" placeholder="artist name" ng-model="user.artistName" required/>
+            <br>  
+
 
   <!-- form sections to add in: on tour, genre, location, band name, band type, email, phone number, record label, facebook, soundcloud, youtube, website, aboutus -->
             
@@ -23,7 +33,7 @@
 
             <div class="wrapper">
               <span class="group-btn">     
-                <button class="btn btn-primary btn-block" ng-click="signup()" ng-disabled="signForm.$invalid">Create Artist Profile</button>
+                <button class="btn btn-primary btn-block" ng-click="signup()" ng-disabled="signUpForm.$invalid">Create Artist Profile</button>
               </span>
               <br> 
               <br>
