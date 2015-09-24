@@ -5,92 +5,225 @@
       </div>
       <div class="col-md-6">
         <div class="form-login">
+          
           <h3>VENUE SIGN UP FORM</h3>
 
+          <!-- Sign up with Facebook Option -->
           <div class="wrapper">
             <span class="group-btn">     
               <button class="btn btn-primary btn-block" ng-click="" ng-disabled="signForm.$invalid">Sign Up with Facebook</button>
             </span>
           </div>
           <br>
+          
+          <hr><!-- add in an - OR - seperator -->
 
-          <!-- add in an - OR - seperator -->
-
+          <!-- Start of User Sign Up Form (w/o Facebook) -->
           <form name="signForm">
             <!-- username input-->
             <h3>Create an Account: </h3>
             <br>
             
             <label for="username">Username: </label>
-            <input name="username" type="text"  class="form-control input-sm chat-input" placeholder="username" ng-model="user.username" required/>
+              <input name="username" type="text"  class="form-control input-sm chat-input" placeholder="username" ng-model="user.username" required/>
             <br>
             <label for="password">Password: </label>
-            <input name="password" type="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" ng-model="user.password" required/>
+              <input name="password" type="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" ng-model="user.password" required/>
             <br>
-
+            
+            <hr>
+            
             <h3>Basic Venue Info: </h3>
             <br>
             
             <label for="name">Name: </label>
-            <input name="name" type="text"  class="form-control input-sm chat-input" placeholder="name" ng-model="user.name" required/>
+              <input name="name" type="text"  class="form-control input-sm chat-input" placeholder="name" ng-model="user.name" required/>
             <br>
-           
-            <label for="street">Address:</label>
-            <input name="street" type="text" id="userStreet" class="form-control input-sm chat-input" placeholder="street" ng-model="user.street" required/>
+            <label for="street">Venue Address:</label>
+              <input name="street" type="text" id="userStreet" class="form-control input-sm chat-input" placeholder="street" ng-model="user.street" required/>
             <br>
-            <input name="city" type="text" id="userCity" class="form-control input-sm chat-input" placeholder="city" ng-model="user.city" required/>
+              <input name="city" type="text" id="userCity" class="form-control input-sm chat-input" placeholder="city" ng-model="user.city" required/>
             <br>
-            <input name="state" type="text" id="userState" class="form-control input-sm chat-input" placeholder="state" ng-model="user.state" required/>
+              <input name="state" type="text" id="userState" class="form-control input-sm chat-input" placeholder="state" ng-model="user.state" required/>
             <br>
-            <input name="zip" type="text" id="userZip" class="form-control input-sm chat-input" placeholder="zip" ng-model="user.zip" required/>
+              <input name="zip" type="text" id="userZip" class="form-control input-sm chat-input" placeholder="zip" ng-model="user.zip" required/>
             <br>
-
+          
+            <hr>
+            
             <h3>About Your Venue: </h3>
             <br>
 
-            <label for="capacity">Venue Capacity</label>
-            <input name="capacity" type="number" id="userCapacity" class="form-control input-sm chat-input" placeholder="capacity" ng-model="user.capacity" required/>
+            <label for="capacity">Venue Capacity: </label>
+              <input name="capacity" type="number" id="userCapacity" class="form-control input-sm chat-input" placeholder="capacity" ng-model="user.capacity" required/>
             <br>  
-            <label for="genre">Music Genres</label> 
-            <input name="genre" type="text" id="userGenre" class="form-control input-sm chat-input" placeholder="genre, will be checkbox" ng-model="user.genre" required/>
-            <br>    
-            <label for="about_us">Tell us a bit more about your venue:</label> 
-            <input name="about_us" type="text" id="userAboutUs" class="form-control input-sm chat-input" placeholder="Brief bio about your venue" ng-model="user.about_us" required/>
+
+            <!-- GENRE CHECKBOXES -->
+            <label>Music Genres:</label>
+              <div class="form-group">
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre"/>Americana
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre"/>Blues
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre"/>Bluegrass
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre"/>Classical
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre"/>Comedy
+                  </label>  
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre"/>Country
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre"/>DJ
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre"/>EDM
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre"/>Electronic
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre"/>Folk
+                  </label>   
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre"/>Hip Hop
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre"/>Jazz
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre"/>Latin
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre"/>Metal
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre"/>Pop
+                  </label>   
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre"/>R&B
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre"/>Rock
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre"/>Spoken Word
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre"/>World
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre"/>Other
+                  </label>                                                         
+              </div>
+              <br>          
+              <!-- END OF GENRE CHECKBOXES -->
+
+            <!-- About Us Expandable Text Box  -->    
+            <label for="about_us">About your venue:</label> 
+              <textarea name="about" type="text" id="userAboutUs" class="form-control input-sm chat-input" placeholder="Brief bio about your venue" ng-model="user.about" required></textarea>
+            <br>
+
+            <!-- VENUE TYPE CHECKBOXES -->
+            <label>Type of Venue:</label>
+              <div class="form-group">
+                  <label class="checkbox">
+                      <input type="checkbox" name="userType" ng-model="user.type"/>Casual Bar
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userType" ng-model="user.type"/>Beer Garden
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userType" ng-model="user.type"/>Champagne Bar
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userType" ng-model="user.type"/>Cocktail Bar
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userType" ng-model="user.type"/>Country Dance Hall
+                  </label>  
+                  <label class="checkbox">
+                      <input type="checkbox" name="userType" ng-model="user.type"/>Dance Club
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userType" ng-model="user.type"/>Dive Bar
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userType" ng-model="user.type"/>Gay/Lesbian Bar
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userType" ng-model="user.type"/>Hookah Bar
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userType" ng-model="user.type"/>Irish Pub
+                  </label>   
+                  <label class="checkbox">
+                      <input type="checkbox" name="userType" ng-model="user.type"/>Jazz/Blues Bar
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userType" ng-model="user.type"/>Karoke
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userType" ng-model="user.type"/>Late Night Coffee Shop
+                  </label>
+                  <label class="checkbox">                  
+                      <input type="checkbox" name="userType" ng-model="user.type"/>Lounge
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userType" ng-model="user.type"/>Music Venue
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userType" ng-model="user.type"/>Piano Bar 
+                  </label>   
+                  <label class="checkbox">
+                      <input type="checkbox" name="userType" ng-model="user.type"/>Wine Bar
+                  </label>                                                        
+              </div>
+              <br>          
+              <!-- END OF VENUE TYPE CHECKBOXES -->
+
+            <label for="inout">Indoor or Outdoor:</label>
             <br> 
-            <label for="type">Venue Type:</label> 
-            <input name="type" type="text" id="userType" class="form-control input-sm chat-input" placeholder="type of venue, will be check boxes" ng-model="user.type" required/>
-            <br>  
-            <label for="inout">Indoor or Outdoor:</label> 
-            <input name="inout" type="text" id="userInOut" class="form-control input-sm chat-input" placeholder="indoor outdoor, will be radios" ng-model="user.inout" required/>
+              <input name="inout" type="radio" ng-model="user.inout" value="Indoor"/> Indoor
+              <input name="inout" type="radio" ng-model="user.inout" value="Indoor"/> Outdoor
+              <input name="inout" type="radio" ng-model="user.inout" value="Indoor"/> Both
             <br>                                         
+            
+            <hr>
 
             <h3>Contact Info: </h3>
             <br>
             <label for="contact">Contact Name: </label>
-            <input name="contact" type="text"  class="form-control input-sm chat-input" placeholder="Contact Name" ng-model="user.contact" required/>
+              <input name="contact" type="text"  class="form-control input-sm chat-input" placeholder="Contact Name" ng-model="user.contact" required/>
             <br>
             <label for="phone">Contact Phone Number: </label>
-            <input name="phone" type="text"  class="form-control input-sm chat-input" placeholder="phone number" ng-model="user.phone" required/>
+              <input name="phone" type="text"  class="form-control input-sm chat-input" placeholder="Phone Number" ng-model="user.phone" required/>
             <br>
             <label for="email">Contact Email Address: </label>
-            <input name="email" type="email"  class="form-control input-sm chat-input" placeholder="email" ng-model="user.email" required/>
+              <input name="email" type="email"  class="form-control input-sm chat-input" placeholder="Email" ng-model="user.email" required/>
             <br>                        
-
+<hr>
             <h3>Your Links: </h3>
             <br>
             <label for="facebook">Facebook URL: </label>
-            <input name="facebook" type="text"  class="form-control input-sm chat-input" placeholder="http://www.facebook.com/my-venue/" ng-model="user.facebook"/>
+              <input name="facebook" type="text"  class="form-control input-sm chat-input" placeholder="http://www.facebook.com/my-venue/" ng-model="user.facebook"/>
             <br>  
             <label for="yelp">Venue Yelp URL: </label>
-            <input name="yelp" type="text" id="userYelp" class="form-control input-sm chat-input" placeholder="http://www.yelp.com/my-venue/" ng-model="user.yelp"/>
+              <input name="yelp" type="text" id="userYelp" class="form-control input-sm chat-input" placeholder="http://www.yelp.com/my-venue/" ng-model="user.yelp"/>
             <br>  
             <label for="website">Venue Website: </label>
-            <input name="website" type="text" id="userwebsite" class="form-control input-sm chat-input" placeholder="http://www.my-venue.com/" ng-model="user.website"/>            
+              <input name="website" type="text" id="userWebsite" class="form-control input-sm chat-input" placeholder="http://www.my-venue.com/" ng-model="user.website"/>            
             <br>
-
+<hr>
             <!-- Agreement Form to be added -->
             <label for="agree">Yes, I agree to the Terms and Conditions! (that don't exist)  </label>
-            <input type="checkbox" ng-model="user.agree" name="agree" required />
+              <input type="checkbox" ng-model="user.agree" name="agree" required />
 
             <div class="wrapper">
               <span class="group-btn">     
@@ -103,5 +236,4 @@
         </div>
       </div>
     </div>
-  </div>
 </div>
