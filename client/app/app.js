@@ -15,7 +15,7 @@
 
     $stateProvider
       .state('signup', {
-        templateUrl: 'app/auth/signup-talent.html',
+        templateUrl: 'app/auth/signup-talent.html', //change this route later
         url: '/signup-talent/',
         controller: 'AuthController'
       })

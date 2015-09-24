@@ -17,7 +17,7 @@
           // set user's localstorage token to allow user to be authorized to browser other web pages
           // also direct user to create their first project
           $window.localStorage.setItem('headliner', token);
-          $location.path('/login');
+          $location.path('/login'); // change this redirect later
         })
         .catch(function(error){
           console.log("error", error)
@@ -30,28 +30,19 @@
         });
     };
 
-    $scope.signin = function () {
-    //   Auth.signin($scope.user)
-    //     .then(function (data) {
-    //       // server send an Object that has token and boolean hasWIP throught Auth factory signin function
-    //       // if user does not have WIP project, direct user to create a project
-    //       $window.localStorage.setItem('headliner', data.token);
-    //       if ( !!data.hasWIP ) {
-    //         $location.path('/landing');
-    //       } else {
-    //         $location.path('/landing');
-    //       }
-    //     })
-    //     .catch(function(error) {
-    //       console.log("error", error)
-    //       // check error to display different Error to user
-    //       if ( error.data.indexOf('not exist') > -1 ) {
-    //         $scope.user.err = 'Error: Username does not exist'
-    //       } else {
-    //         $scope.user.err = 'Error: Invalid password';
-    //       }
-    //     });     
-    // };
+  $scope.signin = function () {
+    Auth.signin($scope.user)
+      .then(function (token) {
+        $window.localStorage.setItem('headliner', token);
+        $location.path('/landing'); //change
+      })
+      .catch(function (error) {
+        if (error.data.error.indexOf('No') > -1) {
+          $scope.user.err = 'Error: Invalid password'
+        } else {
+          $scope.user.err = 'Error: ' + error.data.error;
+        }
+      });
   };
 
 })();
