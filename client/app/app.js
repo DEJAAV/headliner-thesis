@@ -3,6 +3,7 @@
   angular.module('headliner', [
     'headliner.service',
     'headliner.auth', 
+    // 'headliner.homepage',
     'ngRoute',
     'ui.router'
   ])
@@ -14,21 +15,31 @@
     $urlRouterProvider.otherwise('/landing');
 
     $stateProvider
-      .state('signup', {
-        templateUrl: 'app/auth/signup-talent.html', //change this route later
-        url: '/signup-talent/',
-        controller: 'AuthController'
-      })
       .state('landing', {
         templateUrl: 'app/auth/landing.html',
         url: '/landing',
         controller: 'AuthController'
       })
+      .state('signup-artist', {
+        templateUrl: 'app/auth/signup-artist.html', 
+        url: '/signup-artist',
+        controller: 'AuthController'
+      })
+      .state('signup-venue', {
+        templateUrl: 'app/auth/signup-venue.html',
+        url: '/signup-venue',
+        controller: 'AuthController'
+      })      
       .state('login', {
         templateUrl: 'app/auth/login.html',
         url: '/login',
         controller: 'AuthController'
-      })           
+      })  
+      .state('homepage', {
+        templateUrl: 'app/homepage/homepage.html',
+        url: '/homepage',
+        controller: 'HomepageController' //em: change this to HomepageController after f() are written
+      })                 
       .state('signout', {
         templateUrl: 'app/auth/landing.html',
         url: '/signout',

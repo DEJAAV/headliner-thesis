@@ -5,22 +5,25 @@
       </div>
       <div class="col-md-6">
         <div class="form-login">
-          <h3>LOGIN</h3>
+          <h3>ARTIST SIGN UP FORM</h3>
           <form name="signForm">
             <!-- username input-->
             <label for="username">Username: </label>
             <input name="username" type="text"  class="form-control input-sm chat-input" placeholder="username" ng-model="user.username" required/>
-            </br>
-
-            <!-- password input -->
-            <label for="username">Password: </label>
+            <br>
+            <label for="password">Password: </label>
             <input name="password" type="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" ng-model="user.password" required/>
-            </br>
+            <br>
 
-            <!-- login button and signup option -->
+  <!-- form sections to add in: on tour, genre, location, band name, band type, email, phone number, record label, facebook, soundcloud, youtube, website, aboutus -->
+            
+            <!-- Agreement Form to be added -->
+            <label for="agree">Yes, I agree to the Terms and Conditions! (that don't exist)  </label>
+            <input type="checkbox" ng-model="user.agree" name="agree" required="" />
+
             <div class="wrapper">
               <span class="group-btn">     
-                <button class="btn btn-primary btn-block" ng-click="login()" ng-disabled="signForm.$invalid">Login <i class="fa fa-sign-in"></i></button>
+                <button class="btn btn-primary btn-block" ng-click="signup()" ng-disabled="signForm.$invalid">Create Artist Profile</button>
               </span>
               <br> 
               <br>

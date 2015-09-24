@@ -9,22 +9,32 @@
 
   function Auth ($http, $location, $window) {
     // signup requires server send over a token attach to data and pass it over to controller
-    function signup (user) {
+    function signup(user) {
       return $http({
         method: 'POST',
-        url: '/users/signup',
+        url: 'api/users', /* get route */
         data: user
       })
       .then(function(resp) {
         return resp.data.token;
       });
     };
+    // function signupVenue (user) {
+    //   return $http({
+    //     method: 'POST',
+    //     url: '/users/signup/venue',  get route 
+    //     data: user
+    //   })
+    //   .then(function(resp) {
+    //     return resp.data.token;
+    //   });
+    // };
 
     // login require server send over data with token and hasWIP and hand them over to controller
     function login (user) {
       return $http({
         method: 'POST',
-        url: '/users/login',
+        url: '/users/login', /* get route */
         data: user
       })
       .then(function(resp) {
@@ -45,6 +55,7 @@
 
     return {
       signup: signup,
+      // signupVenue: signupVenue,
       login: login,
       isAuth: isAuth,
       signout: signout

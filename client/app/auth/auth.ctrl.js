@@ -17,7 +17,7 @@
           // set user's localstorage token to allow user to be authorized to browser other web pages
           // also direct user to create their first project
           $window.localStorage.setItem('headliner', token);
-          $location.path('/login'); // change this redirect later
+          $location.path('/homepage'); 
         })
         .catch(function(error){
           console.log("error", error)
@@ -30,11 +30,30 @@
         });
     };
 
-  $scope.signin = function () {
-    Auth.signin($scope.user)
+    // $scope.signupVenue = function () {
+    //   Auth.signupVenue($scope.user)
+    //     .then(function (token) {
+    //       // set user's localstorage token to allow user to be authorized to browser other web pages
+    //       // also direct user to create their first project
+    //       $window.localStorage.setItem('headliner', token);
+    //       $location.path('/homepage'); 
+    //     })
+    //     .catch(function(error){
+    //       console.log("error", error)
+    //       // check error to display different Error to user
+    //       if ( error.data.indexOf('taken') > -1 ) {
+    //         $scope.user.err = 'Error: Username is taken'
+    //       } else {
+    //         $scope.user.err = 'Error: Invalid password';
+    //       }
+    //     });
+    // };    
+
+  $scope.login = function () {
+    Auth.login($scope.user)
       .then(function (token) {
         $window.localStorage.setItem('headliner', token);
-        $location.path('/landing'); //change
+        $location.path('/homepage'); 
       })
       .catch(function (error) {
         if (error.data.error.indexOf('No') > -1) {
