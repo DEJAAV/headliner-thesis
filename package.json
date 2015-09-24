@@ -2,7 +2,7 @@
   "name": "headliner",
   "version": "1.0.0",
   "description": "venue finder for bands",
-  "main": "index.js",
+  "main": "server/server.js",
   "dependencies": {
     "bcrypt": "^0.8.5",
     "bcrypt-nodejs": "0.0.3", 
