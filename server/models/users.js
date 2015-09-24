@@ -2,14 +2,14 @@ module.exports = function(knex) {
 
   return {
     signupLocal: function(username, hashedPass) {
-      return knex('users').insert({
+      return knex('Users').insert({
         'username': username,
         'password': hashedPass,
       });
     },
 
     signupFacebook: function(username, facebookId, facebookToken) {
-      return knex('users').insert({
+      return knex('Users').insert({
         'username': username,
         'fb_id': facebookId,
         'fb_token': facebookToken
@@ -17,7 +17,7 @@ module.exports = function(knex) {
     },
 
     updateFacebook: function(facebookId, facebookToken, userId) {
-      return knex('users')
+      return knex('Users')
         .where('id', userId) 
         .update({
           'fb_id': facebookId,
@@ -26,22 +26,22 @@ module.exports = function(knex) {
     },
 
     addProfile: function(id, profileText){
-      return knex('users')
+      return knex('Users')
         .where({'id': id})
         .update({'profile':profileText});
     },
     getUserByName: function(username){
-      return knex('users')
+      return knex('Users')
         .where({'username':username})
         .select();
     },
     getUserById: function(id){
-      return knex('users')
+      return knex('Users')
         .where({'id':id})
         .select();
     },
     getUserByFB: function(facebookId){
-      return knex('users')
+      return knex('Users')
         .where({'fb_id':facebookId})
         .select();
     } 
