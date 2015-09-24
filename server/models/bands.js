@@ -23,7 +23,7 @@ module.exports = function(knex) {
         })
     },
 
-    addShow: function(band_id, venue_id, date){
+    addShow: function(band_id, venue_id, date) {
       return knex('Shows').insert({
         'band_id': band_id,
         'venue_id': venue_id,
@@ -31,11 +31,19 @@ module.exports = function(knex) {
       })
     },
 
-    addBandMember: function(band_id, member_name, title){
+    addBandMember: function(band_id, member_name, title) {
       return knex('Band_Members').insert({
         'band_id': band_id,
         'member_name': member_name,
         'title': title
+      })
+    },
+
+    addBandName: function(band_id, band_name) {
+      return knex('Bands').insert({
+        'band_name': band_name
+      }).where({
+        'band_id': band_id
       })
     }
 
@@ -49,24 +57,44 @@ module.exports = function(knex) {
     },
 
     addFacebookUrl: function(url, band_id) {
-      return knex
-    },
-
-    addTwitterUrl: function(url, band_id) {
-
+      return knex('Bands').insert({
+        'facebook_url': url
+      }).where({
+        'band_id': band_id
+      })
     },
 
     addSoundCloudUrl: function(url, band_id) {
-
+      return knex('Bands').insert({
+        'soundcloud_url': url
+      }).where({
+        'band_id': band_id
+      })
     },
 
     addYouTubeUrl: function(url, band_id) {
-
+      return knex('Bands').insert({
+        'youtube_url': url
+      }).where({
+        'band_id': band_id
+      })
     },
 
-    addInstagramUrl: function(url, band_id) {
+    // addTwitterUrl: function(url, band_id) {
+    //   return knex('Bands').insert({
+    //     'twitter_url': url
+    //   }).where({
+    //     'band_id': band_id
+    //   })
+    // },
 
-    },
+    // addInstagramUrl: function(url, band_id) {
+    //   return knex('Bands').insert({
+    //     'instagram_url': url
+    //   }).where({
+    //     'band_id': band_id
+    //   })
+    // },
 
 
 
