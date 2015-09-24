@@ -17,7 +17,7 @@
           // set user's localstorage token to allow user to be authorized to browser other web pages
           // also direct user to create their first project
           $window.localStorage.setItem('headliner', token);
-          $location.path('/login'); // change this redirect later
+          $location.path('/homepage'); 
         })
         .catch(function(error){
           console.log("error", error)
@@ -34,7 +34,7 @@
     Auth.signin($scope.user)
       .then(function (token) {
         $window.localStorage.setItem('headliner', token);
-        $location.path('/landing'); //change
+        $location.path('/homepage'); 
       })
       .catch(function (error) {
         if (error.data.error.indexOf('No') > -1) {

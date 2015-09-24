@@ -1,4 +1,4 @@
-<!-- Main signin form -->
+<!-- Main login form -->
 <div class="container signform">
     <div class="row">
       <div class="col-md-6">
@@ -9,21 +9,18 @@
           <form name="signForm">
             <!-- username input-->
             <input name="username" type="text"  class="form-control input-sm chat-input" placeholder="username" ng-model="user.username" required/>
-            <p ng-show="signForm.username.$error.required && signForm.username.$dirty" class="help-block">Username is required.</p>
             </br>
 
             <!-- password input -->
             <input name="password" type="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" ng-model="user.password" required/>
-            <p ng-show="signForm.password.$error.required && signForm.password.$dirty" class="help-block">Password is required.</p>
             </br>
 
-            <!-- signin button and signup option -->
+            <!-- login button and signup option -->
             <div class="wrapper">
               <span class="group-btn">     
                 <button class="btn btn-primary btn-block" ng-click="signin()" ng-disabled="signForm.$invalid">Signin <i class="fa fa-sign-in"></i></button>
               </span>
-              <br>
-              <a href="#/signup">Don't have an account? <strong>Signup</strong>...</a> 
+              <br> 
               <br>
               <p class="alert alert-danger" ng-if="user.err">{{ user.err }}</p>
             </div>

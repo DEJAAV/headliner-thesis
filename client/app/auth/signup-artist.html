@@ -5,15 +5,15 @@
     </div>
     <div class="col-md-6">
       <div class="form-login">
-        <h3>Welcome to <span class="tyr"><strong>Headliner</strong></span> !</h3>
+        <h3>Welcome to <span class="headliner"><strong>Headliner</strong></span> !</h3>
         <form name="signForm">
           <!-- username input-->
-          <input name="username" type="text"  class="form-control input-sm chat-input" placeholder="username" ng-model="Users.username" required/>
+          <input name="username" type="text"  class="form-control input-sm chat-input" placeholder="username" ng-model="user.username" required/>
           <p ng-show="signForm.username.$error.required && signForm.username.$dirty" class="help-block">Username is required.</p>
           </br>
 
           <!-- password input -->
-          <input name="password" type="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" ng-model="Users.password" required/>
+          <input name="password" type="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" ng-model="user.password" required/>
           <p ng-show="signForm.password.$error.required && signForm.password.$dirty" class="help-block">Password is required.</p>
           </br>
 
