@@ -3,7 +3,7 @@
 
 (function(){
 
-  angular.module('headliner.service', [])
+  angular.module('headliner.authService', [])
 
   .factory('Auth', Auth)
 

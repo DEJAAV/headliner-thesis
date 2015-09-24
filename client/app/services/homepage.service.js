@@ -1,6 +1,6 @@
 (function() {
 
-  angular.module('headliner.service')
+  angular.module('headliner.homeService', [])
     .factory('Homepage', Homepage)
 
   function Homepage($http, $location, $window) {
