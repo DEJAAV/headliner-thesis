@@ -40,7 +40,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-app.use(express.static('views'));
+app.use(express.static(__dirname + '/../client'));
 
 //require('./app/routes.js')(app, passport, knex);
 
