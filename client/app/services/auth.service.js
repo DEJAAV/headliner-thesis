@@ -12,7 +12,7 @@
     function signup(user) {
       return $http({
         method: 'POST',
-        url: 'api/users', /* get route */
+        url: 'api/signup', /* get route */
         data: user
       })
       .then(function(resp) {
