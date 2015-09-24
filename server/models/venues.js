@@ -1,5 +1,7 @@
 var Users = require('./users.js');
 //var Genres = require('./genres.js');
+
+/* Uncomment when Genre model is set, otherwise server will break
 module.exports = {
   addGenre: function(venueId, genreName) {
     Genres.findGenreId(genreName)
@@ -50,3 +52,4 @@ module.exports = {
       })
   }
 }
+*/
