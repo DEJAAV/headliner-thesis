@@ -1,9 +1,10 @@
 (function(){
 
   angular.module('headliner', [
-    'headliner.service',
-    'headliner.auth', 
-    // 'headliner.homepage',
+    'headliner.authService',
+    'headliner.homeService', 
+    'headliner.auth',
+    'headliner.homepage',
     'ngRoute',
     'ui.router'
   ])
