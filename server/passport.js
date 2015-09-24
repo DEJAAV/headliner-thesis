@@ -7,7 +7,7 @@ var configAuth = require('./auth');
 module.exports = function(passport, knex) {
 
   // need to require Users inside this function so we can pass the db connection (knex)
-  var Users = require('./models/users')(knex);
+  var Users = require('./models/Users')(knex);
 
   // used to serialize the user for the session
   // adds user.id to all requests from now until logout
