@@ -80,6 +80,9 @@
                       <input type="checkbox" name="userGenre" ng-model="user.genre.country"/>Country
                   </label>
                   <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.coverband"/>Cover Band
+                  </label>                  
+                  <label class="checkbox">
                       <input type="checkbox" name="userGenre" ng-model="user.genre.dj"/>DJ
                   </label>
                   <label class="checkbox">
@@ -123,7 +126,7 @@
               <!-- END OF GENRE CHECKBOXES -->
 
             <!-- About Us Expandable Text Box  -->    
-            <label for="about_us">About your venue:</label> 
+            <label for="about">About your venue:</label> 
               <textarea name="about" type="text" id="userAboutUs" class="form-control input-sm chat-input" placeholder="Brief bio about your venue" ng-model="user.about" required></textarea>
             <br>
 

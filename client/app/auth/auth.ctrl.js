@@ -17,15 +17,16 @@
           // set user's localstorage token to allow user to be authorized to browser other web pages
           // also direct user to create their first project
           $window.localStorage.setItem('headliner', token);
-          $location.path('/homepage'); 
+          console.log($scope.user, '$scope user before redirect')
+          $location.path('/find-bands'); 
         })
         .catch(function(error){
-          console.log("error", error)
+          console.log("this is the caught error on signup AuthCtrl", error)
           // check error to display different Error to user
           if ( error.data.indexOf('taken') > -1 ) {
-            $scope.user.err = 'Error: Username is taken'
+            $scope.user.err = 'Error in form' //error handling may need to change depending on passport
           } else {
-            $scope.user.err = 'Error: Invalid password';
+            $scope.user.err = 'Error';
           }
         });
     };
@@ -53,7 +54,7 @@
     Auth.login($scope.user)
       .then(function (token) {
         $window.localStorage.setItem('headliner', token);
-        $location.path('/homepage'); 
+        $location.path('/find-bands'); 
       })
       .catch(function (error) {
         if (error.data.error.indexOf('No') > -1) {

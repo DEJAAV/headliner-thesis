@@ -35,7 +35,17 @@
         templateUrl: 'app/auth/login.html',
         url: '/login',
         controller: 'AuthController'
+      }) 
+      .state('findBand', {
+        templateUrl: 'app/search/findABand.html',
+        url: '/find-bands',
+        controller: 'AuthController' // change this to search controller after it's built out
       })  
+      .state('findVenue', {
+        templateUrl: 'app/search/findAVenue.html',
+        url: '/find-venues',
+        controller: 'AuthController' // change this to search controller after it's built out
+      })               
       .state('homepage', {
         templateUrl: 'app/homepage/homepage.html',
         url: '/homepage',

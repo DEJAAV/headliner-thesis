@@ -1,0 +1,14 @@
+<div class="container">
+  <h3>Find a band for your next show.</h3>
+
+  <hr>
+
+  <h1>I am looking for a band to play in...</h1>
+
+  <form name="searchForBand">
+      <input name="city" ng-model="users" placeholder="Enter City Name Here"/>
+      <button class="btn btn-default" ng-click="signout()" ng-disabled="signForm.$invalid">Find a Band</button>
+  </form>
+</div>
+
+<!-- Need to figure out which ng-model to do a GET request from to get all bands from the input city -->
