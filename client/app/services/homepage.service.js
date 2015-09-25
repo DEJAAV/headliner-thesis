@@ -1,35 +1,34 @@
-(function() {
+(function(){
+  
+  angular.module('headliner.homepage.service', [])
+  .factory('Homepage', Homepage);
 
-  angular.module('headliner.homeService', [])
-    .factory('Homepage', Homepage)
+  function Homepage ($http, $location, $window) {
 
-  function Homepage($http, $location, $window) {
-    //get all artists to load on to the venues homepage display
-    function getAllArtists() {
+    function getAllVenues () {
       return $http({
-          method: 'GET',
-          url: 'api/artists'
-        })
-        .then(function(resp) { //handle if it's a venue or artist 
-          return resp.data;
-        })
-    }
-
-  //get all venues to load on to the artists homepage display
-  function getAllVenues() {
-    return $http({
         method: 'GET',
-        url:'api/venues'
+        url: '/users/venues'
       })
-      .then(function(resp) { //handle if it's a venue or artist 
+      .then(function(resp){
         return resp.data;
       })
-  }
+    };
 
-  return {
-    getAllArtists: getAllArtists,
-    getAllVenues: getAllVenues
-  }
-}
+    function getAllArtists () {
+      return $http({
+        method: 'GET',
+        url: '/users/artists'
+      })
+      .then(function(resp){
+        return resp.data;
+      })
+    };
+
+    return {
+      getAllVenues: getAllVenues,
+      getAllArtists: getAllArtists
+    }
+  };
 
 })();
