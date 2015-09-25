@@ -8,7 +8,7 @@
     function getAllArtists() {
       return $http({
           method: 'GET',
-          url: 'api/users'
+          url: 'api/artists'
         })
         .then(function(resp) { //handle if it's a venue or artist 
           return resp.data;
@@ -19,7 +19,7 @@
   function getAllVenues() {
     return $http({
         method: 'GET',
-        url:'api/users'
+        url:'api/venues'
       })
       .then(function(resp) { //handle if it's a venue or artist 
         return resp.data;
