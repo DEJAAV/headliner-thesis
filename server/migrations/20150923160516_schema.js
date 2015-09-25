@@ -43,15 +43,31 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
   return Promise.all([
-    knex.schema.dropTable('Genres'),
-    knex.schema.dropTable('Users'),
-    knex.schema.dropTable('Bands'),
-    knex.schema.dropTable('Locations'),
-    knex.schema.dropTable('Venues'),
-    knex.schema.dropTable('Shows'),
-    knex.schema.dropTable('Band_Reviews'),
-    knex.schema.dropTable('Venue_Reviews'),
+    knex.schema.table('Bands', function(table) {
+      table.dropColumn('type_id');
+      table.dropColumn('e-mail');
+      table.dropColumn('phone_number');
+      table.dropColumn('record_label');
+      table.dropColumn('facebook');
+      table.dropColumn('youtube');
+      table.dropColumn('soundcloud');
+      table.dropColumn('bandcamp');
+      table.dropColumn('website');
+      table.dropColumn('bio');
+    }),
+
     knex.schema.dropTable('Band_Types'),
+
+    knex.schema.table('Venues', function(table) {
+      table.dropColumn('bio');
+      table.dropColumn('website');
+      table.dropColumn('yelp');
+      table.dropColumn('address');
+    }),
+
+    knex.schema.dropTable('Musician_Titles'),
+
     knex.schema.dropTable('Band_Members')
-    ])
+
+  ])
 };
