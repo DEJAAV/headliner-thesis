@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../styles.css">
 <!-- Main login form -->
 <div class="container signform">
     <div class="row">
@@ -7,13 +8,219 @@
         <div class="form-login">
           <h3>ARTIST SIGN UP FORM</h3>
           <form name="signForm">
+            <h2>Create an Account:</h2>
             <!-- username input-->
-            <label for="username">Username: </label>
-            <input name="username" type="text"  class="form-control input-sm chat-input" placeholder="username" ng-model="user.username" required/>
-            <br>
+            <label for="localEmail">Email: </label>
+              <input name="localEmail" type="email"  class="form-control input-sm chat-input" placeholder="email address" ng-model="user.localEmail" required/>
+           <br>
             <label for="password">Password: </label>
-            <input name="password" type="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" ng-model="user.password" required/>
+              <input name="password" type="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" ng-model="user.password" required/>
             <br>
+
+            <hr>
+            <h2>Basic Artist Info:</h2>
+            <br>
+            <!-- artist's name -->
+            <label for="artist_name">Artist Name: </label>
+              <input name="artist name" type="text"  class="form-control input-sm chat-input" placeholder="artist name" ng-model="user.artistName" required/>
+            <br>
+            <!-- Members of Band & their roles 
+                (will add button here for adding more members) --> 
+            <label for="band_members">Band Members & Roles: </label>
+            <div class="inline-fields">
+              <label for="member_name_1">Member 1: </label>
+                <input style="width: 54px;" name="member name 1" type="text"  class="band-members" placeholder="name" ng-model="user.band.member.name" required/>
+              <label for="member_role_1">Role: </label>
+                <input style="width: 54px;" name="member role 1" type="text"  class="band-members" placeholder="name" ng-model="user.band.member.role" required/>
+              <br>
+              <label for="member_name_2">Member 2: </label>
+                <input style="width: 54px;" name="member name 2" type="text"  class="band-members" placeholder="name" ng-model="user.band.member.name" required/>
+              <label for="member_role_2">Role: </label>
+                <input style="width: 54px;" name="member role 2" type="text"  class="band-members" placeholder="name" ng-model="user.band.member.role" required/>    
+              <br>  
+            </div>
+            <br>
+            <hr>
+            
+            <!-- About Artist text box-->
+            <h2>About the Artist</h2>
+            <label for="about_artist">About You:</label> 
+              <textarea name="about" type="text"  class="form-control input-sm chat-input" placeholder="Short bio about you and your music" ng-model="user.about" required></textarea>
+            <br>
+            <hr>
+
+
+              <!--Genres of Music-->
+              <h2>Types of Genres</h2>
+              <p><i>Check all that apply to your sound.</i></p>
+              <div class="form-group">
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.americana"/>Americana
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.blues"/>Blues
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.bluegrass"/>Bluegrass
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.classical"/>Classical
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.comedy"/>Comedy
+                  </label>  
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.country"/>Country
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.dj"/>DJ
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.edm"/>EDM
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.electronic"/>Electronic
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.folk"/>Folk
+                  </label>   
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.hiphop"/>Hip Hop
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.jazz"/>Jazz
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.latin"/>Latin
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.metal"/>Metal
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.pop"/>Pop
+                  </label>   
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.rnb"/>R&B
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.rock"/>Rock
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.spoken"/>Spoken Word
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.world"/>World
+                  </label>                                                       
+              </div>
+              <br> 
+              <hr>
+
+
+              <!-- Record Label Checkbox (ng-if) -->
+            <h2>Label Info</h2>
+            <div>
+              <label>Are you currently signed to a Label?</label>
+                <select name="label" ng-model="signed" required>
+                  <option></option>
+                  <option>Yes</option>
+                  <option>No</option>
+                </select>
+            </div>
+
+            <div ng-if="signed === 'Yes'">
+              <label for="record_label">Enter Label Name: </label>
+                <input name="record label" class="form-control input-sm chat-input" placeholder="Record Label" ng-model="user.labelInfo"/>
+            </div>
+            <br>
+            <hr>
+
+
+            <!--location -->
+            <div class"loc">
+              <h2>Location</h2>
+              <label for="location">Where is your band located?</label>
+              <br>
+                <label for="city">City: </label>
+                  <input name="city" class="city-state-zip" placeholder="City" ng-model="user.location.city"/>
+                <br>
+                <label for="state">State: </label>  
+                  <input name="state" class="city-state-zip" placeholder="State" ng-model="user.location.state"/>
+                <br>
+                <label for="zip_code">Zip Code: </label>
+                  <input name="zip_code" class="city-state-zip" placeholder="Zip Code" ng-model="user.location.zipCode"/>
+                <br>
+
+              <!-- Local, Touring, or Both -->
+              <label for="inout">Are you local or touring?</label>
+              <br> 
+                <input name="inout" type="radio" ng-model="user.inout" value="Local"/> Local
+                <input name="inout" type="radio" ng-model="user.inout" value="Touring"/> Touring
+                <input name="inout" type="radio" ng-model="user.inout" value="Both"/> Both
+              <br>
+
+              <!-- Location Availability -->
+              <div ng-if="user.inout === 'Touring' || user.inout === 'Both'">
+                <label>Where is your band available to travel?</label>
+                  <label class="checkbox">
+                    <input type="checkbox" name="locationArea" ng-model="user.location.east"/>East Coast</label>
+                  <label class="checkbox">
+                    <input type="checkbox" name="locationArea" ng-model="user.location.west"/>West Coast</label>
+                  <label class="checkbox">
+                    <input type="checkbox" name="locationArea" ng-model="user.location.midwest"/>Midwest</label>
+                  <label class="checkbox">
+                    <input type="checkbox" name="locationArea" ng-model="user.location.north"/>North</label>
+                  <label class="checkbox">
+                    <input type="checkbox" name="locationArea" ng-model="user.location.south"/>South</label>
+                  <label class="checkbox">
+                    <input type="checkbox" name="locationArea" ng-model="user.location.nationwide"/>Nationwide</label>
+              </div>
+              <hr>
+
+
+
+              <!-- contact info -->
+              <h2>Contact Info:</h2>
+              <label for="contact name">Contact Name: </label>
+                <input name="contact name" type="text" class="form-control input-sm chat-input" placeholder="contact name" ng-model="user.contactName" required/>
+              <br>
+              <div class="question" ng-show="user.contactName">
+                <label>What is the best way to contact your band {{user.contactName}}?</label>
+                  <select name="communicate" ng-model="communication" required>
+                    <option></option>
+                    <option>Phone</option>
+                    <option>Email</option>
+                  </select>
+              </div>              
+            <div ng-if="communication === 'Email'">
+              <label for="email">Enter an email address: </label>
+                <input name="artist-email" type="text" class="form-control input-sm chat-input" placeholder="valid email address" ng-model="user.email" required/>
+              <br>
+            </div>
+            <div ng-if="communication === 'Phone'"> 
+              <label for="phone number">Phone Number: </label>
+               <input name="phone number" type="text" class="form-control input-sm chat-input" placeholder="valid phone number" ng-model="user.phoneNum" required/>
+              <br>
+            </div>
+              <hr>
+
+
+              <!-- social media links --> 
+              <h3>Your Links: </h3>
+              <p>Share more of your sound!</p>
+              <br>
+              <label for="facebook">Facebook: </label>
+                <input name="facebook" type="text" class="form-control input-sm chat-input" placeholder="http://www.facebook.com/my-facebook/" ng-model="user.facebook"/>
+              <br>  
+              <label for="soundcloud">SoundCloud: </label>
+                <input name="soundcloud" type="text" id="userSoundCloud" class="form-control input-sm chat-input" placeholder="http://www.soundcloud.com/my-soundcloud/" ng-model="user.soundcloud"/>
+              <br>  
+              <label for="twitter">Twitter: </label>
+                <input name="twitter" type="text" id="userTwitter" class="form-control input-sm chat-input" placeholder="http://www.twitter.com/my-twitter" ng-model="user.twitter"/>            
+              <br>
+              <label for="youtube">YouTube: </label>
+                <input name="youtube" type="text" id="userYoutube" class="form-control input-sm chat-input" placeholder="http://www.youtube.com/my-youtube" ng-model="user.youtube"/>            
+              <br>
+
 
   <!-- form sections to add in: on tour, genre, location, band name, band type, email, phone number, record label, facebook, soundcloud, youtube, website, aboutus -->
             
@@ -23,7 +230,7 @@
 
             <div class="wrapper">
               <span class="group-btn">     
-                <button class="btn btn-primary btn-block" ng-click="signup()" ng-disabled="signForm.$invalid">Create Artist Profile</button>
+                <button class="btn btn-primary btn-block" ng-click="signupArtist()" ng-disabled="signUpForm.$invalid">Create Artist Profile</button>
               </span>
               <br> 
               <br>
