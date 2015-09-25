@@ -11,25 +11,40 @@
     $scope.user = {};
     $scope.user.err = '';
     
-    $scope.signup = function () {
-      Auth.signup($scope.user)
+    $scope.signupVenue = function () {
+      $scope.user.venue = true; 
+      Auth.signupVenue($scope.user)
         .then(function (token) {
-          // set user's localstorage token to allow user to be authorized to browser other web pages
-          // also direct user to create their first project
           $window.localStorage.setItem('headliner', token);
           console.log($scope.user, '$scope user before redirect')
           $location.path('/find-bands'); 
         })
         .catch(function(error){
           console.log("this is the caught error on signup AuthCtrl", error)
-          // check error to display different Error to user
           if ( error.data.indexOf('taken') > -1 ) {
-            $scope.user.err = 'Error in form' //error handling may need to change depending on passport
+            $scope.user.err = 'Error in form' //err will change once checks in place in ang
           } else {
             $scope.user.err = 'Error';
           }
         });
     };
+
+    $scope.signupArtist = function () {
+      $scope.user.artist = true;
+      Auth.signup($scope.user)
+        .then(function (token) {
+          $window.localStorage.setItem('headliner', token);
+          console.log($scope.user, '$scope user before redirect')
+          $location.path('/find-venues'); 
+        })
+        .catch(function(error){
+          if ( error.data.indexOf('taken') > -1 ) {
+            $scope.user.err = 'Error in form' 
+          } else {
+            $scope.user.err = 'Error';
+          }
+        });
+    };    
 
     // $scope.signupVenue = function () {
     //   Auth.signupVenue($scope.user)
