@@ -106,7 +106,7 @@ module.exports = function(knex) {
     },
     findBand: function(username) {
       return knex('Users').where({
-        'Username': username
+        'username': username
       }).select('band_id')
     },
     addShow: function(band_id, venue_id, date) {
