@@ -10,8 +10,8 @@
           <form name="signForm">
             <h2>Create an Account:</h2>
             <!-- username input-->
-            <label for="localEmail">Login Email: </label>
-              <input name="localEmail" type="email"  class="form-control input-sm chat-input" placeholder="localEmail" ng-model="user.localEmail" required/>
+            <label for="localEmail">Email: </label>
+              <input name="localEmail" type="email"  class="form-control input-sm chat-input" placeholder="email address" ng-model="user.localEmail" required/>
            <br>
             <label for="password">Password: </label>
               <input name="password" type="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" ng-model="user.password" required/>
@@ -184,15 +184,15 @@
                 <input name="contact name" type="text" class="form-control input-sm chat-input" placeholder="contact name" ng-model="user.contactName" required/>
               <br>
               <div>
-                <label>What is the best way to contact you?</label>
+                <label>What is the best way to contact your band?</label>
                   <select name="communicate" ng-model="communication" required>
                     <option></option>
                     <option>Phone</option>
                     <option>Email</option>
                   </select>
               </div>              
-            <div ng-if="communication === 'Email'"> 
-              <label for="email">Email Address: </label>
+            <div ng-if="communication === 'Email'">
+              <label for="email">Enter an email address: </label>
                 <input name="artist-email" type="text" class="form-control input-sm chat-input" placeholder="email address" ng-model="user.email" required/>
               <br>
             </div>
