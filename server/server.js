@@ -1,14 +1,20 @@
 var express = require('express');
 var app = express();
 var port = process.env.PORT || 3000;
-var path = require('path');
-var flash = require('connect-flash')
-var passport = require('passport');
+
 var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
+
 var session = require('express-session');
 var morgan = require('morgan')
 var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var pg = require('pg');
+var path = require('path');
+var flash = require('connect-flash')
+var passport = require('passport');
+
+var Users = require('./models/users.js');
 
 var databasehost = process.env.HOST || 'localhost';
 var knex = require('knex')({
@@ -24,20 +30,28 @@ var knex = require('knex')({
 });
 
 app.use(express.static(__dirname + '/../client'));
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(session({ secret: 'keyboard cat',
+                  saveUninitialized: true,
+                  resave: true
+ })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.listen(port);
 console.log('Server running on port:', port)
 
-var Users = require('./models/Users');
 
 passport.use('local-signup', new LocalStrategy({
-    usernameField : 'username',
+    usernameField : 'localEmail',
     passwordField : 'password',
     passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
   },
-  function(req, username, password, done) {
+  function(req, email, password, done) {
+    console.log('/////////////////');
+    console.log('Inside of passport use local-signup');
     Users.getUserByName(username).then(function(err, user) {
       // if there are any errors, return the error
       if (err) {return done(err);}
@@ -68,6 +82,6 @@ passport.deserializeUser(function(id, done) {
 
 app.post('/api/signup', passport.authenticate('local-signup', {
   successRedirect: '/', // redirect to the secure profile section
-  failureRedirect: '/signup-venue', // redirect back to the signup page if there is an error
+  failureRedirect: '/#/signup-venue', // redirect back to the signup page if there is an error
   failureFlash: true // allow flash messages
 }));

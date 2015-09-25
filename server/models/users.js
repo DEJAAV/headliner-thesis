@@ -1,6 +1,4 @@
-module.exports = function(knex) {
-
-  return {
+module.exports = {
     signupLocal: function(username, hashedPass) {
       return knex('Users').insert({
         'username': username,
@@ -45,5 +43,5 @@ module.exports = function(knex) {
         .where({'fb_id':facebookId})
         .select();
     } 
-  }
+  
 };
