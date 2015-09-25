@@ -8,9 +8,9 @@
     function getAllArtists() {
       return $http({
           method: 'GET',
-          url: '/* get route */'
+          url: 'api/users'
         })
-        .then(function(resp) {
+        .then(function(resp) { //handle if it's a venue or artist 
           return resp.data;
         })
     }
@@ -19,9 +19,9 @@
   function getAllVenues() {
     return $http({
         method: 'GET',
-        url:'/* get route */'
+        url:'api/users'
       })
-      .then(function(resp) {
+      .then(function(resp) { //handle if it's a venue or artist 
         return resp.data;
       })
   }
