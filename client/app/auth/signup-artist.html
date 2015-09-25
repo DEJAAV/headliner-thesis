@@ -183,8 +183,8 @@
               <label for="contact name">Contact Name: </label>
                 <input name="contact name" type="text" class="form-control input-sm chat-input" placeholder="contact name" ng-model="user.contactName" required/>
               <br>
-              <div>
-                <label>What is the best way to contact your band?</label>
+              <div class="question" ng-show="user.contactName">
+                <label>What is the best way to contact your band {{user.contactName}}?</label>
                   <select name="communicate" ng-model="communication" required>
                     <option></option>
                     <option>Phone</option>
@@ -193,7 +193,7 @@
               </div>              
             <div ng-if="communication === 'Email'">
               <label for="email">Enter an email address: </label>
-                <input name="artist-email" type="text" class="form-control input-sm chat-input" placeholder="email address" ng-model="user.email" required/>
+                <input name="artist-email" type="text" class="form-control input-sm chat-input" placeholder="valid email address" ng-model="user.email" required/>
               <br>
             </div>
             <div ng-if="communication === 'Phone'"> 
