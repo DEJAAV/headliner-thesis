@@ -50,13 +50,40 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
   return Promise.all([
-    knex.schema.dropTable('Genres'),
-    knex.schema.dropTable('Users'),
-    knex.schema.dropTable('Bands'),
-    knex.schema.dropTable('Locations'),
-    knex.schema.dropTable('Venues'),
-    knex.schema.dropTable('Shows'),
-    knex.schema.dropTable('Band_Reviews'),
-    knex.schema.dropTable('Venue_Reviews')
+    knex.schema.table('Bands', function(table) {
+      table.integer('genre_id');
+    }),
+
+    knex.schema.table('Bands', function(table) {
+      table.integer('type_id');
+    }),
+
+    knex.schema.table('Venues', function(table) {
+      table.string('address');
+      table.integer('genre_id');
+      table.dropColumn('contact_name');
+      table.dropColumn('contact_phone');
+      table.dropColumn('contact_email');
+      table.dropColumn('in_out');
+      table.dropColumn('facebook');
+      table.dropColumn('street');
+      table.dropColumn('city');
+      table.dropColumn('zip');
+      table.dropColumn('state');
+    }),
+
+    knex.schema.createTable('Band_Types', function(table) {
+      table.increments('type_id').primary();
+      table.string('type');
+    }),
+
+    knex.schema.dropTable('Band_Genres'),
+
+    knex.schema.dropTable('Venue_Genres'),
+
+    knex.schema.dropTable('Venue_Types'),
+
+    knex.schema.dropTable('Venues_Types')
+
   ])
 };
