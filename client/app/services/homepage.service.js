@@ -1,11 +1,12 @@
 (function(){
   
-  angular.module('headliner.homepage.service', [])
+  angular.module('headliner.homeService', [])
   .factory('Homepage', Homepage);
 
   function Homepage ($http, $location, $window) {
 
     function getAllVenues () {
+      console.log('getAllVenues is being called');
       return $http({
         method: 'GET',
         url: '/users/venues'
@@ -16,6 +17,7 @@
     };
 
     function getAllArtists () {
+      console.log('getAllArtists is being called');
       return $http({
         method: 'GET',
         url: '/users/artists'

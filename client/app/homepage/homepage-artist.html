@@ -1,8 +1,9 @@
-<div class="container">
+<div class="container" ng-init="initArtist()">
   <h1>Hey Artist!</h1>
   <h3>Here's venues in [location whatever]</h3>
 
-  <div ng-repeat="venue in Venues">
+  <div ng-repeat="venue in venues">
+    <div>{{ venue }}</div>
     <div>{{ venue.name }}</div>
   </div>
 </div>
