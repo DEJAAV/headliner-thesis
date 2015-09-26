@@ -1,8 +1,9 @@
-var Users = require('./users.js');
-//var Genres = require('./genres.js');
+var Types = require('./types.js');
+var Genres = require('./genres.js');
+var knex = require('../db/db.js');
 
-/* Uncomment when Genre model is set, otherwise server will break
 module.exports = {
+
   addGenre: function(venueId, genreName) {
     Genres.findGenreId(genreName)
       .then(function(genreId) {
@@ -13,6 +14,7 @@ module.exports = {
           });
       })
   },
+
   addType: function(venueId, typeName) {
     Types.findTypeId(typeName)
       .then(function(typeId) {
@@ -22,7 +24,8 @@ module.exports = {
             venue_id: venueId
           });
       })
-  }
+  },
+
   create: function(reqBody) {
     knex('Venues')
       .returning('venue_id')
@@ -51,5 +54,5 @@ module.exports = {
         }
       })
   }
-}
-*/
+
+};
