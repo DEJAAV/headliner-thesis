@@ -13,12 +13,12 @@
 
   function config($routeProvider, $httpProvider, $stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/landing');
+    $urlRouterProvider.otherwise('/');
 
     $stateProvider
       .state('landing', {
         templateUrl: 'app/auth/landing.html',
-        url: '/landing',
+        url: '/',
         controller: 'AuthController'
       })
       .state('signup-artist', {
@@ -46,14 +46,19 @@
         url: '/find-venues',
         controller: 'AuthController' // change this to search controller after it's built out
       })               
-      .state('homepage', {
-        templateUrl: 'app/homepage/homepage.html',
-        url: '/homepage',
-        controller: 'HomepageController' //em: change this to HomepageController after f() are written
-      })                 
+      .state('homepage-artist', {
+        templateUrl: 'app/homepage/homepage-artist.html',
+        url: '/homepage-artist',
+        controller: 'HomepageController' 
+      })
+      .state('homepage-venue', {
+        templateUrl: 'app/homepage/homepage-venue.html',
+        url: '/homepage-venue',
+        controller: 'HomepageController' 
+      })                        
       .state('signout', {
         templateUrl: 'app/auth/landing.html',
-        url: '/signout',
+        url: '/',
         controller: 'AuthController',
         resolve: {function (Auth) {
           Auth.signout();
