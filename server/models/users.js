@@ -1,25 +1,28 @@
+var knex = require('../db/db.js');
+
 module.exports = {
-    signupLocal: function(username, hashedPass) {
+    signupLocal: function(email, hashedPass) {
       return knex('Users').insert({
-        'username': username,
+        'email': email,
         'password': hashedPass,
       });
     },
 
-    signupFacebook: function(username, facebookId, facebookToken) {
+    signupFacebook: function(email, facebookId, facebookToken, facebookName) {
       return knex('Users').insert({
-        'username': username,
-        'fb_id': facebookId,
-        'fb_token': facebookToken
+        'facebook_email': username,
+        'facebook_id': facebookId,
+        'facebook_token': facebookToken,
+        'facebook_name': facebookName
       });
     },
 
     updateFacebook: function(facebookId, facebookToken, userId) {
       return knex('Users')
-        .where('id', userId) 
+        .where('user_id', userId) 
         .update({
-          'fb_id': facebookId,
-          'fb_token': facebookToken
+          'facebook_id': facebookId,
+          'facebook_token': facebookToken
         });
     },
 
@@ -28,19 +31,19 @@ module.exports = {
         .where({'id': id})
         .update({'profile':profileText});
     },
-    getUserByName: function(username){
+    getUserByEmail: function(email){
       return knex('Users')
-        .where({'username':username})
+        .where({'email':email})
         .select();
     },
     getUserById: function(id){
       return knex('Users')
-        .where({'id':id})
+        .where({'user_id':id})
         .select();
     },
-    getUserByFB: function(facebookId){
+    getUserByFacebook: function(facebookId){
       return knex('Users')
-        .where({'fb_id':facebookId})
+        .where({'facebook_id':facebookId})
         .select();
     } 
   

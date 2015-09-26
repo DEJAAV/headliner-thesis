@@ -13,21 +13,12 @@ var pg = require('pg');
 var path = require('path');
 var flash = require('connect-flash')
 var passport = require('passport');
+var Auth = require('./auth.js');
 
 var Users = require('./models/users.js');
 
-var databasehost = process.env.HOST || 'localhost';
-var knex = require('knex')({
-  client: 'pg',
-  connection: {
-    host: databasehost,
-    database: 'headliner',
-    charset: 'utf8'
-  },
-  migrations: {
-    tableName: 'knex_migrations'
-  }
-});
+
+var knex = require('knex')(Auth.pgData);
 
 app.use(express.static(__dirname + '/../client'));
 app.use(cookieParser());
@@ -35,10 +26,11 @@ app.use(bodyParser.json());
 app.use(session({ secret: 'keyboard cat',
                   saveUninitialized: true,
                   resave: true
- })
+                })
 );
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
 app.listen(port);
 console.log('Server running on port:', port)
@@ -49,19 +41,26 @@ passport.use('local-signup', new LocalStrategy({
     passwordField : 'password',
     passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
   },
-  function(req, email, password, done) {
+  function(req, username, password, done) {
     console.log('/////////////////');
     console.log('Inside of passport use local-signup');
-    Users.getUserByName(username).then(function(err, user) {
+    Users.getUserByEmail(username).then(function(user, err) {
+      console.log(user[0]);
       // if there are any errors, return the error
-      if (err) {return done(err);}
+      if (err) {
+        console.log('There was an error');
+        console.log(err);
+        return done(err);
+      }
       // check to see if theres already a user with that email
-      if (user) {
+      if (user[0]) {
         return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
       } else {
         // create the user
         Users.signupLocal(username, password).then(function(err, user) {
           if (err) {return done(err);}
+          console.log('No errors!');
+          console.log(user);
           return done(null, user);
         });
       }
@@ -80,7 +79,12 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-app.post('/api/signup', passport.authenticate('local-signup', {
+// app.post('/api/users/artists', function(req, res) {
+//   console.log(req.body);
+//   res.send('success');
+// })
+
+app.post('/api/users/artists', passport.authenticate('local-signup', {
   successRedirect: '/', // redirect to the secure profile section
   failureRedirect: '/#/signup-venue', // redirect back to the signup page if there is an error
   failureFlash: true // allow flash messages
