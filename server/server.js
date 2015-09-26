@@ -4,6 +4,7 @@ var port = process.env.PORT || 3000;
 
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
+var GoogleStrategy = require('passport-google').Strategy;
 
 var session = require('express-session');
 var morgan = require('morgan')
@@ -68,6 +69,57 @@ passport.use('local-signup', new LocalStrategy({
   })
 );
 
+passport.use(new FacebookStrategy({
+  clientID: Auth.facebookAuth.clientID,
+  clientSecret: Auth.facebookAuth.clientSecret,
+  callbackURL: Auth.facebookAuth.callbackURL
+  }, 
+  function(accessToken, refreshToken, profile, done) {
+    process.nextTick(function() {
+      Users.getUserByFacebook(profile.id).then(function(err, user) {
+        if(err) {
+          return done(err);
+        }
+        if(user[0]) {
+          return done(null, user);
+        } else {
+          Users.signupFacebook(profile.emails[0].value, profile.id, accessToken, profile.name.givenName).then(function(err, user) {
+            if (err) {
+              return done(err);
+            }
+            console.log('No errors!');
+            return done(null, user);
+          })
+        }
+      })
+    });
+  })
+);
+
+passport.use(new GoogleStrategy({
+  returnURL: 'http://localhost:3000/auth/google/return',
+  realm: 'http://localhost:3000/'
+  },
+  function(identifier, profile, done) {
+    //check for the user by google_id, if it doesn't exist signup, else call done returning user_id
+    Users.findByGoogle(profile.id).then(function(err, user) {
+      if(err) {
+        return done(err);
+      }
+      if(user[0]) {
+        return done(null, user);
+      } else {
+        Users.signupGoogle(profile.emails[0].value, profile.id, identifier, profile.name.givenName).then(function(err, user) {
+          if(err) {
+            return done(err);
+          }
+          return done(null, user);
+        })
+      }
+    });
+  })
+);
+
 passport.serializeUser(function(user, done) {
   console.log(user)
   done(null, user.user_id);
@@ -79,13 +131,28 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-// app.post('/api/users/artists', function(req, res) {
-//   console.log(req.body);
-//   res.send('success');
-// })
-
 app.post('/api/users/artists', passport.authenticate('local-signup', {
   successRedirect: '/', // redirect to the secure profile section
   failureRedirect: '/#/signup-venue', // redirect back to the signup page if there is an error
   failureFlash: true // allow flash messages
-}));
+  })
+);
+
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
+
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+  successRedirect: '/',
+  failureRedirect: '/',
+  failureFlash: true
+  })
+);
+
+app.get('/auth/google', passport.authenticate('google'));
+
+app.get('/auth/google/return', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  }
+);
