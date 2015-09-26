@@ -36,6 +36,7 @@
         url: '/login',
         controller: 'AuthController'
       }) 
+      // possibly remove these routes when modal is created from homepage to save query
       .state('findBand', {
         templateUrl: 'app/search/findABand.html',
         url: '/find-bands',
@@ -58,7 +59,7 @@
       })                        
       .state('signout', {
         templateUrl: 'app/auth/landing.html',
-        url: '/',
+        url: '/signout',
         controller: 'AuthController',
         resolve: {function (Auth) {
           Auth.signout();
