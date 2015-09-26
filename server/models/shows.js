@@ -20,9 +20,9 @@ module.exports = function(){
     },
 
     cancelShow: function(reqBody){
-      return knex('Show').where{(
+      return knex('Show').where({
         show_id: reqBody.show_id
-        )}.del()
+        }).del()
     }
 
   }

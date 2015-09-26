@@ -1,13 +1,13 @@
-var Users = require('./models/users.js');
-var Genres = require('./models/genres.js');
-var Locations = require('./models/locations.js');
-var Shows = require('./models/shows.js')
+var Users = require('./users.js');
+var Genres = require('./genres.js');
+var Locations = require('./locations.js');
+var Shows = require('./shows.js')
 module.exports = function(knex) {
   return {
 
     getAll: function() {
       return knex('Bands').select()
-    }
+    },
     ////////create profile///////////
     addLocation: function(zipcode) {
       Locations.findLocationId(zipcode).then(function(location_id) {
