@@ -66,22 +66,22 @@
     // };    
 
     //Members array of objects for artist members and their roles (id included)
-    $scope.members = [{id: 'member1'}];
+    $scope.user.members = [{id: 'member1'}];
 
     //Adds an incremented new member object to the array 
     //if the button is clicked on the form
     $scope.addNewMember = function(){
-    	var newMemberNum = $scope.members.length+1;
-    	$scope.members.push({'id':'member'+newMemberNum});
+    	var newMemberNum = $scope.user.members.length+1;
+    	$scope.user.members.push({'id':'member'+newMemberNum});
     };
 
     $scope.removeMember = function(){
-    	var last = $scope.members.length-1;
-    	$scope.members.splice(last);
+    	var last = $scope.user.members.length-1;
+    	$scope.user.members.splice(last);
     };
 
     $scope.showAddMember = function(member){
-    	return member.id === $scope.members[$scope.members.length-1].id;
+    	return member.id === $scope.user.members[$scope.user.members.length-1].id;
     };
 
 

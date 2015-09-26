@@ -21,12 +21,13 @@
             <br>
             <!-- artist's name -->
             <label for="artist_name">Artist Name: </label>
-              <input name="artist name" type="text"  class="form-control input-sm chat-input" placeholder="artist name" ng-model="user.artistName" required/>
+              <input name="artist name" type="text"  class="form-control input-sm chat-input" placeholder="artist name" ng-model="user.band_name" required/>
             <br>
-            <!-- Members of Band & their roles 
-                (will add button here for adding more members) --> 
+            <!-- Band Members & their roles 
+                -Members added into array of objects, with
+                their own ID, name, and role properties--> 
             <label for="band_members">Band Members & Roles: </label>
-            <div class="form-group" ng-repeat="member in members">
+            <div class="form-group" ng-repeat="member in user.members">
               <label for="member_name">Member: </label>
                 <input type="text" ng-model="member.name" name="" class="band-members" placeholder="enter member's name"  required/>
               <label for="member_role">Role: </label>
@@ -151,7 +152,7 @@
 
             <div ng-if="signed === 'Yes'">
               <label for="record_label">Enter Label Name: </label>
-                <input name="record label" class="form-control input-sm chat-input" placeholder="Record Label" ng-model="user.label"/>
+                <input name="record label" class="form-control input-sm chat-input" placeholder="Record Label" ng-model="user.record_label"/>
             </div>
             <br>
             <hr>
@@ -175,13 +176,13 @@
               <!-- Local, Touring, or Both -->
               <label for="localTour">Are you local or touring?</label>
               <br> 
-                <input name="localTour" type="radio" ng-model="user.localTour" value="Local"/> Local
-                <input name="localTour" type="radio" ng-model="user.localTour" value="Touring"/> Touring
-                <input name="localTour" type="radio" ng-model="user.localTour" value="Both"/> Both
+                <input name="localTour" type="radio" ng-model="user.onTour" value="Local"/> Local
+                <input name="localTour" type="radio" ng-model="user.onTour" value="Touring"/> Touring
+                <input name="localTour" type="radio" ng-model="user.onTour" value="Both"/> Both
               <br>
 
               <!-- Location Availability -->
-              <div ng-if="user.localTour === 'Touring' || user.localTour === 'Both'">
+              <div ng-if="localTour === 'Touring' || localTour === 'Both'">
                 <label>Where is your band available to travel?</label>
                   <label class="checkbox">
                     <input type="checkbox" name="locationArea" ng-model="user.east"/>East Coast</label>
@@ -236,11 +237,11 @@
               <label for="soundcloud">SoundCloud: </label>
                 <input name="soundcloud" type="text" id="userSoundCloud" class="form-control input-sm chat-input" placeholder="http://www.soundcloud.com/my-soundcloud/" ng-model="user.soundcloud"/>
               <br>  
-              <label for="twitter">Twitter: </label>
-                <input name="twitter" type="text" id="userTwitter" class="form-control input-sm chat-input" placeholder="http://www.twitter.com/my-twitter" ng-model="user.twitter"/>            
+              <label for="youtube">Youtube: </label>
+                <input name="Youtube" type="text" id="userYoutube" class="form-control input-sm chat-input" placeholder="http://www.youtube.com/my-youtube" ng-model="user.youtube"/>            
               <br>
-              <label for="youtube">YouTube: </label>
-                <input name="youtube" type="text" id="userYoutube" class="form-control input-sm chat-input" placeholder="http://www.youtube.com/my-youtube" ng-model="user.youtube"/>            
+              <label for="website">Band Website: </label>
+                <input name="website" type="text" id="userWebsite" class="form-control input-sm chat-input" placeholder="http://www.my-band.com/" ng-model="user.website"/>            
               <br>
 
 
