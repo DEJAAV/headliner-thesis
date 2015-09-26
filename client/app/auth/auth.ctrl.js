@@ -66,19 +66,39 @@
     //     });
     // };    
 
-  $scope.login = function () {
-    Auth.login($scope.user)
-      .then(function (token) {
-        $window.localStorage.setItem('headliner', token);
-        $location.path('/find-bands'); 
-      })
-      .catch(function (error) {
-        if (error.data.error.indexOf('No') > -1) {
-          $scope.user.err = 'Error: Invalid password'
-        } else {
-          $scope.user.err = 'Error: ' + error.data.error;
-        }
-      });
-  };
+    //Members array of objects for artist members and their roles (id included)
+    $scope.members = [{id: 'member1'}];
+
+    //Adds an incremented new member object to the array 
+    //if the button is clicked on the form
+    $scope.addNewMember = function(){
+    	var newMemberNum = $scope.members.length+1;
+    	$scope.members.push({'id':'member'+newMemberNum});
+    };
+
+    $scope.removeMember = function(){
+    	var last = $scope.members.length-1;
+    	$scope.members.splice(last);
+    };
+
+    $scope.showAddMember = function(member){
+    	return member.id === $scope.members[$scope.members.length-1].id;
+    };
+
+
+	$scope.login = function () {
+	Auth.login($scope.user)
+	  .then(function (token) {
+	    $window.localStorage.setItem('headliner', token);
+	    $location.path('/find-bands'); 
+	  })
+	  .catch(function (error) {
+	    if (error.data.error.indexOf('No') > -1) {
+	      $scope.user.err = 'Error: Invalid password'
+	    } else {
+	      $scope.user.err = 'Error: ' + error.data.error;
+	    }
+	  });
+	};
 }
 })();

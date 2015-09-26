@@ -1,4 +1,7 @@
+var knex = require('../db/db.js');
+
 module.exports = {
+
   findGenreId: function(name) {
     return knex('Genres')
       .where({
@@ -13,4 +16,5 @@ module.exports = {
         genre_name: name
       })
   }
-}
+
+};

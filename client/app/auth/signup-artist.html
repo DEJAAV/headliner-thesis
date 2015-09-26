@@ -26,18 +26,14 @@
             <!-- Members of Band & their roles 
                 (will add button here for adding more members) --> 
             <label for="band_members">Band Members & Roles: </label>
-            <div class="inline-fields">
-              <label for="member_name_1">Member 1: </label>
-                <input style="width: 54px;" name="member name 1" type="text"  class="band-members" placeholder="name" ng-model="user.members.name" required/>
-              <label for="member_role_1">Role: </label>
-                <input style="width: 54px;" name="member role 1" type="text"  class="band-members" placeholder="name" ng-model="user.members.role" required/>
-              <br>
-              <label for="member_name_2">Member 2: </label>
-                <input style="width: 54px;" name="member name 2" type="text"  class="band-members" placeholder="name" ng-model="user.members.name" required/>
-              <label for="member_role_2">Role: </label>
-                <input style="width: 54px;" name="member role 2" type="text"  class="band-members" placeholder="name" ng-model="user.members.role" required/>    
-              <br>  
+            <div class="form-group" ng-repeat="member in members">
+              <label for="member_name">Member: </label>
+                <input type="text" ng-model="member.name" name="" class="band-members" placeholder="enter member's name"  required/>
+              <label for="member_role">Role: </label>
+                <input type="text" ng-model="member.role" name="" class="band-members" placeholder="enter member's role"  required/>
+              <button class="add_member" type="button" ng-show="$last" ng-click="addNewMember()">Add Member</button>
             </div>
+            <button class="remove_member" type="button" ng-click="removeMember()">Remove Member</button>            
             <br>
             <hr>
             
@@ -54,14 +50,20 @@
               <p><i>Check all that apply to your sound.</i></p>
               <div class="form-group">
                   <label class="checkbox">
-                      <input type="checkbox" name="userGenre" ng-model="user.genre.americana"/>Americana
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.alternative"/>Alternative
                   </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.americana"/>Americana
+                  </label>                  
                   <label class="checkbox">
                       <input type="checkbox" name="userGenre" ng-model="user.genre.blues"/>Blues
                   </label>
                   <label class="checkbox">
                       <input type="checkbox" name="userGenre" ng-model="user.genre.bluegrass"/>Bluegrass
                   </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.christian"/>Christian
+                  </label>                                    
                   <label class="checkbox">
                       <input type="checkbox" name="userGenre" ng-model="user.genre.classical"/>Classical
                   </label>
@@ -81,11 +83,23 @@
                       <input type="checkbox" name="userGenre" ng-model="user.genre.electronic"/>Electronic
                   </label>
                   <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.experimental"/>Experimental
+                  </label>                  
+                  <label class="checkbox">
                       <input type="checkbox" name="userGenre" ng-model="user.genre.folk"/>Folk
                   </label>   
                   <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.goth"/>Goth
+                  </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.grunge"/>Grunge
+                  </label>                                    
+                  <label class="checkbox">
                       <input type="checkbox" name="userGenre" ng-model="user.genre.hiphop"/>Hip Hop
                   </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.indie"/>Indie
+                  </label>                  
                   <label class="checkbox">
                       <input type="checkbox" name="userGenre" ng-model="user.genre.jazz"/>Jazz
                   </label>
@@ -102,11 +116,20 @@
                       <input type="checkbox" name="userGenre" ng-model="user.genre.rnb"/>R&B
                   </label>
                   <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.reggae"/>Reggae
+                  </label>                  
+                  <label class="checkbox">
                       <input type="checkbox" name="userGenre" ng-model="user.genre.rock"/>Rock
                   </label>
                   <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.shoegaze"/>Shoegaze
+                  </label>                  
+                  <label class="checkbox">
                       <input type="checkbox" name="userGenre" ng-model="user.genre.spoken"/>Spoken Word
                   </label>
+                  <label class="checkbox">
+                      <input type="checkbox" name="userGenre" ng-model="user.genre.tejano"/>Tejano
+                  </label>                  
                   <label class="checkbox">
                       <input type="checkbox" name="userGenre" ng-model="user.genre.world"/>World
                   </label>                                                       
@@ -184,7 +207,7 @@
               <br>
               <div class="question" ng-show="user.name">
                 <label>What is the best way to contact your band {{user.name}}?</label>
-                  <select name="communicate" ng-model="user.communication" required>
+                  <select name="communicate" ng-model="communication" required>
                     <option></option>
                     <option>Phone</option>
                     <option>Email</option>
