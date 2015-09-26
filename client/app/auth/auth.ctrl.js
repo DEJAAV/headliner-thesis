@@ -31,8 +31,9 @@
 
     $scope.signupArtist = function () {
       $scope.user.artist = true;
-      Auth.signup($scope.user)
+      Auth.signupArtist($scope.user)
         .then(function (token) {
+          console.log(token);
           $window.localStorage.setItem('headliner', token);
           console.log($scope.user, '$scope user before redirect')
           $location.path('/find-venues'); 
