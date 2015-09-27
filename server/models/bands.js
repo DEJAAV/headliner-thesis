@@ -8,11 +8,10 @@ module.exports = {
     return knex('Bands').select()
   },
 
-  addLocation: function(zipcode) {
-    Locations.findLocationId(zipcode).then(function(location_id) {
-      return knex('Bands').insert({
-        'location_id': location_id
-      })
+  addLocation: function(band_id, zipcode) {
+    Locations.getLocationId(zipcode).then(function(location_id) {
+      knex('Bands').where({'band_id': band_id})
+      .insert({'location_id': location_id})
     })
   },
 
@@ -34,21 +33,21 @@ module.exports = {
   },
 
   create: function(reqBody) {
-    this.addLocation(reqBody.location);
-    return knex('Bands').returning('band_id').insert({
+
+    return knex('Bands').insert({
       band_name: reqBody.band_name,
+      onTour: reqBody.onTour,
       email: reqBody.email,
-      phone_number: reqBody.phone,
-      Record_label: reqBody.record_label,
-      facebook_url: reqBody.facebook,
-      soundcloud_url: reqBody.soundcloud,
-      youtube_url: reqBody.youtube,
+      phone_number: reqBody.phone_number,
+      record_label: reqBody.record_label,
+      facebook: reqBody.facebook,
+      youtube: reqBody.youtube,
+      soundcloud: reqBody.soundcloud,
+      bandcamp: reqBody.bandcamp,
       website: reqBody.website,
-      about_us: reqBody.aboutUs,
-      touring: reqBody.touring,
-      contact_name: reqBody.contact,
-      photo: reqBody.photo
+      bio: reqBody.bio
     }).then(function(bandId) {
+      module.exports.addLocation(bandId,reqBody.location);
       for (var genre in reqBody.genre) {
         this.addGenre(bandId, genre)
       }
@@ -60,7 +59,7 @@ module.exports = {
   },
 
   updateLocation: function(zipcode) {
-    Locations.findLocationId(zipcode).then(function(location_id) {
+    Locations.getLocationId(zipcode).then(function(location_id) {
       return knex('Bands').update({
         'location_id': location_id
       })
@@ -88,17 +87,17 @@ module.exports = {
     this.updateLocation(reqBody.location);
     return knex('Bands').returning('band_id').update({
       band_name: reqBody.band_name,
+      onTour: reqBody.onTour,
+      location_id: reqBody.location_id,
       email: reqBody.email,
-      phone_number: reqBody.phone,
-      Record_label: reqBody.record_label,
-      facebook_url: reqBody.facebook,
-      soundcloud_url: reqBody.soundcloud,
-      youtube_url: reqBody.youtube,
+      phone_number: reqBody.phone_number,
+      record_label: reqBody.record_label,
+      facebook: reqBody.facebook,
+      youtube: reqBody.youtube,
+      soundcloud: reqBody.soundcloud,
+      bandcamp: reqBody.bandcamp,
       website: reqBody.website,
-      about_us: reqBody.aboutUs,
-      touring: reqBody.touring,
-      contact_name: reqBody.contact,
-      photo: reqBody.photo
+      bio: reqBody.bio
     }).then(function(bandId) {
       for (var genre in reqBody.genre) {
         this.updateGenre(bandId, genre)
@@ -110,10 +109,10 @@ module.exports = {
     })
   },
 
-  findBand: function(username) {
-    return knex('Users').where({
-      'username': username
-    }).select('band_id')
+  findBand: function(id) {
+    return knex('Bands').where({
+      'band_id': id
+    })
   },
 
   addShow: function(band_id, venue_id, date) {

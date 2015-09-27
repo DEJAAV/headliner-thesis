@@ -2,10 +2,16 @@ var knex = require('../db/db.js');
 
 module.exports = {
 
-	findLocationId: function(zipcode){
-		return knex('Locations')
-			.where({Zip_code: zipcode})
-			.select(id)
+	getLocationId: function(zipcode) {
+    if (knex('Locations').where({zipcode: zipcode})) {
+  		return knex('Locations')
+  			.where({zipcode: zipcode})
+  			.select('location_id');
+    } else {
+      return knex('Locations')
+        .insert({zipcode: zipcode})
+        .returning('location_id');
+    }
 	}
 
 };
