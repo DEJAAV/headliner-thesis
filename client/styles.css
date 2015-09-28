@@ -68,6 +68,8 @@ body {
 #status-buttons a.active span { 
     background: red; 
 }
-.form-group {
-    color: white;
+
+/*selectors in form Material UI*/
+md-radio-button {
+  display: inline;
 }
