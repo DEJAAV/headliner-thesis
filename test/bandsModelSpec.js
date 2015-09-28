@@ -55,10 +55,90 @@ describe("Bands", function(){
       });
     });
   });
-
-  describe("getAll()", function(){
-    it("should be a function", function(){
-       expect(Bands.getAll).to.be.a.function;
+  describe("update", function(){
+    it("should have method update", function(){
+       expect(Bands.update).to.be.a.function;
+    });
+    it("should be able to update a band", function(){
+      var req1 = {
+        band_name: 'The Rednex',
+        onTour: false,
+        email: 'rednex@rednex.com',
+        phone_number: 1234567890,
+        record_label: 'rednex',
+        facebook: 'http://www.facebook.com/rednex',
+        youtube: 'http://www.youtube.com/rednex',
+        soundcloud: 'http://www.soundcloud.com/rednex',
+        bandcamp: 'http://www.bandcamp.com/rednex',
+        website: 'http://www.rednex.com',
+        bio: 'We are an awsome band.',
+        location: 12345,
+        genres: {'country': true, 'comedy': true},
+        members: [{name: 'bob', title: 'drummer'}, {name: 'joe', title: 'singer'}]
+      };
+      Bands.create(req1).then(function(band_id) {
+        var req2 = {
+          'band_id': band_id,
+          'band_name': 'The Rednecks'
+        };
+        Bands.update(req2);
+        Bands.findBand(band_id).then(function(band) {
+          expect(band.band_name.to.equal(req2.band_name));
+        });
+      });
+    });
+  });
+  describe("getAll", function(){
+    it("should have a method getAll", function(){
+      expect(Bands.getAll).to.be.a.function;
+    });
+    it("should retrieve all bands", function(){
+      var req1 = {
+        band_name: 'The Rednex',
+        onTour: false,
+        email: 'rednex@rednex.com',
+        phone_number: 1234567890,
+        record_label: 'rednex',
+        facebook: 'http://www.facebook.com/rednex',
+        youtube: 'http://www.youtube.com/rednex',
+        soundcloud: 'http://www.soundcloud.com/rednex',
+        bandcamp: 'http://www.bandcamp.com/rednex',
+        website: 'http://www.rednex.com',
+        bio: 'We are an awsome band.',
+        location: 12345,
+        genres: {'country': true, 'comedy': true},
+        members: [{name: 'bob', title: 'drummer'}, {name: 'joe', title: 'singer'}]
+      };
+      var req2 = {
+        band_name: 'The Rednex2',
+        onTour: false,
+        email: 'rednex@rednex.com',
+        phone_number: 1234567890,
+        record_label: 'rednex',
+        facebook: 'http://www.facebook.com/rednex',
+        youtube: 'http://www.youtube.com/rednex',
+        soundcloud: 'http://www.soundcloud.com/rednex',
+        bandcamp: 'http://www.bandcamp.com/rednex',
+        website: 'http://www.rednex.com',
+        bio: 'We are an awsome band.',
+        location: 12345,
+        genres: {'country': true, 'comedy': true},
+        members: [{name: 'bob', title: 'drummer'}, {name: 'joe', title: 'singer'}]
+      };
+      Bands.create(req1).then(function(band_id1) {
+        Bands.create(req2).then(function(band_id2) {
+          Bands.getAll().then(function(bands) {
+            expect(bands.length.to.equal(2));
+            for (band in bands) {
+              if (band.band_id === bnad_id1) {
+                expect(band.name.to.equal(req1.band_name));
+              } else if (band.band_id === bnad_id2) {
+                expect(band.name.to.equal(req2.band_name));
+              }
+            }
+          });
+        });
+      });
     });
   });
 });
