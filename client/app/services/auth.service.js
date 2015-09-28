@@ -8,7 +8,19 @@
   .factory('Auth', Auth)
 
   function Auth ($http, $location, $window) {
-    // signup requires server send over a token attach to data and pass it over to controller
+
+    function signupGeneral(newUser) {
+      console.log('this is the user being sent in POST req: ', newUser);
+      return $http({
+        method: 'POST',
+        url: '/api/users/users', 
+        data: newUser
+      })
+      .then(function(resp) {
+        return resp.data.token;
+      });
+    };
+
     function signupVenue(user) {
       console.log('this is the user being sent in POST req: ', user);
       return $http({

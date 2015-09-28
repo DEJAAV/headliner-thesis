@@ -37,6 +37,11 @@
         url: '/login',
         controller: 'AuthController'
       }) 
+      .state('signup', {
+        templateUrl: 'app/auth/signup.html',
+        url: '/signup',
+        controller: 'AuthController'
+      })    
       // VENUE FORM (nested views)
       .state('signup-venue', {
         templateUrl: 'app/auth/signup-venue/signup-venue.html',
