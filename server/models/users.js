@@ -49,6 +49,20 @@ module.exports = {
     return knex('Users')
       .where({'facebook_id':facebookId})
       .select();
-  } 
+  },
+
+  getUserByGoogle: function(googleId) {
+    return knex('Users')
+      .where({'google_id': googleId})
+      .select();
+  },
+
+  signupGoogle: function(profile) {
+    console.log('Google Signup');
+    return knex('Users').insert({
+      'google_id': profile.id,
+      'google_email': profile.emails[0].value
+    })
+  }
   
 };
