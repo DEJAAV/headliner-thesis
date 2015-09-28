@@ -21,17 +21,6 @@
         url: '/',
         controller: 'AuthController'
       })
-      // .state('signup-artist', {
-      //   templateUrl: 'app/auth/signup-artist.html', 
-      //   url: '/signup-artist',
-      //   controller: 'AuthController'
-      // })
-      // .state('signup-venue', {
-      //   templateUrl: 'app/auth/signup-venue.html',
-      //   url: '/signup-venue',
-      //   controller: 'AuthController'
-      // })   
-
       .state('login', {
         templateUrl: 'app/auth/login.html',
         url: '/login',
@@ -108,18 +97,7 @@
         templateUrl: 'app/auth/signup-artist/signup-artist-file5.html',
         url: '/file5',
         controller: 'AuthController'
-      })                                                                       
-      // possibly remove these routes when modal is created from homepage to save query
-      // .state('findBand', {
-      //   templateUrl: 'app/search/findABand.html',
-      //   url: '/find-bands',
-      //   controller: 'AuthController' // change this to search controller after it's built out
-      // })  
-      // .state('findVenue', {
-      //   templateUrl: 'app/search/findAVenue.html',
-      //   url: '/find-venues',
-      //   controller: 'AuthController' // change this to search controller after it's built out
-      // })               
+      })                                                                                     
       .state('homepage-artist', {
         templateUrl: 'app/homepage/homepage-artist.html',
         url: '/homepage-artist',

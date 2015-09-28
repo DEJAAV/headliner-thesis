@@ -64,6 +64,7 @@
     // signout user by removing token that is stored in the client's localStorage
     function signout () {
       $window.localStorage.removeItem('headliner');
+      $window.localStorage.removeItem('userid');
       $location.path('/');
     };
 
