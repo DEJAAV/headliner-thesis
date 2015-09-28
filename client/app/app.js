@@ -21,32 +21,64 @@
         url: '/',
         controller: 'AuthController'
       })
-      .state('signup-artist', {
-        templateUrl: 'app/auth/signup-artist.html', 
-        url: '/signup-artist',
-        controller: 'AuthController'
-      })
-      .state('signup-venue', {
-        templateUrl: 'app/auth/signup-venue.html',
-        url: '/signup-venue',
-        controller: 'AuthController'
-      })      
+      // .state('signup-artist', {
+      //   templateUrl: 'app/auth/signup-artist.html', 
+      //   url: '/signup-artist',
+      //   controller: 'AuthController'
+      // })
+      // .state('signup-venue', {
+      //   templateUrl: 'app/auth/signup-venue.html',
+      //   url: '/signup-venue',
+      //   controller: 'AuthController'
+      // })   
+
       .state('login', {
         templateUrl: 'app/auth/login.html',
         url: '/login',
         controller: 'AuthController'
       }) 
-      // possibly remove these routes when modal is created from homepage to save query
-      .state('findBand', {
-        templateUrl: 'app/search/findABand.html',
-        url: '/find-bands',
-        controller: 'AuthController' // change this to search controller after it's built out
+      // VENUE FORM (nested views)
+      .state('signup-venue', {
+        templateUrl: 'app/auth/signup-venue/signup-venue.html',
+        url: '/signup-venue',
+        controller: 'AuthController'
       })  
-      .state('findVenue', {
-        templateUrl: 'app/search/findAVenue.html',
-        url: '/find-venues',
-        controller: 'AuthController' // change this to search controller after it's built out
-      })               
+      .state('signup-venue.basic', {
+        templateUrl: 'app/auth/signup-venue/signup-venue-basic.html',
+        url: '/basic',
+        controller: 'AuthController'
+      })
+      .state('signup-venue.more', {
+        templateUrl: 'app/auth/signup-venue/signup-venue-more.html',
+        url: '/more',
+        controller: 'AuthController'
+      }) 
+      .state('signup-venue.about', {
+        templateUrl: 'app/auth/signup-venue/signup-venue-about.html',
+        url: '/about',
+        controller: 'AuthController'
+      })
+      .state('signup-venue.contact', {
+        templateUrl: 'app/auth/signup-venue/signup-venue-contact.html',
+        url: '/contact',
+        controller: 'AuthController'
+      })
+      .state('signup-venue.terms', {
+        templateUrl: 'app/auth/signup-venue/signup-venue-terms.html',
+        url: '/terms',
+        controller: 'AuthController'
+      })                                    
+      // possibly remove these routes when modal is created from homepage to save query
+      // .state('findBand', {
+      //   templateUrl: 'app/search/findABand.html',
+      //   url: '/find-bands',
+      //   controller: 'AuthController' // change this to search controller after it's built out
+      // })  
+      // .state('findVenue', {
+      //   templateUrl: 'app/search/findAVenue.html',
+      //   url: '/find-venues',
+      //   controller: 'AuthController' // change this to search controller after it's built out
+      // })               
       .state('homepage-artist', {
         templateUrl: 'app/homepage/homepage-artist.html',
         url: '/homepage-artist',

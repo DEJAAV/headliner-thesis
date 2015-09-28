@@ -17,7 +17,7 @@
         .then(function (token) {
           $window.localStorage.setItem('headliner', token);
           console.log($scope.user, '$scope user before redirect')
-          $location.path('/find-bands'); 
+          $location.path('/homepage-venue'); 
         })
         .catch(function(error){
           console.log("this is the caught error on signup AuthCtrl", error)
@@ -33,10 +33,9 @@
       $scope.user.artist = true;
       Auth.signupArtist($scope.user)
         .then(function (token) {
-          console.log(token);
           $window.localStorage.setItem('headliner', token);
           console.log($scope.user, '$scope user before redirect')
-          $location.path('/find-venues'); 
+          $location.path('/homepage-artist'); 
         })
         .catch(function(error){
           if ( error.data.indexOf('taken') > -1 ) {
@@ -46,25 +45,6 @@
           }
         });
     };    
-
-    // $scope.signupVenue = function () {
-    //   Auth.signupVenue($scope.user)
-    //     .then(function (token) {
-    //       // set user's localstorage token to allow user to be authorized to browser other web pages
-    //       // also direct user to create their first project
-    //       $window.localStorage.setItem('headliner', token);
-    //       $location.path('/homepage'); 
-    //     })
-    //     .catch(function(error){
-    //       console.log("error", error)
-    //       // check error to display different Error to user
-    //       if ( error.data.indexOf('taken') > -1 ) {
-    //         $scope.user.err = 'Error: Username is taken'
-    //       } else {
-    //         $scope.user.err = 'Error: Invalid password';
-    //       }
-    //     });
-    // };    
 
     //Members array of objects for artist members and their roles (id included)
     $scope.user.members = [{id: 'member1'}];
