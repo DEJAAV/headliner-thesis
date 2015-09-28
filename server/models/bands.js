@@ -6,7 +6,7 @@ var knex = require('../db/db.js');
 module.exports = {
 
   create: function(reqBody) {
-    return knex('Bands').insert({
+    return knex('Bands').returning('band_id').insert({
       band_name: reqBody.band_name,
       onTour: reqBody.onTour,
       email: reqBody.email,
@@ -18,14 +18,16 @@ module.exports = {
       bandcamp: reqBody.bandcamp,
       website: reqBody.website,
       bio: reqBody.bio
-    }).then(function(bandId) {
-      module.exports.addLocation(bandId,reqBody.location);
-      for (var genre in reqBody.genre) {
-        Band_Genres.addGenre(bandId, genre);
+    })
+    .then(function(band_id) {
+      module.exports.addLocation(band_id[0],reqBody.location);
+      for (var genre in reqBody.genres) {
+        Band_Genres.addGenre(band_id[0], genre);
       }
       for (var member in reqBody.members) {
-        Band_Members.addMember(bandId, member);
+        Band_Members.addMember(band_id[0], member);
       }
+      return band_id[0];
     })
   },
 
@@ -70,6 +72,8 @@ module.exports = {
   findBand: function(id) {
     return knex('Bands').where({
       'band_id': id
+    }).then(function(bands){
+      return bands[0];
     })
   },
 

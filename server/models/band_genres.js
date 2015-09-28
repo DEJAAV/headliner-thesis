@@ -6,7 +6,6 @@ module.exports = {
   getGenres: function(band_id) {
     return knex('Band_Genres')
       .where({'band_id': band_id})
-      .select()
   },
 
   addGenre: function(band_id, genre) {
