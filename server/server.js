@@ -4,7 +4,7 @@ var port = process.env.PORT || 3000;
 
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var GoogleStrategy = require('passport-google-oauth2').Strategy;
 
 var session = require('express-session');
 var morgan = require('morgan')
@@ -17,10 +17,6 @@ var passport = require('passport');
 var Auth = require('./auth.js');
 
 var Users = require('./models/users.js');
-
-
-
-
 
 var knex = require('knex')(Auth.pgData);
 
@@ -59,11 +55,11 @@ passport.use('local-signup', new LocalStrategy({
         return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
       } else {
         // create the user
-        Users.signupLocal(username, password).then(function(err, user) {
+        Users.signupLocal(username, password).then(function(user, err) {
           if (err) {return done(err);}
           console.log('No errors!');
           console.log(user);
-          return done(null, user);
+          return done(null, user[0]);
         });
       }
     });
@@ -77,19 +73,16 @@ passport.use(new FacebookStrategy({
   }, 
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function() {
-      Users.getUserByFacebook(profile.id).then(function(err, user) {
-        if(err) {
-          return done(err);
-        }
+      Users.getUserByFacebook(profile.id).then(function(user) {
         if(user[0]) {
-          return done(null, user);
+          console.log('THIS GUY EXISTS');
+          return done(null, user[0]);
         } else {
-          Users.signupFacebook(profile.emails[0].value, profile.id, accessToken, profile.name.givenName).then(function(err, user) {
-            if (err) {
-              return done(err);
-            }
-            console.log('No errors!');
-            return done(null, user);
+          console.log('FACEBOOK PROFILE:  ++++++++++ ');
+          console.log(profile);
+          Users.signupFacebook(profile.emails[0].value, profile.id, accessToken, profile.name.givenName).then(function(user) {
+            console.log('No errors! FACEBOOK');
+            return done(null, user[0]);
           })
         }
       })
@@ -110,19 +103,14 @@ passport.use(new GoogleStrategy({
       console.log('token: ');
       console.log(token);
       //check for the user by google_id, if it doesn't exist signup, else call done returning user_id
-      Users.findByGoogle(profile.id).then(function(err, user) {
-        if(err) {
-          return done(err);
-        }
+      Users.getUserByGoogle(profile.id).then(function(user) {
         if(user[0]) {
           console.log('Logging in!');
-          return done(null, user);
+          return done(null, user[0]);
         } else {
-          Users.signupGoogle(profile).then(function(err, user) {
-            if(err) {
-              return done(err);
-            }
-            return done(null, user);
+          Users.signupGoogle(profile).then(function(user) {
+            console.log("INSIDE GOOGLE SIGNUP IN THE GOOGLE STRAT");
+            return done(null, user[0]);
           })
         }
       });
@@ -136,8 +124,8 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-  Users.getUserById(id).then(function(err, user) {
-    done(err, user);
+  Users.getUserById(id).then(function(user, err) {
+    done(err, user[0]);
   });
 });
 
@@ -152,17 +140,25 @@ app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }
 
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
   successRedirect: '/',
-  failureRedirect: '/',
+  failureRedirect: '/#/signup-venue',
   failureFlash: true
   })
 );
 
-app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+app.get('/auth/google', function(req, res, next) {
+  if(!req.user) { //Not already logged-in, we'll continue on to authenticating
+    return next();
+  }
+  res.redirect('/');
+  }, passport.authenticate('google', { 
+    scope: ['profile', 'email'] 
+  })
+);
 
 app.get('/auth/google/callback', 
   passport.authenticate('google', {
     successRedirect: '/',
-    failureRedirect: '/' })
+    failureRedirect: '/#/signup-venue' })
 );
 
 require('./routes.js')(app);
