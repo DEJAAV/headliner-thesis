@@ -9,17 +9,15 @@
 
   function AuthController ($scope, $window, $location, Auth) {
     
-    $scope.newUser = {};
-    $scope.newUser.err = '';
-    $scope.user = {};
-    $scope.user.err = '';
-    
+  $scope.newUser = {};
+  $scope.user = {};
+
+
   $scope.signupGeneral = function () {
     Auth.signupGeneral($scope.newUser)
-      .then(function (data) {
-        $window.localStorage.setItem('headliner', data.token);
-        $window.localStorage.setItem('userid', data.userid);
-        $location.path('/select'); //change this
+      .then(function (token) {
+        $window.localStorage.setItem('headliner', token);
+        $location.path('/select'); 
       })
       .catch(function (error) {
           console.error(error);
@@ -77,11 +75,7 @@
 	    $location.path('/find-bands'); 
 	  })
 	  .catch(function (error) {
-	    if (error.data.error.indexOf('No') > -1) {
-	      $scope.user.err = 'Error: Invalid password'
-	    } else {
-	      $scope.user.err = 'Error: ' + error.data.error;
-	    }
+      console.log('error with login: ', error)
 	  });
 	};
 }
