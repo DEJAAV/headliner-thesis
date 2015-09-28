@@ -1,34 +1,36 @@
-<!-- Main login form -->
-<div class="container signform">
-    <div class="row">
-      <div class="col-md-6">
-      </div>
-      <div class="col-md-6">
-        <div class="form-login">
-          <h3>LOGIN</h3>
-          <form name="signForm">
-            <!-- username input-->
-            <label for="username">Username: </label>
-            <input name="username" type="text"  class="form-control input-sm chat-input" placeholder="username" ng-model="user.username" required/>
-            </br>
+ <div class="container">
+<form id="signup" class="forms" name="signupForm" ng-submit="login()">
+    <div class="header">
+      <h1>Login</h1>
+      <p>Welcome Back!</p>
+    </div>  
 
-            <!-- password input -->
-            <label for="username">Password: </label>
-            <input name="password" type="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" ng-model="user.password" required/>
-            </br>
-
-            <!-- login button and signup option -->
-            <div class="wrapper">
-              <span class="group-btn">     
-                <button class="btn btn-primary btn-block" ng-click="login()" ng-disabled="signForm.$invalid">Login</button>
-              </span>
-              <br> 
-              <br>
-              <p class="alert alert-danger" ng-if="user.err">{{ user.err }}</p>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+  <!-- sep signup for Facebook and Google -->
+  <div class="wrapper">
+    <span class="group-btn">     
+      <button class="btn btn-primary btn-block" ng-click="" ng-disabled="signForm.$invalid">Login with Facebook</button>
+      <button class="btn btn-warning btn-block" ng-click="" ng-disabled="signForm.$invalid">Login with Google</button>      
+    </span>
   </div>
+    <div ng-if="user.error" class="alert alert-danger" role="alert"> {{ user.error }} </div>
+  <br>
+    <div class="inputs">
+      <div class="form-group" ng-class="{ 'has-error': signupForm.username.$dirty && signupForm.username.$error.required }">
+      <label for="username">Username: </label>
+      <input id="username" type="text" name="username" class="form-control" ng-model="user.username" required />
+      <span ng-show="signupForm.username.$dirty && signupForm.username.$error.required" class="help-block">Username is required</span>      
+      </div>
+    
+      <div class="form-group" ng-class="{ 'has-error': signupForm.password.$dirty && signupForm.password.$error.required }">
+      <label for="password">Password: </label>
+      <input type="password" class="form-control" name="password" id="password" ng-model="user.password" required />
+      <span ng-show="signupForm.password.$dirty && signupForm.password.$error.required" class="help-block">Password is required</span>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-danger">Login</button>
+        <a href="#/signup" class="btn btn-link">Sign Up</a>
+      </div>
+    </div>  
+</form>
 </div>
