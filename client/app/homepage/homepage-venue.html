@@ -1,9 +1,103 @@
-<div class="container" ng-init="initVenue()">
-  <h1>Hey Venue!</h1>
-  <h3>Here's artists in [location whatever]</h3>
+<div class="container" ng-init="initArtist()">
+  <h1>Hey Artist!</h1>
+  <hr>
+  <ul class="nav nav-tabs">
+    <li class="active">
+      <a href="#/homepage-artist">Find a Venue</a>
+    </li>
+    <li>
+      <a href="#/">Your Profile</a> <!-- find route to add here to prof page -->
+    </li>
+  </ul>
 
-  <div ng-repeat="artist in artists">
-    <div>{{ artist }}</div>
-    <div>{{ artist.name }}</div>
+  <h3>Here's venues in [location whatever]</h3>
+
+  <div ng-repeat="venue in venues">
+    <div>{{ venue }}</div>
+    <div>{{ venue.name }}</div>
   </div>
+
+
+  <div class="row">
+    <div class="col-md-8">
+      <table class="table table-hover">
+        <thead></thead>
+        <tbody>
+          <tr> 
+            <tr> <!-- Each venue posting add an ng-repeat -->
+              <td> Pretend this is a picture... </td>
+              <td>
+                <h2>Super Duper Bar</h2>
+                  <p><button type="button" class="btn btn-primary btn-sm outline">Champagne Bar</button></p> <!-- Each venue type add an ng-repeat -->
+                  <p>Address: 123 Magic Lane, Austin, TX, 78701</p>
+                  <p>About: Super Duper Bar loves their patrons. WAHOO"</p>
+              </td>
+              <td>
+                 <button class="btn btn-success">get venue details</button> <!-- add an ng-click or anchor -->
+              </td>
+            </tr>
+
+            <tr> <!-- Each venue posting add an ng-repeat -->
+              <td> Pretend this is a picture... </td>
+              <td>
+                <h2>Enchilada Lounge</h2>
+                  <p><button type="button" class="btn btn-primary btn-sm outline">Beer Garden</button></p> <!-- Each venue type add an ng-repeat -->
+                  <p>Address: 124 ChickaBoom Rd, Austin, TX, 78755</p>
+                  <p>About: Enchilada Lounge loves beer. WUDDUPPP"</p>
+              </td>
+              <td>
+                 <button class="btn btn-success">get venue details</button> <!-- add an ng-click or anchor -->
+              </td>
+            </tr>
+          </tr>                        
+        </tbody>
+      </table>
+    </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <h2>Pretend these are filters </h2>
+            <table class="table table-hover">
+              <tbody>
+                <div class="row">  
+                  <td> <!-- do ng-repeat for each category -->
+                    <form> 
+                      <div class="form-group"> 
+                        <h3>Cities: </h3>
+                        <label class="checkbox"> 
+                            <input type="checkbox" name="city"/>Austin
+                        </label>
+                        <label class="checkbox"> 
+                            <input type="checkbox" name="city"/>Houston
+                        </label>
+                        <label class="checkbox"> 
+                            <input type="checkbox" name="city"/>College Station
+                        </label>                                                
+                      </div>                        
+                    </form>
+                  </td>
+              </div>
+                  <div class="row"> <!-- do ng-repeat for each category -->
+                    <td> 
+                      <form> 
+                        <div class="form-group"> 
+                          <h3>Venue Type: </h3>
+                          <label class="checkbox"> 
+                              <input type="checkbox" name="venue"/>Dance Club
+                          </label>
+                          <label class="checkbox"> 
+                              <input type="checkbox" name="venue"/>Country Dance Hall
+                          </label>
+                          <label class="checkbox"> 
+                              <input type="checkbox" name="venue"/>Dive Bar
+                          </label>                                                
+                        </div>                        
+                      </form>
+                    </td>
+                  </div>
+
+              </tbody>
+            </table>
+        </div>
+
 </div>

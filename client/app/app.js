@@ -67,7 +67,38 @@
         templateUrl: 'app/auth/signup-venue/signup-venue-terms.html',
         url: '/terms',
         controller: 'AuthController'
-      })                                    
+      }) 
+      //ARTIST SIGNUP FORM
+      .state('signup-artist', {
+        templateUrl: 'app/auth/signup-artist/signup-artist.html',
+        url: '/signup-artist',
+        controller: 'AuthController'
+      })
+      .state('signup-artist.file1', {
+        templateUrl: 'app/auth/signup-artist/signup-artist-file1.html',
+        url: '/file1',
+        controller: 'AuthController'
+      })
+      .state('signup-artist.file2', {
+        templateUrl: 'app/auth/signup-artist/signup-artist-file2.html',
+        url: '/file2',
+        controller: 'AuthController'
+      })
+      .state('signup-artist.file3', {
+        templateUrl: 'app/auth/signup-artist/signup-artist-file3.html',
+        url: '/file3',
+        controller: 'AuthController'
+      })
+      .state('signup-artist.file4', {
+        templateUrl: 'app/auth/signup-artist/signup-artist-file4.html',
+        url: '/file4',
+        controller: 'AuthController'
+      })
+      .state('signup-artist.file5', {
+        templateUrl: 'app/auth/signup-artist/signup-artist-file5.html',
+        url: '/file5',
+        controller: 'AuthController'
+      })                                                                       
       // possibly remove these routes when modal is created from homepage to save query
       // .state('findBand', {
       //   templateUrl: 'app/search/findABand.html',
