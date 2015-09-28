@@ -1,4 +1,5 @@
-var Genres = require('./genres.js');
+var Band_Genres = require('./band_genres.js');
+var Band_Members = require('./band_members.js');
 var Locations = require('./locations.js');
 var knex = require('../db/db.js');
 
@@ -12,23 +13,6 @@ module.exports = {
     Locations.getLocationId(zipcode).then(function(location_id) {
       knex('Bands').where({'band_id': band_id})
       .insert({'location_id': location_id})
-    })
-  },
-
-  addBandMember: function(band_id, member_name, title) {
-    return knex('Band_Members').insert({
-      'band_id': band_id,
-      'member_name': member_name,
-      'title': title
-    })
-  },
-
-  addGenre: function(band_id, genre) {
-    Genres.findGenreId(genre).then(function(genre_id) {
-      return knex('Band_Genres').insert({
-        'genre_id': genre_id,
-        'band_id': band_id
-      })
     })
   },
 
@@ -49,11 +33,10 @@ module.exports = {
     }).then(function(bandId) {
       module.exports.addLocation(bandId,reqBody.location);
       for (var genre in reqBody.genre) {
-        this.addGenre(bandId, genre)
+        Band_Genres.addGenre(bandId, genre);
       }
-      for (var band_member in reqBody.band_member) {
-        this.addBandMember(bandId, band_member, reqBody.band_member[
-          band_member])
+      for (var member in reqBody.members) {
+        Band_Members.addMember(bandId, member);
       }
     })
   },
