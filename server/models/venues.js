@@ -53,6 +53,10 @@ module.exports = {
           this.addType(venueId, type);
         }
       })
+  },
+
+  getAll: function() {
+    return knex('Venues')
   }
 
 };
