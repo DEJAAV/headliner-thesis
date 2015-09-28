@@ -8,13 +8,16 @@ module.exports = {
         genre_name: name
       })
       .select('genre_id')
-  },
-
-  create: function(name) {
-    return knex('Genres')
-      .insert({
-        genre_name: name
+      .then(function(genre){
+        return genre[0].genre_id;
       })
   }
+
+  // create: function(name) {
+  //   return knex('Genres')
+  //     .insert({
+  //       genre_name: name
+  //     })
+  // }
 
 };
