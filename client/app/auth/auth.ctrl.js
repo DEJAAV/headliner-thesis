@@ -19,7 +19,7 @@
       .then(function (data) {
         $window.localStorage.setItem('headliner', data.token);
         $window.localStorage.setItem('userid', data.userid);
-        $location.path('/homepage-artist'); //change this
+        $location.path('/select'); //change this
       })
       .catch(function (error) {
           console.error(error);
@@ -31,6 +31,7 @@
       Auth.signupVenue($scope.user)
         .then(function () {
           console.log('successfully signed up venue')
+          $location.path('/homepage-venue');
         })
         .catch(function(error){
           console.log(error);
@@ -42,6 +43,7 @@
       Auth.signupArtist($scope.user)
         .then(function () {
           console.log('successfully signed up artist')
+          $location.path('/homepage-artist');
         })
         .catch(function(error){
           console.log(error);

@@ -9,12 +9,12 @@
 
   function Auth ($http, $location, $window) {
 
-    function signupGeneral(newUser) {
-      console.log('this is the user being sent in POST req: ', newUser);
+    function signupGeneral(user) {
+      console.log('signupGeneral POST: ', user);
       return $http({
         method: 'POST',
-        url: '/api/users/users', 
-        data: newUser
+        url: '/api/users/local', 
+        data: user
       })
       .then(function(resp) {
         return resp.data.token;
@@ -22,7 +22,7 @@
     };
 
     function signupVenue(user) {
-      console.log('this is the user being sent in POST req: ', user);
+      console.log('signupVenue POST: ', user);
       return $http({
         method: 'POST',
         url: '/api/users/venues', 
@@ -34,7 +34,7 @@
     };
 
     function signupArtist(user) {
-      console.log('this is the user being sent in POST req: ', user);
+      console.log('signupArtist POST: ', user);
       return $http({
         method: 'POST',
         url: '/api/users/artists', 
@@ -68,6 +68,7 @@
     };
 
     return {
+      signupGeneral: signupGeneral,
       signupVenue: signupVenue,
       signupArtist: signupArtist,
       login: login,
