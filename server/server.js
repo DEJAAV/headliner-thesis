@@ -4,7 +4,7 @@ var port = process.env.PORT || 3000;
 
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
-var GoogleStrategy = require('passport-google').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var session = require('express-session');
 var morgan = require('morgan')
@@ -17,6 +17,9 @@ var passport = require('passport');
 var Auth = require('./auth.js');
 
 var Users = require('./models/users.js');
+
+
+
 
 
 var knex = require('knex')(Auth.pgData);
@@ -33,8 +36,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-app.listen(port);
-console.log('Server running on port:', port)
 
 
 passport.use('local-signup', new LocalStrategy({
@@ -97,26 +98,35 @@ passport.use(new FacebookStrategy({
 );
 
 passport.use(new GoogleStrategy({
-  returnURL: 'http://localhost:3000/auth/google/return',
-  realm: 'http://localhost:3000/'
+  clientID: Auth.googleAuth.clientID,
+  clientSecret: Auth.googleAuth.clientSecret,
+  callbackURL: Auth.googleAuth.callbackURL
   },
-  function(identifier, profile, done) {
-    //check for the user by google_id, if it doesn't exist signup, else call done returning user_id
-    Users.findByGoogle(profile.id).then(function(err, user) {
-      if(err) {
-        return done(err);
-      }
-      if(user[0]) {
-        return done(null, user);
-      } else {
-        Users.signupGoogle(profile.emails[0].value, profile.id, identifier, profile.name.givenName).then(function(err, user) {
-          if(err) {
-            return done(err);
-          }
+  function(token, refreshToken, profile, done) {
+    process.nextTick(function() {
+      console.log('Firing up the Google Strategy');
+      console.log(profile);
+      console.log('/////////////////////////////////////////');
+      console.log('token: ');
+      console.log(token);
+      //check for the user by google_id, if it doesn't exist signup, else call done returning user_id
+      Users.findByGoogle(profile.id).then(function(err, user) {
+        if(err) {
+          return done(err);
+        }
+        if(user[0]) {
+          console.log('Logging in!');
           return done(null, user);
-        })
-      }
-    });
+        } else {
+          Users.signupGoogle(profile).then(function(err, user) {
+            if(err) {
+              return done(err);
+            }
+            return done(null, user);
+          })
+        }
+      });
+    })
   })
 );
 
@@ -131,7 +141,7 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-app.post('/api/users/artists', passport.authenticate('local-signup', {
+app.post('/api/users/local', passport.authenticate('local-signup', {
   successRedirect: '/', // redirect to the secure profile section
   failureRedirect: '/#/signup-venue', // redirect back to the signup page if there is an error
   failureFlash: true // allow flash messages
@@ -147,12 +157,15 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
   })
 );
 
-app.get('/auth/google', passport.authenticate('google'));
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-app.get('/auth/google/return', 
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  }
+app.get('/auth/google/callback', 
+  passport.authenticate('google', {
+    successRedirect: '/',
+    failureRedirect: '/' })
 );
+
+require('./routes.js')(app);
+
+app.listen(port);
+console.log('Server running on port:', port)
