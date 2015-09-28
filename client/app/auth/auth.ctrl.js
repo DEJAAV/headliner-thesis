@@ -8,41 +8,45 @@
   .controller('AuthController', AuthController);
 
   function AuthController ($scope, $window, $location, Auth) {
+    
+    $scope.newUser = {};
+    $scope.newUser.err = '';
     $scope.user = {};
     $scope.user.err = '';
     
+  $scope.signupGeneral = function () {
+    Auth.signupGeneral($scope.newUser)
+      .then(function (data) {
+        $window.localStorage.setItem('headliner', data.token);
+        $window.localStorage.setItem('userid', data.userid);
+        $location.path('/select'); //change this
+      })
+      .catch(function (error) {
+          console.error(error);
+      });
+  };
+
     $scope.signupVenue = function () {
       $scope.user.venue = true; 
       Auth.signupVenue($scope.user)
-        .then(function (token) {
-          $window.localStorage.setItem('headliner', token);
-          console.log($scope.user, '$scope user before redirect')
-          $location.path('/homepage-venue'); 
+        .then(function () {
+          console.log('successfully signed up venue')
+          $location.path('/homepage-venue');
         })
         .catch(function(error){
-          console.log("this is the caught error on signup AuthCtrl", error)
-          if ( error.data.indexOf('taken') > -1 ) {
-            $scope.user.err = 'Error in form' //err will change once checks in place in ang
-          } else {
-            $scope.user.err = 'Error';
-          }
+          console.log(error);
         });
     };
 
     $scope.signupArtist = function () {
       $scope.user.artist = true;
       Auth.signupArtist($scope.user)
-        .then(function (token) {
-          $window.localStorage.setItem('headliner', token);
-          console.log($scope.user, '$scope user before redirect')
-          $location.path('/homepage-artist'); 
+        .then(function () {
+          console.log('successfully signed up artist')
+          $location.path('/homepage-artist');
         })
         .catch(function(error){
-          if ( error.data.indexOf('taken') > -1 ) {
-            $scope.user.err = 'Error in form' 
-          } else {
-            $scope.user.err = 'Error';
-          }
+          console.log(error);
         });
     };    
 

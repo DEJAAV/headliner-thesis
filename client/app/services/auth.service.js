@@ -8,9 +8,21 @@
   .factory('Auth', Auth)
 
   function Auth ($http, $location, $window) {
-    // signup requires server send over a token attach to data and pass it over to controller
+
+    function signupGeneral(user) {
+      console.log('signupGeneral POST: ', user);
+      return $http({
+        method: 'POST',
+        url: '/api/users/local', 
+        data: user
+      })
+      .then(function(resp) {
+        return resp.data.token;
+      });
+    };
+
     function signupVenue(user) {
-      console.log('this is the user being sent in POST req: ', user);
+      console.log('signupVenue POST: ', user);
       return $http({
         method: 'POST',
         url: '/api/users/venues', 
@@ -22,7 +34,7 @@
     };
 
     function signupArtist(user) {
-      console.log('this is the user being sent in POST req: ', user);
+      console.log('signupArtist POST: ', user);
       return $http({
         method: 'POST',
         url: '/api/users/artists', 
@@ -52,10 +64,12 @@
     // signout user by removing token that is stored in the client's localStorage
     function signout () {
       $window.localStorage.removeItem('headliner');
+      $window.localStorage.removeItem('userid');
       $location.path('/');
     };
 
     return {
+      signupGeneral: signupGeneral,
       signupVenue: signupVenue,
       signupArtist: signupArtist,
       login: login,
