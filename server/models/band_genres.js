@@ -16,6 +16,15 @@ module.exports = {
         'band_id': band_id
       })
     })
+  },
+
+  updateGenre: function(band_id, genre) {
+    Genres.findGenreId(genre).then(function(genre_id) {
+      return knex('Band_Genres').update({
+        'genre_id': genre_id,
+        'band_id': band_id
+      })
+    })
   }
 
 };

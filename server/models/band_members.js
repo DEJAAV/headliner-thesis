@@ -14,6 +14,14 @@ module.exports = {
       'member_name': member.name,
       'title': member.title
     })
+  },
+
+  updateMember: function(band_id, member) {
+    return knex('Band_Members').update({
+      'band_id': band_id,
+      'member_name': member.name,
+      'title': member.title
+    })
   }
 
 };
