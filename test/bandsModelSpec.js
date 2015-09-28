@@ -1,6 +1,8 @@
 var expect = require("chai").expect;
 var Bands = require("../server/models/bands.js");
 var Locations = require('../server/models/locations.js');
+var Band_Genres = require('../server/models/band_genres.js');
+var Band_Members = require('../server/models/band_members.js');
  
 describe("Bands", function(){
   describe("create and find", function(){
@@ -23,7 +25,9 @@ describe("Bands", function(){
         bandcamp: 'http://www.bandcamp.com/rednex',
         website: 'http://www.rednex.com',
         bio: 'We are an awsome band.',
-        location: 12345
+        location: 12345,
+        genres: {'country': true, 'comedy': true},
+        members: [{name: 'bob', title: 'drummer'}, {name: 'joe', title: 'singer'}]
       };
       Bands.create(req).then(function(band_id) {
         Bands.findBand(band_id).then(function(band) {
@@ -41,6 +45,12 @@ describe("Bands", function(){
           Locations.getLocationId(req.location).then(function(location_id) {
             expect(location_id.to.equal(band.location_id));
           });
+        });
+        Band_Genres.getGenres(band_id).then(function(genres) {
+          expect(genres.to.equal(req.genres));
+        });
+        Band_Members.getMembers(band_id).then(function(members) {
+          expect(members.to.equal(req.members));
         });
       });
     });
