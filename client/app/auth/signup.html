@@ -1,0 +1,35 @@
+ <div class="container">
+<form id="signup" class="forms" name="signupForm" ng-submit="signupGeneral()">
+  <div class="wrapper">
+    <!-- sep signup for Facebook and Google -->
+    <span class="group-btn">     
+      <button class="btn btn-primary btn-block" ng-click="" ng-disabled="signForm.$invalid">Sign Up with Facebook</button>
+      <button class="btn btn-warning btn-block" ng-click="" ng-disabled="signForm.$invalid">Sign Up with Google</button>      
+    </span>
+  </div>
+    <div ng-if="user.error" class="alert alert-danger" role="alert"> {{ user.error }} </div>
+    <div class="header">
+      <h1>Sign Up</h1>
+      <p>Fill out the following information to create a new account</p>
+    </div>  
+  <br>
+    <div class="inputs">
+      <div class="form-group" ng-class="{ 'has-error': signupForm.username.$dirty && signupForm.username.$error.required }">
+      <label for="username">Username: </label>
+      <input id="username" type="text" name="username" class="form-control" ng-model="user.username" required />
+      <span ng-show="signupForm.username.$dirty && signupForm.username.$error.required" class="help-block">Username is required</span>      
+      </div>
+    
+      <div class="form-group" ng-class="{ 'has-error': signupForm.password.$dirty && signupForm.password.$error.required }">
+      <label for="password">Password: </label>
+      <input type="password" class="form-control" name="password" id="password" ng-model="user.password" required />
+      <span ng-show="signupForm.password.$dirty && signupForm.password.$error.required" class="help-block">Password is required</span>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-danger">Sign Up</button>
+        <a href="#/login" class="btn btn-link">Sign In</a>
+      </div>
+    </div>  
+</form>
+</div>
