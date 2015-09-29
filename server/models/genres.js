@@ -7,17 +7,19 @@ module.exports = {
       .where({
         genre_name: name
       })
-      .select('genre_id')
       .then(function(genre){
         return genre[0].genre_id;
       })
-  }
+  },
 
-  // create: function(name) {
-  //   return knex('Genres')
-  //     .insert({
-  //       genre_name: name
-  //     })
-  // }
+  getGenreById: function(genre_id) {
+    return knex('Genres')
+      .where({
+        'genre_id': genre_id
+      })
+      .then(function(genre){
+        return genre[0];
+      })
+  }
 
 };
