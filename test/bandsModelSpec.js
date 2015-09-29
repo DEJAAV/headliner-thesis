@@ -4,9 +4,33 @@ var Locations = require('../server/models/locations.js');
 var Band_Genres = require('../server/models/band_genres.js');
 var Genres = require('../server/models/genres.js');
 var Band_Members = require('../server/models/band_members.js');
-var knex = require('../server/db/db.js');
 
+var config = {  
+  database: {
+    client: 'postgresql',
+    connection: {
+      database: 'headliner'
+    }
+  },
+  directory: './server/migrations',
+  tableName: 'knex_migrations'
+};
+
+var knex = require('knex')(config.database);  
+ 
 describe("Bands", function(){
+  before(function(done) {
+    knex.migrate.rollback(config);
+    done();
+  });
+  beforeEach(function(done) {
+    knex.migrate.latest(config);
+    done();
+  });
+  afterEach(function(done) {  
+    knex.migrate.rollback(config);
+    done();
+  });
   describe("create and find", function(){
     it("should have method create", function(done){
        expect(Bands.create).to.be.a('function');
@@ -49,12 +73,17 @@ describe("Bands", function(){
           Locations.getLocationId(req.location).then(function(location_id) {
             expect(location_id).to.equal(band.location_id);
           });
-        });
-        Band_Genres.getGenres(band_id).then(function(genres) {
-          expect(genres).to.deep.equal(req.genres); 
-        });
-        Band_Members.getMembers(band_id).then(function(members) {
-          expect(members).to.deep.equal(req.members);
+          Band_Genres.getGenres(band_id).then(function(genres) {
+              Genres.getGenreById(genres[0].genre_id).then(function(genre) {
+                console.log(genre)
+                expect(genre).to.deep.equal(req.genres);
+              });
+            
+            
+          });
+          Band_Members.getMembers(band_id).then(function(members) {
+            expect(members).to.deep.equal(req.members);
+          });
         });
       });
       done();
