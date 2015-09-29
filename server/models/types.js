@@ -3,13 +3,12 @@ var knex = require('../db/db.js');
 module.exports = {
 
   findTypeId: function(name) {
-    return knex('Venue_Types')
+    return knex('Types')
       .where({
         type_name: name
       })
-      .select('venue_type_id')
       .then(function(type){
-        return type[0].venue_type_id;
+        return type[0].type_id;
       })
   }
 
