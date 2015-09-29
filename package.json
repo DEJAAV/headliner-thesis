@@ -4,8 +4,8 @@
   "description": "venue finder for bands",
   "main": "server/server.js",
   "dependencies": {
-    "bcrypt": "^0.8.5",
     "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^2.10.1",
     "body-parser": "^1.14.0",
     "chai": "^3.3.0",
     "connect-flash": "^0.1.1",

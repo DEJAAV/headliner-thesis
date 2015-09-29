@@ -1,4 +1,6 @@
 var knex = require('../db/db.js');
+var bcrypt = require('bcrypt-nodejs');
+var Bluebird = require('bluebird');
 
 module.exports = {
 
@@ -6,7 +8,7 @@ module.exports = {
     return knex('Users').insert({
       'email': email,
       'password': hashedPass,
-    });
+    }).returning('user_id');
   },
 
   signupFacebook: function(email, facebookId, facebookToken, facebookName) {
@@ -47,7 +49,7 @@ module.exports = {
   
   getUserByFacebook: function(facebookId){
     return knex('Users')
-      .where({'facebook_id':facebookId})
+      .where({'facebook_id': facebookId})
       .select();
   },
 
@@ -63,6 +65,31 @@ module.exports = {
       'google_id': profile.id,
       'google_email': profile.emails[0].value
     })
-  }
+  },
+
+  signInLocal: function(username, password) {
+    console.log('LOCAL SIGN IN');
+    return this.hashPassword(password).then(function(hash) {
+      return knex('Users').select()
+        .where({
+          'username': username,
+          'password': hash
+        })
+    })
+  },
+
+  hashPassword: function(password) {
+    var genSalt = Bluebird.promisify(bcrypt.genSalt);
+    var hasher = Bluebird.promisify(bcrypt.hash);
+    return genSalt(10).then(function(salt) {
+      return hasher(password, salt, null);
+    })
+  },
   
+  comparePassword: function(password, dbPassword) {
+    var compare = Bluebird.promisify(bcrypt.compare);
+    return compare(password, dbPassword).then(function(err, res) {
+      return res;
+    })
+  }
 };

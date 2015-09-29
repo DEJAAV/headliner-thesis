@@ -32,8 +32,19 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+passport.serializeUser(function(user, done) {
+  console.log('WE INSIDE THE SERIALIZE FUNCTION YEAAAAAAA');
+  console.log(user)
+  done(null, user.user_id);
+});
 
+passport.deserializeUser(function(id, done) {
+  Users.getUserById(id).then(function(user, err) {
+    done(err, user[0]);
+  });
+});
 
+/*---------------Local Sign Up Strategy ---------------------- */
 passport.use('local-signup', new LocalStrategy({
     usernameField : 'localEmail',
     passwordField : 'password',
@@ -43,6 +54,7 @@ passport.use('local-signup', new LocalStrategy({
     console.log('/////////////////');
     console.log('Inside of passport use local-signup');
     Users.getUserByEmail(username).then(function(user, err) {
+      console.log('GETTING USER BY THE EMAIL: ')
       console.log(user[0]);
       // if there are any errors, return the error
       if (err) {
@@ -52,37 +64,82 @@ passport.use('local-signup', new LocalStrategy({
       }
       // check to see if theres already a user with that email
       if (user[0]) {
+        console.log('This username was already taken.')
         return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
       } else {
-        // create the user
-        Users.signupLocal(username, password).then(function(user, err) {
-          if (err) {return done(err);}
-          console.log('No errors!');
-          console.log(user);
-          return done(null, user[0]);
-        });
+        // hash the password
+        Users.hashPassword(req.body.password).then(function(hashed) {
+          console.log('WE HASHIN THE PASSWORD');
+          //insert the email and hashed password
+          Users.signupLocal(req.body.localEmail, hashed)
+          //returns user_id from the newly created user
+          .then(function(id) {
+            //use that id to return a user object to serialize
+            Users.getUserById(id[0]).then(function(user) {
+              console.log('ABOUT TO SERIALIZE ALL OVER THIS')
+              done(null, user[0]);
+            })
+          })
+        })
       }
     });
   })
 );
 
+/*---------------- Local Sign In Strategy ---------------------- */
+passport.use('local-signin', new LocalStrategy({
+  usernameField: 'localEmail',
+  passwordField: 'password',
+  passReqToCallback: true
+  },
+  function(req, username, password, done) {
+    console.log('Does req.user exist?');
+    console.log(req.user);
+    console.log('////////////////////////////////');
+    console.log('INSIDE OF PASSPORT USE FOR LOCAL-SIGNIN');
+    Users.getUserByEmail(username).then(function(user, err) {
+      if(!user[0]) {
+        console.log('User does not exist');
+        return done(null, false, req.flash('signinMessage', 'This email address has not been registered'));
+      } else {
+        console.log('WE COMPARIN PASSWORDS')
+        if(Users.comparePassword(password, user[0].password)) {
+          console.log('IT IS TRUE!');
+          return done(null, user[0]);
+        } else {
+          console.log('IT DID NOT PASS');
+          return done(null, false, req.flash('failedPassword', 'Incorrect password'));
+        }
+      }
+    })
+  })
+)
+
+/*--------------- Facebook OAuth Strategy ---------------------- */
 passport.use(new FacebookStrategy({
   clientID: Auth.facebookAuth.clientID,
   clientSecret: Auth.facebookAuth.clientSecret,
-  callbackURL: Auth.facebookAuth.callbackURL
+  callbackURL: Auth.facebookAuth.callbackURL,
+  profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'updated_time', 'verified']
   }, 
+
   function(accessToken, refreshToken, profile, done) {
+    console.log('FACEBOOK PROFILE ///////////////////////');
+    console.log(profile);
     process.nextTick(function() {
+      //If there is no Facebook user in the database, we're going to add one
       Users.getUserByFacebook(profile.id).then(function(user) {
         if(user[0]) {
           console.log('THIS GUY EXISTS');
+          console.log(user[0]);
           return done(null, user[0]);
         } else {
-          console.log('FACEBOOK PROFILE:  ++++++++++ ');
-          console.log(profile);
-          Users.signupFacebook(profile.emails[0].value, profile.id, accessToken, profile.name.givenName).then(function(user) {
-            console.log('No errors! FACEBOOK');
-            return done(null, user[0]);
+          //Add the user to the database here
+          Users.signupFacebook(profile.emails[0].value, profile.id, accessToken, profile.name.givenName).then(function(id) {
+            console.log('Finished adding this facebook user to the database');
+            Users.getUserById(id).then(function(user) {
+              return done(null, user[0]);
+            })
           })
         }
       })
@@ -90,6 +147,7 @@ passport.use(new FacebookStrategy({
   })
 );
 
+/*--------------- Google OAuth Strategy ---------------------- */
 passport.use(new GoogleStrategy({
   clientID: Auth.googleAuth.clientID,
   clientSecret: Auth.googleAuth.clientSecret,
@@ -108,9 +166,12 @@ passport.use(new GoogleStrategy({
           console.log('Logging in!');
           return done(null, user[0]);
         } else {
-          Users.signupGoogle(profile).then(function(user) {
+          //create user with their google information
+          Users.signupGoogle(profile).then(function(id) {
             console.log("INSIDE GOOGLE SIGNUP IN THE GOOGLE STRAT");
-            return done(null, user[0]);
+            Users.getUserById(id).then(function(user) {
+              return done(null, user[0]);
+            })
           })
         }
       });
@@ -118,29 +179,26 @@ passport.use(new GoogleStrategy({
   })
 );
 
-passport.serializeUser(function(user, done) {
-  console.log(user)
-  done(null, user.user_id);
-});
-
-passport.deserializeUser(function(id, done) {
-  Users.getUserById(id).then(function(user, err) {
-    done(err, user[0]);
-  });
-});
 
 app.post('/api/users/local', passport.authenticate('local-signup', {
-  successRedirect: '/', // redirect to the secure profile section
-  failureRedirect: '/#/signup-venue', // redirect back to the signup page if there is an error
+  successRedirect: '/#/signup-venue', // redirect to the secure profile section
+  failureRedirect: '/#/', // redirect back to the signup page if there is an error
   failureFlash: true // allow flash messages
   })
 );
 
+app.post('/api/users/login', passport.authenticate('local-signin', {
+  successRedirect: '/#/homepage-venue',
+  failureRedirect: '/#/',
+  failureFlash: true
+  })
+); 
+
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-  successRedirect: '/',
-  failureRedirect: '/#/signup-venue',
+  successRedirect: '/#/signup-select',
+  failureRedirect: '/#/',
   failureFlash: true
   })
 );
@@ -155,10 +213,23 @@ app.get('/auth/google', function(req, res, next) {
   })
 );
 
+app.post('/test', function(req, res) {
+  Users.hashPassword(req.body.password).then(function(hashed) {
+    Users.signupLocal(req.body.email, hashed)
+    .then(function(id) {
+      console.log('request////////')
+      console.log(req.body);
+      console.log(req.email);
+      console.log(id)
+      res.json(id);
+    })
+  })
+});
+
 app.get('/auth/google/callback', 
   passport.authenticate('google', {
     successRedirect: '/',
-    failureRedirect: '/#/signup-venue' })
+    failureRedirect: '/#/signup-select' })
 );
 
 require('./routes.js')(app);
