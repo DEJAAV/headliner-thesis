@@ -18,7 +18,7 @@
       return { abbrev: state }; 
       });
   $scope.signupGeneral = function () {
-    Auth.signupGeneral($scope.newUser)
+    Auth.signupGeneral($scope.user)
       .then(function (token) {
         $window.localStorage.setItem('headliner', token);
         $location.path('/select'); 
