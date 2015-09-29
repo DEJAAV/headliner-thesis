@@ -51,7 +51,6 @@ describe("Bands", function(){
           });
         });
         Band_Genres.getGenres(band_id).then(function(genres) {
-          console.log(genres)
           expect(genres).to.deep.equal(req.genres); 
         });
         Band_Members.getMembers(band_id).then(function(members) {
