@@ -17,6 +17,7 @@
         data: user
       })
       .then(function(resp) {
+        console.log('this is the response', resp)
         return resp.data.token;
       });
     };
