@@ -23,7 +23,7 @@ exports.up = function(knex, Promise) {
       table.increments('band_id').primary();
       table.string('band_name');
       table.string('onTour');
-      table.integer('location_id').references('location_id').inTable('Locations');
+      table.integer('zip');
       table.string('phone_number');
       table.string('record_label');
       table.string('facebook');
@@ -33,11 +33,6 @@ exports.up = function(knex, Promise) {
       table.string('website');
       table.string('bio');
       table.string('email');
-    }),
-      
-    knex.schema.createTable('Locations', function(table) {
-      table.increments('location_id').primary();
-      table.integer('zipcode');
     }),
 
     knex.schema.createTable('Venues', function(table) {
@@ -116,7 +111,6 @@ exports.down = function(knex, Promise) {
     knex.schema.dropTable('Genres'),
     knex.schema.dropTable('Users'),
     knex.schema.dropTable('Bands'),
-    knex.schema.dropTable('Locations'),
     knex.schema.dropTable('Venues'),
     knex.schema.dropTable('Shows'),
     knex.schema.dropTable('Band_Reviews'),
