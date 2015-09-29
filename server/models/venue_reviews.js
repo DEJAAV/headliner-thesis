@@ -4,7 +4,7 @@ module.exports = {
 
   addReview: function(reqBody) {
     return knex('Venue_Reviews').insert({
-      band_id: reqBody.band_id,
+      venue_id: reqBody.venue_id,
       show_id: reqBody.show_id,
       rating: reqBody.rating,
       comment: reqBody.comment
@@ -15,7 +15,7 @@ module.exports = {
     return knex('Venue_Reviews').where({
       show_id: reqBody.show_id
     }).update({
-      band_id: reqBody.band_id,
+      venue_id: reqBody.venue_id,
       show_id: reqBody.show_id,
       rating: reqBody.rating,
       comment: reqBody.comment
