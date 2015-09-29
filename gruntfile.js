@@ -7,16 +7,27 @@ module.exports = function(grunt){
         'gruntfile.js', 
         'client/app/**/*.js', 
         'server/**/*.js',
-        'test/**/*.js' 
+        'test/*.js' 
       ], 
     },
 
+    // auto_install: {
+    //   local: {},
+    //   subdir: {
+    //     cwd: '',
+    //     stdout: true,
+    //     stderr: true,
+    //     failOnError: true
+    //   }
+    // },
+
     bower: {
+      // name: grunt.file.readJSON('client/bower.json'),
       install: {
         options: {
           install: true,
           copy: false,
-          targetDir: 'client/bower_components',
+          targetDir: 'client/bower.json',
         }
       }
     },
@@ -67,15 +78,28 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-jshint');	
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-auto-install');
   grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-contrib-connect');
 
   /*====Registering Tasks for CLI====*/
+
+  // grunt.registerTask('install', 'install and/or update front-end dependencies', function() {
+  //   var exec = require('child_process').exec, child;
+  //   var call = this.async();
+  //   child = exec('bower install', {pwd: 'client/'}, function(error, stdout, stderr) {
+  //     console.log('stdout: ' + stdout);
+  //     console.log('stderr: ' + stderr);
+  //     if(error !== null){
+  //       console.log('exec error: ' + error);
+  //     }
+  //   });
+  // });
+
   //default (>> grunt)
   grunt.registerTask('default', [
-        'jshint',
         'bower',
-        'watch'
+        'jshint'
   ]);
 
   //testing (>> grunt test) 
