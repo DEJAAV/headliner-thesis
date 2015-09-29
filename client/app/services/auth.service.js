@@ -45,16 +45,18 @@
       });
     };    
 
-    function login (user) {
-      return $http({
-        method: 'POST',
-        url: '/api/users/login', /* get route */
-        data: user
-      })
-      .then(function(resp) {
-        return resp.data;
-      });
-    };
+  var login = function (user) {
+    console.log('inside login')
+    return $http({
+
+      method: 'POST',
+      url: '/api/users/login',
+      data: user
+    })
+    .then(function (res) {
+      return res.data.token;
+    });
+  };
 
     // check if a user is authorized when user switch pages on app
     function isAuth () {

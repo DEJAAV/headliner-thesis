@@ -9,17 +9,19 @@
 
   function AuthController ($scope, $window, $location, Auth) {
     
-    $scope.newUser = {};
-    $scope.newUser.err = '';
-    $scope.user = {};
-    $scope.user.err = '';
-    
+  $scope.newUser = {};
+  $scope.user = {};
+  $scope.band = {};
+  $scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
+    'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
+    'WY').split(' ').map(function (state) { 
+      return { abbrev: state }; 
+      });
   $scope.signupGeneral = function () {
     Auth.signupGeneral($scope.newUser)
-      .then(function (data) {
-        $window.localStorage.setItem('headliner', data.token);
-        $window.localStorage.setItem('userid', data.userid);
-        $location.path('/select'); //change this
+      .then(function (token) {
+        $window.localStorage.setItem('headliner', token);
+        $location.path('/select'); 
       })
       .catch(function (error) {
           console.error(error);
@@ -51,22 +53,22 @@
     };    
 
     //Members array of objects for artist members and their roles (id included)
-    $scope.user.members = [{id: 'member1'}];
+    $scope.band.members = [{id: 'member1'}];
 
     //Adds an incremented new member object to the array 
     //if the button is clicked on the form
     $scope.addNewMember = function(){
-    	var newMemberNum = $scope.user.members.length+1;
-    	$scope.user.members.push({'id':'member'+newMemberNum});
+    	var newMemberNum = $scope.band.members.length+1;
+    	$scope.band.members.push({'id':'member'+newMemberNum});
     };
 
     $scope.removeMember = function(){
-    	var last = $scope.user.members.length-1;
-    	$scope.user.members.splice(last);
+    	var last = $scope.band.members.length-1;
+    	$scope.band.members.splice(last);
     };
 
     $scope.showAddMember = function(member){
-    	return member.id === $scope.user.members[$scope.user.members.length-1].id;
+    	return member.id === $scope.band.members[$scope.band.members.length-1].id;
     };
 
 
@@ -77,11 +79,7 @@
 	    $location.path('/find-bands'); 
 	  })
 	  .catch(function (error) {
-	    if (error.data.error.indexOf('No') > -1) {
-	      $scope.user.err = 'Error: Invalid password'
-	    } else {
-	      $scope.user.err = 'Error: ' + error.data.error;
-	    }
+      console.log('error with login: ', error)
 	  });
 	};
 }

@@ -21,15 +21,5 @@
         $scope.venues = all;
       })
     } 
-
-    $scope.getAllArtists = function () {
-      Homepage.getAllArtists()
-      console.log('wudup I just got all yo artists');
-    }
-
-    $scope.getAllArtists = function () {
-      Homepage.getAllVenues()
-      console.log('wudup I just got all yo venues');
-    }  
   }
 })();

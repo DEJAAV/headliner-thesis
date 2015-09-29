@@ -6,6 +6,7 @@
     'headliner.auth',
     'headliner.homepage',
     'ngRoute',
+    'ngMaterial',
     'ui.router'
   ])
   .config(config)
@@ -44,28 +45,23 @@
       })  
       .state('signup-venue.basic', {
         templateUrl: 'app/auth/signup-venue/signup-venue-basic.html',
-        url: '/basic',
-        controller: 'AuthController'
+        url: '/basic'
       })
       .state('signup-venue.more', {
         templateUrl: 'app/auth/signup-venue/signup-venue-more.html',
-        url: '/more',
-        controller: 'AuthController'
+        url: '/more'
       }) 
       .state('signup-venue.about', {
         templateUrl: 'app/auth/signup-venue/signup-venue-about.html',
-        url: '/about',
-        controller: 'AuthController'
+        url: '/about'
       })
       .state('signup-venue.contact', {
         templateUrl: 'app/auth/signup-venue/signup-venue-contact.html',
-        url: '/contact',
-        controller: 'AuthController'
+        url: '/contact'
       })
       .state('signup-venue.terms', {
         templateUrl: 'app/auth/signup-venue/signup-venue-terms.html',
-        url: '/terms',
-        controller: 'AuthController'
+        url: '/terms'
       }) 
       //ARTIST SIGNUP FORM
       .state('signup-artist', {
@@ -75,28 +71,23 @@
       })
       .state('signup-artist.file1', {
         templateUrl: 'app/auth/signup-artist/signup-artist-file1.html',
-        url: '/file1',
-        controller: 'AuthController'
+        url: '/file1'
       })
       .state('signup-artist.file2', {
         templateUrl: 'app/auth/signup-artist/signup-artist-file2.html',
-        url: '/file2',
-        controller: 'AuthController'
+        url: '/file2'
       })
       .state('signup-artist.file3', {
         templateUrl: 'app/auth/signup-artist/signup-artist-file3.html',
-        url: '/file3',
-        controller: 'AuthController'
+        url: '/file3'
       })
       .state('signup-artist.file4', {
         templateUrl: 'app/auth/signup-artist/signup-artist-file4.html',
-        url: '/file4',
-        controller: 'AuthController'
+        url: '/file4'
       })
       .state('signup-artist.file5', {
         templateUrl: 'app/auth/signup-artist/signup-artist-file5.html',
-        url: '/file5',
-        controller: 'AuthController'
+        url: '/file5'
       })                                                                                     
       .state('homepage-artist', {
         templateUrl: 'app/homepage/homepage-artist.html',

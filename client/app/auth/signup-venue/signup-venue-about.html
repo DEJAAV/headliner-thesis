@@ -2,6 +2,72 @@
 
 <label>About</label>
 <div class="form-group">
+
+  <br>
+  <div>{{ user }}</div>
+  <hr> 
+
+   <!-- VENUE TYPE CHECKBOXES -->
+    <label>Type of Venue:</label>
+      <div class="form-group">
+          <label class="checkbox">
+              <input type="checkbox" name="userType" ng-model="user.type.casual"/>Casual Bar
+          </label>
+          <label class="checkbox">
+              <input type="checkbox" name="userType" ng-model="user.type.beer"/>Beer Garden
+          </label>
+          <label class="checkbox">
+              <input type="checkbox" name="userType" ng-model="user.type.champagne"/>Champagne Bar
+          </label>
+          <label class="checkbox">
+              <input type="checkbox" name="userType" ng-model="user.type.cocktail"/>Cocktail Bar
+          </label>
+          <label class="checkbox">
+              <input type="checkbox" name="userType" ng-model="user.type.country"/>Country Dance Hall
+          </label>  
+          <label class="checkbox">
+              <input type="checkbox" name="userType" ng-model="user.type.dance"/>Dance Club
+          </label>
+          <label class="checkbox">
+              <input type="checkbox" name="userType" ng-model="user.type.dive"/>Dive Bar
+          </label>
+          <label class="checkbox">
+              <input type="checkbox" name="userType" ng-model="user.type.gay"/>Gay/Lesbian Bar
+          </label>
+          <label class="checkbox">
+              <input type="checkbox" name="userType" ng-model="user.type.hookah"/>Hookah Bar
+          </label>
+          <label class="checkbox">
+              <input type="checkbox" name="userType" ng-model="user.type.irish"/>Irish Pub
+          </label>   
+          <label class="checkbox">
+              <input type="checkbox" name="userType" ng-model="user.type.jazz"/>Jazz/Blues Bar
+          </label>
+          <label class="checkbox">
+              <input type="checkbox" name="userType" ng-model="user.type.karoke"/>Karoke
+          </label>
+          <label class="checkbox">
+              <input type="checkbox" name="userType" ng-model="user.type.coffee"/>Late Night Coffee Shop
+          </label>
+          <label class="checkbox">                  
+              <input type="checkbox" name="userType" ng-model="user.type.lounge"/>Lounge
+          </label>
+          <label class="checkbox">
+              <input type="checkbox" name="userType" ng-model="user.type.music"/>Music Venue
+          </label>
+          <label class="checkbox">
+              <input type="checkbox" name="userType" ng-model="user.type.piano"/>Piano Bar 
+          </label>   
+          <label class="checkbox">
+              <input type="checkbox" name="userType" ng-model="user.type.wine"/>Wine Bar
+          </label>                                                        
+      </div>
+              <br>          
+              <!-- END OF VENUE TYPE CHECKBOXES -->
+             <!-- About Us Expandable Text Box  -->    
+            <label for="about">About your venue:</label> 
+              <textarea name="about" type="text" id="userAboutUs" class="form-control input-sm chat-input" placeholder="Brief bio about your venue" ng-model="user.about" required></textarea>
+            <br>
 </div>
 
 <div class="form-group row">

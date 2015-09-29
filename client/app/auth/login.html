@@ -8,16 +8,16 @@
   <!-- sep signup for Facebook and Google -->
   <div class="wrapper">
     <span class="group-btn">     
-      <button class="btn btn-primary btn-block" ng-click="" ng-disabled="signForm.$invalid">Login with Facebook</button>
-      <button class="btn btn-warning btn-block" ng-click="" ng-disabled="signForm.$invalid">Login with Google</button>      
+      <button class="btn btn-primary btn-block" ng-click="">Login with Facebook</button>
+      <button class="btn btn-warning btn-block" ng-click="">Login with Google</button>      
     </span>
   </div>
-    <div ng-if="user.error" class="alert alert-danger" role="alert"> {{ user.error }} </div>
+
   <br>
     <div class="inputs">
       <div class="form-group" ng-class="{ 'has-error': signupForm.username.$dirty && signupForm.username.$error.required }">
       <label for="username">Username: </label>
-      <input id="username" type="text" name="username" class="form-control" ng-model="user.username" required />
+      <input id="username" type="text" name="username" class="form-control" ng-model="user.localEmail" required />
       <span ng-show="signupForm.username.$dirty && signupForm.username.$error.required" class="help-block">Username is required</span>      
       </div>
     

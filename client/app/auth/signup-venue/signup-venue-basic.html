@@ -1,7 +1,43 @@
 <!-- includes: venue name, street, city, state, zip -->
 
-<label>Basic</label>
-<div class="form-group">
+<h3>Basic Venue Info: </h3>
+<div> {{ user }} </div>
+<div layout="column" class="formGroup" ng-app="headliner">
+
+  <md-content>
+      <div layout="" layout-sm="column">
+        <md-input-container flex="">
+          <label>Venue Name</label>
+          <input name="name" ng-model="user.venue_name" required/>
+        </md-input-container>
+      </div>
+      
+      <div layout="" layout-sm="column">
+        <md-input-container flex="">
+          <label>Address</label>
+          <input ng-model="user.street" required/>
+        </md-input-container>
+      </div>
+      <div layout="" layout-sm="column">
+        <md-input-container flex="">
+          <label>City</label>
+          <input ng-model="user.city" required/>
+        </md-input-container>
+      <md-input-container>
+        <label>State</label>
+        <md-select ng-model="user.state">
+          <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+            {{state.abbrev}}
+          </md-option>
+        </md-select>
+      </md-input-container>
+        <md-input-container flex="">
+          <label>Zip Code</label>
+          <input ng-model="user.zip" placeholder="12345" required/>
+        </md-input-container>
+      </div>
+  </md-content>
+
 </div>
 
 <div class="form-group row">

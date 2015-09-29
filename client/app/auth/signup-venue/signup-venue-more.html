@@ -1,7 +1,124 @@
 <!-- includes: capacity, genre, indoor or outdoor -->
 
-<label>More</label>
+<h3>More Info: </h3>
 <div class="form-group">
+  <div>{{ user }}</div>
+            
+<br>
+<div layout="column" class="formGroup" ng-app="headliner">
+  <md-content>
+      <div layout="" layout-sm="column">
+        <md-input-container flex="">
+          <label>Capacity</label>
+          <input name="capacity" type="number" ng-model="user.capacity" required/>
+        </md-input-container>   
+        
+        <label>Indoor or Outdoor?</label>
+        <md-input-container flex="">
+          <md-radio-group ng-model="user.inout">
+            <md-radio-button class="md-primary" value="Indoor">Indoor</md-radio-button>
+            <md-radio-button class="md-primary" value="Outdoor">Outdoor</md-radio-button>
+            <md-radio-button class="md-primary" value="Both">Both</md-radio-button>
+          </md-radio-group>  
+        </md-input-container>     
+      </div>
+
+
+<div layout="column" class="form-group" ng-app="headliner">
+      
+      <label class="checkbox-inline">
+          <md-checkbox name="userGenre" ng-model="user.genre.americana"/>Americana
+      </md-checkbox>
+
+      <label class="checkbox-inline">
+          <md-checkbox name="userGenre" ng-model="user.genre.blues"/>Blues
+      </md-checkbox>
+
+      <label class="checkbox-inline">
+          <md-checkbox name="userGenre" ng-model="user.genre.bluegrass"/>Bluegrass
+      </md-checkbox>
+
+      <label class="checkbox-inline">
+          <md-checkbox name="userGenre" ng-model="user.genre.classical"/>Classical
+      </md-checkbox>
+
+      <label class="checkbox-inline">
+          <md-checkbox name="userGenre" ng-model="user.genre.comedy"/>Comedy
+      </md-checkbox>
+
+      <label class="checkbox-inline">
+          <md-checkbox name="userGenre" ng-model="user.genre.country"/>Country
+      </md-checkbox>
+
+      <label class="checkbox-inline">
+          <md-checkbox name="userGenre" ng-model="user.genre.coverband"/>Cover Band
+      </md-checkbox>
+
+      <label class="checkbox-inline">
+          <md-checkbox name="userGenre" ng-model="user.genre.dj"/>DJ
+      </md-checkbox>
+
+      <label class="checkbox-inline">
+          <md-checkbox name="userGenre" ng-model="user.genre.edm"/>EDM
+      </md-checkbox>
+
+      <label class="checkbox-inline">
+          <md-checkbox name="userGenre" ng-model="user.genre.electronic"/>Electronic
+      </md-checkbox>
+
+      <label class="checkbox-inline">
+          <md-checkbox name="userGenre" ng-model="user.genre.folk"/>Folk
+      </md-checkbox>
+
+      <label class="checkbox-inline">
+          <md-checkbox name="userGenre" ng-model="user.genre.hiphop"/>Hip Hop
+      </md-checkbox>
+
+      <label class="checkbox-inline">
+          <md-checkbox name="userGenre" ng-model="user.genre.jazz"/>Jazz
+      </md-checkbox>
+
+      <label class="checkbox-inline">
+          <md-checkbox name="userGenre" ng-model="user.genre.latin"/>Latin
+      </md-checkbox>
+
+      <label class="checkbox-inline">
+          <md-checkbox name="userGenre" ng-model="user.genre.metal"/>Metal
+      </md-checkbox>
+
+      <label class="checkbox-inline">
+          <md-checkbox name="userGenre" ng-model="user.genre.pop"/>Pop
+      </md-checkbox>
+
+      <label class="checkbox-inline">
+          <md-checkbox name="userGenre" ng-model="user.genre.rnb"/>R&B
+      </md-checkbox>
+
+      <label class="checkbox-inline">
+          <md-checkbox name="userGenre" ng-model="user.genre.rock"/>Rock
+      </md-checkbox>
+
+      <label class="checkbox-inline">
+          <md-checkbox name="userGenre" ng-model="user.genre.spoken"/>Spoken Word
+      </md-checkbox>
+
+      <label class="checkbox-inline">
+          <md-checkbox name="userGenre" ng-model="user.genre.world"/>World
+      </md-checkbox>
+
+  </div>
+  <br>          
+  <!-- END OF GENRE CHECKBOXES -->  
+
+    <label for="inout">Indoor or Outdoor:</label>
+    <br> 
+      <input name="inout" type="radio" ng-model="user.inout" value="Indoor"/> Indoor
+      <input name="inout" type="radio" ng-model="user.inout" value="Outdoor"/> Outdoor
+      <input name="inout" type="radio" ng-model="user.inout" value="Both"/> Both
+    <br>                                         
+    
+    <hr>
+
 </div>
 
 <div class="form-group row">
