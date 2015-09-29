@@ -29,7 +29,6 @@
   };
 
     $scope.signupVenue = function () {
-      $scope.user.venue = true; 
       Auth.signupVenue($scope.user)
         .then(function () {
           console.log('successfully signed up venue')
@@ -41,7 +40,6 @@
     };
 
     $scope.signupArtist = function () {
-      $scope.user.artist = true;
       Auth.signupArtist($scope.user)
         .then(function () {
           console.log('successfully signed up artist')
