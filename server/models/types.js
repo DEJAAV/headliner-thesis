@@ -2,18 +2,14 @@ var knex = require('../db/db.js');
 
 module.exports = {
 
-  findTypeId: function(type) {
-    return knex('Types')
+  findTypeId: function(name) {
+    return knex('Venue_Types')
       .where({
-        type: type
+        type_name: name
       })
-      .select('type_id')
-  },
-
-  create: function(type) {
-    return knex('Types')
-      .insert({
-        type: type
+      .select('venue_type_id')
+      .then(function(type){
+        return type[0].venue_type_id;
       })
   }
 

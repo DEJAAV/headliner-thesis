@@ -1,28 +1,31 @@
-// var expect = require("chai").expect;
-// var venues = require("../server/models/venues.js");
-// var genres = require("../server/models/genres.js");
+var expect = require("chai").expect;
+var Venues = require("../server/models/venues.js");
+var genres = require("../server/models/genres.js");
  
-// describe("Venues", function(){
-//   var req = {
-//     venue_name: 'Red7',
-//     capacity: 300
-//     website: 'rednex@rednex.com',
-//     street: 1234567890,
-//     bio: 'rednex',
-//     city: 'http://www.facebook.com/rednex',
-//     state: 'http://www.youtube.com/rednex',
-//     zip: 'http://www.soundcloud.com/rednex',
-//     facebook: 'http://www.bandcamp.com/rednex',
-//     yelp: 'http://www.rednex.com',
-//     contact_name: 'We are an awsome band.',
-//     contact_phone: 12345
-//     in_out:
-//   }
-//     it("should add a genre to venue", function(){
-//       expect(venues)
-//     })
-//   });
-// });
+describe("Venues", function(){
+  it("should be able to create a venue", function(){
+    var req = {
+      name: 'Red7',
+      capacity: 300,
+      website: 'http://www.red7.com',
+      street: 'main street',
+      about: 'We are the best',
+      city: 'Austin',
+      state: 'TX',
+      zip: 78787,
+      facebook: 'http://www.facebook.com/red7',
+      yelp: 'http://www.yelp.com/red7',
+      contact: 'Danielson',
+      phone: 12345,
+      email: 'red7@red7.com',
+      inout: 'out',
+      genres: {"classical": "true"},
+      type: {"beer": 'true'}
+    }
+    return Venues.create(req)
+    // done();
+  })
+});
 
 
 
