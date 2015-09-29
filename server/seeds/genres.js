@@ -6,7 +6,7 @@ exports.seed = function(knex, Promise) {
   return Promise.join(
     // Deletes ALL existing entries
     knex('Genres').del(),
-    knex('Venue_Types').del(),
+    knex('Types').del(),
 
     // Inserts seed entries
     knex('Genres').insert({genre_id: 1, genre_name: 'americana'}),
@@ -30,23 +30,23 @@ exports.seed = function(knex, Promise) {
     knex('Genres').insert({genre_id: 19, genre_name: 'spoken'}),
     knex('Genres').insert({genre_id: 20, genre_name: 'world'}),
 
-    knex('Venue_Types').insert({venue_type_id: 1, type_name: 'casual'}),
-    knex('Venue_Types').insert({venue_type_id: 2, type_name: 'beer'}),
-    knex('Venue_Types').insert({venue_type_id: 3, type_name: 'champagne'}),
-    knex('Venue_Types').insert({venue_type_id: 4, type_name: 'cocktail'}),
-    knex('Venue_Types').insert({venue_type_id: 5, type_name: 'country'}),
-    knex('Venue_Types').insert({venue_type_id: 6, type_name: 'dance'}),
-    knex('Venue_Types').insert({venue_type_id: 7, type_name: 'dive'}),
-    knex('Venue_Types').insert({venue_type_id: 8, type_name: 'gay'}),
-    knex('Venue_Types').insert({venue_type_id: 9, type_name: 'hookah'}),
-    knex('Venue_Types').insert({venue_type_id: 10, type_name: 'irish'}),
-    knex('Venue_Types').insert({venue_type_id: 11, type_name: 'jazz'}),
-    knex('Venue_Types').insert({venue_type_id: 12, type_name: 'karoke'}),
-    knex('Venue_Types').insert({venue_type_id: 13, type_name: 'coffee'}),
-    knex('Venue_Types').insert({venue_type_id: 14, type_name: 'lounge'}),
-    knex('Venue_Types').insert({venue_type_id: 15, type_name: 'music'}),
-    knex('Venue_Types').insert({venue_type_id: 16, type_name: 'piano'}),
-    knex('Venue_Types').insert({venue_type_id: 17, type_name: 'wine'})
+    knex('Types').insert({type_id: 1, type_name: 'casual'}),
+    knex('Types').insert({type_id: 2, type_name: 'beer'}),
+    knex('Types').insert({type_id: 3, type_name: 'champagne'}),
+    knex('Types').insert({type_id: 4, type_name: 'cocktail'}),
+    knex('Types').insert({type_id: 5, type_name: 'country'}),
+    knex('Types').insert({type_id: 6, type_name: 'dance'}),
+    knex('Types').insert({type_id: 7, type_name: 'dive'}),
+    knex('Types').insert({type_id: 8, type_name: 'gay'}),
+    knex('Types').insert({type_id: 9, type_name: 'hookah'}),
+    knex('Types').insert({type_id: 10, type_name: 'irish'}),
+    knex('Types').insert({type_id: 11, type_name: 'jazz'}),
+    knex('Types').insert({type_id: 12, type_name: 'karoke'}),
+    knex('Types').insert({type_id: 13, type_name: 'coffee'}),
+    knex('Types').insert({type_id: 14, type_name: 'lounge'}),
+    knex('Types').insert({type_id: 15, type_name: 'music'}),
+    knex('Types').insert({type_id: 16, type_name: 'piano'}),
+    knex('Types').insert({type_id: 17, type_name: 'wine'})
 
   );
 };
