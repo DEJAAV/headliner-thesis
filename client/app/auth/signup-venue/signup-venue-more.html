@@ -5,121 +5,168 @@
   <div>{{ user }}</div>
             
 <br>
-<div layout="column" class="formGroup" ng-app="headliner">
-  <md-content>
-      <div layout="" layout-sm="column">
-        <md-input-container flex="">
-          <label>Capacity</label>
-          <input name="capacity" type="number" ng-model="user.capacity" required/>
-        </md-input-container>   
-        
-        <label>Indoor or Outdoor?</label>
-        <md-input-container flex="">
-          <md-radio-group ng-model="user.inout">
-            <md-radio-button class="md-primary" value="Indoor">Indoor</md-radio-button>
-            <md-radio-button class="md-primary" value="Outdoor">Outdoor</md-radio-button>
-            <md-radio-button class="md-primary" value="Both">Both</md-radio-button>
-          </md-radio-group>  
-        </md-input-container>     
+ 
+<!-- GENRE CHECKBOXES --> 
+   <form class="col s12">
+    <div class="row">
+      <div class="input-field col s12">
+        <div class="input-field col s3">
+          <p>
+            <input type="checkbox" id="americana" ng-model="user.type.americana"/>
+            <label for="americana">americana</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="blues" ng-model="user.type.blues"/>
+            <label for="blues">blues</label>
+          </p>
+        </div>
+        <div class="input-field col s3"> 
+          <p>
+            <input type="checkbox" id="bluegrass" ng-model="user.type.bluegrass"/>
+            <label for="bluegrass">bluegrass</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="classical" ng-model="user.type.classical"/>
+            <label for="classical">classical</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="comedy" ng-model="user.type.comedy"/>
+            <label for="comedy">comedy</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="country" ng-model="user.type.country"/>
+            <label for="country">country</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="cover" ng-model="user.type.cover"/>
+            <label for="cover">cover band</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="dj" ng-model="user.type.dj"/>
+            <label for="dj">dj</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="edm" ng-model="user.type.edm"/>
+            <label for="edm">edm</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="electronic" ng-model="user.type.electronic"/>
+            <label for="electronic">electronic</label>
+          </p>
+        </div>
+        <div class="input-field col s3"> 
+          <p>
+            <input type="checkbox" id="folk" ng-model="user.type.folk"/>
+            <label for="folk">folk</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="hiphop" ng-model="user.type.hiphop"/>
+            <label for="hiphop">hiphop</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="jazz" ng-model="user.type.jazz"/>
+            <label for="jazz">jazz</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="latin" ng-model="user.type.latin"/>
+            <label for="latin">latin</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="metal" ng-model="user.type.metal"/>
+            <label for="metal">metal</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="pop" ng-model="user.type.pop"/>
+            <label for="pop">pop</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="rnb" ng-model="user.type.rnb"/>
+            <label for="rnb">r&b</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="rock" ng-model="user.type.rock"/>
+            <label for="rock">rock</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="spoken" ng-model="user.type.spoken"/>
+            <label for="spoken">spoken word</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="world" ng-model="user.type.world"/>
+            <label for="world">world</label>
+          </p>
+        </div>
       </div>
+    </div>
+  </form>
 
-
-<div layout="column" class="form-group" ng-app="headliner">
-      
-      <label class="checkbox-inline">
-          <md-checkbox name="userGenre" ng-model="user.genre.americana"/>Americana
-      </md-checkbox>
-
-      <label class="checkbox-inline">
-          <md-checkbox name="userGenre" ng-model="user.genre.blues"/>Blues
-      </md-checkbox>
-
-      <label class="checkbox-inline">
-          <md-checkbox name="userGenre" ng-model="user.genre.bluegrass"/>Bluegrass
-      </md-checkbox>
-
-      <label class="checkbox-inline">
-          <md-checkbox name="userGenre" ng-model="user.genre.classical"/>Classical
-      </md-checkbox>
-
-      <label class="checkbox-inline">
-          <md-checkbox name="userGenre" ng-model="user.genre.comedy"/>Comedy
-      </md-checkbox>
-
-      <label class="checkbox-inline">
-          <md-checkbox name="userGenre" ng-model="user.genre.country"/>Country
-      </md-checkbox>
-
-      <label class="checkbox-inline">
-          <md-checkbox name="userGenre" ng-model="user.genre.coverband"/>Cover Band
-      </md-checkbox>
-
-      <label class="checkbox-inline">
-          <md-checkbox name="userGenre" ng-model="user.genre.dj"/>DJ
-      </md-checkbox>
-
-      <label class="checkbox-inline">
-          <md-checkbox name="userGenre" ng-model="user.genre.edm"/>EDM
-      </md-checkbox>
-
-      <label class="checkbox-inline">
-          <md-checkbox name="userGenre" ng-model="user.genre.electronic"/>Electronic
-      </md-checkbox>
-
-      <label class="checkbox-inline">
-          <md-checkbox name="userGenre" ng-model="user.genre.folk"/>Folk
-      </md-checkbox>
-
-      <label class="checkbox-inline">
-          <md-checkbox name="userGenre" ng-model="user.genre.hiphop"/>Hip Hop
-      </md-checkbox>
-
-      <label class="checkbox-inline">
-          <md-checkbox name="userGenre" ng-model="user.genre.jazz"/>Jazz
-      </md-checkbox>
-
-      <label class="checkbox-inline">
-          <md-checkbox name="userGenre" ng-model="user.genre.latin"/>Latin
-      </md-checkbox>
-
-      <label class="checkbox-inline">
-          <md-checkbox name="userGenre" ng-model="user.genre.metal"/>Metal
-      </md-checkbox>
-
-      <label class="checkbox-inline">
-          <md-checkbox name="userGenre" ng-model="user.genre.pop"/>Pop
-      </md-checkbox>
-
-      <label class="checkbox-inline">
-          <md-checkbox name="userGenre" ng-model="user.genre.rnb"/>R&B
-      </md-checkbox>
-
-      <label class="checkbox-inline">
-          <md-checkbox name="userGenre" ng-model="user.genre.rock"/>Rock
-      </md-checkbox>
-
-      <label class="checkbox-inline">
-          <md-checkbox name="userGenre" ng-model="user.genre.spoken"/>Spoken Word
-      </md-checkbox>
-
-      <label class="checkbox-inline">
-          <md-checkbox name="userGenre" ng-model="user.genre.world"/>World
-      </md-checkbox>
-
-  </div>
   <br>          
   <!-- END OF GENRE CHECKBOXES -->  
 
-    <label for="inout">Indoor or Outdoor:</label>
-    <br> 
-      <input name="inout" type="radio" ng-model="user.inout" value="Indoor"/> Indoor
-      <input name="inout" type="radio" ng-model="user.inout" value="Outdoor"/> Outdoor
-      <input name="inout" type="radio" ng-model="user.inout" value="Both"/> Both
-    <br>                                         
-    
-    <hr>
+   <form class="col s12">
+    <div class="row">
+      <div class="input-field col s9">
+        <div class="input-field col s3">
+          <p>
+            <input class="with-gap" name="group1" type="radio" id="indoor" value="Indoor" ng-model="user.inout"/>
+            <label for="indoor">Indoor</label>
+          </p>          
+        </div>
+        <div class="input-field col s3">
+          <p>
+            <input class="with-gap" name="group1" type="radio" id="outdoor" value="Outdoor" ng-model="user.inout" />
+            <label for="outdoor">Outdoor</label>
+          </p>
+        </div>
+        <div class="input-field col s3">
+          <p>
+            <input class="with-gap" name="group1" type="radio" id="both" value="Indoor/Outdoor" ng-model="user.inout" />
+            <label for="both">Indoor/Outdoor</label>
+          </p>    
+        </div>
+      </div>
+        <div class="input-field col s3">
+          <input id="capacity" type="number" ng-model="user.capacity" class="validate">
+          <label for="capacity">Capacity</label>
+        </div>  
+    </div>    
+  </form>
 
-</div>
+  <hr>
 
 <div class="form-group row">
   <div class="col-xs-6 col-xs-offset-3">
