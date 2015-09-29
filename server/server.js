@@ -137,7 +137,7 @@ passport.use(new FacebookStrategy({
           //Add the user to the database here
           Users.signupFacebook(profile.emails[0].value, profile.id, accessToken, profile.name.givenName).then(function(id) {
             console.log('Finished adding this facebook user to the database');
-            Users.getUserById(id).then(function(user) {
+            Users.getUserById(id[0]).then(function(user) {
               return done(null, user[0]);
             })
           })
@@ -169,7 +169,7 @@ passport.use(new GoogleStrategy({
           //create user with their google information
           Users.signupGoogle(profile).then(function(id) {
             console.log("INSIDE GOOGLE SIGNUP IN THE GOOGLE STRAT");
-            Users.getUserById(id).then(function(user) {
+            Users.getUserById(id[0]).then(function(user) {
               return done(null, user[0]);
             })
           })
@@ -181,7 +181,7 @@ passport.use(new GoogleStrategy({
 
 
 app.post('/api/users/local', passport.authenticate('local-signup', {
-  successRedirect: '/#/signup-venue', // redirect to the secure profile section
+  successRedirect: '/', // redirect to the secure profile section
   failureRedirect: '/#/', // redirect back to the signup page if there is an error
   failureFlash: true // allow flash messages
   })
@@ -197,7 +197,7 @@ app.post('/api/users/login', passport.authenticate('local-signin', {
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-  successRedirect: '/#/signup-select',
+  successRedirect: '/#/select',
   failureRedirect: '/#/',
   failureFlash: true
   })
@@ -205,6 +205,8 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 
 app.get('/auth/google', function(req, res, next) {
   if(!req.user) { //Not already logged-in, we'll continue on to authenticating
+     console.log('IT IS REQ USER TIME!!!!');
+     console.log(req.user);
     return next();
   }
   res.redirect('/');
@@ -228,8 +230,8 @@ app.post('/test', function(req, res) {
 
 app.get('/auth/google/callback', 
   passport.authenticate('google', {
-    successRedirect: '/',
-    failureRedirect: '/#/signup-select' })
+    successRedirect: '/#/select',
+    failureRedirect: '/#/' })
 );
 
 require('./routes.js')(app);

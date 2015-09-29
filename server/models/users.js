@@ -13,11 +13,19 @@ module.exports = {
 
   signupFacebook: function(email, facebookId, facebookToken, facebookName) {
     return knex('Users').insert({
-      'facebook_email': username,
+      'facebook_email': email,
       'facebook_id': facebookId,
       'facebook_token': facebookToken,
       'facebook_name': facebookName
-    });
+    }).returning('user_id');
+  },
+
+  signupGoogle: function(profile) {
+    console.log('Google Signup');
+    return knex('Users').insert({
+      'google_id': profile.id,
+      'google_email': profile.emails[0].value
+    }).returning('user_id');
   },
 
   updateFacebook: function(facebookId, facebookToken, userId) {
@@ -57,14 +65,6 @@ module.exports = {
     return knex('Users')
       .where({'google_id': googleId})
       .select();
-  },
-
-  signupGoogle: function(profile) {
-    console.log('Google Signup');
-    return knex('Users').insert({
-      'google_id': profile.id,
-      'google_email': profile.emails[0].value
-    })
   },
 
   signInLocal: function(username, password) {
