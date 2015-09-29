@@ -12,11 +12,11 @@ exports.up = function(knex, Promise) {
       table.integer('venue_id').references('venue_id').inTable('Venues');
       table.string('email');
       table.string('facebook_email');
-      table.integer('facebook_id');
+      table.string('facebook_id');
       table.string('facebook_token');
       table.string('facebook_name');
       table.string('google_email');
-      table.integer('google_id');
+      table.string('google_id');
     }),
 
     knex.schema.createTable('Bands', function(table) {
