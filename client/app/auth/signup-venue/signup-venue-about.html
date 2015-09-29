@@ -7,67 +7,126 @@
   <div>{{ user }}</div>
   <hr> 
 
-   <!-- VENUE TYPE CHECKBOXES -->
-    <label>Type of Venue:</label>
-      <div class="form-group">
-          <label class="checkbox">
-              <input type="checkbox" name="userType" ng-model="user.type.casual"/>Casual Bar
-          </label>
-          <label class="checkbox">
-              <input type="checkbox" name="userType" ng-model="user.type.beer"/>Beer Garden
-          </label>
-          <label class="checkbox">
-              <input type="checkbox" name="userType" ng-model="user.type.champagne"/>Champagne Bar
-          </label>
-          <label class="checkbox">
-              <input type="checkbox" name="userType" ng-model="user.type.cocktail"/>Cocktail Bar
-          </label>
-          <label class="checkbox">
-              <input type="checkbox" name="userType" ng-model="user.type.country"/>Country Dance Hall
-          </label>  
-          <label class="checkbox">
-              <input type="checkbox" name="userType" ng-model="user.type.dance"/>Dance Club
-          </label>
-          <label class="checkbox">
-              <input type="checkbox" name="userType" ng-model="user.type.dive"/>Dive Bar
-          </label>
-          <label class="checkbox">
-              <input type="checkbox" name="userType" ng-model="user.type.gay"/>Gay/Lesbian Bar
-          </label>
-          <label class="checkbox">
-              <input type="checkbox" name="userType" ng-model="user.type.hookah"/>Hookah Bar
-          </label>
-          <label class="checkbox">
-              <input type="checkbox" name="userType" ng-model="user.type.irish"/>Irish Pub
-          </label>   
-          <label class="checkbox">
-              <input type="checkbox" name="userType" ng-model="user.type.jazz"/>Jazz/Blues Bar
-          </label>
-          <label class="checkbox">
-              <input type="checkbox" name="userType" ng-model="user.type.karoke"/>Karoke
-          </label>
-          <label class="checkbox">
-              <input type="checkbox" name="userType" ng-model="user.type.coffee"/>Late Night Coffee Shop
-          </label>
-          <label class="checkbox">                  
-              <input type="checkbox" name="userType" ng-model="user.type.lounge"/>Lounge
-          </label>
-          <label class="checkbox">
-              <input type="checkbox" name="userType" ng-model="user.type.music"/>Music Venue
-          </label>
-          <label class="checkbox">
-              <input type="checkbox" name="userType" ng-model="user.type.piano"/>Piano Bar 
-          </label>   
-          <label class="checkbox">
-              <input type="checkbox" name="userType" ng-model="user.type.wine"/>Wine Bar
-          </label>                                                        
+<!-- VENUE TYPE CHECKBOXES -->
+   <form class="col s12">
+    <div class="row">
+      <div class="input-field col s12">
+        <div class="input-field col s3">
+          <p>
+            <input type="checkbox" id="casual" ng-model="user.type.casual"/>
+            <label for="casual">casual</label>
+          </p>
+        </div>
+        <div class="input-field col s3">  
+          <p>
+            <input type="checkbox" id="beer" ng-model="user.type.beer"/>
+            <label for="beer">beer</label>
+          </p>
+        </div>
+        <div class="input-field col s3">               
+          <p>
+            <input type="checkbox" id="champagne" ng-model="user.type.champagne"/>
+            <label for="champagne">champagne</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="cocktail" ng-model="user.type.cocktail"/>
+            <label for="cocktail">cocktail</label>
+          </p>
+        </div>
+        <div class="input-field col s3">          
+          <p>
+            <input type="checkbox" id="country" ng-model="user.type.country"/>
+            <label for="country">country</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="dance" ng-model="user.type.dance"/>
+            <label for="dance">dance</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="dive" ng-model="user.type.dive"/>
+            <label for="dive">dive</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="gay" ng-model="user.type.gay"/>
+            <label for="gay">gay</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="hookah" ng-model="user.type.hookah"/>
+            <label for="hookah">hookah</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="irish" ng-model="user.type.irish"/>
+            <label for="irish">irish</label>
+          </p>
+        </div>
+        <div class="input-field col s3">               
+          <p>
+            <input type="checkbox" id="jazz" ng-model="user.type.jazz"/>
+            <label for="jazz">jazz</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="karoke" ng-model="user.type.karoke"/>
+            <label for="karoke">karoke</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="coffee" ng-model="user.type.coffee"/>
+            <label for="coffee">coffee</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="lounge" ng-model="user.type.lounge"/>
+            <label for="lounge">lounge</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="music" ng-model="user.type.music"/>
+            <label for="music">music</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="piano" ng-model="user.type.piano"/>
+            <label for="piano">piano</label>
+          </p>
+        </div>
+        <div class="input-field col s3">           
+          <p>
+            <input type="checkbox" id="wine" ng-model="user.type.wine"/>
+            <label for="wine">wine</label>
+          </p>
+        </div>
       </div>
-              <br>          
-              <!-- END OF VENUE TYPE CHECKBOXES -->
-             <!-- About Us Expandable Text Box  -->    
-            <label for="about">About your venue:</label> 
-              <textarea name="about" type="text" id="userAboutUs" class="form-control input-sm chat-input" placeholder="Brief bio about your venue" ng-model="user.about" required></textarea>
-            <br>
+    </div>
+  </form>
+
+<!-- About Text Area Box -->
+  <form class="col s12">
+    <div class="row">
+      <div class="input-field col s12">
+        <textarea id="textarea1" class="materialize-textarea" ng-model="user.about"></textarea>
+        <label for="textarea1">About Your Venue</label>
+      </div>
+    </div>
+  </form>
+
 </div>
 
 <div class="form-group row">

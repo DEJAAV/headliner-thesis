@@ -6,46 +6,38 @@
   <br>
   <div>{{ user }}</div>
   <hr>
-                  <h3>Contact Info: </h3>
-            <br>
-            <label for="contact">Contact Name: </label>
-              <input name="contact" type="text"  class="form-control input-sm chat-input" placeholder="Contact Name" ng-model="user.contact_name" required/>
-            <br>
 
-            <div>
-              <label>Do you prefer to be contacted by phone or email?</label>
-                <select name="communicate" ng-model="communication" required>
-                  <option></option>
-                  <option>Phone</option>
-                  <option>Email</option>
-                </select>
-            </div>
+    <label>Do you prefer to be contacted by phone or email?</label>
+    <select class="browser-default" ng-model="communication">
+      <option value="" disabled selected>Choose your option</option>
+      <option value="Phone">Phone</option>
+      <option value="Email">Email</option>
+    </select>
 
-            <!-- drop down options depending on what user selects as their communication preference -->
-            <div ng-show="communication === 'Phone'">
-            <label for="phone">Contact Phone Number: </label>
-              <input name="phone" type="text"  class="form-control input-sm chat-input" placeholder="Phone Number" ng-model="user.contact_phone"/>
-            </div>
-            <br>
-            <div ng-show="communication === 'Email'">
-            <label for="email">Contact Email Address: </label>
-              <input name="email" type="email"  class="form-control input-sm chat-input" placeholder="Email" ng-model="user.contact_email"/>
-            </div>
-            <br> 
+    <!-- drop down options depending on what user selects as their communication preference -->
+    <div ng-show="communication === 'Phone'">
+      <label for="phone">Contact Phone Number: </label>
+      <input name="phone" type="text"  class="form-control input-sm chat-input" placeholder="Phone Number" ng-model="user.contact_phone"/>
+    </div>
+    <br>
+    <div ng-show="communication === 'Email'">
+      <label for="email">Contact Email Address: </label>
+      <input name="email" type="email"  class="form-control input-sm chat-input" placeholder="Email" ng-model="user.contact_email"/>
+    </div>
+    <br> 
 
-            <hr>
+    <hr>
 
-            <h3>Your Links: </h3>
-            <br>
-            <label for="facebook">Facebook URL: </label>
-              <input name="facebook" type="text" class="form-control input-sm chat-input" placeholder="http://www.facebook.com/my-venue/" ng-model="user.facebook"/>
-            <br>  
-            <label for="yelp">Venue Yelp URL: </label>
-              <input name="yelp" type="text" id="userYelp" class="form-control input-sm chat-input" placeholder="http://www.yelp.com/my-venue/" ng-model="user.yelp"/>
-            <br>  
-            <label for="website">Venue Website: </label>
-              <input name="website" type="text" id="userWebsite" class="form-control input-sm chat-input" placeholder="http://www.my-venue.com/" ng-model="user.website"/>            
-            <br>
+    <h3>Your Links: </h3>
+    <label for="facebook">Facebook URL: </label>
+      <input name="facebook" type="text" class="form-control input-sm chat-input" placeholder="http://www.facebook.com/my-venue/" ng-model="user.facebook"/>
+    <br>  
+    <label for="yelp">Venue Yelp URL: </label>
+      <input name="yelp" type="text" id="userYelp" class="form-control input-sm chat-input" placeholder="http://www.yelp.com/my-venue/" ng-model="user.yelp"/>
+    <br>  
+    <label for="website">Venue Website: </label>
+      <input name="website" type="text" id="userWebsite" class="form-control input-sm chat-input" placeholder="http://www.my-venue.com/" ng-model="user.website"/>            
+    <br>
 
 </div>
 
