@@ -9,7 +9,7 @@
       console.log('getAllVenues is being called');
       return $http({
         method: 'GET',
-        url: '/users/venues'
+        url: '/api/venues'
       })
       .then(function(resp){
         return resp.data;
@@ -20,7 +20,7 @@
       console.log('getAllArtists is being called');
       return $http({
         method: 'GET',
-        url: '/users/artists'
+        url: '/api/artists'
       })
       .then(function(resp){
         return resp.data;

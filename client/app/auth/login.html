@@ -17,7 +17,7 @@
     <div class="inputs">
       <div class="form-group" ng-class="{ 'has-error': signupForm.username.$dirty && signupForm.username.$error.required }">
       <label for="username">Username: </label>
-      <input id="username" type="text" name="username" class="form-control" ng-model="user.localEmail" required />
+      <input id="username" type="email" name="username" class="form-control" ng-model="user.localEmail" required />
       <span ng-show="signupForm.username.$dirty && signupForm.username.$error.required" class="help-block">Username is required</span>      
       </div>
     
