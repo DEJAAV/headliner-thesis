@@ -29,11 +29,10 @@ module.exports = {
   },
 
   create: function(reqBody) {
-    // console.log('inside create', reqBody)
     return knex('Venues')
       .returning('venue_id')
       .insert({
-        name: reqBody.name,
+        venue_name: reqBody.venue_name,
         capacity: reqBody.capacity,
         website: reqBody.website,
         street: reqBody.street,
@@ -43,24 +42,38 @@ module.exports = {
         zip: reqBody.zip,
         facebook: reqBody.facebook,
         yelp: reqBody.yelp,
-        contact_name: reqBody.contact,
-        contact_phone: reqBody.phone,
-        contact_email: reqBody.email,
+        contact_name: reqBody.contact_name,
+        contact_phone: reqBody.contact_phone,
+        contact_email: reqBody.contact_email,
         in_out: reqBody.inout
       })
       .then(function(venueId) {
-        for(var prop in reqBody.genres) {
-          Venue_Genres.addGenre(venueId, prop);
+        for(var prop in reqBody.genre) {
+          Venue_Genres.addGenre(venueId[0], prop);
         }
         for(var type in reqBody.type) {
-          Venues_Types.addType(venueId, type);
+          Venues_Types.addType(venueId[0], type);
         }
-        console.log(reqBody)
+        return venueId[0];
       })
   },
 
   getAll: function() {
-    return knex('Venues')
+    // return knex('Venue_Genres').then(function(venue_genres) {
+    //   var genres = {};
+    //   for (var i = 0; i < venue_genres.length; i++) {
+    //     if (genres[venue_genres[i].venue_id]) {
+    //       genres[venue_genres[i].venue_id].push(venue_genres[i].genre_id)
+    //     } else {
+    //       genres[venue_genres[i].venue_id] = [venue_genres[i].genre_id];
+    //     }
+    //   }
+    //   return genres;
+    // })
+
+    // return knex('Venues')
+    //   .join("Venue_Genres", "Venues.venue_id", "Venue_Genres.venue_id")
+    //   .join("Genres", "Venue_Genres.genre_id", "Genres.genre_id")
   }
 
 };
