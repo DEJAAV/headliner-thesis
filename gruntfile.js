@@ -7,7 +7,7 @@ module.exports = function(grunt){
         'gruntfile.js', 
         'client/app/**/*.js', 
         'server/**/*.js',
-        'test/**/*.js' // ./**/*.js === test folder
+        'test/**/*.js' 
       ], 
     },
 
@@ -74,7 +74,7 @@ module.exports = function(grunt){
   //default (>> grunt)
   grunt.registerTask('default', [
         'jshint',
-        'bower'
+        'bower',
         'watch'
   ]);
 
