@@ -1,6 +1,8 @@
 var Types = require('./types.js');
 var Genres = require('./genres.js');
 var knex = require('../db/db.js');
+var Venue_Genres = require('./venue_genres.js')
+var Venues_Types = require('./venues_types.js')
 
 module.exports = {
 
@@ -27,7 +29,8 @@ module.exports = {
   },
 
   create: function(reqBody) {
-    knex('Venues')
+    // console.log('inside create', reqBody)
+    return knex('Venues')
       .returning('venue_id')
       .insert({
         name: reqBody.name,
@@ -46,12 +49,13 @@ module.exports = {
         in_out: reqBody.inout
       })
       .then(function(venueId) {
-        for(var prop in reqBody.genre) {
-          this.addGenre(venueId, prop);
+        for(var prop in reqBody.genres) {
+          Venue_Genres.addGenre(venueId, prop);
         }
         for(var type in reqBody.type) {
-          this.addType(venueId, type);
+          Venues_Types.addType(venueId, type);
         }
+        console.log(reqBody)
       })
   },
 

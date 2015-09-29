@@ -5,7 +5,7 @@ describe("Locations", function(){
   describe("Return location_id", function(){
     it("should return a location_id if the zipcode is found", function(){
       Locations.getLocationId(78756).then(function(data){
-        expect(data).to.equal(2);
+        expect(data).to.equal(30);
       });
     });
   });
