@@ -9,7 +9,7 @@
                   <h3>Contact Info: </h3>
             <br>
             <label for="contact">Contact Name: </label>
-              <input name="contact" type="text"  class="form-control input-sm chat-input" placeholder="Contact Name" ng-model="user.contact" required/>
+              <input name="contact" type="text"  class="form-control input-sm chat-input" placeholder="Contact Name" ng-model="user.contact_name" required/>
             <br>
 
             <div>
@@ -24,12 +24,12 @@
             <!-- drop down options depending on what user selects as their communication preference -->
             <div ng-show="communication === 'Phone'">
             <label for="phone">Contact Phone Number: </label>
-              <input name="phone" type="text"  class="form-control input-sm chat-input" placeholder="Phone Number" ng-model="user.phone"/>
+              <input name="phone" type="text"  class="form-control input-sm chat-input" placeholder="Phone Number" ng-model="user.contact_phone"/>
             </div>
             <br>
             <div ng-show="communication === 'Email'">
             <label for="email">Contact Email Address: </label>
-              <input name="email" type="email"  class="form-control input-sm chat-input" placeholder="Email" ng-model="user.email"/>
+              <input name="email" type="email"  class="form-control input-sm chat-input" placeholder="Email" ng-model="user.contact_email"/>
             </div>
             <br> 
 
@@ -46,7 +46,7 @@
             <label for="website">Venue Website: </label>
               <input name="website" type="text" id="userWebsite" class="form-control input-sm chat-input" placeholder="http://www.my-venue.com/" ng-model="user.website"/>            
             <br>
-                        
+
 </div>
 
 <div class="form-group row">
