@@ -73,3 +73,6 @@ body {
 md-radio-button {
   display: inline;
 }
+md-checkbox {
+  display: inline;
+}
