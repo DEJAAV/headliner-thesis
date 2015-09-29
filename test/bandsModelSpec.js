@@ -73,14 +73,19 @@ describe("Bands", function(){
           Locations.getLocationId(req.location).then(function(location_id) {
             expect(location_id).to.equal(band.location_id);
           });
-          Band_Genres.getGenres(band_id).then(function(genres) {
-              Genres.getGenreById(genres[0].genre_id).then(function(genre) {
-                console.log(genre)
-                expect(genre).to.deep.equal(req.genres);
+          var reqGenres = [];
+          var dbGenres = [];
+          for (genre in req.genres) {
+            reqGenres.push(genre);
+          }
+          Band_Genres.getGenres(band_id).then(function(pairs) {
+            pairs.forEach(function(pair) {
+              Genres.getGenreById(pair.genre_id).then(function(genre) {
+                dbGenres.push(genre);
               });
-            
-            
+            });
           });
+          expect(reqGenres).to.deep.equal(dbGenres);
           Band_Members.getMembers(band_id).then(function(members) {
             expect(members).to.deep.equal(req.members);
           });
