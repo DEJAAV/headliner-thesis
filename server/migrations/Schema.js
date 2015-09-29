@@ -38,7 +38,6 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('Venues', function(table) {
       table.increments('venue_id').primary();
       table.string('venue_name');
-      table.integer('location_id').references('location_id').inTable('Locations');
       table.integer('capacity');
       table.string('bio');
       table.string('website');
