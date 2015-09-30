@@ -17,11 +17,11 @@ module.exports = function (app) {
     });
   });
 
-  // app.post('/api/users/artists/update', function(req, res, next) {
-  //   Bands.update(req.body).then(function(result) {
-  //     res.json(result);
-  //   });
-  // });
+  app.post('/api/users/artists/update', function(req, res, next) {
+    Bands.update(req.body).then(function(result) {
+      res.json(result);
+    });
+  });
 
   app.post('/api/users/login', function(req, res, next) {
     Users.signInLocal(req.body.username, req.body.password).then(function(result) {
