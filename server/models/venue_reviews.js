@@ -23,7 +23,7 @@ module.exports = {
   },
 
   deleteReview: function(reqBody) {
-    return knex.('Venue_Reviews').where({
+    return knex('Venue_Reviews').where({
       venueReview_id: reqBody.venueReview_id
     }).del()
   }
