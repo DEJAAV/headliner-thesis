@@ -59,21 +59,43 @@ module.exports = {
   },
 
   getAll: function() {
-    // return knex('Venue_Genres').then(function(venue_genres) {
-    //   var genres = {};
-    //   for (var i = 0; i < venue_genres.length; i++) {
-    //     if (genres[venue_genres[i].venue_id]) {
-    //       genres[venue_genres[i].venue_id].push(venue_genres[i].genre_id)
-    //     } else {
-    //       genres[venue_genres[i].venue_id] = [venue_genres[i].genre_id];
-    //     }
-    //   }
-    //   return genres;
-    // })
-
-    // return knex('Venues')
-    //   .join("Venue_Genres", "Venues.venue_id", "Venue_Genres.venue_id")
-    //   .join("Genres", "Venue_Genres.genre_id", "Genres.genre_id")
+    return knex('Genres')
+      .join("Venue_Genres", "Genres.genre_id", "Venue_Genres.genre_id")
+      .then(function(venue_genres) {
+        var genres = {};
+        for (var i = 0; i < venue_genres.length; i++) {
+          if (genres[venue_genres[i].venue_id]) {
+            genres[venue_genres[i].venue_id][venue_genres[i].genre_name] = true;
+          } else {
+            genres[venue_genres[i].venue_id] = {};
+            genres[venue_genres[i].venue_id][venue_genres[i].genre_name] = true;
+          }
+        }
+        return genres;
+      }).then(function(genres) {
+        return knex('Types')
+          .join("Venues_Types", "Types.type_id", "Venues_Types.type_id")
+          .then(function(venues_types) {
+            var types = {};
+            for (var i = 0; i < venues_types.length; i++) {
+              if (types[venues_types[i].venue_id]) {
+                types[venues_types[i].venue_id][venues_types[i].type_name] = true;
+              } else {
+                types[venues_types[i].venue_id] = {};
+                types[venues_types[i].venue_id][venues_types[i].type_name] = true;
+              }
+            }
+            return [genres,types];
+          })
+      }).then(function(genres_and_types) {
+        return knex('Venues').then(function(venues) {
+          return venues.map(function(venue) {
+            venue.genre = genres_and_types[0][venue.venue_id];
+            venue.type = genres_and_types[1][venue.venue_id];
+            return venue;
+          });
+        });
+      });
   }
 
 };
