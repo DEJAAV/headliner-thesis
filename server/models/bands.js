@@ -53,6 +53,7 @@ module.exports = {
     }).then(function(band_id) {
       for(var genre in reqBody.genre) {
         if (reqBody.genre[genre] === true) {
+          console.log(genre, 'true')
           Band_Genres.updateGenre(band_id[0], genre);
         }
         if (reqBody.genre[genre] === false) {
@@ -78,19 +79,28 @@ module.exports = {
   },
 
   getAll: function() {
-    console.log('hello')
-    return knex('Bands')
-    .innerJoin('Band_Genres', 'Bands.band_id', 'Band_Genres.band_id')
-    .innerJoin('Band_Members', 'Bands.band_id', 'Band_Members.band_id')
-    .then(function(result){
-      console.log(result)
-      var genreArr = []
-      // for (var i = 0; i < result.length; i++){
-      //   console.log(result[i]["genre_id"], "id: ", i)
-      //   // if (genreArr.indexOf(result[i]["genre_id"])
-      // } 
-      return result
-    })
+    return knex('Genres')
+      .join('Band_Genres', 'Genres.genre_id', 'Band_Genres.genre_id')
+      .then(function(band_genres){
+        var genres = {};
+        for (var i = 0; i < band_genres.length; i++)  {
+          if (genres[band_genres[i].band_id]) {
+            genres[band_genres[i].band_id][band_genres[i].genre_name] = true;
+          } else {
+              genres[band_genres[i].band_id] = {};
+              genres[band_genres[i].band_id][band_genres[i].genre_name] = true;
+            }
+          }
+          return genres
+      }).then(function(genres) {
+        return knex('Bands').then(function(bands) {
+          return bands.map(function(band) {
+            band.genre = genres[band.band_id]
+            return band
+          })
+        })
+      })
+    
   }
 
 };
