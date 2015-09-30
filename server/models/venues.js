@@ -60,7 +60,7 @@ module.exports = {
 
   getAll: function() {
     return knex('Genres')
-      .join("Venue_Genres", "Genres.genre_id", "Venue_Genres.genre_id")
+      .join('Venue_Genres', 'Genres.genre_id', 'Venue_Genres.genre_id')
       .then(function(venue_genres) {
         var genres = {};
         for (var i = 0; i < venue_genres.length; i++) {
@@ -74,7 +74,7 @@ module.exports = {
         return genres;
       }).then(function(genres) {
         return knex('Types')
-          .join("Venues_Types", "Types.type_id", "Venues_Types.type_id")
+          .join('Venues_Types', 'Types.type_id', 'Venues_Types.type_id')
           .then(function(venues_types) {
             var types = {};
             for (var i = 0; i < venues_types.length; i++) {
@@ -87,11 +87,42 @@ module.exports = {
             }
             return [genres,types];
           })
-      }).then(function(genres_and_types) {
+      }).then(function(genres_types) {
+        return knex('Bands')
+          .join('Shows', 'Bands.band_id', 'Shows.band_id')
+          .then(function(bands_shows) {
+            var shows = {};
+            for (var i = 0; i < bands_shows.length; i++) {
+              if (shows[bands_shows[i].venue_id]) {
+                shows[bands_shows[i].venue_id].push({'band': bands_shows[i].band_name, 'date': bands_shows[i].date});
+              } else {
+                shows[bands_shows[i].venue_id] = [{'band': bands_shows[i].band_name, 'date': bands_shows[i].date}];
+              }
+            }
+            return genres_types.concat(shows);
+          })
+      }).then(function(genres_types_shows) {
+        return knex('Venue_Reviews')
+          .join('Shows', 'Venue_Reviews.show_id', 'Shows.show_id')
+          .join('Bands', 'Shows.band_id', 'Bands.band_id')
+          .then(function(rsb) {
+            var reviews = {};
+            for (var i = 0; i < rsb.length; i++) {
+              if (reviews[rsb[i].venue_id]) {
+                reviews[rsb[i].venue_id].push({'band': rsb[i].band_name, 'show_date': rsb[i].date, 'rating': rsb[i].rating, 'comment': rsb[i].comment});
+              } else {
+                reviews[rsb[i].venue_id] = [{'band': rsb[i].band_name, 'show_date': rsb[i].date, 'rating': rsb[i].rating, 'comment': rsb[i].comment}];
+              }
+            }
+            return genres_types_shows.concat(reviews);
+          })
+      }).then(function(genres_types_shows_reviews) {
         return knex('Venues').then(function(venues) {
           return venues.map(function(venue) {
-            venue.genre = genres_and_types[0][venue.venue_id];
-            venue.type = genres_and_types[1][venue.venue_id];
+            venue.genre = genres_types_shows_reviews[0][venue.venue_id];
+            venue.type = genres_types_shows_reviews[1][venue.venue_id];
+            venue.shows = genres_types_shows_reviews[2][venue.venue_id];
+            venue.reviews = genres_types_shows_reviews[3][venue.venue_id];
             return venue;
           });
         });
