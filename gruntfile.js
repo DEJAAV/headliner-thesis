@@ -82,7 +82,6 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-auto-install');
   grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-deps-ok');
 
   /*====Registering Tasks for CLI====*/
 
