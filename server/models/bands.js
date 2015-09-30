@@ -28,10 +28,10 @@ module.exports = {
       return band_id[0]
     })
   },
-  ////////This works for everything but changing band name. Can we grab band_id from request??////////
+  
   update: function(reqBody) {
     return knex('Bands').where({
-      'band_name': reqBody.band_name
+      'band_id': reqBody.band_id
     }).returning('band_id').update({
       band_name: reqBody.band_name,
       onTour: reqBody.onTour,
@@ -62,13 +62,7 @@ module.exports = {
       return band_id[0]
     })
   },
-  findBand: function(id) {
-    return knex('Bands').where({
-      'band_id': id
-    }).then(function(bands) {
-      return bands[0];
-    })
-  },
+
   getAll: function() {
     return knex('Genres').join('Band_Genres', 'Genres.genre_id',
       'Band_Genres.genre_id').then(function(band_genres) {
