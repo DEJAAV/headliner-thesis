@@ -45,7 +45,7 @@
       })  
       .state('signup-venue.basic', {
         templateUrl: 'app/auth/signup-venue/signup-venue-basic.html',
-        url: '/basic'
+        url: '/basic',
       })
       .state('signup-venue.more', {
         templateUrl: 'app/auth/signup-venue/signup-venue-more.html',
@@ -69,25 +69,25 @@
         url: '/signup-artist',
         controller: 'AuthController'
       })
-      .state('signup-artist.file1', {
-        templateUrl: 'app/auth/signup-artist/signup-artist-file1.html',
-        url: '/file1'
+      .state('signup-artist.basic', {
+        templateUrl: 'app/auth/signup-artist/signup-artist-basic.html',
+        url: '/basic'
       })
-      .state('signup-artist.file2', {
-        templateUrl: 'app/auth/signup-artist/signup-artist-file2.html',
-        url: '/file2'
+      .state('signup-artist.about', {
+        templateUrl: 'app/auth/signup-artist/signup-artist-about.html',
+        url: '/about'
       })
-      .state('signup-artist.file3', {
-        templateUrl: 'app/auth/signup-artist/signup-artist-file3.html',
-        url: '/file3'
+      .state('signup-artist.label', {
+        templateUrl: 'app/auth/signup-artist/signup-artist-label.html',
+        url: '/label'
       })
-      .state('signup-artist.file4', {
-        templateUrl: 'app/auth/signup-artist/signup-artist-file4.html',
-        url: '/file4'
+      .state('signup-artist.contact', {
+        templateUrl: 'app/auth/signup-artist/signup-artist-contact.html',
+        url: '/contact'
       })
-      .state('signup-artist.file5', {
-        templateUrl: 'app/auth/signup-artist/signup-artist-file5.html',
-        url: '/file5'
+      .state('signup-artist.terms', {
+        templateUrl: 'app/auth/signup-artist/signup-artist-terms.html',
+        url: '/terms'
       })                                                                                     
       .state('homepage-artist', {
         templateUrl: 'app/homepage/homepage-artist.html',

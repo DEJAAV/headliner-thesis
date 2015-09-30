@@ -52,7 +52,6 @@
 
     //Members array of objects for artist members and their roles (id included)
     $scope.band.members = [{id: 'member1'}];
-
     //Adds an incremented new member object to the array 
     //if the button is clicked on the form
     $scope.addNewMember = function(){
@@ -66,8 +65,12 @@
     };
 
     $scope.showAddMember = function(member){
-    	return member.id === $scope.band.members[$scope.band.members.length-1].id;
+    	return member.id === $scope.members[$scope.members.length-1].id;
     };
+
+    $scope.showMemberLabel = function (member) {
+     return member.id === $scope.band.members[0].id;
+    }
 
 
 	$scope.login = function () {

@@ -1,0 +1,155 @@
+<!-- includes: record label info, genre info -->
+<label>Label Info</label>
+<div class="form-group">
+  
+  <div>{{ user }}</div>
+  <br>
+
+  <form class="row col s6">
+    <h5>Are you currently signed to a Record Label?</h5>
+    <div class="row col s6">
+      <select class="browser-default" ng-model="signed" required="required">
+        <option value="" disabled selected>Choose your option</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+    <div ng-if="signed === 'Yes'">
+      <input name="label" type="text" class="form-control input-sm chat-input" placeholder="Record Label" ng-model="user.record_label"/>
+    </div>
+  </form>
+
+  <form class="col s12">
+    <h5>Check all Genres that apply to your sound</h5>
+    <div class="row col s12">
+      <div class="input-field col s3">
+        <p>
+          <input type="checkbox" id="americana" ng-model="user.type.americana"/>
+          <label for="americana">americana</label>
+        </p>
+      </div>
+      <div class="input-field col s3">           
+        <p>
+          <input type="checkbox" id="blues" ng-model="user.type.blues"/>
+          <label for="blues">blues</label>
+        </p>
+      </div>
+      <div class="input-field col s3"> 
+        <p>
+          <input type="checkbox" id="bluegrass" ng-model="user.type.bluegrass"/>
+          <label for="bluegrass">bluegrass</label>
+        </p>
+      </div>
+      <div class="input-field col s3">           
+        <p>
+          <input type="checkbox" id="classical" ng-model="user.type.classical"/>
+          <label for="classical">classical</label>
+        </p>
+      </div>
+      <div class="input-field col s3">           
+        <p>
+          <input type="checkbox" id="comedy" ng-model="user.type.comedy"/>
+          <label for="comedy">comedy</label>
+        </p>
+      </div>
+      <div class="input-field col s3">           
+        <p>
+          <input type="checkbox" id="country" ng-model="user.type.country"/>
+          <label for="country">country</label>
+        </p>
+      </div>
+      <div class="input-field col s3">           
+        <p>
+          <input type="checkbox" id="cover" ng-model="user.type.cover"/>
+          <label for="cover">cover band</label>
+        </p>
+      </div>
+      <div class="input-field col s3">           
+        <p>
+          <input type="checkbox" id="dj" ng-model="user.type.dj"/>
+          <label for="dj">dj</label>
+        </p>
+      </div>
+      <div class="input-field col s3">           
+        <p>
+          <input type="checkbox" id="edm" ng-model="user.type.edm"/>
+          <label for="edm">edm</label>
+        </p>
+      </div>
+      <div class="input-field col s3">           
+        <p>
+          <input type="checkbox" id="electronic" ng-model="user.type.electronic"/>
+          <label for="electronic">electronic</label>
+        </p>
+      </div>
+      <div class="input-field col s3"> 
+        <p>
+          <input type="checkbox" id="folk" ng-model="user.type.folk"/>
+          <label for="folk">folk</label>
+        </p>
+      </div>
+      <div class="input-field col s3">           
+        <p>
+          <input type="checkbox" id="hiphop" ng-model="user.type.hiphop"/>
+          <label for="hiphop">hiphop</label>
+        </p>
+      </div>
+      <div class="input-field col s3">           
+        <p>
+          <input type="checkbox" id="jazz" ng-model="user.type.jazz"/>
+          <label for="jazz">jazz</label>
+        </p>
+      </div>
+      <div class="input-field col s3">           
+        <p>
+          <input type="checkbox" id="latin" ng-model="user.type.latin"/>
+          <label for="latin">latin</label>
+        </p>
+      </div>
+      <div class="input-field col s3">           
+        <p>
+          <input type="checkbox" id="metal" ng-model="user.type.metal"/>
+          <label for="metal">metal</label>
+        </p>
+      </div>
+      <div class="input-field col s3">           
+        <p>
+          <input type="checkbox" id="pop" ng-model="user.type.pop"/>
+          <label for="pop">pop</label>
+        </p>
+      </div>
+      <div class="input-field col s3">           
+        <p>
+          <input type="checkbox" id="rnb" ng-model="user.type.rnb"/>
+          <label for="rnb">r&b</label>
+        </p>
+      </div>
+      <div class="input-field col s3">           
+        <p>
+          <input type="checkbox" id="rock" ng-model="user.type.rock"/>
+          <label for="rock">rock</label>
+        </p>
+      </div>
+      <div class="input-field col s3">           
+        <p>
+          <input type="checkbox" id="spoken" ng-model="user.type.spoken"/>
+          <label for="spoken">spoken word</label>
+        </p>
+      </div>
+      <div class="input-field col s3">           
+        <p>
+          <input type="checkbox" id="world" ng-model="user.type.world"/>
+          <label for="world">world</label>
+        </p>
+      </div>
+    </div>
+  </form>
+
+  <br>          
+  <div class="form-group row">
+    <div class="col-xs-6 col-xs-offset-3">
+        <a ui-sref="signup-artist.contact" class="btn btn-block btn-info">
+        Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
+        </a>
+    </div>
+  </div>
