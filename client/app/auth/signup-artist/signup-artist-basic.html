@@ -1,7 +1,7 @@
 <!-- includes: artist's name, members/roles -->
 
 <h3>Basic Artist Info</h3>
-<div> {{ user }} </div>
+<div> {{ user }} {{ member }} </div>
 
   
   <div class="row">
@@ -13,29 +13,38 @@
         </div>
       </div>
       <h5>Members & Roles</h5>
-      <div class="row" ng-repeat"member in user.members">
+      <div class="row">
         <div class="input-field col s6">
-          <input ng-model="member.name" type="text" class="validate">
+          <input ng-model="member.name1" type="text" class="validate">
           <label for="member_name">Member</label>
         </div>
         <div class="input-field col s6">
-          <input ng-model="member.role" type="text" class="validate">
+          <input ng-model="member.role1" type="text" class="validate">
           <label for="member_role">Role</label>
         </div>
-        <a class="btn-floating">
-          <i class="material-icons" ng-show="$last" ng-click="addNewMember()">+</i>
-        </a>
+        <div class="input-field col s6">
+          <input ng-model="member.name2" type="text" class="validate">
+          <label for="member_name">Member</label>
+        </div>
+        <div class="input-field col s6">
+          <input ng-model="member.role2" type="text" class="validate">
+          <label for="member_role">Role</label>
+        </div>
+        <div class="input-field col s6">
+          <input ng-model="member.name3" type="text" class="validate">
+          <label for="member_name">Member</label>
+        </div>
+        <div class="input-field col s6">
+          <input ng-model="member.role3" type="text" class="validate">
+          <label for="member_role">Role</label>
+        </div>                
       </div>
-        
-        
+    </div>
 
-
-
-
-
-        <a ui-sref="signup-artist.file2" class="btn btn-block btn-info">
-        Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    <div class="form-group row">
+      <div class="col-xs-6 col-xs-offset-3">
+        <a ui-sref="signup-artist.about" class="btn btn-block btn-info">
+          Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
         </a>
     </div>
-  </div>
 </div>
