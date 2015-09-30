@@ -33,6 +33,8 @@ module.exports = {
     })
   },
 
+
+  ////////This works for everything but changing band name. Can we grab band_id from request??////////
   update: function(reqBody) {
     return knex('Bands').where({'band_name': reqBody.band_name})
     .returning('band_id').update({
@@ -48,30 +50,24 @@ module.exports = {
       website: reqBody.website,
       bio: reqBody.bio,
       zip: reqBody.zip
-    }).then(function(bandId) {
-      for (var genre in reqBody.genre) {
-        Band_Genres.updateGenre(bandId[0], genre);
+    }).then(function(band_id) {
+      for(var genre in reqBody.genre) {
+        if (reqBody.genre[genre] === true) {
+          Band_Genres.updateGenre(band_id[0], genre);
+        }
+        if (reqBody.genre[genre] === false) {
+          Band_Genres.deleteGenre(band_id[0], genre)
+        }
       }
+      return band_id
+    })
+    .then(function(band_id){
       for (var i = 0; i < reqBody.members.length; i++) {
-        Band_Members.updateMember(bandId[0], reqBody.members[i]);
+        Band_Members.updateMember(band_id[0], reqBody.members[i]);
       }
-      return knex('Bands').where({band_id: bandId[0]})
+      return band_id[0]
     })
   },
-
-  // addLocation: function(band_id, zipcode) {
-  //   return Locations.getLocationId(zipcode).then(function(location_id) {
-  //     knex('Bands').where({'band_id': band_id})
-  //     .insert({'location_id': location_id})
-  //   })
-  // },
-
-  // updateLocation: function(band_id, zipcode) {
-  //   return Locations.getLocationId(zipcode).then(function(location_id) {
-  //     knex('Bands').where({'band_id': band_id})
-  //     .update({'location_id': location_id})
-  //   })
-  // },
 
   findBand: function(id) {
     return knex('Bands').where({
