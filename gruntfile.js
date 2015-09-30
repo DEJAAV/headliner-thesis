@@ -10,7 +10,7 @@ module.exports = function(grunt){
         'test/*.js' 
       ], 
     },
-
+/* All bower shit */
     // auto_install: {
     //   local: {},
     //   subdir: {
@@ -21,17 +21,18 @@ module.exports = function(grunt){
     //   }
     // },
 
-    bower: {
-      // name: grunt.file.readJSON('client/bower.json'),
-      install: {
-        options: {
-          install: true,
-          copy: false,
-          targetDir: 'client/bower.json',
-        }
-      }
-    },
+    // bower: {
+    //   // name: grunt.file.readJSON('client/bower.json'),
+    //   install: {
+    //     options: {
+    //       install: true,
+    //       copy: false,
+    //       targetDir: 'client/',
+    //     }
+    //   }
+    // },
 
+/* Bower shit ends here */
   	uglify: {
   		options: {
   			banner: '/*! <%= Headliner %> <% grunt.template.today("yyyy-mm-dd") %> */\n',
@@ -81,6 +82,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-auto-install');
   grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-deps-ok');
 
   /*====Registering Tasks for CLI====*/
 
@@ -98,8 +100,7 @@ module.exports = function(grunt){
 
   //default (>> grunt)
   grunt.registerTask('default', [
-        'bower',
-        'jshint'
+        'js-hint'
   ]);
 
   //testing (>> grunt test) 
@@ -109,6 +110,7 @@ module.exports = function(grunt){
   //       'jshint'
   //   ])
   
+
   //minification (>> grunt minify) 
   //can add to default task once app is up & running
   grunt.registerTask('minify', [
