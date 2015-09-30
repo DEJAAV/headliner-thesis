@@ -6,28 +6,6 @@ var Venues_Types = require('./venues_types.js')
 
 module.exports = {
 
-  addGenre: function(venueId, genreName) {
-    Genres.findGenreId(genreName)
-      .then(function(genreId) {
-        return knex('Venues_Genres')
-          .insert({
-            genre_id: genre_id,
-            venue_id: venueId
-          });
-      })
-  },
-
-  addType: function(venueId, typeName) {
-    Types.findTypeId(typeName)
-      .then(function(typeId) {
-        return knex('Venues_Types')
-          .insert({
-            type_id: typeId,
-            venue_id: venueId
-          });
-      })
-  },
-
   create: function(reqBody) {
     return knex('Venues')
       .returning('venue_id')
