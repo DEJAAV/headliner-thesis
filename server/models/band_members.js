@@ -13,6 +13,7 @@ module.exports = {
       'band_id': band_id,
       'member_name': member.name,
       'title': member.title
+    }).then(function(band){
     })
   },
 
