@@ -18,13 +18,10 @@ module.exports = {
     })
   },
 
-  updateType: function(venue_id, type) {
-    Types.findTypeId(type).then(function(type_id) {
-      return knex('Venues_Types').update({
-        'type_id': type_id,
-        'venue_id': band_id
-      })
-    })
+  removeAll: function(venue_id) {
+    return knex('Venues_Types').where({
+      'venue_id': venue_id
+    }).del()
   }
 
 };

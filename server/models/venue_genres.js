@@ -18,13 +18,10 @@ module.exports = {
     })
   },
 
-  updateGenre: function(venue_id, genre) {
-    Genres.findGenreId(genre).then(function(genre_id) {
-      return knex('Venue_Genres').update({
-        'genre_id': genre_id,
-        'venue_id': band_id
-      })
-    })
+  removeAll: function(venue_id) {
+    return knex('Venue_Genres').where({
+      'venue_id': venue_id
+    }).del()
   }
 
 };

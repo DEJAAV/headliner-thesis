@@ -26,14 +26,56 @@ module.exports = {
         in_out: reqBody.inout
       })
       .then(function(venueId) {
-        for(var prop in reqBody.genre) {
-          Venue_Genres.addGenre(venueId[0], prop);
+        for(var genre in reqBody.genre) {
+          if (reqBody.genre[genre]) {
+            Venue_Genres.addGenre(venueId[0], genre);
+          }
         }
         for(var type in reqBody.type) {
-          Venues_Types.addType(venueId[0], type);
+          if (reqBody.type[type]) {
+            Venues_Types.addType(venueId[0], type);
+          }
         }
         return venueId[0];
+      });
+  },
+
+  update: function(reqBody) {
+    return knex('Venues')
+      .where({'venue_id': reqBody.venue_id})
+      .returning('venue_id')
+      .update({
+        venue_name: reqBody.venue_name,
+        capacity: reqBody.capacity,
+        website: reqBody.website,
+        street: reqBody.street,
+        bio: reqBody.about,
+        city: reqBody.city,
+        state: reqBody.state,
+        zip: reqBody.zip,
+        facebook: reqBody.facebook,
+        yelp: reqBody.yelp,
+        contact_name: reqBody.contact_name,
+        contact_phone: reqBody.contact_phone,
+        contact_email: reqBody.contact_email,
+        in_out: reqBody.inout
       })
+      .then(function(venueId) {
+        Venue_Genres.removeAll(venueId[0]).then(function() {
+          for(var genre in reqBody.genre) {
+            if (reqBody.genre[genre]) {
+              Venue_Genres.addGenre(venueId[0], genre);
+            }
+          }
+        });
+        Venues_Types.removeAll(venueId[0]).then(function() {
+          for(var type in reqBody.type) {
+            if (reqBody.type[type]) {
+              Venues_Types.addType(venueId[0], type);
+            }
+          }
+        });
+      });
   },
 
   getAll: function() {
