@@ -19,9 +19,15 @@ module.exports = function (app) {
     });
   });
 
+  app.post('/api/users/venues/update', function(req, res, next) {
+    Venues.update(req.body).then(function(result) {
+      res.json('success');
+    });
+  });
+
   app.post('/api/users/artists/update', function(req, res, next) {
     Bands.update(req.body).then(function(result) {
-      res.json(result);
+      res.json('success');
     });
   });
 
