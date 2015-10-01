@@ -10,7 +10,7 @@
     <div class="row">
       <h5>Tell us how you got your start!</h5>
       <div class="input-field col s12">
-        <textarea id="textarea1" class="materialize-textarea" ng-model="user.about"></textarea>
+        <textarea id="textarea1" class="materialize-textarea" ng-model="user.bio"></textarea>
         <label for="textarea1">About the Artist</label>
       </div>
     </div>
@@ -48,54 +48,8 @@
               <option value="Both">Both</option>
         </select>
       </div>
-  </form>
-
-  <!-- Location availability -->
-      <div ng-if="user.onTour === 'Touring' || user.onTour === 'Both'">
-        <div class="input-field col s12">
-          <h5>Where is your band available to travel?</h5>
-          <div class="input-field col s3">  
-            <p>
-              <input type="checkbox" id="east" class="filled-in" ng-model="user.east"/>
-              <label for="east">East Coast</label>
-            </p>
-          </div>
-          <div class="input-field col s3">  
-            <p>
-              <input type="checkbox" id="west" class="filled-in" ng-model="user.west"/>
-              <label for="west">West Coast</label>
-            </p>
-          </div>
-          <div class="input-field col s3">  
-            <p>
-              <input type="checkbox" id="midwest" class="filled-in" ng-model="user.midwest"/>
-              <label for="midwest">Midwest</label>
-            </p>
-          </div>
-        </div>
-        <div class="input-field col s12">
-          <div class="input-field col s3">  
-            <p>
-              <input type="checkbox" id="north" class="filled-in" ng-model="user.north"/>
-              <label for="north">North</label>
-            </p>
-          </div>
-          <div class="input-field col s3">              
-            <p>
-              <input type="checkbox" id="south" class="filled-in" ng-model="user.south"/>
-              <label for="south">South</label>
-            </p>
-          </div>
-          <div class="input-field col s3">  
-            <p>
-              <input type="checkbox" id="nationwide" class="filled-in" ng-model="user.nationwide"/>
-              <label for="nationwide">Nationwide</label>
-            </p>
-          </div> 
-        </div>
-      </div>
     </div>
-  </form>  
+  </form>
 </div>    
 
   <div class="form-group row">
