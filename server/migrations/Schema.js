@@ -24,7 +24,7 @@ exports.up = function(knex, Promise) {
       table.string('band_name');
       table.string('onTour');
       table.integer('zip');
-      table.string('phone_number');
+      table.string('phone');
       table.string('record_label');
       table.string('facebook');
       table.string('youtube');
@@ -33,6 +33,9 @@ exports.up = function(knex, Promise) {
       table.string('website');
       table.string('bio');
       table.string('email');
+      table.string('city');
+      table.string('state');
+      table.string('contact_name');
     }),
 
     knex.schema.createTable('Venues', function(table) {
