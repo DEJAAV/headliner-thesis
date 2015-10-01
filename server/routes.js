@@ -8,13 +8,15 @@ var Venue_Reviews = require('./models/venue_reviews.js');
 module.exports = function (app) {
 
   app.post('/api/users/venues', function(req, res, next) {
-    Venues.create(req.body).then(function(result) {
+    console.log('Req user in req.user');
+    console.log(req.user);
+    Venues.create(req.body, req.user).then(function(result) {
       res.json('success');
     });
   });
 
   app.post('/api/users/artists', function(req, res, next) {
-    Bands.create(req.body).then(function(result) {
+    Bands.create(req.body, req.user).then(function(result) {
       res.json('success');
     });
   });
