@@ -41,6 +41,7 @@ module.exports = {
       }).update({
         'band_id': bandId
       });
+    })
   },
   
   update: function(reqBody) {
