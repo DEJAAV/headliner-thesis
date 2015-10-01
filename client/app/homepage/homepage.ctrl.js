@@ -10,13 +10,9 @@
       "city": "Austin",
       "state": "TX",
       "zip": "78751",
-      "type": {
+      "genre": {
         "americana": true,
-        "blues": true,
-        "metal": false,
-        "casual": true,
-        "lounge": true,
-        "jazz": true
+        "blues": true
       },
       "about": "Depart do be so he enough talent. Sociable formerly six but handsome. Up do view time they shot. He concluded disposing provision by questions as situation. Its estimating are motionless day sentiments end. Calling an imagine at forbade. At name no an what like spot. Pressed my by do affixed he studied.",
       "contact_phone": "8327944795",
@@ -29,13 +25,9 @@
       "city": "Austin",
       "state": "TX",
       "zip": "78751",
-      "type": {
-        "americana": true,
+      "genre": {
         "blues": true,
-        "metal": false,
-        "casual": true,
-        "lounge": true,
-        "jazz": true
+        "bluegrass": true
       },
       "about": "Depart do be so he enough talent. Sociable formerly six but handsome. Up do view time they shot. He concluded disposing provision by questions as situation. Its estimating are motionless day sentiments end. Calling an imagine at forbade. At name no an what like spot. Pressed my by do affixed he studied.'",
       "contact_phone": "8327944795",
@@ -48,13 +40,9 @@
       "city": "Austin",
       "state": "TX",
       "zip": "78751",
-      "type": {
-        "americana": true,
-        "blues": true,
-        "metal": false,
-        "casual": true,
-        "lounge": true,
-        "jazz": true
+      "genre": {
+        "bluegrass": true,
+        "classical": true
       },
       "about": "Depart do be so he enough talent. Sociable formerly six but handsome. Up do view time they shot. He concluded disposing provision by questions as situation. Its estimating are motionless day sentiments end. Calling an imagine at forbade. At name no an what like spot. Pressed my by do affixed he studied.'",
       "contact_phone": "8327944795",
@@ -67,13 +55,9 @@
       "city": "Austin",
       "state": "TX",
       "zip": "78751",
-      "type": {
-        "americana": true,
-        "blues": true,
-        "metal": false,
-        "casual": true,
-        "lounge": true,
-        "jazz": true
+      "genre": {
+        "classical": true,
+        "comedy": true
       },
       "about": "Depart do be so he enough talent. Sociable formerly six but handsome. Up do view time they shot. He concluded disposing provision by questions as situation. Its estimating are motionless day sentiments end. Calling an imagine at forbade. At name no an what like spot. Pressed my by do affixed he studied.",
       "contact_phone": "8327944795",
@@ -86,13 +70,9 @@
       "city": "Austin",
       "state": "TX",
       "zip": "78751",
-      "type": {
-        "americana": true,
-        "blues": true,
-        "metal": false,
-        "casual": true,
-        "lounge": true,
-        "jazz": true
+      "genre": {
+        "comedy": true,
+        "country": true
       },
       "about": "Depart do be so he enough talent. Sociable formerly six but handsome. Up do view time they shot. He concluded disposing provision by questions as situation. Its estimating are motionless day sentiments end. Calling an imagine at forbade. At name no an what like spot. Pressed my by do affixed he studied.",
       "contact_phone": "8327944795",
@@ -189,13 +169,24 @@
       Homepage.getAllArtists().then(function(all) {
         $scope.artists = all;
       })
-    }
+    };
+
     $scope.initArtist = function() {
       console.log('initArtist is being called')
       Homepage.getAllVenues().then(function(all) {
         console.log($scope.venueGroup);        
         $scope.venues = all;
       })
-    }
+    };
+
+    $scope.genreFilter = function(artist) {
+      for (var genre in $scope.genre) {
+        if ($scope.genre[genre] && !artist.genre[genre]) {
+          return false;
+        }
+      }
+      return true;
+    };
+
   }
 })();
