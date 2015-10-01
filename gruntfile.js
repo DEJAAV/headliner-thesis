@@ -10,7 +10,7 @@ module.exports = function(grunt){
         'test/*.js' 
       ], 
     },
-
+/* All bower shit */
     // auto_install: {
     //   local: {},
     //   subdir: {
@@ -22,16 +22,21 @@ module.exports = function(grunt){
     // },
 
     bower: {
-      // name: grunt.file.readJSON('client/bower.json'),
       install: {
         options: {
           install: true,
           copy: false,
-          targetDir: 'client/bower.json',
+          targetDir: 'client/bower_components',
+          cleanTargetDir: true,
+          verbose: true,
+          bowerOptions: {
+            forceLatest: true
+          }
         }
       }
     },
 
+/* Bower shit ends here */
   	uglify: {
   		options: {
   			banner: '/*! <%= Headliner %> <% grunt.template.today("yyyy-mm-dd") %> */\n',
@@ -98,8 +103,7 @@ module.exports = function(grunt){
 
   //default (>> grunt)
   grunt.registerTask('default', [
-        'bower',
-        'jshint'
+        'bower'
   ]);
 
   //testing (>> grunt test) 
@@ -109,6 +113,7 @@ module.exports = function(grunt){
   //       'jshint'
   //   ])
   
+
   //minification (>> grunt minify) 
   //can add to default task once app is up & running
   grunt.registerTask('minify', [
