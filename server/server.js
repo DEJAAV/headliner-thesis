@@ -108,11 +108,15 @@ passport.use('local-signin', new LocalStrategy({
       if(!user[0]) {
         return done(null, false);
       } else {
-        if(Users.comparePassword(password, user[0].password)) {
-          return done(null, user[0]);
-        } else {
-          return done(null, false);
-        }
+        Users.comparePassword(password, user[0].password).then(function(result){
+          console.log(result);
+          if(result) {
+            return done(null, user[0]);
+          } else {
+            //redirect to error handling endpoint
+            return done(null, false);
+          }
+        })
       }
     })
   })
@@ -188,7 +192,7 @@ app.post('/api/users/local', passport.authenticate('local-signup', {}), function
   });
 });
 
-app.post('/api/users/login', passport.authenticate('local-signin', {}),
+app.post('/api/users/login', passport.authenticate('local-signin', { failureRedirect: '/api/users/login/error' }),
   function(req, res) {
     if(!req.user) {
       res.json({error: 'Incorrect username/password'})
@@ -208,6 +212,10 @@ app.post('/api/users/login', passport.authenticate('local-signin', {}),
     });
   }
 );
+
+app.get('/api/users/login/error', function(req, res) {
+  res.json({ error: 'Incorrect username/password' });
+});
 
 app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email'] }));
 
@@ -245,7 +253,7 @@ app.get('/auth/google',
       } else if(user[0].venue_id !== null) {
         response.type = 'venue';
       } else {
-        response.type = null;
+        response.type = null; 
       }
     }).then(function() {
       res.json(response);
@@ -276,11 +284,6 @@ app.get('/auth/google/callback', passport.authenticate('google', {}),
     });
   }
 );
-
-app.get('/logout', function (req, res) {
-  req.logout();
-  res.redirect('/');
-});
 
 require('./routes.js')(app);
 

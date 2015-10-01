@@ -9,13 +9,13 @@ module.exports = function (app) {
 
   app.post('/api/users/venues', function(req, res, next) {
     Venues.create(req.body).then(function(result) {
-      res.json('success');
+      res.json({type: 'venue'});
     });
   });
 
   app.post('/api/users/artists', function(req, res, next) {
     Bands.create(req.body).then(function(result) {
-      res.json(result);
+      res.json({type: 'artist'});
     });
   });
 

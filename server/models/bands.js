@@ -32,6 +32,12 @@ module.exports = {
         Band_Members.addMember(band_id[0], member, reqBody.members[member] )
       }
       return band_id[0]
+    }).then(function(bandId) {
+      return knex('Users').where({
+        'user_id': req.user.user_id
+      }).update({
+        'band_id': bandId
+      });
     })
   },
   
