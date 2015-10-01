@@ -21,7 +21,7 @@
     Auth.signupGeneral($scope.user)
       .then(function (data) {
         $window.localStorage.setItem('headliner', data.token);
-        $window.localStorage.setItem('type', data.type);
+        $window.localStorage.setItem('type', null);
         $location.path('/select'); 
       })
       .catch(function (error) {
@@ -33,7 +33,7 @@
     $scope.signupVenue = function () {
       Auth.signupVenue($scope.user)
         .then(function () {
-          console.log('successfully signed up venue')
+          $window.localStorage.setItem('type', 'venue');
           $location.path('/homepage-venue');
         })
         .catch(function(error){
@@ -44,7 +44,7 @@
     $scope.signupArtist = function () {
       Auth.signupArtist($scope.user)
         .then(function () {
-          console.log('successfully signed up artist')
+          $window.localStorage.setItem('type', 'artist');
           $location.path('/homepage-artist');
         })
         .catch(function(error){
@@ -57,17 +57,17 @@
     //Adds an incremented new member object to the array 
     //if the button is clicked on the form
     $scope.addNewMember = function(){
-    	var newMemberNum = $scope.band.members.length+1;
-    	$scope.band.members.push({'id':'member'+newMemberNum});
+      var newMemberNum = $scope.band.members.length+1;
+      $scope.band.members.push({'id':'member'+newMemberNum});
     };
 
     $scope.removeMember = function(){
-    	var last = $scope.band.members.length-1;
-    	$scope.band.members.splice(last);
+      var last = $scope.band.members.length-1;
+      $scope.band.members.splice(last);
     };
 
     $scope.showAddMember = function(member){
-    	return member.id === $scope.members[$scope.members.length-1].id;
+      return member.id === $scope.members[$scope.members.length-1].id;
     };
 
     $scope.showMemberLabel = function (member) {
@@ -75,9 +75,9 @@
     }
 
 
-	$scope.login = function () {
-	Auth.login($scope.user)
-	  .then(function (data) {
+  $scope.login = function () {
+  Auth.login($scope.user)
+    .then(function (data) {
       console.log(data, 'data');
       if(data.error) {
         $scope.login.error = data.error;
@@ -89,13 +89,13 @@
         } else {
           $location.path('/select');
         }
-  	    $window.localStorage.setItem('headliner', data.token);
+        $window.localStorage.setItem('headliner', data.token);
         $window.localStorage.setItem('type', data.type);
       }
-	  })
-	  .catch(function (error) {
+    })
+    .catch(function (error) {
       console.log('error with login: ', error)
-	  });
-	};
+    });
+  };
 }
 })();
