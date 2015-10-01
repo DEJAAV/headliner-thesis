@@ -17,8 +17,7 @@
         data: user
       })
       .then(function(resp) {
-        console.log('this is the response', resp)
-        return resp.data.token;
+        return resp.data;
       });
     };
 
@@ -49,13 +48,14 @@
   var login = function (user) {
     console.log('inside login')
     return $http({
-
       method: 'POST',
       url: '/api/users/login',
       data: user
     })
     .then(function (res) {
-      return res.data.token;
+      console.log('This is the login response: ');
+      console.log(res);
+      return res.data;
     });
   };
 
@@ -67,7 +67,6 @@
     // signout user by removing token that is stored in the client's localStorage
     function signout () {
       $window.localStorage.removeItem('headliner');
-      $window.localStorage.removeItem('userid');
       $location.path('/');
     };
 

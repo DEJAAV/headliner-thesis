@@ -79,17 +79,12 @@ module.exports = {
   },
 
   hashPassword: function(password) {
-    var genSalt = Bluebird.promisify(bcrypt.genSalt);
     var hasher = Bluebird.promisify(bcrypt.hash);
-    return genSalt(10).then(function(salt) {
-      return hasher(password, salt, null);
-    })
+    return hasher(password, null, null);
   },
-  
-  comparePassword: function(password, dbPassword) {
+
+  comparePassword: function(password, old) {
     var compare = Bluebird.promisify(bcrypt.compare);
-    return compare(password, dbPassword).then(function(err, res) {
-      return res;
-    })
+    return compare(password, old).then(function(result) { return result; });
   }
 };
