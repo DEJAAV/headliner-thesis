@@ -3,14 +3,15 @@
   angular.module('headliner', [
     'headliner.authService',
     'headliner.homeService', 
+    'headliner.profileService',
     'headliner.auth',
     'headliner.homepage',
+    'headliner.profile',
     'ngRoute',
-    'ngMaterial',
     'ui.router'
   ])
   .config(config)
-  .factory('AttachTokens', AttachTokens);
+  .factory('AttachTokens', AttachTokens)
 
   function config($routeProvider, $httpProvider, $stateProvider, $urlRouterProvider) {
 
@@ -45,7 +46,7 @@
       })  
       .state('signup-venue.basic', {
         templateUrl: 'app/auth/signup-venue/signup-venue-basic.html',
-        url: '/basic',
+        url: '/basic'
       })
       .state('signup-venue.more', {
         templateUrl: 'app/auth/signup-venue/signup-venue-more.html',
@@ -69,25 +70,25 @@
         url: '/signup-artist',
         controller: 'AuthController'
       })
-      .state('signup-artist.basic', {
-        templateUrl: 'app/auth/signup-artist/signup-artist-basic.html',
-        url: '/basic'
+      .state('signup-artist.file1', {
+        templateUrl: 'app/auth/signup-artist/signup-artist-file1.html',
+        url: '/file1'
       })
-      .state('signup-artist.about', {
-        templateUrl: 'app/auth/signup-artist/signup-artist-about.html',
-        url: '/about'
+      .state('signup-artist.file2', {
+        templateUrl: 'app/auth/signup-artist/signup-artist-file2.html',
+        url: '/file2'
       })
-      .state('signup-artist.label', {
-        templateUrl: 'app/auth/signup-artist/signup-artist-label.html',
-        url: '/label'
+      .state('signup-artist.file3', {
+        templateUrl: 'app/auth/signup-artist/signup-artist-file3.html',
+        url: '/file3'
       })
-      .state('signup-artist.contact', {
-        templateUrl: 'app/auth/signup-artist/signup-artist-contact.html',
-        url: '/contact'
+      .state('signup-artist.file4', {
+        templateUrl: 'app/auth/signup-artist/signup-artist-file4.html',
+        url: '/file4'
       })
-      .state('signup-artist.terms', {
-        templateUrl: 'app/auth/signup-artist/signup-artist-terms.html',
-        url: '/terms'
+      .state('signup-artist.file5', {
+        templateUrl: 'app/auth/signup-artist/signup-artist-file5.html',
+        url: '/file5'
       })                                                                                     
       .state('homepage-artist', {
         templateUrl: 'app/homepage/homepage-artist.html',
@@ -98,7 +99,64 @@
         templateUrl: 'app/homepage/homepage-venue.html',
         url: '/homepage-venue',
         controller: 'HomepageController' 
-      })                        
+      })
+      // VENUE PROFILE 
+      .state('profile-venue', {
+        templateUrl: 'app/profiles/profile-venue/profile-venue.html',
+        url: '/profile-venue',
+        controller: 'ProfileController'
+      })
+      // VENUE PROFILE (nested views)                                    
+      .state('profile-venue.overview', {
+        templateUrl: 'app/profiles/profile-venue/overview.html',
+        url: '/venue-overview'
+      }) 
+      .state('profile-venue.reviews', {
+        templateUrl: 'app/profiles/profile-venue/reviews.html',
+        url: '/venue-reviews'
+      }) 
+      .state('profile-venue.events', {
+        templateUrl: 'app/profiles/profile-venue/events.html',
+        url: '/venue-events'
+      }) 
+      .state('profile-venue.photos', {
+        templateUrl: 'app/profiles/profile-venue/photos.html',
+        url: '/venue-photos'
+      })    
+
+      // ARTIST PROFILE 
+      .state('profile-artist', {
+        templateUrl: 'app/profiles/profile-artist/profile-artist.html',
+        url: '/profile-artist',
+        controller: 'ProfileController'
+      })
+      // ARTIST PROFILE (nested views)                                    
+      .state('profile-artist.overview', {
+        templateUrl: 'app/profiles/profile-artist/overview.html',
+        url: '/artist-overview'
+      })
+      .state('profile-artist.music', {
+        templateUrl: 'app/profiles/profile-artist/music.html',
+        url: '/artist-music'
+      })  
+      .state('profile-artist.videos', {
+        templateUrl: 'app/profiles/profile-artist/videos.html',
+        url: '/artist-videos'
+      })
+      .state('profile-artist.photos', {
+        templateUrl: 'app/profiles/profile-artist/photos.html',
+        url: '/artist-photos'
+      })                      
+      .state('profile-artist.calendar', {
+        templateUrl: 'app/profiles/profile-artist/calendar.html',
+        url: '/artist-calendar'
+      }) 
+      .state('profile-artist.reviews', {
+        templateUrl: 'app/profiles/profile-artist/reviews.html',
+        url: '/artist-reviews'
+      }) 
+
+      // SIGNOUT    
       .state('signout', {
         templateUrl: 'app/auth/landing.html',
         url: '/signout',
@@ -110,7 +168,7 @@
 
     // Add AttachTokens to $httpInterceptor, add token from local storage the to header of http request to server
     $httpProvider.interceptors.push('AttachTokens');
-  }
+}
 
   function AttachTokens ($window) {
     var attach = {
