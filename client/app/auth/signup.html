@@ -13,7 +13,6 @@
       <a href="/auth/google" class="btn btn-warning btn-block" ng-click="" ng-disabled="signForm.$invalid">Sign Up with Google</a>      
     </span>
   </div>
-    <div ng-if="user.error" class="alert alert-danger" role="alert"> {{ user.error }} </div>
   <br>
     <div class="inputs">
       <div class="form-group" ng-class="{ 'has-error': signupForm.username.$dirty && signupForm.username.$error.required }">
@@ -28,6 +27,8 @@
       <span ng-show="signupForm.password.$dirty && signupForm.password.$error.required" class="help-block">Password is required</span>
       </div>
 
+    <div ng-if="user.error" class="alert alert-danger" role="alert"> {{ user.error }} </div>
+    
       <div class="form-actions">
         <button type="submit" class="btn btn-danger">Sign Up</button>
         <a href="#/login" class="btn btn-link">Login</a>

@@ -25,6 +25,7 @@
         $location.path('/select'); 
       })
       .catch(function (error) {
+          $scope.user.error = 'Username is already taken.'
           console.error(error);
       });
   };
