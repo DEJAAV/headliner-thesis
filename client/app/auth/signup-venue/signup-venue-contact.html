@@ -7,6 +7,11 @@
   <div>{{ user }}</div>
   <hr>
 
+    <div class="input-field col s12">
+      <input ng-model="user.contact_name" id="contact_name" type="text" class="validate" required />
+      <label for="contact_name">Contact Name</label>
+    </div>
+
     <label>Do you prefer to be contacted by phone or email?</label>
     <select class="browser-default" ng-model="communication">
       <option value="" disabled selected>Choose your option</option>
