@@ -49,7 +49,7 @@
       </div>
       <div class="col s9">
         <div class="col s4" ng-repeat="venue in venuesFake">
-          <div class="card small">
+          <div class="card">
             <div class="card-image waves-effect waves-block waves-light">
               <img class="activator" src="http://i.imgur.com/ZNc1JZq.jpg">
             </div>
@@ -58,7 +58,7 @@
               <p>{{ venue.city }} , {{ venue.state }}</p> 
               <div class="chip lime lighten-4" ng-repeat="(key,data) in venue.type">{{ key }}</div>
               <hr>
-              <p><a href="#/homepage-venue">get details</a></p>
+              <p><a href="#/profile-venue">get more details</a></p>
             </div>
             <div class="card-reveal">
               <span class="card-title grey-text text-darken-4">About {{venue.name}}<i class="material-icons right">close</i></span>
