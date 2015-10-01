@@ -4,10 +4,10 @@ var knex = require('../db/db.js');
 module.exports = {
   create: function(reqBody) {
     return knex('Bands').returning('band_id').insert({
-      band_name: reqBody.band_name,
+      band_name: reqBody.band_name, 
       onTour: reqBody.onTour,
-      email: reqBody.email,
-      phone_number: reqBody.phone_number,
+      email: reqBody.email, 
+      phone_number: reqBody.phone_number, 
       record_label: reqBody.record_label,
       facebook: reqBody.facebook,
       youtube: reqBody.youtube,
@@ -15,15 +15,18 @@ module.exports = {
       bandcamp: reqBody.bandcamp,
       website: reqBody.website,
       bio: reqBody.bio,
-      zip: reqBody.zip
+      zip: reqBody.zip, 
+      city: reqBody.city,
+      state: reqBody.state, 
+      contact_name: reqBody.contact_name 
     }).then(function(band_id) {
       for (var genre in reqBody.genre) {
         Band_Genres.addGenre(band_id[0], genre);
       }
       return band_id
     }).then(function(band_id) {
-      for (var i = 0; i < reqBody.members.length; i++) {
-        Band_Members.addMember(band_id[0], reqBody.members[i]);
+      for (var name in reqBody.members) {
+        Band_Members.addMember(band_id[0], )
       }
       return band_id[0]
     })
@@ -129,14 +132,15 @@ module.exports = {
           return bands.map(function(band) {
             band.genre = genres_bandMembers_shows_reviews[0][band.band_id]
 
-            band.bandMembers = []
+            band.bandMembers = [];
+            var memberObj = {};
             for (var i = 0; i < genres_bandMembers_shows_reviews[1].length; i++) {
-              var memberObj = {}
+              console.log(genres_bandMembers_shows_reviews[1][i].member_name)
               if (genres_bandMembers_shows_reviews[1][i].band_id === band.band_id) {
                 memberObj[genres_bandMembers_shows_reviews[1][i].member_name] = genres_bandMembers_shows_reviews[1][i].title;
-                band.bandMembers.push(memberObj)
               }
             }
+            band.bandMembers.push(memberObj)
             band.shows = genres_bandMembers_shows_reviews[2][band.band_id]
             band.reviews = genres_bandMembers_shows_reviews[3][band.band_id]
             return band
