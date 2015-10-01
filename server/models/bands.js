@@ -29,10 +29,17 @@ module.exports = {
             Band_Genres.addGenre(band_id[0], genre);
           }
         }
-        for (var member in reqBody.member) {
-          Band_Members.addMember(band_id[0], member, reqBody.member[member]);
-        }
-        return band_id[0];
+      return band_id
+    }).then(function(band_id) {
+      for (var member in reqBody.members) {
+        Band_Members.addMember(band_id[0], member, reqBody.members[member] )
+      }
+      return band_id[0]
+    }).then(function(bandId) {
+      return knex('Users').where({
+        'user_id': reqBody.user.user_id
+      }).update({
+        'band_id': bandId
       });
   },
   

@@ -37,6 +37,12 @@ module.exports = {
           }
         }
         return venueId[0];
+      }).then(function(venueId) {
+        return knex('Users').where({
+          'user_id': reqBody.user.user_id
+        }).update({
+          'venue_id': venueId
+        });
       });
   },
 
