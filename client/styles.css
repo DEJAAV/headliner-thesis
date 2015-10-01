@@ -1,4 +1,5 @@
 /*TRANSPARENT BUTTONS FOR VENUE TYPE AND GENRE UNDER TITLES ON LISTINGS*/
+
 .btn.outline {
     background: none;
     padding: 2px 5px;
@@ -15,7 +16,8 @@
     border-color: #007299;
     color: #007299;
     box-shadow: none;
-}.inline-fields band-members{
+}
+.inline-fields band-members{
     display: inline-block;
 }
 
@@ -69,10 +71,62 @@ body {
     background: red; 
 }
 
-/*selectors in form Material UI*/
-md-radio-button {
-  display: inline;
+.artistTitle {
+    padding-left: 25px;
 }
-md-checkbox {
-  display: inline;
+.star{
+    color:#ffea00;
+    border: .5px solid #ffc400;
 }
+
+/*filter boxes*/
+.box {
+    border:1px solid #cfd8dc;
+    margin-top: 10px;
+}
+.box h6 {
+    background: #cfd8dc;
+    color:white;
+    padding:10px;
+}
+.box p {
+    color:#333;
+    padding:10px;
+}
+.box {
+    -moz-border-radius-topright:5px;
+    -moz-border-radius-topleft:5px;
+    -webkit-border-top-right-radius:5px;
+    -webkit-border-top-left-radius:5px;
+}
+
+/*PROFILE*/
+#profpic {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+}
+
+/*photo gallery thumbnail styling*/
+.photo-gallery {
+  filter: gray; 
+  -webkit-filter: grayscale(1); 
+    -webkit-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+    box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+    margin-bottom:10px;
+    overflow: hidden;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;    
+}
+.photo-gallery:hover {
+  filter: none; /* IE6-9 */
+  -webkit-filter: grayscale(0); /* Google Chrome, Safari 6+ & Opera 15+ */
+}
+
