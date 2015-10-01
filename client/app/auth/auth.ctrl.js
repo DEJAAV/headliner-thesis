@@ -97,5 +97,11 @@
       console.log('error with login: ', error)
     });
   };
+
+  $scope.signout = function() {
+    Auth.signout();
+    console.log('user signed out');
+  }
+
 }
 })();

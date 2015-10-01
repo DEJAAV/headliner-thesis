@@ -65,6 +65,7 @@
 
     // signout user by removing token that is stored in the client's localStorage
     function signout () {
+      console.log('signout is being called in auth service')
       $window.localStorage.removeItem('headliner');
       $window.localStorage.removeItem('type');
       $location.path('/');
