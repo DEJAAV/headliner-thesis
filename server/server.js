@@ -277,11 +277,6 @@ app.get('/auth/google/callback', passport.authenticate('google', {}),
   }
 );
 
-app.get('/logout', function (req, res) {
-  req.logout();
-  res.redirect('/');
-});
-
 require('./routes.js')(app);
 
 app.listen(port);
