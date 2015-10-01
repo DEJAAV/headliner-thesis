@@ -21,16 +21,20 @@ module.exports = function(grunt){
     //   }
     // },
 
-    // bower: {
-    //   // name: grunt.file.readJSON('client/bower.json'),
-    //   install: {
-    //     options: {
-    //       install: true,
-    //       copy: false,
-    //       targetDir: 'client/',
-    //     }
-    //   }
-    // },
+    bower: {
+      install: {
+        options: {
+          install: true,
+          copy: false,
+          targetDir: 'client/bower_components',
+          cleanTargetDir: true,
+          verbose: true,
+          bowerOptions: {
+            forceLatest: true
+          }
+        }
+      }
+    },
 
 /* Bower shit ends here */
   	uglify: {
@@ -99,7 +103,7 @@ module.exports = function(grunt){
 
   //default (>> grunt)
   grunt.registerTask('default', [
-        'js-hint'
+        'bower'
   ]);
 
   //testing (>> grunt test) 
