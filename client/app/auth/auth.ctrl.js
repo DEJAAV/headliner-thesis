@@ -19,8 +19,9 @@
       });
   $scope.signupGeneral = function () {
     Auth.signupGeneral($scope.user)
-      .then(function (token) {
-        $window.localStorage.setItem('headliner', token);
+      .then(function (data) {
+        $window.localStorage.setItem('headliner', data.token);
+        $window.localStorage.setItem('type', data.type);
         $location.path('/select'); 
       })
       .catch(function (error) {
@@ -75,8 +76,9 @@
 
 	$scope.login = function () {
 	Auth.login($scope.user)
-	  .then(function (token) {
-	    $window.localStorage.setItem('headliner', token);
+	  .then(function (data) {
+	    $window.localStorage.setItem('headliner', data.token);
+      $window.localStorage.setItem('type', data.type);
 	    $location.path('/find-bands'); 
 	  })
 	  .catch(function (error) {
