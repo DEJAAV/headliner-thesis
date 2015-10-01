@@ -19,11 +19,13 @@ module.exports = {
       city: reqBody.city,
       state: reqBody.state, 
       contact_name: reqBody.contact_name 
-    }).then(function(band_id) {
-      for (var genre in reqBody.genre) {
-        console.log(genre)
-        Band_Genres.addGenre(band_id[0], genre);
-      }
+    })
+      .then(function(band_id) {
+        for(var genre in reqBody.genre) {
+          if (reqBody.genre[genre]) {
+            Band_Genres.addGenre(band_id[0], genre);
+          }
+        }
       return band_id
     }).then(function(band_id) {
       for (var member in reqBody.members) {
@@ -54,10 +56,9 @@ module.exports = {
       contact_name: reqBody.contact_name 
     }).then(function(band_id) {
       for (var genre in reqBody.genre) {
-        if (reqBody.genre[genre] === true) {
+        if (reqBody.genre[genre]) {
           Band_Genres.updateGenre(band_id[0], genre);
-        }
-        if (reqBody.genre[genre] === false) {
+        } else {
           Band_Genres.deleteGenre(band_id[0], genre)
         }
       }
@@ -89,11 +90,15 @@ module.exports = {
       return knex('Band_Members').then(function(bandMembers) {
         var members = {}
         for (var i = 0; i < bandMembers.length; i++) {
-          console.log(members[bandMembers[i].band_id][bandMembers[i].title], 'title', i)
+          if (members[bandMembers[i].band_id]) {
             members[bandMembers[i].band_id][bandMembers[i].member_name] = 
-            members[bandMembers[i].band_id][bandMembers[i].title]
+          bandMembers[i].title
+          } else{
+            members[bandMembers[i].band_id] = {}
+            members[bandMembers[i].band_id][bandMembers[i].member_name] = 
+            bandMembers[i].title
+          }
         }
-        console.log(members, 'members');
         return [genres, members]
       }).then(function(genres_bandMembers) {
         return knex('Venues').join('Shows', 'Venues.venue_id',
@@ -142,16 +147,7 @@ module.exports = {
         return knex('Bands').then(function(bands) {
           return bands.map(function(band) {
             band.genre = genres_bandMembers_shows_reviews[0][band.band_id]
-
-            band.bandMembers = [];
-            var memberObj = {};
-            for (var i = 0; i < genres_bandMembers_shows_reviews[1].length; i++) {
-              console.log(genres_bandMembers_shows_reviews[1][i].member_name)
-              if (genres_bandMembers_shows_reviews[1][i].band_id === band.band_id) {
-                memberObj[genres_bandMembers_shows_reviews[1][i].member_name] = genres_bandMembers_shows_reviews[1][i].title;
-              }
-            }
-            band.members.push(memberObj)
+            band.members = genres_bandMembers_shows_reviews[1][band.band_id]
             band.shows = genres_bandMembers_shows_reviews[2][band.band_id]
             band.reviews = genres_bandMembers_shows_reviews[3][band.band_id]
             return band
