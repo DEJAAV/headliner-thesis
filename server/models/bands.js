@@ -7,7 +7,7 @@ module.exports = {
       band_name: reqBody.band_name, 
       onTour: reqBody.onTour,
       email: reqBody.email, 
-      phone_number: reqBody.phone_number, 
+      phone: reqBody.phone, 
       record_label: reqBody.record_label,
       facebook: reqBody.facebook,
       youtube: reqBody.youtube,
@@ -21,12 +21,13 @@ module.exports = {
       contact_name: reqBody.contact_name 
     }).then(function(band_id) {
       for (var genre in reqBody.genre) {
+        console.log(genre)
         Band_Genres.addGenre(band_id[0], genre);
       }
       return band_id
     }).then(function(band_id) {
-      for (var name in reqBody.members) {
-        Band_Members.addMember(band_id[0], )
+      for (var member in reqBody.members) {
+        Band_Members.addMember(band_id[0], member, reqBody.members[member] )
       }
       return band_id[0]
     })
@@ -36,10 +37,10 @@ module.exports = {
     return knex('Bands').where({
       'band_id': reqBody.band_id
     }).returning('band_id').update({
-      band_name: reqBody.band_name,
+      band_name: reqBody.band_name, 
       onTour: reqBody.onTour,
-      email: reqBody.email,
-      phone: reqBody.phone,
+      email: reqBody.email, 
+      phone: reqBody.phone, 
       record_label: reqBody.record_label,
       facebook: reqBody.facebook,
       youtube: reqBody.youtube,
@@ -47,7 +48,10 @@ module.exports = {
       bandcamp: reqBody.bandcamp,
       website: reqBody.website,
       bio: reqBody.bio,
-      zip: reqBody.zip
+      zip: reqBody.zip, 
+      city: reqBody.city,
+      state: reqBody.state, 
+      contact_name: reqBody.contact_name 
     }).then(function(band_id) {
       for (var genre in reqBody.genre) {
         if (reqBody.genre[genre] === true) {
@@ -59,8 +63,8 @@ module.exports = {
       }
       return band_id
     }).then(function(band_id) {
-      for (var i = 0; i < reqBody.members.length; i++) {
-        Band_Members.updateMember(band_id[0], reqBody.members[i]);
+      for (var member in reqBody.members) {
+        Band_Members.updateMember(band_id[0], member, reqBody.members[member]);
       }
       return band_id[0]
     })
@@ -83,7 +87,14 @@ module.exports = {
       return genres
     }).then(function(genres) {
       return knex('Band_Members').then(function(bandMembers) {
-        return [genres, bandMembers]
+        var members = {}
+        for (var i = 0; i < bandMembers.length; i++) {
+          console.log(members[bandMembers[i].band_id][bandMembers[i].title], 'title', i)
+            members[bandMembers[i].band_id][bandMembers[i].member_name] = 
+            members[bandMembers[i].band_id][bandMembers[i].title]
+        }
+        console.log(members, 'members');
+        return [genres, members]
       }).then(function(genres_bandMembers) {
         return knex('Venues').join('Shows', 'Venues.venue_id',
           'Shows.venue_id').then(function(venues_shows) {
@@ -140,7 +151,7 @@ module.exports = {
                 memberObj[genres_bandMembers_shows_reviews[1][i].member_name] = genres_bandMembers_shows_reviews[1][i].title;
               }
             }
-            band.bandMembers.push(memberObj)
+            band.members.push(memberObj)
             band.shows = genres_bandMembers_shows_reviews[2][band.band_id]
             band.reviews = genres_bandMembers_shows_reviews[3][band.band_id]
             return band
