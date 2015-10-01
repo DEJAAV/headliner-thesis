@@ -24,12 +24,12 @@
           </select>
         </div>
         <div ng-if="communication === 'Phone'"> 
-           <input ng-model="user.contact_phone" id="contact_phone" type="text" class="validate"/>
-           <label for="contact_phone">Contact Phone Number</label>
+           <input ng-model="user.phone" id="phone" type="text" class="validate"/>
+           <label for="phone">Contact Phone Number</label>
         </div>
         <div ng-if="communication === 'Email'"> 
-           <input ng-model="user.contact_email" id="contact_email" type="text" class="validate"/>
-           <label for="contact_email">Contact Email Address</label>
+           <input ng-model="user.email" id="email" type="text" class="validate"/>
+           <label for="email">Contact Email Address</label>
         </div>
       </div>
       <hr>
@@ -43,6 +43,9 @@
         <br>  
         <label for="youtube">Youtube: </label>
           <input name="youtube" type="text" id="userYoutube" class="form-control input-sm chat-input" placeholder="http://www.youtube.com/my-band" ng-model="user.youtube"/>            
+        <br>
+        <label for="website">Website: </label>
+          <input name="website" type="text" id="userWebsite" class="form-control input-sm chat-input" placeholder="http://www.my-band.com/" ng-model="user.website"/>            
         <br>
       </div>
     </form>
