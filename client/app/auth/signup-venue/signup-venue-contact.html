@@ -10,7 +10,7 @@
     <div class="input-field col s12">
       <input ng-model="user.contact_name" id="contact_name" name="contact_name" type="text" class="validate" required />
       <label for="contact_name">Contact Name</label>
-      <span ng-show="signupVenue.contact_name.$dirty && signupVenue.contact_name.$error.required" class="help-block">* required</span>
+      <span ng-show="venueForm.contact_name.$dirty && venueForm.contact_name.$error.required" class="help-block">* required</span>
     </div>
 
     <label>Do you prefer to be contacted by phone or email?</label>
@@ -24,13 +24,13 @@
     <div ng-show="communication === 'Phone'">
       <label for="phone">Contact Phone Number: </label>
       <input name="phone" type="text" class="form-control input-sm chat-input" placeholder="Phone Number" ng-model="user.contact_phone" required />
-      <span ng-show="signupVenue.phone.$dirty && signupVenue.phone.$error.required" class="help-block">* required</span>
+      <span ng-show="venueForm.phone.$dirty && venueForm.phone.$error.required" class="help-block">* required</span>
     </div>
     <br>
     <div ng-show="communication === 'Email'">
       <label for="email">Contact Email Address: </label>
       <input name="email" type="email"  class="form-control input-sm chat-input" placeholder="Email" ng-model="user.contact_email" required />
-      <span ng-show="signupVenue.email.$dirty && signupVenue.email.$error.required" class="help-block">* required</span>
+      <span ng-show="venueForm.email.$dirty && venueForm.email.$error.required" class="help-block">* required</span>
     </div>
     <br> 
 

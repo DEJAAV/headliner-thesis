@@ -78,11 +78,17 @@
 	$scope.login = function () {
 	Auth.login($scope.user)
 	  .then(function (data) {
-      console.log(data);
+      console.log(data, 'data');
       if(data.error) {
-        $location.path('/homepage-artist')
+        $scope.login.error = data.error;
       } else {
-        $location.path('/select'); 
+        if (data.type === 'venue') {
+          $location.path('/homepage-venue');
+        } else if (data.type === 'artist') {
+          $location.path('/homepage-artist');
+        } else {
+          $location.path('/select');
+        }
   	    $window.localStorage.setItem('headliner', data.token);
         $window.localStorage.setItem('type', data.type);
       }
