@@ -39,7 +39,7 @@ module.exports = {
       band_name: reqBody.band_name,
       onTour: reqBody.onTour,
       email: reqBody.email,
-      phone_number: reqBody.phone_number,
+      phone: reqBody.phone,
       record_label: reqBody.record_label,
       facebook: reqBody.facebook,
       youtube: reqBody.youtube,
