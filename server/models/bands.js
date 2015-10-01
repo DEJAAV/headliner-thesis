@@ -4,7 +4,7 @@ var knex = require('../db/db.js');
 
 module.exports = {
 
-  create: function(reqBody) {
+  create: function(reqBody, reqUser) {
     return knex('Bands')
       .returning('band_id')
       .insert({
@@ -29,11 +29,19 @@ module.exports = {
             Band_Genres.addGenre(band_id[0], genre);
           }
         }
-        for (var member in reqBody.member) {
-          Band_Members.addMember(band_id[0], member, reqBody.member[member]);
-        }
-        return band_id[0];
+      return band_id
+    }).then(function(band_id) {
+      for (var member in reqBody.members) {
+        Band_Members.addMember(band_id[0], member, reqBody.members[member] )
+      }
+      return band_id[0]
+    }).then(function(bandId) {
+      return knex('Users').where({
+        'user_id': reqUser.user_id
+      }).update({
+        'band_id': bandId
       });
+    })
   },
   
   update: function(reqBody) {
