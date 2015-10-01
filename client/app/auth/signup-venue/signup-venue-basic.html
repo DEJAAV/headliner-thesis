@@ -5,23 +5,27 @@
 
 
  <div class="row">
+
     <form class="col s12">
       <div class="row">
         <div class="input-field col s12">
-          <input ng-model="user.venue_name" id="venue_name" type="text" class="validate">
+          <input ng-model="user.venue_name" id="venue_name" name = "venue_name" type="text" class="validate" required />
           <label for="venue_name">Venue Name</label>
+          <span ng-show="signupVenue.venue_name.$dirty && signupVenue.venue_name.$error.required" class="help-block">* required</span>      
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input ng-model="user.street" id="street" type="text" class="validate">
+          <input ng-model="user.street" id="street" name="street" type="text" class="validate" required />
           <label for="street">Address</label>
+          <span ng-show="signupVenue.street.$dirty && signupVenue.street.$error.required" class="help-block">* required</span>
         </div>
       </div>      
       <div class="row">
         <div class="input-field col s6">
-          <input id="city" ng-model="user.city" type="text" class="validate">
+          <input id="city" ng-model="user.city" name="city" type="text" class="validate" required />
           <label for="city">City</label>
+          <span ng-show="signupVenue.city.$dirty && signupVenue.city.$error.required" class="help-block">* required</span>
         </div>
         <div class="input-field col s3">
           <select class="browser-default" ng-model="user.state">
@@ -30,8 +34,9 @@
           </select>
         </div>
         <div class="input-field col s3">
-          <input id="zip" type="text" ng-model="user.zip" class="validate">
+          <input id="zip" name="zip" type="text" ng-model="user.zip" class="validate" required />
           <label for="zip">Zip Code</label>
+          <span ng-show="signupVenue.zip.$dirty && signupVenue.zip.$error.required" class="help-block">* required</span>
         </div>        
       </div>
     </form>
