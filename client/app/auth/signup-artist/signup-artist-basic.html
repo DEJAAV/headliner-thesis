@@ -1,7 +1,7 @@
 <!-- includes: artist's name, members/roles -->
 
 <h3>Basic Artist Info</h3>
-<div> {{ user }} {{ member }} </div>
+<div> {{ user }} </div>
 
   
   <div class="row">
@@ -13,31 +13,17 @@
         </div>
       </div>
       <h5>Members & Roles</h5>
-      <div class="row">
+      <div class="form-group row" ng-repeat="mem in members">
         <div class="input-field col s6">
-          <input ng-model="user.member.name1" type="text" class="validate">
-          <label for="member_name">Member</label>
+          <input ng-model="mem.name" type="text" class="validate" required>
+          <label for="member_name" ng-show="showMemberLabel(mem)">Member</label>
         </div>
         <div class="input-field col s6">
-          <input ng-model="user.member.role1" type="text" class="validate">
+          <input ng-model="mem.role" type="text" class="validate">
           <label for="member_role">Role</label>
         </div>
-        <div class="input-field col s6">
-          <input ng-model="user.member.name2" type="text" class="validate">
-          <label for="member_name">Member</label>
-        </div>
-        <div class="input-field col s6">
-          <input ng-model="user.member.role2" type="text" class="validate">
-          <label for="member_role">Role</label>
-        </div>
-        <div class="input-field col s6">
-          <input ng-model="user.member.name3" type="text" class="validate">
-          <label for="member_name">Member</label>
-        </div>
-        <div class="input-field col s6">
-          <input ng-model="user.member.role3" type="text" class="validate">
-          <label for="member_role">Role</label>
-        </div>                
+        <a class="btn-floating btn-medium waves-effect waves-light blue" ng-click="addNewMember()" ><i class="material-icons">add</i></a>
+                      
       </div>
     </div>
 
