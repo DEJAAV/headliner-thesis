@@ -180,12 +180,16 @@
     };
 
     $scope.genreFilter = function(artist) {
+      var any = false;
       for (var genre in $scope.genre) {
-        if ($scope.genre[genre] && !artist.genre[genre]) {
-          return false;
+        if ($scope.genre[genre]) {
+          any = true;
+          if (artist.genre[genre]) {
+            return true;
+          }
         }
       }
-      return true;
+      return any ? false : true;
     };
 
   }
