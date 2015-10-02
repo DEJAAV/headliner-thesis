@@ -5,7 +5,7 @@
   function HomepageController($scope, $window, $location, $rootScope,
     Homepage, Auth) { // Homepage is the injected service     
     $scope.artistsFake = [{
-      "name": "Ellie",
+      "band_name": "Ellie",
       "street": "123 Peanut Street",
       "city": "Austin",
       "state": "TX",
@@ -22,7 +22,7 @@
       "yelp": "http://www.yelp.com",
       "website": "http://www.google.com"
     }, {
-      "name": "Aaron",
+      "band_name": "Aaron",
       "street": "123 Peanut Street",
       "city": "Austin",
       "state": "TX",
@@ -41,7 +41,7 @@
       "yelp": "http://www.yelp.com",
       "website": "http://www.google.com"
     }, {
-      "name": "Javier",
+      "band_name": "Javier",
       "street": "123 Peanut Street",
       "city": "Austin",
       "state": "TX",
@@ -59,7 +59,7 @@
       "yelp": "http://www.yelp.com",
       "website": "http://www.google.com"
     }, {
-      "name": "Dan",
+      "band_name": "Dan",
       "street": "123 Peanut Street",
       "city": "Austin",
       "state": "TX",
@@ -76,7 +76,7 @@
       "yelp": "http://www.yelp.com",
       "website": "http://www.google.com"
     }, {
-      "name": "Vahagn",
+      "band_name": "Vahagn",
       "street": "123 Peanut Street",
       "city": "Austin",
       "state": "TX",
