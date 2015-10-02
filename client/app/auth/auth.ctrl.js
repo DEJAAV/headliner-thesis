@@ -10,7 +10,7 @@
   function AuthController ($scope, $window, $location, Auth) {
     
   $scope.user = {};
-  $scope.user.member = [{'id': 'member1'}];
+  $scope.user.member = {};
   $scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
     'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
     'WY').split(' ').map(function (state) { 
@@ -53,27 +53,15 @@
     };    
 
   
-    //Adds an incremented new member object to the array 
-    //if the button is clicked on the form
+    //Sets a band member's name as a property in the
+    //member object, their role as the value
     $scope.addNewMember = function(name, role){
-      // console.log("$scope.user.member length before click: ",Object.keys($scope.user.member).length);
-      var newMemberNo = $scope.user.member.length+1;
-      $scope.user.member.push({'id':'member'+newMemberNo});
-      // $scope.user.member[name] = role;
-      // console.log("$scope.user.member length after click: ",Object.keys($scope.user.member).length);
-    };
+        $scope.user.member[name] = role;
+        //console.log("Name: ", name);
+        $scope.name = "";
+        $scope.role = "";
+     };
 
-    $scope.removeMember = function(){
-      delete $scope.member[name];
-    };
-
-    $scope.showAddChoice = function(member) {
-      return member.id === $scope.user.member[$scope.user.member.length-1].id;
-    };
-
-    $scope.showMemberLabel = function (member) {
-     return member.id === $scope.user.member[0].id;
-    }
 
 
   $scope.login = function () {
