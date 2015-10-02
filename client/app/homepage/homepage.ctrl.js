@@ -3,7 +3,7 @@
     HomepageController);
 
   function HomepageController($scope, $window, $location, $rootScope,
-    Homepage) { // Homepage is the injected service     
+    Homepage, Auth) { // Homepage is the injected service     
     $scope.artistsFake = [{
       "name": "Ellie",
       "street": "123 Peanut Street",
@@ -266,6 +266,9 @@
       }
       return any ? false : true;
     };
-
+  $scope.signout = function() {
+    Auth.signout();
+    console.log('user signed out');
+  }
   }
 })();

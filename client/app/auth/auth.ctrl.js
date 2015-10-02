@@ -20,6 +20,7 @@
   $scope.signupGeneral = function () {
     Auth.signupGeneral($scope.user)
       .then(function (data) {
+        console.log(data, 'data');
         $window.localStorage.setItem('headliner', data.token);
         $window.localStorage.setItem('type', null);
         $location.path('/select'); 
@@ -78,7 +79,6 @@
   $scope.login = function () {
   Auth.login($scope.user)
     .then(function (data) {
-      console.log(data, 'data');
       if(data.error) {
         $scope.login.error = data.error;
       } else {
