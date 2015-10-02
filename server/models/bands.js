@@ -37,7 +37,7 @@ module.exports = {
       return band_id[0]
     }).then(function(bandId) {
       return knex('Users').where({
-        'user_id': reqUser.user_id
+        'user_id': reqBody.user_id
       }).update({
         'band_id': bandId
       });
