@@ -5,7 +5,8 @@
     'headliner.homeService', 
     'headliner.profileService',
     'headliner.auth',
-    'headliner.homepage',
+    'headliner.venueHomepage',
+    'headliner.artistHomepage',
     'headliner.profile',
     'ngRoute',
     'ui.router'
@@ -93,12 +94,12 @@
       .state('homepage-artist', {
         templateUrl: 'app/homepage/homepage-artist.html',
         url: '/homepage-artist',
-        controller: 'HomepageController' 
+        controller: 'ArtistHomepageController' 
       })
       .state('homepage-venue', {
         templateUrl: 'app/homepage/homepage-venue.html',
         url: '/homepage-venue',
-        controller: 'HomepageController' 
+        controller: 'VenueHomepageController' 
       })
       // VENUE PROFILE 
       .state('profile-venue', {
