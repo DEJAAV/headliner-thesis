@@ -130,3 +130,59 @@ body {
   -webkit-filter: grayscale(0); /* Google Chrome, Safari 6+ & Opera 15+ */
 }
 
+
+/*LANDING NAVBAR */
+
+#login-dp{
+    min-width: 350px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+}
+#login-dp .help-block{
+    font-size:12px    
+}
+#login-dp .bottom{
+    border-top:1px solid #ddd;
+    clear:both;
+    padding:14px;
+}
+#login-dp .social-buttons{
+    margin:12px 0    
+}
+#login-dp .social-buttons a{
+    width: 49%;
+}
+#login-dp .form-group {
+    margin-bottom: 10px;
+}
+.btn-fb{
+    color: #fff;
+    background-color:#3b5998;
+}
+.btn-fb:hover{
+    color: #fff;
+    background-color:#496ebc 
+}
+.btn-goog{
+    color: #fff;
+    background-color: red;
+}
+.btn-goog:hover{
+    color: #fff;
+    background-color: red;
+}
+@media(max-width:768px){
+    #login-dp{
+        color: #fff;
+    }
+    #login-dp .bottom{
+        border-top:0 none;
+    }
+}
+nav {
+    color: black;
+}
+.logintext{
+    color: gray;
+    padding: 0px;
+}
