@@ -62,8 +62,6 @@
         $scope.role = "";
      };
 
-
-
   $scope.login = function () {
   Auth.login($scope.user)
     .then(function (data) {
@@ -80,6 +78,8 @@
         $window.localStorage.setItem('headliner', data.token);
         $window.localStorage.setItem('type', data.type);
       }
+      console.log('dadadata', data)
+      $scope.current = data;
     })
     .catch(function (error) {
       console.log('error with login: ', error)

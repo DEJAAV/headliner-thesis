@@ -42,12 +42,11 @@
       <img id="profpic" src="http://www.twisper.com/magazine/wp-content/uploads/2013/10/hofbrauhaus.jpg" />
     </div>
     <div class="col s9">
-      <h3>HOFBRAUHAUS!</h3>
-      <p>city,state</p>
+      <h3>{{ clickedVenue.venue_name }}</h3>
+      <p>{{ clickedVenue.city }} , {{ clickedVenue.state }}</p>
     </div>
     <div class="col s9">
-      <p>type chip,chip,chip</p>
-      <p>any additional info to add here?</p>
+      <div class="chip lime lighten-4" ng-repeat="(key,data) in clickedVenue.type">{{ key }}</div>
     </div>    
   </div>
   
@@ -70,27 +69,22 @@
       <div class="row">
         <div class="col s7">
           <div>
-            <h4>About</h4>
+            <h4>{{ clickedVenue.venue_name }} Bio: </h4>
             <hr>
-              <p id="aboutText">
-                Continual delighted as elsewhere am convinced unfeeling. Introduced stimulated attachment no by projection. To loud lady whom my mile sold four. Need miss all four case fine age tell. He families my pleasant speaking it bringing it thoughts. View busy dine oh in knew if even. Boy these along far own other equal old fanny charm. Difficulty invitation put introduced see middletons nor preference. 
-                <br>
-                <br>
-                Wise busy past both park when an ye no. Nay likely her length sooner thrown sex lively income. The expense windows adapted sir. Wrong widen drawn ample eat off doors money. Offending belonging promotion provision an be oh consulted ourselves it. Blessing welcomed ladyship she met humoured sir breeding her. Six curiosity day assurance bed necessary.
-              </p> 
+              <p>{{ clickedVenue.bio }}</p>
           </div>
         </div>
         <!-- RIGHT SIDE PANEL -->
         <div class="col s5">
           <div class="card-panel blue-grey lighten-4">
             
-
             <div>
               <h5>More Info</h5>
               <div>
-                <p>Venue Type: beer garden</p>
-                <p>Indoor or outdoor: Indoor</p>
-                <p>Capacity: 1300 guests</p>
+                <p>Venue Type: {{ clickedVenue.type }}</p>
+                <div class="chip lime lighten-4" ng-repeat="(key,data) in clickedVenue.type">{{ key }}</div>
+                <p>Indoor or outdoor: {{ clickedVenue.inout }}</p>
+                <p>Capacity: {{ clickedVenue.capacity }}</p>
                 <p>Additional Info (from form inputs)</p>
               </div>
             </div>
@@ -98,16 +92,15 @@
             <div> 
               <h5>Seeking:</h5>
               <div>
-                <p>genre type</p>
-                <p>genre type</p>
+                <div class="chip lime lighten-4" ng-repeat="(key,data) in clickedVenue.genre">{{ key }}</div>
               </div>
             </div>
             <div>
               <h5>Links</h5>
               <div>
-                <p><a href="http://www.yelp.com">Yelp</a></p>
-                <p><a href="http://www.facebook.com">Facebook</a></p>
-                <p><a href="http://www.hofbraeu-muenchen.de/">Venue Website</a></p>
+                <p><a href="{{ clickedVenue.yelp }}">{{ clickedVenue.yelp }}</a></p>
+                <p><a href="{{ clickedVenue.facebook }}">{{ clickedVenue.facebook }}</a></p>
+                <p><a href="{{ clickedVenue.website }}">{{ clickedVenue.website }}</a></p>
               </div>
             </div>                        
 
@@ -120,7 +113,7 @@
     <!-- PHOTOS TAB (uses Bootstrap) --> 
     <div id="photos" class="col s12">
 
-        <h4>PHOTO GALLERY</h4>
+        <h4>PHOTO GALLERY {{ clickedVenue.venue_name }}</h4>
         <hr>
 
       <div class="row">

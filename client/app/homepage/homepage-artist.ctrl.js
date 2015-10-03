@@ -209,6 +209,12 @@
         return true;
       }
     };
+    // this will load the data from that clicked venue into the profile page 
+    $scope.getClickedVenueData = function (e) {
+      var id = $(e.target).data('id');
+      console.log(this.venue);
+      $rootScope.clickedVenue = this.venue;
+    }    
 
   }
 })();
