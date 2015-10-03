@@ -115,6 +115,7 @@ exports.up = function(knex, Promise) {
       table.string('band_accept');
       table.string('venue_accept');
       table.string('sender');
+      table.string('receiver');
     })
   ]);
 };
