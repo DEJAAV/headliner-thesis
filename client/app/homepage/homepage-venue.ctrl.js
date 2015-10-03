@@ -33,7 +33,7 @@
       },
       "record_label": '2',
       "onTour": 'Local',
-      "shows": [{'venue': '', 'date': ''}],
+      "shows": [{'venue': '', 'date': '2015-10-03'}],
       "reviews": [{'venue': '','shows-date': '','rating': 1,'comment': ''},{'venue': '','shows-date': '','rating': 5,'comment': ''}],
       "about": "Depart do be so he enough talent. Sociable formerly six but handsome. Up do view time they shot. He concluded disposing provision by questions as situation. Its estimating are motionless day sentiments end. Calling an imagine at forbade. At name no an what like spot. Pressed my by do affixed he studied.'",
       "contact_phone": "8327944795",
@@ -174,9 +174,29 @@
       }
       return any ? false : true;
     };
-  $scope.signout = function() {
-    Auth.signout();
-    console.log('user signed out');
-  }
+
+    $scope.dateFilter = function(artist) {
+      if (artist.shows) {
+        var busy = artist.shows.map(function(show) {
+          return show.date;
+        });
+      } else {
+        var busy = [];
+      }
+      if ($scope.date) {
+        if (busy.indexOf($scope.date.toISOString().split('T')[0]) > -1) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        return true;
+      }
+    };
+
+    $scope.signout = function() {
+      Auth.signout();
+      console.log('user signed out');
+    };
   }
 })();
