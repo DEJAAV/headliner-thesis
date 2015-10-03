@@ -3,7 +3,48 @@
     ProfileController);
 
   function ProfileController($scope, $window, $location, $rootScope,
-    Profile) { // Profile is the injected service     
+    Profile) { // Profile is the injected service  
+
+    // console.log($rootScope.clickedVenue, 'clickedVenue') 
+    // console.log($rootScope.clickedArtist, 'clickedArtist') 
+
+    // console.log($location.$$path.slice(0, ($location.$$path).length-1), 'location')
+
+    var homepageUrl = $location.$$path.slice(0, ($location.$$path).length-1)
+
+    var id = $location.$$path.slice(($location.$$path).length-1)
+
+
+    // if (homepageUrl === '/profile-venue/' && !$rootScope.clickedVenue) {
+    //   console.log("no venue")
+    // }
+
+
+    $scope.getArtistById = function(id){
+      Profile.getAllArtists().then(function(artists) {
+        for (var artist in artists) {
+          if (artists[artist].band_id.toString() === id) {
+            console.log(artists[artist])
+            $scope.artist = artists[artist]
+          }
+        }
+      })
+    }
+    if (homepageUrl === '/profile-artist/' && !$rootScope.clickedArtist) {
+      console.log("no artist")
+      console.log(id, 'id')
+      $scope.getArtistById(id);
+    }
+
+    console.log($scope.artist)
+
+    $scope.getVenueById = function(id){
+      Profile.getAllVenues().then(function(venues) {
+        console.log(venues)
+      })
+    }
+
+
     
 
     $scope.fakeArtist = [{

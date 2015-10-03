@@ -228,7 +228,7 @@
               <p>{{ artist.city }} , {{ artist.state }}</p> 
               <div class="chip lime lighten-4" ng-repeat="(key,data) in artist.genre">{{ key }}</div>
               <hr>
-              <p><a data-id='{{ artist.band_id }}' ng-click='getClickedArtistData($event)' href="#/profile-artist">get more details</a></p>
+              <p><a href='{{"#/profile-artist/" + artist.band_id}}'>get more details</a></p>
             </div>
             <div class="card-reveal">
               <span class="card-title grey-text text-darken-4">About {{artist.band_name}}<i class="material-icons right">close</i></span>

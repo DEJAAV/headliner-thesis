@@ -126,9 +126,9 @@
       })    
 
       // ARTIST PROFILE 
-      .state('profile-artist', {
+      .state('profile-artist/', {
         templateUrl: 'app/profiles/profile-artist/profile-artist.html',
-        url: '/profile-artist',
+        url: '/profile-artist/:id',
         controller: 'ProfileController'
       })
       // ARTIST PROFILE (nested views)                                    

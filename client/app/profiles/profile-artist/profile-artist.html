@@ -41,14 +41,14 @@
       <img id="profpic" src="http://www.nowplayingnashville.com/sites/nowplayingnashville.com/images/event/441756170/johnnyswim.jpg" />
     </div>
     <div class="col s9">
-      <h3>{{clickedArtist.band_name}}</h3>
-      <p>{{clickedArtist.city}}, {{clickedArtist.state}}</p>
+      <h3>{{artist.band_name}}</h3>
+      <p>{{artist.city}}, {{artist.state}}</p>
     </div>
     <div class="col s3">
       <p>blank</p>
     </div>
     <div class="col s9">
-      <div class="chip lime lighten-4" ng-repeat="(key,data) in clickedArtist.genre">{{ key }} hello</div>
+      <div class="chip lime lighten-4" ng-repeat="(key,data) in artist.genre">{{ key }} hello</div>
     </div>     
   </div>
   
@@ -76,7 +76,7 @@
             <h4>About</h4>
             <hr>
               <p id="aboutText">
-                {{clickedArtist.bio}}
+                {{artist.bio}}
               </p> 
           </div>
         </div>
@@ -86,7 +86,7 @@
             
             <div> 
               <h5>Band Members</h5>
-              <div ng-repeat="(key, data) in clickedArtist.members">
+              <div ng-repeat="(key, data) in artist.members">
                 <p><b>{{key}}:</b> {{data}}</p>
               </div>
             </div>
@@ -94,7 +94,7 @@
             <div>
               <h5>Other Info</h5>
               <div>
-                <p><b>Record Label:</b> {{clickedArtist.record_label}}</p>
+                <p><b>Record Label:</b> {{artist.record_label}}</p>
                 <p><b>Contact Info:</b> name and numbaaa</p>
                 <p><b>Additional Info:</b> (from form inputs)</p>
               </div>
@@ -103,9 +103,9 @@
             <div>
               <h5>Links</h5>
               <div>
-                <p><a href="{{clickedArtist.soundcloud}}">SoundCloud</a></p>
-                <p><a href="{{clickedArtist.youtube}}">Youtube</a></p>
-                <p><a href="{{clickedArtist.facebook}}">Facebook</a></p>
+                <p><a href="{{artist.soundcloud}}">SoundCloud</a></p>
+                <p><a href="{{artist.youtube}}">Youtube</a></p>
+                <p><a href="{{artist.facebook}}">Facebook</a></p>
               </div>
             </div>                        
 
