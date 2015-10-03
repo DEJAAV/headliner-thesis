@@ -41,16 +41,15 @@
       <img id="profpic" src="http://www.nowplayingnashville.com/sites/nowplayingnashville.com/images/event/441756170/johnnyswim.jpg" />
     </div>
     <div class="col s9">
-      <h3>JOHNNYSWIM</h3>
-      <p>city,state</p>
+      <h3>{{clickedArtist.band_name}}</h3>
+      <p>{{clickedArtist.city}}, {{clickedArtist.state}}</p>
     </div>
     <div class="col s3">
       <p>blank</p>
     </div>
     <div class="col s9">
-      <p>type chip,chip,chip</p>
-      <p>any additional info to add here?</p>
-    </div>    
+      <div class="chip lime lighten-4" ng-repeat="(key,data) in clickedArtist.genre">{{ key }} hello</div>
+    </div>     
   </div>
   
   <!-- NAV TABS -->
@@ -77,10 +76,7 @@
             <h4>About</h4>
             <hr>
               <p id="aboutText">
-                Continual delighted as elsewhere am convinced unfeeling. Introduced stimulated attachment no by projection. To loud lady whom my mile sold four. Need miss all four case fine age tell. He families my pleasant speaking it bringing it thoughts. View busy dine oh in knew if even. Boy these along far own other equal old fanny charm. Difficulty invitation put introduced see middletons nor preference. 
-                <br>
-                <br>
-                Wise busy past both park when an ye no. Nay likely her length sooner thrown sex lively income. The expense windows adapted sir. Wrong widen drawn ample eat off doors money. Offending belonging promotion provision an be oh consulted ourselves it. Blessing welcomed ladyship she met humoured sir breeding her. Six curiosity day assurance bed necessary.
+                {{clickedArtist.bio}}
               </p> 
           </div>
         </div>
@@ -90,28 +86,26 @@
             
             <div> 
               <h5>Band Members</h5>
-              <div>
-                <p>Name</p>
-                <p>role</p>
+              <div ng-repeat="(key, data) in clickedArtist.members">
+                <p><b>{{key}}:</b> {{data}}</p>
               </div>
             </div>
 
             <div>
               <h5>Other Info</h5>
               <div>
-                <p>Artist Type: duet</p>
-                <p>Record Label: none</p>
-                <p>Contact Info: name and numbaaa</p>
-                <p>Additional Info (from form inputs)</p>
+                <p><b>Record Label:</b> {{clickedArtist.record_label}}</p>
+                <p><b>Contact Info:</b> name and numbaaa</p>
+                <p><b>Additional Info:</b> (from form inputs)</p>
               </div>
             </div>
 
             <div>
               <h5>Links</h5>
               <div>
-                <p><a href="http://www.soundcloud.com">SoundCloud</a></p>
-                <p><a href="http://www.youtube.com">Youtube</a></p>
-                <p><a href="http://www.facebook.com">Facebook</a></p>
+                <p><a href="{{clickedArtist.soundcloud}}">SoundCloud</a></p>
+                <p><a href="{{clickedArtist.youtube}}">Youtube</a></p>
+                <p><a href="{{clickedArtist.facebook}}">Facebook</a></p>
               </div>
             </div>                        
 

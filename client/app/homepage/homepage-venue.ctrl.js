@@ -194,6 +194,12 @@
       }
     };
 
+    $scope.getClickedArtistData = function (e) {
+      var id = $(e.target).data('id');
+      console.log(this.artist);
+      $rootScope.clickedArtist = this.artist;
+    }    
+
     $scope.signout = function() {
       Auth.signout();
       console.log('user signed out');
