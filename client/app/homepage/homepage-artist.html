@@ -48,6 +48,12 @@
       <div class="col s3">
       <div class="row">
         <div class="box">
+          <h6>Filter By Availability</h6>
+          <form>
+             <input type="date" ng-model="date">
+          </form>  
+        </div>
+        <div class="box">
           <h6>Filter By Genre</h6>
           <form>
             <p>
@@ -293,7 +299,7 @@
 
       </div>
       <div class="col s9">
-        <div class="col s4" ng-repeat="venue in venuesFake | filter:search | filter:genreFilter | filter:typeFilter | filter:capacityFilter | filter:inoutFilter |filter:bookedFilter | filter:reviewsFilter">
+        <div class="col s4" ng-repeat="venue in venuesFake | filter:search | filter:genreFilter | filter:typeFilter | filter:capacityFilter | filter:inoutFilter |filter:bookedFilter | filter:reviewsFilter | filter:dateFilter">
           <div class="card">
             <div class="card-image waves-effect waves-block waves-light">
               <img class="activator" src="http://i.imgur.com/ZNc1JZq.jpg">

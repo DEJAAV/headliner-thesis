@@ -174,9 +174,23 @@
       }
       return any ? false : true;
     };
-  $scope.signout = function() {
-    Auth.signout();
-    console.log('user signed out');
-  }
+
+    $scope.dateFilter = function(artist) {
+      var any = false;
+      for (var genre in $scope.genre) {
+        if ($scope.genre[genre]) {
+          any = true;
+          if (artist.genre[genre]) {
+            return true;
+          }
+        }
+      }
+      return any ? false : true;
+    };
+
+    $scope.signout = function() {
+      Auth.signout();
+      console.log('user signed out');
+    };
   }
 })();

@@ -191,5 +191,19 @@
       return any ? false : true;
     };
 
+    $scope.dateFilter = function(venue) {
+      //console.log($scope.date.toISOString().split('T')[0])
+      var any = false;
+      for (var genre in $scope.genre) {
+        if ($scope.genre[genre]) {
+          any = true;
+          if (venue.genre[genre]) {
+            return true;
+          }
+        }
+      }
+      return any ? false : true;
+    };
+
   }
 })();
