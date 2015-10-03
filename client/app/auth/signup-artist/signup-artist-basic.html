@@ -17,14 +17,19 @@
         <div class="input-field col s6">
           <input ng-model="$parent.name" id="member_name" type="text" class="validate" required>
           <label for="member_name">Member</label>
-        </div>
+        </div>      
         <div class="input-field col s6">
           <input ng-model="$parent.role" id="member_role" type="text" class="validate">
           <label for="member_role">Role</label>
         </div>
-        <a class="btn-floating btn-medium waves-effect waves-light blue" ng-click="addNewMember(name, role)" ><i class="material-icons">add</i></a>
-                      
+      <a class="btn-floating btn-medium waves-effect waves-light blue" ng-click="addNewMember(name, role)" onclick="Materialize.toast('Member Added!', 4000)" ><i class="material-icons">add</i></a>
       </div>
+      <ul class="collection with-header col s6 center-align" ng-repeat="(key, val)">
+        <li class="collection-header"><h5>Members</h5></li>
+        <li class="collection-item">
+          <p><strong>Member:</strong> {{ key }} </p>
+          <p><strong>Role:</strong> {{ val }}</p>
+      </ul>        
     </div>
 
     <div class="form-group row">
