@@ -8,8 +8,8 @@
   .controller('AuthController', AuthController);
 
   function AuthController ($scope, $window, $location, Auth) {
-    
-  $scope.user = {};
+  $scope.venue = {};
+  $scope.user = {}; // for bands
   $scope.user.member = {};
   $scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
     'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
@@ -31,7 +31,7 @@
   };
 
     $scope.signupVenue = function () {
-      Auth.signupVenue($scope.user)
+      Auth.signupVenue($scope.venue)
         .then(function () {
           $window.localStorage.setItem('type', 'venue');
           $location.path('/homepage-venue');

@@ -4,11 +4,11 @@
 <div class="form-group">
 
   <br>
-  <div>{{ user }}</div>
+  <div>{{ venue }}</div>
   <hr>
 
     <div class="input-field col s12">
-      <input ng-model="user.contact_name" id="contact_name" name="contact_name" type="text" class="validate" required />
+      <input ng-model="venue.contact_name" id="contact_name" name="contact_name" type="text" class="validate" required />
       <label for="contact_name">Contact Name</label>
       <span ng-show="venueForm.contact_name.$dirty && venueForm.contact_name.$error.required" class="help-block">* required</span>
     </div>
@@ -20,16 +20,16 @@
       <option value="Email">Email</option>
     </select>
 
-    <!-- drop down options depending on what user selects as their communication preference -->
+    <!-- drop down options depending on what venue selects as their communication preference -->
     <div ng-show="communication === 'Phone'">
       <label for="phone">Contact Phone Number: </label>
-      <input name="phone" type="text" class="form-control input-sm chat-input" placeholder="Phone Number" ng-model="user.contact_phone" required />
+      <input name="phone" type="text" class="form-control input-sm chat-input" placeholder="Phone Number" ng-model="venue.contact_phone" required />
       <span ng-show="venueForm.phone.$dirty && venueForm.phone.$error.required" class="help-block">* required</span>
     </div>
     <br>
     <div ng-show="communication === 'Email'">
       <label for="email">Contact Email Address: </label>
-      <input name="email" type="email"  class="form-control input-sm chat-input" placeholder="Email" ng-model="user.contact_email" required />
+      <input name="email" type="email"  class="form-control input-sm chat-input" placeholder="Email" ng-model="venue.contact_email" required />
       <span ng-show="venueForm.email.$dirty && venueForm.email.$error.required" class="help-block">* required</span>
     </div>
     <br> 
@@ -38,13 +38,13 @@
 
     <h3>Your Links: </h3>
     <label for="facebook">Facebook URL: </label>
-      <input name="facebook" type="text" class="form-control input-sm chat-input" placeholder="http://www.facebook.com/my-venue/" ng-model="user.facebook"/>
+      <input name="facebook" type="text" class="form-control input-sm chat-input" placeholder="http://www.facebook.com/my-venue/" ng-model="venue.facebook"/>
     <br>  
     <label for="yelp">Venue Yelp URL: </label>
-      <input name="yelp" type="text" id="userYelp" class="form-control input-sm chat-input" placeholder="http://www.yelp.com/my-venue/" ng-model="user.yelp"/>
+      <input name="yelp" type="text" id="venueYelp" class="form-control input-sm chat-input" placeholder="http://www.yelp.com/my-venue/" ng-model="venue.yelp"/>
     <br>  
     <label for="website">Venue Website: </label>
-      <input name="website" type="text" id="userWebsite" class="form-control input-sm chat-input" placeholder="http://www.my-venue.com/" ng-model="user.website"/>            
+      <input name="website" type="text" id="venueWebsite" class="form-control input-sm chat-input" placeholder="http://www.my-venue.com/" ng-model="venue.website"/>            
     <br>
 
 </div>

@@ -1,7 +1,7 @@
 <!-- includes: venue name, street, city, state, zip -->
 
 <h3>Basic Venue Info: </h3>
-<div> {{ user }} </div>
+<div> {{ venue }} </div>
 
 
  <div class="row">
@@ -9,32 +9,32 @@
     <form class="col s12">
       <div class="row">
         <div class="input-field col s12">
-          <input ng-model="user.venue_name" id="venue_name" name = "venue_name" type="text" class="validate" required />
+          <input ng-model="venue.venue_name" id="venue_name" name = "venue_name" type="text" class="validate" required />
           <label for="venue_name">Venue Name</label>
           <span ng-show="venueForm.venue_name.$dirty && venueForm.venue_name.$error.required" class="help-block">* required</span>      
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input ng-model="user.street" id="street" name="street" type="text" class="validate" required />
+          <input ng-model="venue.street" id="street" name="street" type="text" class="validate" required />
           <label for="street">Address</label>
           <span ng-show="venueForm.street.$dirty && venueForm.street.$error.required" class="help-block">* required</span>
         </div>
       </div>      
       <div class="row">
         <div class="input-field col s6">
-          <input id="city" ng-model="user.city" name="city" type="text" class="validate" required />
+          <input id="city" ng-model="venue.city" name="city" type="text" class="validate" required />
           <label for="city">City</label>
           <span ng-show="venueForm.city.$dirty && venueForm.city.$error.required" class="help-block">* required</span>
         </div>
         <div class="input-field col s3">
-          <select class="browser-default" ng-model="user.state">
+          <select class="browser-default" ng-model="venue.state">
               <option disabled selected value="">Select a State</option>
               <option ng-repeat="state in states" value="{{state.abbrev}}" >{{state.abbrev}}</option>
           </select>
         </div>
         <div class="input-field col s3">
-          <input id="zip" name="zip" type="text" ng-model="user.zip" class="validate" required />
+          <input id="zip" name="zip" type="text" ng-model="venue.zip" class="validate" required />
           <label for="zip">Zip Code</label>
           <span ng-show="venueForm.zip.$dirty && venueForm.zip.$error.required" class="help-block">* required</span>
         </div>        
