@@ -3,7 +3,39 @@
     ProfileController);
 
   function ProfileController($scope, $window, $location, $rootScope,
-    Profile) { // Profile is the injected service     
+    Profile) { // Profile is the injected service  
+
+    var homepageUrl = $location.$$path.slice(0, ($location.$$path).length-1)
+    var id = $location.$$path.slice(($location.$$path).length-1)
+
+    $scope.getArtistById = function(id){
+      Profile.getAllArtists().then(function(artists) {
+        for (var artist in artists) {
+          if (artists[artist].band_id.toString() === id) {
+            console.log(artists[artist])
+            $scope.artist = artists[artist]
+          }
+        }
+      })
+    }
+    
+    if (homepageUrl === '/profile-artist/') {
+      $scope.getArtistById(id);
+    }
+    
+    
+    ///Backbone for serving venue homepage by unique id url
+    // if (homepageUrl === '/profile-venue/') {
+    //   $scope.getVenueById(id)
+    // }
+
+    // $scope.getVenueById = function(id){
+    //   Profile.getAllVenues().then(function(venues) {
+    //     console.log(venues)
+    //   })
+    // }
+
+
     
 
     $scope.fakeArtist = [{
