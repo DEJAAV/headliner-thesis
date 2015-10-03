@@ -1,15 +1,20 @@
 <div class="row">
-<div class="col-sm-8 col-sm-offset-2">
-
+  <div class="col-sm-10 col-sm-offset-1">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-inverse" role="navigation">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#/"><strong>HEADLINER</strong></a>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>  
+    
+    <!-- BASIC FRAME FOR SIGNUP VENUE FORM NESTED VIEWS -->
     <div id="form-container">
-
         <div class="page-header text-center">
             <h2>VENUE SIGNUP FORM</h2>
-            
-            <button class="btn" ng-click="signout()">Signout</button>
-            
-            <!-- the links to our nested states using relative paths -->
-            <!-- add the active class if the state matches our ui-sref -->
+
             <div id="status-buttons" class="text-center">
                 <a ui-sref-active="active" ui-sref=".basic"><span>1</span> BASIC INFO</a>
                 <a ui-sref-active="active" ui-sref=".more"><span>2</span> MORE INFO</a>
@@ -19,16 +24,12 @@
             </div>
         </div>
         
-        <!-- use ng-submit to catch the form submission and use our Angular function -->
+        <!-- post req sent after all nested view input fields have been filled -->
         <form id="signup-form" name="venueForm" ng-submit="signupVenue()">
-
             <!-- our nested state views will be injected here -->
             <div id="form-views" ui-view></div>
         </form>
 
     </div>
-
-    <!-- show our formData as it is being typed -->
-
-</div>
+  </div>
 </div>
