@@ -44,7 +44,7 @@
       },
       "inout": "Outdoor",
       "capacity": 30,
-      "shows": [{'venue': '', 'date': ''}, {'venue': '', 'date': ''}, {'venue': '', 'date': ''}],
+      "shows": [{'venue': '', 'date': '2015-10-03'}, {'venue': '', 'date': ''}, {'venue': '', 'date': ''}],
       "reviews": [{'venue': '','shows-date': '','rating': 1,'comment': ''},{'venue': '','shows-date': '','rating': 5,'comment': ''}],
       "about": "My venue is bitchin'",
       "contact_phone": "8327944795",
@@ -192,17 +192,22 @@
     };
 
     $scope.dateFilter = function(venue) {
-      //console.log($scope.date.toISOString().split('T')[0])
-      var any = false;
-      for (var genre in $scope.genre) {
-        if ($scope.genre[genre]) {
-          any = true;
-          if (venue.genre[genre]) {
-            return true;
-          }
-        }
+      if (venue.shows) {
+        var busy = venue.shows.map(function(show) {
+          return show.date;
+        });
+      } else {
+        var busy = [];
       }
-      return any ? false : true;
+      if ($scope.date) {
+        if (busy.indexOf($scope.date.toISOString().split('T')[0]) > -1) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        return true;
+      }
     };
 
   }
