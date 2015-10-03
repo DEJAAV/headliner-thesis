@@ -39,7 +39,7 @@ module.exports = {
         return venueId[0];
       }).then(function(venueId) {
         return knex('Users').where({
-          'user_id': reqUser.user_id
+          'user_id': reqBody.user_id
         }).update({
           'venue_id': venueId
         });
