@@ -94,13 +94,23 @@
       "yelp": "http://www.yelp.com",
       "website": "http://www.google.com"
     }];
+    
+    var geocoder = new google.maps.Geocoder();
 
     $scope.initArtist = function() {
       console.log('initArtist is being called')
       Homepage.getAllVenues().then(function(all) {
-        console.log($scope.venueGroup);        
-        $scope.venues = all;
-      })
+        $scope.venues = all;   
+        geocoder.geocode({'address': '78701'}, function(c1) {         
+          var artist_coord = new google.maps.LatLng(c1[0].geometry.location.H, c1[0].geometry.location.L);
+          $scope.venues.forEach(function(venue) {
+            geocoder.geocode({'address': venue.zip}, function(c2) {
+              var venue_coord = new google.maps.LatLng(c2[0].geometry.location.H, c2[0].geometry.location.L);
+              venue.distance = google.maps.geometry.spherical.computeDistanceBetween(venue_coord, artist_coord) * 0.000621371;
+            });
+          }); 
+        });
+      });
     };
 
     $scope.genreFilter = function(venue) {
@@ -209,12 +219,24 @@
         return true;
       }
     };
+
+    $scope.distanceFilter = function(venue) {
+      var any = false;
+        if ($scope.distance) {
+          any = true;
+          if ((venue.distance < 10 && $scope.distance === '10') || (venue.distance < 25 && $scope.distance === '25') || (venue.distance < 50 && $scope.distance === '50') || (venue.distance < 100 && $scope.distance === '100')) {
+            return true;
+          }
+        }
+      return any ? false : true;  
+    };
+
     // this will load the data from that clicked venue into the profile page 
     $scope.getClickedVenueData = function (e) {
       var id = $(e.target).data('id');
       console.log(this.venue);
       $rootScope.clickedVenue = this.venue;
-    }    
+    };    
 
   }
 })();
