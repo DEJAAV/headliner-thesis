@@ -100,8 +100,7 @@
     $scope.initArtist = function() {
       console.log('initArtist is being called')
       Homepage.getAllVenues().then(function(all) {
-        //$scope.venues = all;   
-        $scope.venues = JSON.parse(JSON.stringify($scope.venuesFake));
+        $scope.venues = all;   
         geocoder.geocode({'address': '78701'}, function(c1) {         
           var artist_coord = new google.maps.LatLng(c1[0].geometry.location.H, c1[0].geometry.location.L);
           $scope.venues.forEach(function(venue) {
