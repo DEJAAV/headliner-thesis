@@ -48,6 +48,18 @@
       <div class="col s3">
       <div class="row">
         <div class="box">
+          <h6>Filter By Distance</h6>
+          <form>
+            <select class="browser-default" ng-model="distance">
+              <option value="" disabled selected>select distance</option>
+              <option value="10">10 miles</option>
+              <option value="25">25 miles</option>
+              <option value="50">50 miles</option>
+              <option value="100">100 miles</option>
+            </select>
+          </form>  
+        </div>
+        <div class="box">
           <h6>Filter By Availability</h6>
           <form>
              <input type="date" ng-model="date">
@@ -301,14 +313,14 @@
 
   
       <div class="col s9">
-        <div class="col s4" ng-repeat="venue in venues | filter:search | filter:genreFilter | filter:typeFilter | filter:capacityFilter | filter:inoutFilter |filter:bookedFilter | filter:reviewsFilter | filter:dateFilter">
+        <div class="col s4" ng-repeat="venue in venues | filter:search | filter:genreFilter | filter:typeFilter | filter:capacityFilter | filter:inoutFilter |filter:bookedFilter | filter:reviewsFilter | filter:dateFilter | filter:distanceFilter">
           <div class="card">
             <div class="card-image waves-effect waves-block waves-light">
               <img class="activator" src="http://i.imgur.com/ZNc1JZq.jpg">
             </div>
             <div class="card-content">
               <span class="card-title activator grey-text text-darken-4">{{ venue.venue_name }}<i class="material-icons right">more_vert</i></span>
-              <p>{{ venue.city }} , {{ venue.state }}</p> 
+              <p>{{ venue.city }} , {{ venue.state }}</p>
               <div class="chip lime lighten-4" ng-repeat="(key,data) in venue.genre">{{ key }}</div>
               <hr>
               <p><a data-id='{{ venue.venue_id }}' ng-click='getClickedVenueData($event)' href="#/profile-venue">See Venue Profile</a></p>

@@ -23,7 +23,7 @@ exports.up = function(knex, Promise) {
       table.increments('band_id').primary();
       table.string('band_name');
       table.string('onTour');
-      table.integer('zip');
+      table.string('zip');
       table.string('phone');
       table.string('record_label');
       table.string('facebook');
