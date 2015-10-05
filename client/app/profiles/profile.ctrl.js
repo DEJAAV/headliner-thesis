@@ -6,6 +6,7 @@
     Profile) { // Profile is the injected service 
 
     $scope.request = {};
+    $scope.request.message = "We want you to play!"
 
     var homepageUrl = $location.$$path.slice(0, ($location.$$path).length-1)
     var id = $location.$$path.slice(($location.$$path).length-1)

@@ -1,3 +1,4 @@
+var knex = require('../db/db.js');
 
 module.exports = {
 
