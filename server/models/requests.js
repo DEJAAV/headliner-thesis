@@ -1,26 +1,27 @@
 
 module.exports = {
 
-  getBandMessages: function(band_id) {
+  getBandRequests: function(band_id) {
     return knex('Requests').where({
       'band_id': band_id
     })
   },
   
-  getVenueMessages: function(venue_id) {
+  getVenueRequests: function(venue_id) {
     return knex('Requests').where({
       'venue_id': venue_id
     })
   },
 
-  sendRequest: function(date, message, band_id, venue_id, sender, receiver){
+  sendRequest: function(reqBody, reqUser){
+    var sender = reqBody.sender + '_id'
     return knex('Requests').insert({
-      'date': date,
-      'message': message,
-      'band_id': band_id,
-      'venue_id': venue_id,
-      'sender': sender,
-      'receiver': receiver
+      'date': reqBody.date,
+      'message': reqBody.message,
+      'band_id': reqBody.band_id || reqUser[sender],
+      'venue_id': reqBody.venue_id || reqUser[sender],
+      'sender': reqBody.sender,
+      'receiver': reqBody.receiver
     })
   },
 

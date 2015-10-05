@@ -48,8 +48,8 @@
       <p>blank</p>
     </div>
     <div class="col s9">
-      <div class="chip lime lighten-4" ng-repeat="(key,data) in artist.genre">{{ key }} hello</div>
-    </div>     
+      <div class="chip lime lighten-4" ng-repeat="(key,data) in artist.genre">{{ key }}</div>
+    </div>
   </div>
   
   <!-- NAV TABS -->
@@ -95,7 +95,7 @@
               <h5>Other Info</h5>
               <div>
                 <p><b>Record Label:</b> {{artist.record_label}}</p>
-                <p><b>Contact Info:</b> name and numbaaa</p>
+                <p><b>Contact Info:</b> {{artist.contact_name}}, {{artist.phone || artist.email}}</p>
                 <p><b>Additional Info:</b> (from form inputs)</p>
               </div>
             </div>
