@@ -4,96 +4,6 @@
 
   function HomepageController($scope, $window, $location, $rootScope,
     Homepage) { // Homepage is the injected service     
-
-    $scope.venuesFake = [{
-      "venue_name": "Ellie's Lounge",
-      "street": "123 Peanut Street",
-      "city": "Austin",
-      "state": "TX",
-      "zip": "78751",
-      "genre": {
-        "americana": true,
-        "blues": true
-      },
-      "type": {
-        "casual": true,
-        "beer": true
-      },
-      "inout": "Indoor",
-      "capacity": 10,
-      "shows": [{'venue': '', 'date': ''}],
-      "reviews": [{'venue': '','shows-date': '','rating': 1,'comment': ''},{'venue': '','shows-date': '','rating': 5,'comment': ''}],
-      "about": "My venue is bitchin'",
-      "contact_phone": "8327944795",
-      "facebook": "http://www.facebook.com/elliematsusaka",
-      "yelp": "http://www.yelp.com",
-      "website": "http://www.google.com"
-    }, {
-      "venue_name": "Ellie's Lounge",
-      "street": "123 Peanut Street",
-      "city": "Austin",
-      "state": "TX",
-      "zip": "78751",
-      "genre": {
-        "blues": true,
-        "bluegrass": true
-      },
-      "type": {
-        "champagne": true,
-        "beer": true
-      },
-      "inout": "Outdoor",
-      "capacity": 30,
-      "shows": [{'venue': '', 'date': '2015-10-03'}, {'venue': '', 'date': ''}, {'venue': '', 'date': ''}],
-      "reviews": [{'venue': '','shows-date': '','rating': 1,'comment': ''},{'venue': '','shows-date': '','rating': 5,'comment': ''}],
-      "about": "My venue is bitchin'",
-      "contact_phone": "8327944795",
-      "facebook": "http://www.facebook.com/elliematsusaka",
-      "yelp": "http://www.yelp.com",
-      "website": "http://www.google.com"
-    }, {
-      "venue_name": "Pete's Piano Bar",
-      "street": "123 Peanut Street",
-      "city": "Austin",
-      "state": "TX",
-      "zip": "78751",
-      "genre": {
-        "bluegrass": true,
-        "classical": true
-      },
-      "type": {
-        "champagne": true,
-        "cocktail": true
-      },
-      "inout": "Both",
-      "capacity": 90,
-      "about": "My venue is bitchin'",
-      "contact_phone": "8327944795",
-      "facebook": "http://www.facebook.com/elliematsusaka",
-      "yelp": "http://www.yelp.com",
-      "website": "http://www.google.com"
-    }, {
-      "venue_name": "Bob's Bar",
-      "street": "123 Peanut Street",
-      "city": "Austin",
-      "state": "TX",
-      "zip": "78751",
-      "genre": {
-        "classical": true,
-        "comedy": true
-      },
-      "type": {
-        "country": true,
-        "cocktail": true
-      },
-      "inout": "Both",
-      "capacity": 150,
-      "about": "My venue is bitchin'",
-      "contact_email": "bob@gmail.com",
-      "facebook": "http://www.facebook.com/elliematsusaka",
-      "yelp": "http://www.yelp.com",
-      "website": "http://www.google.com"
-    }];
     
     var geocoder = new google.maps.Geocoder();
 
@@ -229,14 +139,7 @@
           }
         }
       return any ? false : true;  
-    };
-
-    // this will load the data from that clicked venue into the profile page 
-    $scope.getClickedVenueData = function (e) {
-      var id = $(e.target).data('id');
-      console.log(this.venue);
-      $rootScope.clickedVenue = this.venue;
-    };    
+    };  
 
   }
 })();

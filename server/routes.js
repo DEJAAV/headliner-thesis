@@ -4,6 +4,7 @@ var Venues = require('./models/venues.js');
 var Bands = require('./models/bands.js');
 var Shows = require('./models/shows.js');
 var Venue_Reviews = require('./models/venue_reviews.js');
+var Requests = require('./models/requests.js');
 
 module.exports = function (app) {
 
@@ -62,5 +63,11 @@ module.exports = function (app) {
       res.json(result);
     });
   });
+
+  app.post('/api/request', function(req, res, next) {
+    Requests.sendRequest(req.body, req.user).then(function(result) {
+      res.json('success')
+    })
+  })
 
 };

@@ -4,95 +4,6 @@
 
   function HomepageController($scope, $window, $location, $rootScope,
     Homepage, Auth) { // Homepage is the injected service     
-    $scope.artistsFake = [{
-      "band_name": "Ellie",
-      "street": "123 Peanut Street",
-      "city": "Austin",
-      "state": "TX",
-      "zip": "78751",
-      "genre": {
-        "americana": true,
-        "blues": true
-      },
-      "record_label": '1',
-      "onTour": 'Local',
-      "about": "Depart do be so he enough talent. Sociable formerly six but handsome. Up do view time they shot. He concluded disposing provision by questions as situation. Its estimating are motionless day sentiments end. Calling an imagine at forbade. At name no an what like spot. Pressed my by do affixed he studied.",
-      "contact_phone": "8327944795",
-      "facebook": "http://www.facebook.com/elliematsusaka",
-      "yelp": "http://www.yelp.com",
-      "website": "http://www.google.com"
-    }, {
-      "band_name": "Aaron",
-      "street": "123 Peanut Street",
-      "city": "Austin",
-      "state": "TX",
-      "zip": "78751",
-      "genre": {
-        "blues": true,
-        "bluegrass": true
-      },
-      "record_label": '2',
-      "onTour": 'Local',
-      "shows": [{'venue': '', 'date': '2015-10-03'}],
-      "reviews": [{'venue': '','shows-date': '','rating': 1,'comment': ''},{'venue': '','shows-date': '','rating': 5,'comment': ''}],
-      "about": "Depart do be so he enough talent. Sociable formerly six but handsome. Up do view time they shot. He concluded disposing provision by questions as situation. Its estimating are motionless day sentiments end. Calling an imagine at forbade. At name no an what like spot. Pressed my by do affixed he studied.'",
-      "contact_phone": "8327944795",
-      "facebook": "http://www.facebook.com/elliematsusaka",
-      "yelp": "http://www.yelp.com",
-      "website": "http://www.google.com"
-    }, {
-      "band_name": "Javier",
-      "street": "123 Peanut Street",
-      "city": "Austin",
-      "state": "TX",
-      "zip": "78751",
-      "genre": {
-        "bluegrass": true,
-        "classical": true
-      },
-      "record_label": '3',
-      "onTour": 'Touring',
-      "shows": [{'venue': '', 'date': ''}, {'venue': '', 'date': ''}],
-      "about": "Depart do be so he enough talent. Sociable formerly six but handsome. Up do view time they shot. He concluded disposing provision by questions as situation. Its estimating are motionless day sentiments end. Calling an imagine at forbade. At name no an what like spot. Pressed my by do affixed he studied.'",
-      "contact_phone": "8327944795",
-      "facebook": "http://www.facebook.com/elliematsusaka",
-      "yelp": "http://www.yelp.com",
-      "website": "http://www.google.com"
-    }, {
-      "band_name": "Dan",
-      "street": "123 Peanut Street",
-      "city": "Austin",
-      "state": "TX",
-      "zip": "78751",
-      "genre": {
-        "classical": true,
-        "comedy": true
-      },
-      "onTour": 'Touring',
-      "shows": [{'venue': '', 'date': ''}],
-      "about": "Depart do be so he enough talent. Sociable formerly six but handsome. Up do view time they shot. He concluded disposing provision by questions as situation. Its estimating are motionless day sentiments end. Calling an imagine at forbade. At name no an what like spot. Pressed my by do affixed he studied.",
-      "contact_phone": "8327944795",
-      "facebook": "http://www.facebook.com/elliematsusaka",
-      "yelp": "http://www.yelp.com",
-      "website": "http://www.google.com"
-    }, {
-      "band_name": "Vahagn",
-      "street": "123 Peanut Street",
-      "city": "Austin",
-      "state": "TX",
-      "zip": "78751",
-      "genre": {
-        "comedy": true,
-        "country": true
-      },
-      "onTour": 'Both',
-      "shows": [{'venue': '', 'date': ''}],
-      "about": "Depart do be so he enough talent. Sociable formerly six but handsome. Up do view time they shot. He concluded disposing provision by questions as situation. Its estimating are motionless day sentiments end. Calling an imagine at forbade. At name no an what like spot. Pressed my by do affixed he studied.",
-      "contact_phone": "8327944795",
-      "facebook": "http://www.facebook.com/elliematsusaka",
-      "yelp": "http://www.yelp.com",
-      "website": "http://www.google.com"
-    }, ];
 
     var geocoder = new google.maps.Geocoder();
 
@@ -215,12 +126,6 @@
         }
       return any ? false : true;  
     };
-
-    $scope.getClickedArtistData = function (e) {
-      var id = $(e.target).data('id');
-      console.log(this.artist);
-      $rootScope.clickedArtist = this.artist;
-    }    
 
     $scope.signout = function() {
       Auth.signout();
