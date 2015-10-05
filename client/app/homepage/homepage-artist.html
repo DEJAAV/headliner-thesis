@@ -323,7 +323,7 @@
               <p>{{ venue.city }} , {{ venue.state }}</p>
               <div class="chip lime lighten-4" ng-repeat="(key,data) in venue.genre">{{ key }}</div>
               <hr>
-              <p><a data-id='{{ venue.venue_id }}' ng-click='getClickedVenueData($event)' href="#/profile-venue">See Venue Profile</a></p>
+              <p><a href='{{"#/profile-venue/" + venue.venue_id}}'>See Venue Profile</a></p>
             </div>
             <div class="card-reveal">
               <span class="card-title grey-text text-darken-4">About {{venue.venue_name}}<i class="material-icons right">close</i></span>

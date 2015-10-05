@@ -18,22 +18,22 @@
         }
       })
     }
-    
+    $scope.getVenueById = function(id){
+      Profile.getAllVenues().then(function(venues) {
+        console.log(venues, 'venues')
+        for (var venue in venues) {
+          if (venues[venue].venue_id.toString() === id) {
+            $scope.venue = venues[venue]
+          }
+        }
+      })
+    }
     if (homepageUrl === '/profile-artist/') {
       $scope.getArtistById(id);
     }
-    
-    
-    ///Backbone for serving venue homepage by unique id url
-    // if (homepageUrl === '/profile-venue/') {
-    //   $scope.getVenueById(id)
-    // }
-
-    // $scope.getVenueById = function(id){
-    //   Profile.getAllVenues().then(function(venues) {
-    //     console.log(venues)
-    //   })
-    // }
+    if (homepageUrl === '/profile-venue/') {
+      $scope.getVenueById(id)
+    }
 
 
     

@@ -42,11 +42,11 @@
       <img id="profpic" src="http://www.twisper.com/magazine/wp-content/uploads/2013/10/hofbrauhaus.jpg" />
     </div>
     <div class="col s9">
-      <h3>{{ clickedVenue.venue_name }}</h3>
-      <p>{{ clickedVenue.city }} , {{ clickedVenue.state }}</p>
+      <h3>{{ venue.venue_name }}</h3>
+      <p>{{ venue.city }} , {{ venue.state }}</p>
     </div>
     <div class="col s9">
-      <div class="chip lime lighten-4" ng-repeat="(key,data) in clickedVenue.type">{{ key }}</div>
+      <div class="chip lime lighten-4" ng-repeat="(key,data) in venue.type">{{ key }}</div>
     </div>    
   </div>
   
@@ -69,9 +69,9 @@
       <div class="row">
         <div class="col s7">
           <div>
-            <h4>{{ clickedVenue.venue_name }} Bio: </h4>
+            <h4>{{ venue.venue_name }} Bio: </h4>
             <hr>
-              <p>{{ clickedVenue.bio }}</p>
+              <p>{{ venue.bio }}</p>
           </div>
         </div>
         <!-- RIGHT SIDE PANEL -->
@@ -81,10 +81,10 @@
             <div>
               <h5>More Info</h5>
               <div>
-                <p>Venue Type: {{ clickedVenue.type }}</p>
-                <div class="chip lime lighten-4" ng-repeat="(key,data) in clickedVenue.type">{{ key }}</div>
-                <p>Indoor or outdoor: {{ clickedVenue.inout }}</p>
-                <p>Capacity: {{ clickedVenue.capacity }}</p>
+                <p>Venue Type:</p>
+                <div class="chip lime lighten-4" ng-repeat="(key,data) in venue.type">{{ key }}</div>
+                <p>Indoor or outdoor: {{ venue.inout }}</p>
+                <p>Capacity: {{ venue.capacity }}</p>
                 <p>Additional Info (from form inputs)</p>
               </div>
             </div>
@@ -92,15 +92,15 @@
             <div> 
               <h5>Seeking:</h5>
               <div>
-                <div class="chip lime lighten-4" ng-repeat="(key,data) in clickedVenue.genre">{{ key }}</div>
+                <div class="chip lime lighten-4" ng-repeat="(key,data) in venue.genre">{{ key }}</div>
               </div>
             </div>
             <div>
               <h5>Links</h5>
               <div>
-                <p><a href="{{ clickedVenue.yelp }}">{{ clickedVenue.yelp }}</a></p>
-                <p><a href="{{ clickedVenue.facebook }}">{{ clickedVenue.facebook }}</a></p>
-                <p><a href="{{ clickedVenue.website }}">{{ clickedVenue.website }}</a></p>
+                <p><a href="{{ venue.yelp }}">{{ venue.yelp }}</a></p>
+                <p><a href="{{ venue.facebook }}">{{ venue.facebook }}</a></p>
+                <p><a href="{{ venue.website }}">{{ venue.website }}</a></p>
               </div>
             </div>                        
 
@@ -113,7 +113,7 @@
     <!-- PHOTOS TAB (uses Bootstrap) --> 
     <div id="photos" class="col s12">
 
-        <h4>PHOTO GALLERY {{ clickedVenue.venue_name }}</h4>
+        <h4>PHOTO GALLERY {{ venue.venue_name }}</h4>
         <hr>
 
       <div class="row">
