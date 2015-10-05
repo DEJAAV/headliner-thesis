@@ -48,6 +48,18 @@
     <div class="col s3">
       <div class="row">
         <div class="box">
+          <h6>Filter By Distance</h6>
+          <form>
+            <select class="browser-default" ng-model="distance">
+              <option value="" disabled selected>select distance</option>
+              <option value="10">10 miles</option>
+              <option value="25">25 miles</option>
+              <option value="50">50 miles</option>
+              <option value="100">100 miles</option>
+            </select>
+          </form>  
+        </div>
+        <div class="box">
           <h6>Filter By Availability</h6>
           <form>
              <input type="date" ng-model="date">

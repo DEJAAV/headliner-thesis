@@ -206,7 +206,14 @@
     };
 
     $scope.distanceFilter = function(artist) {
-      return !artist.maxDistance || artist.distance < artist.maxDistance;
+      var any = false;
+        if ($scope.distance) {
+          any = true;
+          if ((artist.distance < 10 && $scope.distance === '10') || (artist.distance < 25 && $scope.distance === '25') || (artist.distance < 50 && $scope.distance === '50') || (artist.distance < 100 && $scope.distance === '100')) {
+            return true;
+          }
+        }
+      return any ? false : true;  
     };
 
     $scope.getClickedArtistData = function (e) {
