@@ -34,7 +34,7 @@
       console.log("sending request")
       return $http({
         method: 'POST',
-        url: '/api/requests',
+        url: '/api/request',
         data: request
       })
     };
