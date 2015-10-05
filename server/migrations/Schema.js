@@ -31,7 +31,6 @@ exports.up = function(knex, Promise) {
       table.string('soundcloud');
       table.string('bandcamp');
       table.string('website');
-      table.integer('maxDistance')
       table.string('bio');
       table.string('email');
       table.string('city');
