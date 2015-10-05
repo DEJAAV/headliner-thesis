@@ -1,5 +1,4 @@
 
-
 module.exports = {
 
   getBandMessages: function(band_id) {
@@ -23,8 +22,25 @@ module.exports = {
       'sender': sender,
       'receiver': receiver
     })
+  },
+
+  acceptRequestBand: function(date, band_id, venue_id) {
+    return knex('Requests').where({
+      'date': date,
+      'band_id': band_id,
+      'venue_id': venue_id
+    }).insert({
+      'band_accept': 'true'
+    })
+  },
+
+  acceptRequestVenue: function (date, band_id, venue_id) {
+    return knex('Requests').where({
+      'date': date,
+      'band_id': band_id,
+      'venue_id': venue_id
+    }).insert({
+      'venue_accept': 'true'
+    })
   }
-
-
-
 }
