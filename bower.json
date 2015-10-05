@@ -19,6 +19,7 @@
     "angular-ui-router": "~0.2.15",
     "bootstrap": "~3.3.5",
     "jquery": "~2.1.4",
-    "Materialize": "materialize#~0.97.1"
+    "Materialize": "materialize#~0.97.1",
+    "angular-cookies": "~1.4.7"
   }
 }
