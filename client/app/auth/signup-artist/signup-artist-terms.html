@@ -1,8 +1,21 @@
-<div class="text-center">
+<div class="text-left">
 
   <div>{{ user }}</div>
   <hr>
+  <form action="#" name="pic_upload">
+    <h5>Upload a Profile Pic!</h5>
+    <div class="file-field input-field">
+      <file-field ng-model="user.profilePic" class="btn btn-primary" preview="previewImage">Upload<i class="material-icons left">present_to_all</i></file-field>
+    </div>
+    <div class="text-center">
+      <h5>Preview:</h5>
+      <img width="200" ng-src="{{ previewImage }}">
+    </div>
+  </form>
+  <br>
+  <hr>
   <form action="#" name="terms">
+    <h5>Terms & Conditions</h5>
     <p>
       <input type="checkbox" ng-model="agree" class="filled-in validate" id="agree" required />
       <label for="agree" data-error="wrong" data-success="right">Yes, I agree to the Terms and Conditions! (that don't exist)</label>      

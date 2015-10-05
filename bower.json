@@ -23,5 +23,8 @@
     "bootstrap": "~3.3.5",
     "jquery": "~2.1.4",
     "Materialize": "materialize#~0.97.1"
+  },
+  "resolutions": {
+    "angular": "~1.4.5"
   }
 }

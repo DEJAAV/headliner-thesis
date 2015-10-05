@@ -18,6 +18,8 @@
     'ui.bootstrap',
     'xeditable',
     'headliner.jwt'
+    'ui.router',
+    'bootstrap.fileField'
   ])
   .config(config)
   .factory('AttachTokens', AttachTokens)
