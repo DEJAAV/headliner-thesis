@@ -8,6 +8,8 @@
     'headliner.venueHomepage',
     'headliner.artistHomepage',
     'headliner.profile',
+    'headliner.edit',
+    'xeditable',
     'ngRoute',
     'ui.router'
   ])
@@ -157,6 +159,12 @@
         url: '/artist-reviews'
       }) 
 
+      // EDIT PROFILE
+      .state('edit-profile-venue', {
+        templateUrl: 'app/edit-profile/edit-profile-venue.html',
+        url: '/edit-profile-venue',
+        controller: 'EditController'
+      })      
       // SIGNOUT    
       .state('signout', {
         templateUrl: 'app/auth/landing.html',

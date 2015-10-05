@@ -1,0 +1,63 @@
+<!-- {"venue_name":"Ellie's Lounge","street":"123 Peanut Street","city":"Austin","state":"TX","zip":"78751","type":{"americana":true,"blues":true,"metal":false,"casual":true,"lounge":true,"jazz":true},"inout":"Indoor/Outdoor","capacity":150,"about":"My venue is bitchin'","contact_phone":"8327944795","facebook":"http://www.facebook.com/elliematsusaka","yelp":"http://www.yelp.com","website":"http://www.google.com"} -->
+
+<h4>Edit Your Profile Info:</h4>
+<div>
+  <p>{{ venue }}</p>
+  <div>Venue Name: <a href="#" ng-model="venue.venue_name" editable-text="venue.venue_name">{{ venue.venue_name }}</a></div>
+  <div>Street: <a href="#" ng-model="venue.street" editable-text="venue.street">{{ venue.street }}</a></div>
+  <div>City: <a href="#" ng-model="venue.city" editable-text="venue.city">{{ venue.city }}</a></div>
+  <div>State: <a href="#" ng-model="venue.state" editable-text="venue.state">{{ venue.state }}</a></div>
+  <div>Zip Code: <a href="#" ng-model="venue.zip" editable-text="venue.zip">{{ venue.zip }}</a></div>
+  <div>type: <a href="#" ng-model="venue.type" editable-text="venue.type">{{ venue.type }}</a></div>
+  <div>Indoor/Outdoor?: <a href="#" ng-model="venue.inout" editable-text="venue.inout">{{ venue.inout }}</a></div>
+  <div>Capacity: <a href="#" ng-model="venue.capacity" editable-text="venue.capacity">{{ venue.capacity }}</a></div>
+  <div>About: <a href="#" ng-model="venue.about" editable-text="venue.about">{{ venue.about }}</a></div>
+  <div>contact_phone: <a href="#" ng-model="venue.contact_phone" editable-text="venue.contact_phone">{{ venue.contact_phone }}</a></div>
+  <div>facebook: <a href="#" ng-model="venue.facebook" editable-text="venue.facebook">{{ venue.facebook }}</a></div>
+  <div>yelp: <a href="#" ng-model="venue.yelp" editable-text="venue.yelp">{{ venue.yelp }}</a></div>
+  <div>website: <a href="#" ng-model="venue.website" editable-text="venue.website">{{ venue.website }}</a></div>
+
+</div>
+
+<div ng-controller="EditableFormCtrl">
+  <form editable-form name="editableForm" onaftersave="saveUser()">
+    <div>
+      <!-- editable username (text with validation) -->
+      <span class="title">User name: </span>
+      <span editable-text="user.name" e-name="name" onbeforesave="checkName($data)" e-required>{{ user.name || 'empty' }}</span>
+    </div> 
+
+    <div>
+      <!-- editable status (select-local) -->
+      <span class="title">Status: </span>
+      <span editable-select="user.status" e-name="status" e-ng-options="s.value as s.text for s in statuses">
+        {{ (statuses | filter:{value: user.status})[0].text || 'Not set' }}
+      </span>
+    </div>  
+
+    <div>
+      <!-- editable group (select-remote) -->
+      <span class="title">Group: </span>
+      <span editable-select="user.group" e-name="group" onshow="loadGroups()" e-ng-options="g.id as g.text for g in groups">
+        {{ showGroup() }}
+      </span>
+    </div>
+
+    <div class="buttons">
+      <!-- button to show form -->
+      <button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+        Edit
+      </button>
+      <!-- buttons to submit / cancel form -->
+      <span ng-show="editableForm.$visible">
+        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+          Save
+        </button>
+        <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+          Cancel
+        </button>
+      </span>
+    </div>
+  </form>  
+</div>
+

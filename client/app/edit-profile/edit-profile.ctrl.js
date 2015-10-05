@@ -4,7 +4,7 @@
   .controller('EditController', EditController);
 
   function EditController($scope, $window, $location, $rootScope, Profile) { // Edit is the injected service     
-
+$scope.user = {}
   $scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
     'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
     'WY').split(' ').map(function (state) { 
@@ -32,27 +32,21 @@
     "website": "http://www.google.com"
   }]
 
-  $scope.venue = [{
-    "venue_name": "Ellie's Lounge",
-    "street": "123 Peanut Street",
-    "city": "Austin",
-    "state": "TX",
-    "zip": "78751",
-    "type": {
-      "americana": true,
-      "blues": true,
-      "metal": false,
-      "casual": true,
-      "lounge": true,
-      "jazz": true
-    },
-    "inout": "Indoor/Outdoor",
-    "capacity": 150,
-    "about": "My venue is bitchin'",
-    "contact_phone": "8327944795",
-    "facebook": "http://www.facebook.com/elliematsusaka",
-    "yelp": "http://www.yelp.com",
-    "website": "http://www.google.com"
-  }];   
+  $scope.venue = {"venue_name":"Ellie's Lounge",
+  "street":"123 Peanut Road",
+  "city":"Austin","state":"TX",
+  "zip":"78751",
+  "type":{"americana":true,"blues":true,"metal":false,"casual":true,"lounge":true,"jazz":true},
+  "inout":"Indoor/Outdoor",
+  "capacity":150,
+  "about":"My venue is bitchin'",
+  "contact_phone":"8327944795","facebook":"http://www.facebook.com/elliematsusaka",
+  "yelp":"http://www.yelp.com",
+  "website":"http://www.google.com"} 
+
+  $scope.updateVenue = function() {
+    return $http.post('/updateUser', $scope.venue);
+  };
+
   }
 })();
