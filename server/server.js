@@ -59,6 +59,9 @@ app.use(function(req, res, next) {
   console.log('**************');
   console.log('current session: ');
   console.log(req.session);
+  console.log('Current Request: ');
+  console.log(req);
+  console.log('************************');
   next();
 });
 
@@ -109,7 +112,6 @@ passport.use('local-signin', new LocalStrategy({
         return done(null, false);
       } else {
         Users.comparePassword(password, user[0].password).then(function(result){
-          console.log(result);
           if(result) {
             return done(null, user[0]);
           } else {
