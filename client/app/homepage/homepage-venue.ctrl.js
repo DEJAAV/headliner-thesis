@@ -206,7 +206,7 @@
     };
 
     $scope.distanceFilter = function(artist) {
-      return artist.distance < artist.maxDistance;
+      return !artist.maxDistance || artist.distance < artist.maxDistance;
     };
 
     $scope.getClickedArtistData = function (e) {
