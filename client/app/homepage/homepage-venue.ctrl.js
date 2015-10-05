@@ -94,11 +94,22 @@
       "website": "http://www.google.com"
     }, ];
 
+    var geocoder = new google.maps.Geocoder();
+
     $scope.initVenue = function() {
       console.log('initVenue is being called')
       Homepage.getAllArtists().then(function(all) {
         $scope.artists = all;
-      })
+        geocoder.geocode({'address': '78701'}, function(c1) {         
+          var venue_coord = new google.maps.LatLng(c1[0].geometry.location.H, c1[0].geometry.location.L);
+          $scope.artists.forEach(function(artist) {
+            geocoder.geocode({'address': artist.zip}, function(c2) {
+              var artist_coord = new google.maps.LatLng(c2[0].geometry.location.H, c2[0].geometry.location.L);
+              artist.distance = google.maps.geometry.spherical.computeDistanceBetween(venue_coord, artist_coord) * 0.000621371;
+            });
+          }); 
+        });
+      });
     };
 
     $scope.genreFilter = function(artist) {
@@ -192,6 +203,10 @@
       } else {
         return true;
       }
+    };
+
+    $scope.distanceFilter = function(artist) {
+      return artist.distance < artist.maxDistance;
     };
 
     $scope.getClickedArtistData = function (e) {
