@@ -104,7 +104,7 @@
       // VENUE PROFILE 
       .state('profile-venue', {
         templateUrl: 'app/profiles/profile-venue/profile-venue.html',
-        url: '/profile-venue',
+        url: '/profile-venue/:id',
         controller: 'ProfileController'
       })
       // VENUE PROFILE (nested views)                                    
