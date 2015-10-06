@@ -10,7 +10,8 @@
     'headliner.profile',
     'ngRoute',
     'ui.router',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'headliner.jwt'
   ])
   .config(config)
   .factory('AttachTokens', AttachTokens)
@@ -24,6 +25,11 @@
         templateUrl: 'app/auth/landing.html',
         url: '/',
         controller: 'AuthController'
+      })
+      .state('auth-init', {
+        templateUrl: 'app/auth-init/auth-init.html',
+        url: '/auth-init',
+        controller: 'JwtController'
       })
       .state('login', {
         templateUrl: 'app/auth/login.html',
