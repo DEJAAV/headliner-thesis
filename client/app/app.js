@@ -17,7 +17,7 @@
     'ui.router',
     'ui.bootstrap',
     'xeditable',
-    'headliner.jwt'
+    'headliner.jwt',
     'ui.router',
     'bootstrap.fileField'
   ])
