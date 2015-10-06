@@ -5,7 +5,7 @@ module.exports = {
   getMessages: function(reqBody, reqUser) {
     if (reqBody.sender = 'artist') {
       return knex('Messages').where({
-        'band_id': reqUser[band_id];
+        'band_id': reqUser[band_id]
       })
       .join('Venue','Messages.venue_id','Venues.venue_id')
       .then(function(messages) {
@@ -30,7 +30,8 @@ module.exports = {
           }
         });
         return bands;
-    });
+      });
+    }
   },
 
   getConversations: function(reqBody, reqUser) {
@@ -38,7 +39,7 @@ module.exports = {
     var band_id = reqBody.band_id || reqUser[sender];
     var venue_id = reqBody.venue_id || reqUser[sender];
     return knex('Messages').where({
-      'band_id': band_id
+      'band_id': band_id,
       'venue_id': venue_id
     })
     .join('Band','Messages.band_id','Bands.band_id')
