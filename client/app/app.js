@@ -10,6 +10,9 @@
     'headliner.artistHomepage',
     'headliner.venueProfile',
     'headliner.artistProfile',
+    'headliner.venueMessages',
+    'headliner.artistMessages',
+    'headliner.conversation',
     'ngRoute',
     'ui.router',
     'ui.bootstrap',
@@ -135,6 +138,13 @@
         url: '/venue-photos'
       })    
 
+      // VENUE MESSAGES
+      .state('messages-venue', {
+        templateUrl: 'app/messages/messages-venue.html',
+        url: '/messages-venue/:id',
+        controller: 'VenueMessagesController'
+      })
+
       // ARTIST PROFILE 
       .state('profile-artist', {
         templateUrl: 'app/profiles/profile-artist/profile-artist.html',
@@ -167,6 +177,13 @@
         url: '/artist-reviews'
       }) 
 
+      // ARTIST MESSAGES
+      .state('messages-artist', {
+        templateUrl: 'app/messages/messages-artist.html',
+        url: '/messages-artist/:id',
+        controller: 'ArtistMessagesController'
+      })
+
       // EDIT PROFILE 
       .state('edit-profile-venue', {
         templateUrl: 'app/edit-profile/edit-profile-venue.html',
@@ -184,9 +201,16 @@
         }}
       })
 
+      // Conversations
+      .state('conversation', {
+        templateUrl: 'app/messages/conversation.html',
+        url: '/conversation/:id',
+        controller: 'ConversationController'
+      })
+
     // Add AttachTokens to $httpInterceptor, add token from local storage the to header of http request to server
     $httpProvider.interceptors.push('AttachTokens');
-}
+  }
 
   function AttachTokens ($window) {
     var attach = {
