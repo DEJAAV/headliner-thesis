@@ -5,6 +5,7 @@ var Bands = require('./models/bands.js');
 var Shows = require('./models/shows.js');
 var Venue_Reviews = require('./models/venue_reviews.js');
 var Requests = require('./models/requests.js');
+var Messages = require('./models/messages.js');
 
 module.exports = function (app) {
 
@@ -66,8 +67,26 @@ module.exports = function (app) {
 
   app.post('/api/request', function(req, res, next) {
     Requests.sendRequest(req.body, req.user).then(function(result) {
-      res.json('success')
-    })
-  })
+      res.json('success');
+    });
+  });
+
+  app.post('/api/message', function(req, res, next) {
+    Messages.sendMessage(req.body, req.user).then(function(result) {
+      res.json('success');
+    });
+  });
+
+  app.get('/api/messages', function(req, res, next) {
+    Messages.getMesages(req.body, req.user).then(function(result) {
+      res.json(result);
+    });
+  });
+
+  app.get('/api/conversations', function(req, res, next) {
+    Messages.getConversations(req.body, req.user).then(function(result) {
+      res.json(result);
+    });
+  });
 
 };
