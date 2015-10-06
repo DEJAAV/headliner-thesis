@@ -71,13 +71,21 @@
       $location.path('/');
     };
 
+    function who () {
+      return $http({
+        method: 'GET',
+        url: '/auth/init'
+      })
+    }
+
     return {
       signupGeneral: signupGeneral,
       signupVenue: signupVenue,
       signupArtist: signupArtist,
       login: login,
       isAuth: isAuth,
-      signout: signout
+      signout: signout,
+      who: who
     };
   };
 
