@@ -50,8 +50,8 @@
     <div class="col s9">
       <div class="chip lime lighten-4" ng-repeat="(key,data) in artist.genre">{{ key }}</div>
     </div>
-        <div class="col">     
-      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#requestModal">Book a gig</button>
+    <div class="col">     
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#requestModal">Book {{artist.band_name}}</button>
     </div>
     <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="requestModalLabel">
       <div class="modal-dialog" role="document">
@@ -131,9 +131,9 @@
             <div>
               <h5>Links</h5>
               <div>
-                <p><a href="{{artist.soundcloud}}">SoundCloud</a></p>
-                <p><a href="{{artist.youtube}}">Youtube</a></p>
-                <p><a href="{{artist.facebook}}">Facebook</a></p>
+                <p><a href="{{artist.soundcloud}}">{{artist.soundcloud}}</a></p>
+                <p><a href="{{artist.youtube}}">{{artist.youtube}}</a></p>
+                <p><a href="{{artist.facebook}}">{{artist.facebook}}</a></p>
               </div>
             </div>                        
 

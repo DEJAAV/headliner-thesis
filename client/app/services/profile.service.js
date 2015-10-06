@@ -13,13 +13,11 @@
         url: '/api/venues'
       })
       .then(function(resp){
-        console.log('GET:',resp.data);
         return resp.data;
       })
     };
 
     function getAllArtists () {
-      console.log('getAllArtists is being called');
       return $http({
         method: 'GET',
         url: '/api/artists'
@@ -30,8 +28,6 @@
     };
 
     function sendRequest (request) {
-      //request should have date, message, band_id, venue_id, sender, receiver
-      console.log("sending request")
       return $http({
         method: 'POST',
         url: '/api/request',
