@@ -9,7 +9,7 @@ var GoogleStrategy = require('passport-google-oauth2').Strategy;
 
 //modules
 var session = require('express-session');
-var morgan = require('morgan')
+var logger = require('morgan')
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var pg = require('pg');
@@ -29,9 +29,11 @@ var knex = require('knex')(Auth.pgData);
 app.use(express.static(__dirname + '/../client'));
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(logger('dev'));
+
 app.use(session({ secret: Auth.secret,
                   saveUninitialized: true,
-                  resave: true
+                  resave: false
                 })
 );
 app.use(passport.initialize());
@@ -221,25 +223,10 @@ app.get('/api/users/login/error', function(req, res) {
 
 app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email'] }));
 
-app.get('/auth/facebook/callback', passport.authenticate('facebook', {}),
-  function(req, res) {
-    if(!req.user) {
-      res.json({error: 'Something went wrong with Facebook Login/Sign Up'})
-    }
-    var response = {};
-    response.token = jwt.encode(req.user.user_id, Auth.secret);
-    Users.getUserById(req.user.user_id).then(function(user) {
-      if(user[0].band_id !== null) {
-        response.type = 'artist';
-      } else if(user[0].venue_id !== null) {
-        response.type = 'venue';
-      } else {
-        response.type = null;
-      }
-    }).then(function() {
-      res.json(response);
-    });
-  }
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+  successRedirect: '/#/auth-init',
+  failureRedirect: '/'
+  })
 );
 
 app.get('/auth/google',
@@ -247,28 +234,21 @@ app.get('/auth/google',
     if(!req.user) { //Not already logged-in, we'll continue on to authentication
       return next();
     }
-    var response = {};
-    response.token = jwt.encode(req.user.user_id, Auth.secret);
-    Users.getUserById(req.user.user_id).then(function(user) {
-      if(user[0].band_id !== null) {
-        response.type = 'artist';
-      } else if(user[0].venue_id !== null) {
-        response.type = 'venue';
-      } else {
-        response.type = null; 
-      }
-    }).then(function() {
-      res.json(response);
-    });
+    res.redirect('/#/auth-init')  //redirect to JWT setter if a user is detected
   },
   passport.authenticate('google', { 
     scope: ['profile', 'email'] 
   })
 );
 
-app.get('/auth/google/callback', passport.authenticate('google', {}),
-  function(req, res) {
-    if(!req.user) {
+app.get('/auth/google/callback', passport.authenticate('google', {
+  successRedirect: '/#/auth-init',
+  failureRedirect: '/'
+  })
+);
+
+app.get('/auth/init', function(req, res) {
+  if(!req.user) {
       res.json({error: 'Something went wrong with Google Login/Sign Up'})
     }
     var response = {};
@@ -284,8 +264,7 @@ app.get('/auth/google/callback', passport.authenticate('google', {}),
     }).then(function() {
       res.json(response);
     });
-  }
-);
+})
 
 require('./routes.js')(app);
 
