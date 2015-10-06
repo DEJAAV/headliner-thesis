@@ -9,7 +9,8 @@
     'headliner.artistHomepage',
     'headliner.profile',
     'ngRoute',
-    'ui.router'
+    'ui.router',
+    'ui.bootstrap'
   ])
   .config(config)
   .factory('AttachTokens', AttachTokens)

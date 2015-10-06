@@ -111,6 +111,13 @@
       return any ? false : true;
     };
 
+    $scope.minDate = new Date();
+    $scope.opened = false;
+
+    $scope.open = function() {
+      $scope.opened = true;
+    };
+
     $scope.dateFilter = function(venue) {
       if (venue.shows) {
         var busy = venue.shows.map(function(show) {
