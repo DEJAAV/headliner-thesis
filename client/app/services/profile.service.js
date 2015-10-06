@@ -6,8 +6,10 @@
 
   function Profile ($http, $location, $window) {
 
+    var id = $location.$$path.slice(($location.$$path).length-1)
+
     function getAllVenues () {
-      console.log('getAllVenues is being called');
+      console.log('getAllVenues is being called1');
       return $http({
         method: 'GET',
         url: '/api/venues'
@@ -64,7 +66,8 @@
       getAllArtists: getAllArtists,
       sendRequest: sendRequest,
       updateVenuePswd: updateVenuePswd,
-      updateVenueInfo: updateVenueInfo
+      updateVenueInfo: updateVenueInfo,
+      id: id
     };
   }
 })();
