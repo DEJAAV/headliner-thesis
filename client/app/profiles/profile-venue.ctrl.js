@@ -43,7 +43,9 @@
     };
 
     $scope.disabled = function(date) {
-      return $scope.venue.shows.map(function(show) {return show.date;}).indexOf(date.toISOString().split('T')[0]) > -1;
+      if ($scope.venue.shows) {
+        return $scope.venue.shows.map(function(show) {return show.date;}).indexOf(date.toISOString().split('T')[0]) > -1;
+      }
     };
   };
 })();

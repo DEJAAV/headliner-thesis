@@ -41,7 +41,9 @@
     };
 
     $scope.disabled = function(date) {
-      return $scope.artist.shows.map(function(show) {return show.date;}).indexOf(date.toISOString().split('T')[0]) > -1;   
+      if ($scope.artist.venue){
+        return $scope.artist.shows.map(function(show) {return show.date;}).indexOf(date.toISOString().split('T')[0]) > -1;   
+      }
     };
 
   };
