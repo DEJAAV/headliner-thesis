@@ -21,8 +21,7 @@ module.exports = {
       'message': reqBody.message,
       'band_id': reqBody.band_id || reqUser[sender],
       'venue_id': reqBody.venue_id || reqUser[sender],
-      'sender': reqBody.sender,
-      'receiver': reqBody.receiver
+      'sender': reqBody.sender
     })
   },
 
@@ -45,4 +44,4 @@ module.exports = {
       'venue_accept': 'true'
     })
   }
-}
+};

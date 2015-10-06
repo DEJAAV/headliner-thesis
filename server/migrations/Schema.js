@@ -115,7 +115,15 @@ exports.up = function(knex, Promise) {
       table.string('band_accept');
       table.string('venue_accept');
       table.string('sender');
-      table.string('receiver');
+    }),
+
+    knex.schema.createTable('Messages', function(table) {
+      table.increments('message_id').primary();
+      table.integer('venue_id').references('venue_id').inTable('Venues');
+      table.integer('band_id').references('band_id').inTable('Bands');
+      table.string('date');
+      table.string('message');
+      table.string('sender');
     })
   ]);
 };
@@ -134,6 +142,7 @@ exports.down = function(knex, Promise) {
     knex.schema.dropTable('Venue_Genres'),
     knex.schema.dropTable('Types'),
     knex.schema.dropTable('Venues_Types'),
-    knex.schema.dropTable('Requests')
+    knex.schema.dropTable('Requests'),
+    knex.schema.dropTable('Messages')
   ]);
-}
+};
