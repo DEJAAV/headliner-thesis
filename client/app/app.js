@@ -8,7 +8,8 @@
     'headliner.auth',
     'headliner.venueHomepage',
     'headliner.artistHomepage',
-    'headliner.profile',
+    'headliner.venueProfile',
+    'headliner.artistProfile',
     'ngRoute',
     'ui.router',
     'ui.bootstrap',
@@ -114,7 +115,7 @@
       .state('profile-venue', {
         templateUrl: 'app/profiles/profile-venue/profile-venue.html',
         url: '/profile-venue/:id',
-        controller: 'ProfileController'
+        controller: 'VenueProfileController'
       })
       // VENUE PROFILE (nested views)                                    
       .state('profile-venue.overview', {
@@ -138,7 +139,7 @@
       .state('profile-artist', {
         templateUrl: 'app/profiles/profile-artist/profile-artist.html',
         url: '/profile-artist/:id',
-        controller: 'ProfileController'
+        controller: 'ArtistProfileController'
       })
       // ARTIST PROFILE (nested views)                                    
       .state('profile-artist.overview', {
