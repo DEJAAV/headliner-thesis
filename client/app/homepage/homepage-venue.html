@@ -61,9 +61,7 @@
         </div>
         <div class="box">
           <h6>Filter By Availability</h6>
-          <form>
-             <input type="date" ng-model="date">
-          </form>  
+            <input type="text" placeholder='  select date' datepicker-popup="MM/dd/yyyy" ng-model="date" is-open="opened" min-date="minDate" show-weeks="false" show-button-bar="false" ng-click="open()"/>
         </div>
         <div class="box">
           <h6>Filter By Genre</h6>
