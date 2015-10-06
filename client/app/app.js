@@ -4,6 +4,7 @@
     'headliner.authService',
     'headliner.homeService', 
     'headliner.profileService',
+    'headliner.edit',
     'headliner.auth',
     'headliner.venueHomepage',
     'headliner.artistHomepage',
@@ -11,6 +12,7 @@
     'ngRoute',
     'ui.router',
     'ui.bootstrap',
+    'xeditable',
     'headliner.jwt'
   ])
   .config(config)
@@ -163,6 +165,13 @@
         templateUrl: 'app/profiles/profile-artist/reviews.html',
         url: '/artist-reviews'
       }) 
+
+      // EDIT PROFILE 
+      .state('edit-profile-venue', {
+        templateUrl: 'app/edit-profile/edit-profile-venue.html',
+        url: '/edit-profile-venue',
+        controller: 'EditController'
+      })
 
       // SIGNOUT    
       .state('signout', {
