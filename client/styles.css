@@ -186,3 +186,6 @@ nav {
     color: gray;
     padding: 0px;
 }
+.title {
+    font-weight: 800;
+}

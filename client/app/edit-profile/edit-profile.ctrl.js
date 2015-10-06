@@ -4,49 +4,44 @@
   .controller('EditController', EditController);
 
   function EditController($scope, $window, $location, $rootScope, Profile) { // Edit is the injected service     
-$scope.user = {}
-  $scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
-    'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
-    'WY').split(' ').map(function (state) { 
-      return { abbrev: state }; 
-      });
 
-  $scope.artist = [{
-    "name": "Ellie",
-    "street": "123 Peanut Street",
-    "city": "Austin",
-    "state": "TX",
-    "zip": "78751",
-    "type": {
-      "americana": true,
-      "blues": true,
-      "metal": false,
-      "casual": true,
-      "lounge": true,
-      "jazz": true
-    },
-    "about": "Depart do be so he enough talent. Sociable formerly six but handsome. Up do view time they shot. He concluded disposing provision by questions as situation. Its estimating are motionless day sentiments end. Calling an imagine at forbade. At name no an what like spot. Pressed my by do affixed he studied.",
-    "contact_phone": "8327944795",
-    "facebook": "http://www.facebook.com/elliematsusaka",
-    "yelp": "http://www.yelp.com",
-    "website": "http://www.google.com"
-  }]
+    $scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
+      'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
+      'WY').split(' ').map(function (state) { 
+        return { abbrev: state }; 
+        });
 
-  $scope.venue = {"venue_name":"Ellie's Lounge",
-  "street":"123 Peanut Road",
-  "city":"Austin","state":"TX",
-  "zip":"78751",
-  "type":{"americana":true,"blues":true,"metal":false,"casual":true,"lounge":true,"jazz":true},
-  "inout":"Indoor/Outdoor",
-  "capacity":150,
-  "about":"My venue is bitchin'",
-  "contact_phone":"8327944795","facebook":"http://www.facebook.com/elliematsusaka",
-  "yelp":"http://www.yelp.com",
-  "website":"http://www.google.com"} 
+    $scope.user = {
+      username: "ellie.matsusaka@gmail.com",
+      password: '9854376054673657'
+    }
+    
+    $scope.venue = {"venue_name":"Bob's Bar",
+      "street":"4613 KINGLET ST",
+      "city":"HOUSTON",
+      "zip":"77035-5035",
+      "state":"MO",
+      "genre":{"americana":true,"metal":true,"bluegrass":true},
+      "inout":"Outdoor",
+      "capacity":100,
+      "type":{"casual":true,"dive":true},
+      "about":"John draw real poor on call my from. May she mrs furnished discourse extremely. Ask doubt noisy shade guest did built her him. Ignorant repeated hastened it do. Consider bachelor he yourself expenses no. Her itself active giving for expect vulgar months. Discovery commanded fat mrs remaining son she principle middleton neglected. Be miss he in post sons held.",
+      "contact_name":"Ellie Matsusaka",
+      "contact_phone":"8327944795",
+      "facebook":"http://www.facebook.com/elliematsusaka",
+      "yelp":"http://www.yelp.com/elliematsusaka",
+      "website":"http://www.google.com/elliematsusaka"
+    };
 
-  $scope.updateVenue = function() {
-    return $http.post('/updateUser', $scope.venue);
-  };
+    $scope.updateVenueInfo = function(venue) {
+      Profile.updateVenueInfo(venue);
+      console.log('successfully updated venue info');
+    };
+
+    $scope.updateVenuePswd = function(user) {
+      Profile.updateVenuePswd(user);
+      console.log('successfully updated user password');
+    };  
 
   }
 })();
