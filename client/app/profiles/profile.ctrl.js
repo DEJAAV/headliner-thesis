@@ -52,6 +52,23 @@
       $(document).ready(function(){
         $('ul.tabs').tabs();
       });
-    }; 
+    };
+
+    $scope.minDate = new Date();
+    $scope.opened = false;
+
+    $scope.open = function() {
+      $scope.opened = true;
+    };
+
+    $scope.disabled = function(date) {
+      if (homepageUrl === '/profile-artist/' && $scope.artist.shows) {
+        return $scope.artist.shows.map(function(show) {return show.date;}).indexOf(date.toISOString().split('T')[0]) > -1;   
+      }
+      if (homepageUrl === '/profile-venue/' && $scope.venue.shows) {
+        return $scope.venue.shows.map(function(show) {return show.date;}).indexOf(date.toISOString().split('T')[0]) > -1;
+      }
+    };
+
   };
 })();

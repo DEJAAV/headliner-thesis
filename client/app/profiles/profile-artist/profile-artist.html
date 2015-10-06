@@ -64,7 +64,7 @@
             <form>
               <div class="form-group">
                 <label for="recipient-name" class="control-label">Date:</label>
-                <input type="text" class="form-control" id="recipient-name">
+                <input type="text" placeholder='  select date' datepicker-popup="MM/dd/yyyy" ng-model="date" is-open="opened" min-date="minDate" show-weeks="false" show-button-bar="false" ng-click="open()" date-disabled="disabled(date)"/>
               </div>
               <div class="form-group">
                 <label for="message-text" class="control-label">Message:</label>
