@@ -4,7 +4,9 @@
     'headliner.authService',
     'headliner.homeService', 
     'headliner.profileService',
-    'headliner.edit',
+    'headliner.editService',
+    'headliner.editVenue',
+    'headliner.editArtist',
     'headliner.auth',
     'headliner.venueHomepage',
     'headliner.artistHomepage',
@@ -21,6 +23,7 @@
     'xeditable',
     'headliner.jwt'
   ])
+
   .config(config)
   .factory('AttachTokens', AttachTokens)
 
@@ -190,9 +193,13 @@
       .state('edit-profile-venue', {
         templateUrl: 'app/edit-profile/edit-profile-venue.html',
         url: '/edit-profile-venue',
-        controller: 'EditController'
+        controller: 'EditVenueController'
       })
-
+      .state('edit-profile-artist', {
+        templateUrl: 'app/edit-profile/edit-profile-artist.html',
+        url: '/edit-profile-artist',
+        controller: 'EditArtistController'
+      })
       // SIGNOUT    
       .state('signout', {
         templateUrl: 'app/auth/landing.html',
