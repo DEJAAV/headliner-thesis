@@ -1,18 +1,29 @@
 var knex = require('../db/db.js');
+var Users = require('./users.js');
 
 module.exports = {
 
-  getBandRequests: function(band_id) {
-    return knex('Requests').where({
-      'band_id': band_id
+  getRequests: function(user_id) {
+    Users.getUserById(user_id)
+    .then(function(user) {
+      console.log(user[0].band_id, 'user')
+      if (user[0].band_id) {
+        return knex('Requests').where({
+          'band_id': user[0].band_id
+        }).select()
+      } else {
+        return knex('Requests').where({
+          'venue_id': user[0].venue_id
+        }).select()
+      }
     })
   },
   
-  getVenueRequests: function(venue_id) {
-    return knex('Requests').where({
-      'venue_id': venue_id
-    })
-  },
+  // getVenueRequests: function(venue_id) {
+  //   return knex('Requests').where({
+  //     'venue_id': venue_id
+  //   })
+  // },
 
   sendRequest: function(reqBody, reqUser){
     var sender = reqBody.sender + '_id'

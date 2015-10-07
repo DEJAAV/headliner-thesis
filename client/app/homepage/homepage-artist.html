@@ -17,64 +17,17 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="#/homepage-artist">Find a Venue</a></li>
       </ul>
-
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#/profile-artist">Your Profile</a></li>
             <li><a href="#/messages">Messages</a></li>
-            <li><a href="#/homepage-artist" data-toggle="modal" data-target="#pending">Pending Requests</a></li>
+            <li><a href="#/requests">Pending Requests</a></li>
             <li><a href="#/" ng-click="signout()">Signout</a></li>
           </ul>
         </li>          
       </ul>
-
-      <div class="modal fade" id="pending" tabindex="-1" role="dialog" aria-labelledby="requestModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="requestModalLabel">Pending Requests</h4>
-            </div>
-            <div class="modal-body">
-              <div class="tabbable"> <!-- Only required for left/right tabs -->
-                <ul class="nav nav-tabs" id="tabContent">
-                  <li class="active"><a href="#" data-target="#sentRequest" data-toggle="tab">Sent</a></li>
-                  <li><a href="#" data-target="#receivedRequest" data-toggle="tab">Received</a></li>
-                </ul>
-                <div class="tab-content">
-
-                  <div class="tab-pane active" id="sentRequest">
-                    <div class="request">
-                      <p>To:</p>
-                      <p>Date:</p>
-                      <p>Message:</p>
-                      <hr>
-                    </div>
-                    <div class="request">
-                      <p>To:</p>
-                      <p>Date:</p>
-                      <p>Message:</p>
-                      <hr>
-                    </div>
-                  </div>
-
-                  <div class="tab-pane" id="receivedRequest">
-                    <div class="control-group">
-                      <label class="control-label">Received</label>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="sendRequest()">Send Request</button>
-            </div>
-          </div>
-        </div>
-      </div>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
