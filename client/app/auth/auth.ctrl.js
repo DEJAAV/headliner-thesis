@@ -7,19 +7,18 @@
 
   .controller('AuthController', AuthController);
 
-  function AuthController ($scope, $window, $location, Auth) {
+  function AuthController ($scope, $window, $location, Auth, Global) {
   $scope.venue = {};
   $scope.user = {}; // for bands
   $scope.user.member = {};
-  $scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
-    'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
-    'WY').split(' ').map(function (state) { 
-      return { abbrev: state }; 
-      });
+
+  $scope.states = Global.states;
+  $scope.allGenres = Global.allGenres;
+  $scope.allTypes = Global.allTypes;
+
   $scope.signupGeneral = function () {
     Auth.signupGeneral($scope.user)
       .then(function (data) {
-        console.log(data, 'data');
         $window.localStorage.setItem('headliner', data.token);
         $window.localStorage.setItem('type', null);
         $location.path('/select'); 
@@ -57,7 +56,6 @@
     //member object, their role as the value
     $scope.addNewMember = function(name, role){
         $scope.user.member[name] = role;
-        //console.log("Name: ", name);
         $scope.name = "";
         $scope.role = "";
      };
