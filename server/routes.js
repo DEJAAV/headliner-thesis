@@ -7,21 +7,20 @@ var Venue_Reviews = require('./models/venue_reviews.js');
 var Requests = require('./models/requests.js');
 var Messages = require('./models/messages.js');
 var jwt = require('jwt-simple');
-var Auth = require('./auth.js')
+var Auth = require('./auth.js');
+var Songs = require('./models/songs.js');
 
 module.exports = function (app) {
 
   app.post('/api/users/venues', function(req, res, next) {
-    console.log('Req user in req.user');
-    console.log(req.user);
+    var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret);
     Venues.create(req.body, req.user).then(function(result) {
       res.json('success');
     });
   });
 
   app.post('/api/users/artists', function(req, res, next) {
-    var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret);
-    Bands.create(req.body, user_id).then(function(result) {
+    Bands.create(req.body, req.user).then(function(result) {
       res.json('success');
     });
   });
@@ -69,8 +68,8 @@ module.exports = function (app) {
   });
 
   app.post('/api/request', function(req, res, next) {
-    var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret)
-    Requests.sendRequest(req.body, user_id).then(function(result) {
+    var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret);
+    Requests.sendRequest(req.body, req.user).then(function(result) {
       res.json('success');
     });
   });
@@ -83,6 +82,7 @@ module.exports = function (app) {
   })
 
   app.post('/api/message', function(req, res, next) {
+    var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret);
     Messages.sendMessage(req.body, req.user).then(function(result) {
       res.json('success');
     });
@@ -101,5 +101,12 @@ module.exports = function (app) {
       res.json(result);
     });
   });
+
+  app.get('/api/songs', function(req, res) {
+    var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret);
+    Songs.getSongsByUser(user_id).then(function(songs) {
+      res.json(songs);
+    })
+  })
 
 };
