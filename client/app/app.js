@@ -9,6 +9,7 @@
     'headliner.editArtist',
     'headliner.globalService',
     'headliner.messagesService',
+    'headliner.requestsService',
     'headliner.auth',
     'headliner.venueHomepage',
     'headliner.artistHomepage',
@@ -16,6 +17,7 @@
     'headliner.artistProfile',
     'headliner.messages',
     'headliner.conversation',
+    'headliner.requests',
     'headliner.music',
     'ngRoute',
     'angularSoundManager',
@@ -209,6 +211,13 @@
         templateUrl: 'app/messages/conversation.html',
         url: '/conversation/:id',
         controller: 'ConversationController'
+      })
+
+      //REQUESTS
+      .state('requests', {
+        templateUrl: 'app/requests/requests.html',
+        url: '/requests',
+        controller: 'RequestsController'
       })
 
     // Add AttachTokens to $httpInterceptor, add token from local storage the to header of http request to server
