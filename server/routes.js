@@ -20,7 +20,8 @@ module.exports = function (app) {
   });
 
   app.post('/api/users/artists', function(req, res, next) {
-    Bands.create(req.body, req.user).then(function(result) {
+    var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret);
+    Bands.create(req.body, user_id).then(function(result) {
       res.json('success');
     });
   });
@@ -68,7 +69,8 @@ module.exports = function (app) {
   });
 
   app.post('/api/request', function(req, res, next) {
-    Requests.sendRequest(req.body, req.user).then(function(result) {
+    var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret)
+    Requests.sendRequest(req.body, user_id).then(function(result) {
       res.json('success');
     });
   });

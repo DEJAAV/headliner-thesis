@@ -25,14 +25,31 @@ module.exports = {
   //   })
   // },
 
-  sendRequest: function(reqBody, reqUser){
-    var sender = reqBody.sender + '_id'
-    return knex('Requests').insert({
-      'date': reqBody.date,
-      'message': reqBody.message,
-      'band_id': reqBody.band_id || reqUser[sender],
-      'venue_id': reqBody.venue_id || reqUser[sender],
-      'sender': reqBody.sender
+  sendRequest: function(reqBody, user_id){
+    console.log(reqBody, 'reqBody')
+    return Users.getUserById(user_id)
+    .then(function(user){
+      console.log(user, "useruser")
+      console.log(user[0].band_id, "band_id")
+      if (user[0].venue_id) {
+        return knex('Requests').insert({
+          'date': reqBody.date,
+          'message': reqBody.message,
+          'band_id': reqBody.band_id,
+          'venue_id': user[0].venue_id,
+          'sender': 'venue',
+          'venue_accept': 'true'
+        })
+      } else {
+        return knex('Requests').insert({
+          'date': reqBody.date,
+          'message': reqBody.message,
+          'band_id': user[0].band_id,
+          'venue_id': reqBody.venue_id,
+          'sender': 'band',
+          'band_accept': 'true'
+        })
+      }
     })
   },
 

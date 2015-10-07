@@ -4,7 +4,7 @@ var knex = require('../db/db.js');
 
 module.exports = {
 
-  create: function(reqBody, reqUser) {
+  create: function(reqBody, user_id) {
     return knex('Bands')
       .returning('band_id')
       .insert({
@@ -37,7 +37,7 @@ module.exports = {
       return band_id[0]
     }).then(function(bandId) {
       return knex('Users').where({
-        'user_id': reqUser.user_id
+        'user_id': user_id
       }).update({
         'band_id': bandId
       });
