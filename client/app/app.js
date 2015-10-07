@@ -7,6 +7,7 @@
     'headliner.editService',
     'headliner.editVenue',
     'headliner.editArtist',
+    'headliner.globalService',
     'headliner.messagesService',
     'headliner.auth',
     'headliner.venueHomepage',
