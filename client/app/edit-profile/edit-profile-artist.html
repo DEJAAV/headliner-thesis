@@ -1,0 +1,23 @@
+<p>Add another song!</p>
+
+<div class="row">
+  <h5>Song Info: {{ song }}</h5>
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="url" ng-model="song.url" type="url" class="validate">
+          <label data-error="must be a valid url" for="url">Audio File URL</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="title" ng-model="song.title" type="text" class="validate">
+          <label for="title">Song Title</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="artist" ng-model="song.artist" type="text" class="validate">
+          <label for="artist">Artist</label>
+        </div>
+      </div>
+    </form>
+  </div>
