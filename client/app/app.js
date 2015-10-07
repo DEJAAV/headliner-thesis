@@ -7,13 +7,14 @@
     'headliner.editService',
     'headliner.editVenue',
     'headliner.editArtist',
+    'headliner.messagesService',
+    'headliner.edit',
     'headliner.auth',
     'headliner.venueHomepage',
     'headliner.artistHomepage',
     'headliner.venueProfile',
     'headliner.artistProfile',
-    'headliner.venueMessages',
-    'headliner.artistMessages',
+    'headliner.messages',
     'headliner.conversation',
     'headliner.music',
     'ngRoute',
@@ -143,13 +144,6 @@
         url: '/venue-photos'
       })    
 
-      // VENUE MESSAGES
-      .state('messages-venue', {
-        templateUrl: 'app/messages/messages-venue.html',
-        url: '/messages-venue/:id',
-        controller: 'VenueMessagesController'
-      })
-
       // ARTIST PROFILE 
       .state('profile-artist', {
         templateUrl: 'app/profiles/profile-artist/profile-artist.html',
@@ -182,13 +176,6 @@
         url: '/artist-reviews'
       }) 
 
-      // ARTIST MESSAGES
-      .state('messages-artist', {
-        templateUrl: 'app/messages/messages-artist.html',
-        url: '/messages-artist/:id',
-        controller: 'ArtistMessagesController'
-      })
-
       // EDIT PROFILE 
       .state('edit-profile-venue', {
         templateUrl: 'app/edit-profile/edit-profile-venue.html',
@@ -210,7 +197,14 @@
         }}
       })
 
-      // Conversations
+      // MESSAGES
+      .state('messages', {
+        templateUrl: 'app/messages/messages.html',
+        url: '/messages',
+        controller: 'MessagesController'
+      })
+
+      // CONVERSATIONS
       .state('conversation', {
         templateUrl: 'app/messages/conversation.html',
         url: '/conversation/:id',

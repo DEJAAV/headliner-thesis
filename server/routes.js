@@ -6,6 +6,8 @@ var Shows = require('./models/shows.js');
 var Venue_Reviews = require('./models/venue_reviews.js');
 var Requests = require('./models/requests.js');
 var Messages = require('./models/messages.js');
+var jwt = require('jwt-simple');
+var Auth = require('./auth.js')
 
 module.exports = function (app) {
 
@@ -78,13 +80,15 @@ module.exports = function (app) {
   });
 
   app.get('/api/messages', function(req, res, next) {
-    Messages.getMesages(req.body, req.user).then(function(result) {
+    var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret);
+    Messages.getMessages(user_id).then(function(result) {
       res.json(result);
     });
   });
 
   app.get('/api/conversations', function(req, res, next) {
-    Messages.getConversations(req.body, req.user).then(function(result) {
+    var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret);
+    Messages.getConversations(user_id).then(function(result) {
       res.json(result);
     });
   });
