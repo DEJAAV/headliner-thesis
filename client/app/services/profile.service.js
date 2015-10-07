@@ -37,36 +37,10 @@
       })
     };
 
-  function updateVenuePswd(user) {
-    console.log('updateVenuePswd POST: ', user);
-    return $http({
-      method: 'POST',
-      url: '/api/users/local', 
-      data: user
-    })
-    .then(function(resp) {
-      return resp.data;
-    })
-  };
-
-  function updateVenueInfo(venue) {
-    console.log('updateVenueInfo POST: ', venue);
-    return $http({
-      method: 'POST',
-      url: '/api/users/venues', 
-      data: venue
-    })
-    .then(function(resp) {
-      return resp.data;
-    })
-  };
-
     return {
       getAllVenues: getAllVenues,
       getAllArtists: getAllArtists,
       sendRequest: sendRequest,
-      updateVenuePswd: updateVenuePswd,
-      updateVenueInfo: updateVenueInfo,
       id: id
     };
   }

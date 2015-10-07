@@ -10,6 +10,7 @@
     'headliner.artistHomepage',
     'headliner.venueProfile',
     'headliner.artistProfile',
+    'headliner.editService',
     'headliner.venueMessages',
     'headliner.artistMessages',
     'headliner.conversation',
@@ -190,6 +191,11 @@
         url: '/edit-profile-venue',
         controller: 'EditController'
       })
+      .state('edit-profile-artist', {
+        templateUrl: 'app/edit-profile/edit-profile-artist.html',
+        url: '/edit-profile-artist',
+        controller: 'EditController'
+      })      
 
       // SIGNOUT    
       .state('signout', {

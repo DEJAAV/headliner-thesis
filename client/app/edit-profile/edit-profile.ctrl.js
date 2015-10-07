@@ -3,7 +3,7 @@
 
   .controller('EditController', EditController);
 
-  function EditController($scope, $window, $location, $rootScope, Profile) { // Edit is the injected service     
+  function EditController($scope, $window, $location, $rootScope, Edit) { // Edit is the injected service     
 
     $scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
       'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
@@ -34,12 +34,12 @@
     };
 
     $scope.updateVenueInfo = function(venue) {
-      Profile.updateVenueInfo(venue);
+      Edit.updateVenueInfo(venue);
       console.log('successfully updated venue info');
     };
 
     $scope.updateVenuePswd = function(user) {
-      Profile.updateVenuePswd(user);
+      Edit.updateVenuePswd(user);
       console.log('successfully updated user password');
     };  
 
