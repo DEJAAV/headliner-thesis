@@ -8,7 +8,6 @@
     'headliner.editVenue',
     'headliner.editArtist',
     'headliner.messagesService',
-    'headliner.edit',
     'headliner.auth',
     'headliner.venueHomepage',
     'headliner.artistHomepage',
