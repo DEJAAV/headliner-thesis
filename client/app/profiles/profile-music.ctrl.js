@@ -4,7 +4,7 @@
 
   function MusicController($scope, $window, $location, $rootScope,
     Profile) { 
-
+    
     $scope.songs = [
       {
         url: "https://s3-us-west-1.amazonaws.com/hr-mytunes/data/04+One+In+A+Million.mp3",
@@ -28,5 +28,23 @@
       }
     ];  
     
+    $scope.getAllSongs = function() {
+      Profile.getAllSongs.then(function(songs) {
+        console.log('Object returned from GetAllSongs: ', songs);
+        //grab the old length to compare if there are new songs to pushed into the player
+        var oldSongs = $scope.songs.length-1;
+        for(var i = oldSongs; i < songs.length; i++) {
+          //take relevant song information and format an object to push into our scope
+          var formattedSong = {
+            url: songs[i].url,
+            title: songs[i].title,
+            artist: songs[i].artist
+          };
+          $scope.songs.push(formattedSong);
+        }
+      })
+    }
+
+    $scope.getAllSongs();
   };
 })();
