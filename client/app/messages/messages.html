@@ -33,4 +33,18 @@
   </div><!-- /.container-fluid -->
 </nav>
 
+<div>
+  <table class="table table-striped table-responsive">
+    <thead>
+      <th>Conversations</th><th>Last Message Date</th>
+    </thead>
+    <tbody>
+    <tr ng-repeat="message in messages | orderBy:'-date'">
+      <td><a href='{{"/#/conversation/" + venue_id + band_id}}'>{{message.name}}</a></td>
+      <td><a href='{{"/#/conversation/" + venue_id + band_id}}'>{{message.date}}</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
 </div>

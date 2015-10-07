@@ -2,39 +2,52 @@ var knex = require('../db/db.js');
 
 module.exports = {
 
-  getMessages: function(reqBody, reqUser) {
-    if (reqBody.sender = 'artist') {
-      return knex('Messages').where({
-        'band_id': reqUser[band_id]
-      })
-      .join('Venue','Messages.venue_id','Venues.venue_id')
-      .then(function(messages) {
-        var venues = {};
-        messages.forEach(function(message) {
-          if (!venues[message.venue_name] || venues[message.venue_name] < message.date) {
-            venues[message.venue_name] = message.date;
-          }
+  getMessages: function(user_id) {
+    return knex('Users').where({
+      'user_id': user_id}).then(function(user) {
+      if (user[0].band_id) {
+        return knex('Messages').where({
+          'band_id': user[0].band_id
+        })
+        .join('Venues','Messages.venue_id','Venues.venue_id')
+        .then(function(messages) {
+          var venues = [];
+          messages.forEach(function(message) {
+            var names = venues.map(function(venue) {
+              return venue.venue_name;
+            });
+            if (names.indexOf(message.venue_name) === -1) {
+              venues.push({'name': message.venue_name, 'date': message.date});
+            } else if (message.date > venues[names.indexOf(message.venue_name)].date) {
+              venues[names.indexOf(message.venue_name)].date = message.date;
+            }
+          });
+          return venues;
         });
-        return venues;
-      });
-    } else if (reqBody.sender = 'venue') {
-      return knex('Messages').where({
-        'venue_id': reqUser[venue_id]
-      })
-      .join('Band','Messages.band_id','Bands.band_id')
-      .then(function(messages) {
-        var bands = {};
-        messages.forEach(function(message) {
-          if (!bands[message.band_name] || bands[message.band_name] < message.date) {
-            bands[message.band_name] = message.date;
-          }
+      } else if (user[0].venue_id) {
+        return knex('Messages').where({
+          'venue_id': user[0].venue_id
+        })
+        .join('Bands','Messages.band_id','Bands.band_id')
+        .then(function(messages) {
+          var bands = [];
+          messages.forEach(function(message) {
+            var names = bands.map(function(band) {
+              return band.band_name;
+            });
+            if (names.indexOf(message.band_name) === -1) {
+              bands.push({'name': message.band_name, 'date': message.date});
+            } else if (message.date > bands[names.indexOf(message.band_name)].date) {
+              bands[names.indexOf(message.band_name)].date = message.date;
+            }
+          });
+          return bands;
         });
-        return bands;
-      });
-    }
+      }
+    })
   },
 
-  getConversations: function(reqBody, reqUser) {
+  getConversations: function(user_id) {
     var sender = reqBody.sender + '_id';
     var band_id = reqBody.band_id || reqUser[sender];
     var venue_id = reqBody.venue_id || reqUser[sender];
