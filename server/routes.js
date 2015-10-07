@@ -6,13 +6,8 @@ var Shows = require('./models/shows.js');
 var Venue_Reviews = require('./models/venue_reviews.js');
 var Requests = require('./models/requests.js');
 var Messages = require('./models/messages.js');
-<<<<<<< HEAD
 var jwt = require('jwt-simple');
 var Auth = require('./auth.js')
-=======
-var Auth = require('./auth.js');
-var jwt = require('jwt-simple');
->>>>>>> [server] Adds api/requests to routes
 
 module.exports = function (app) {
 
