@@ -3,7 +3,9 @@
 
   function ConversationController($scope, $window, $location, $rootScope, Messages) {
     
-    $scope.id = $location.$$path.slice(14);
+    $scope.id = parseInt($location.$$path.slice(14));
+
+    Messages.markAsRead({'id': $scope.id});
 
     Messages.getConversation().then(function(messages) {
       $scope.messages = messages.filter(function(message) {

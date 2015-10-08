@@ -36,12 +36,13 @@
 <div>
   <table class="table table-striped table-responsive">
     <thead>
-      <th>Conversations</th><th>Last Message Date</th>
+      <th>Conversations</th><th>Last Message Date</th><th>Unread Messages</th>
     </thead>
     <tbody>
     <tr ng-repeat="message in messages | orderBy:'-date'">
       <td><a href='{{"/#/conversation/" + message.id}}'>{{message.name}}</a></td>
       <td><a href='{{"/#/conversation/" + message.id}}'>{{message.date}}</a></td>
+      <td><a href='{{"/#/conversation/" + message.id}}'>{{message.unread}}</a></td>
     </tr>
     </tbody>
   </table>
