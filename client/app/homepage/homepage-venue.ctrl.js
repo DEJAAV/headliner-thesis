@@ -4,7 +4,8 @@
 
   function HomepageController($scope, $window, $location, $rootScope,
     Homepage, Auth) { // Homepage is the injected service     
-
+    console.log('rootScope current user: ', $rootScope.currentUser);
+    $scope.currentUser = $rootScope.currentUser;
     var geocoder = new google.maps.Geocoder();
 
     $scope.initVenue = function() {

@@ -5,7 +5,7 @@ module.exports = {
   findGenreId: function(name) {
     return knex('Genres')
       .where({
-        genre_name: name
+        'genre_name': name
       })
       .then(function(genre){
         return genre[0].genre_id;

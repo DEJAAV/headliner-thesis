@@ -5,6 +5,9 @@
   function HomepageController($scope, $window, $location, $rootScope,
     Homepage) { // Homepage is the injected service     
     
+    console.log('rootScope current user: ', $rootScope.currentUser);
+    $scope.currentUser = $rootScope.currentUser;
+    
     var geocoder = new google.maps.Geocoder();
 
     $scope.initArtist = function() {

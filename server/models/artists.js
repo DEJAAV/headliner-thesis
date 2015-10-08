@@ -1,10 +1,11 @@
 var Artist_Genres = require('./artist_genres.js');
 var Artist_Members = require('./artist_members.js');
+var Songs = require('./songs.js');
 var knex = require('../db/db.js');
 
 module.exports = {
 
-  create: function(reqBody, user_id) {
+  create: function(reqBody, userId) {
     return knex('Artists')
       .returning('artist_id')
       .insert({
@@ -37,10 +38,14 @@ module.exports = {
       return artist_id[0]
     }).then(function(artistId) {
       return knex('Users').where({
-        'user_id': user_id
+        'user_id': userId
       }).update({
         'artist_id': artistId
-      });
+      }).then(function() {
+        for(var i = 0; i < reqBody.songs.length; i++) {
+          Songs.addSong(song[i], artistId);
+        }
+      })
     })
   },
   
@@ -164,6 +169,36 @@ module.exports = {
         })
       })
     })
+  },
+
+  getArtistByUser: function(user_id) {
+    var artist = {};
+    return knex('Artists').join('Users', 'Users.artist_id', 'Artists.artist_id')
+      .select()
+      .where({
+        'Users.user_id': user_id
+      }).then(function(result) {
+        for(var prop in result[0]) {
+          artist[prop] = result[0][prop]
+        }
+      }).then(function() {
+        return knex('Artist_Genres').join('Genres', 'Artist_Genres.genre_id', 'Genres.genre_id')
+          .select('Genres.genre_name')
+          .where({
+            'Artist_Genres.artist_id': artist.artist_id
+          })
+      }).then(function(genres) {
+        artist.genre = {};
+        for(var i = 0; i < genres.length; i++) {
+          for(var prop in genres) {
+            artist.genre[prop] = true;
+          }
+        }
+      }).then(function() {
+        artist.members = Artist_Members.getMembers(artist.artist_id);
+      }).then(function() {
+        return artist;
+      })
   }
 
 };

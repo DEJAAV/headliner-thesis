@@ -6,7 +6,7 @@ var Venues_Types = require('./venues_types.js')
 
 module.exports = {
 
-  create: function(reqBody, user_id) {
+  create: function(reqBody, userId) {
     return knex('Venues')
       .returning('venue_id')
       .insert({
@@ -38,10 +38,13 @@ module.exports = {
         }
         return venueId[0];
       }).then(function(venueId) {
-      return knex('Users').where({
-        'user_id': user_id
-      }).update({
-        'venue_id': venueId
+        return knex('Users').where({
+          'user_id': userId
+        }).update({
+          'venue_id': venueId
+        }).then(function() {
+          return venueId;
+        })
       });
     })
   },
@@ -153,6 +156,54 @@ module.exports = {
           });
         });
       });
-  }
+  },
 
+  getVenueByUser: function(user_id) {
+  var venue = {};
+  //sync up and grab all information from Venues Table
+  console.log('Firing the getVenueByUser function...');
+  return knex('Venues').join('Users', 'Users.venue_id', 'Venues.venue_id')
+    .select()
+    .where({
+      'Users.user_id': user_id
+    }).then(function(result) {
+      for(var prop in result[0]) {
+        venue[prop] = result[0][prop]
+      }
+    }).then(function() {
+      //create an array of objects with genre_name as their only prop
+      return knex('Venue_Genres').join('Genres', 'Venue_Genres.genre_id', 'Genres.genre_id')
+        .select('Genres.genre_name')
+        .where({
+          'Venue_Genres.venue_id': venue.venue_id
+        })
+    }).then(function(genres) {
+      console.log('Genres as a result of the genres join: ', genres);
+      venue.genre = {};
+      for(var i = 0; i < genres.length; i++) {
+        console.log('This is the ', i, ' in genres: ', genres[i]);
+        for(var prop in genres) {
+          venue.genre[prop] = true;
+        }
+      }
+    }).then(function() {
+      //create an array of objects with type_name as their only prop
+      return knex('Venues_Types').join('Types', 'Types.type_id', 'Venues_Types.type_id')
+        .select('Types.type_name')
+        .where({
+          'Venues_Types.venue_id': venue.venue_id
+        })
+    }).then(function(types) {
+      console.log('Types as a result of the join table: ', types);
+      venue.type = {}
+      for(var i = 0; i < types.length; i++) {
+        for(var prop in types) {
+          venue.type[prop] = true;
+        }
+      }
+    }).then(function() {
+      console.log('venue inside of getVenueByUser: ', venue); 
+      return venue;
+    })
+  }
 };

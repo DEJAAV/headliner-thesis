@@ -14,15 +14,19 @@ module.exports = function (app) {
 
   app.post('/api/users/venues', function(req, res, next) {
     var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret);
-    Venues.create(req.body, user_id).then(function(result) {
-      res.json('success');
+    Venues.create(req.body, user_id).then(function(venue_id) {
+      Venues.getVenueByUser(user_id).then(function(venue) {
+        res.json(venue);
+      })
     });
   });
 
   app.post('/api/users/artists', function(req, res, next) {
     var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret);
     Artists.create(req.body, user_id).then(function(result) {
-      res.json('success');
+      Artists.getArtistByUser(user_id).then(function(artist) {
+        res.json(artist);
+      })
     });
   });
 

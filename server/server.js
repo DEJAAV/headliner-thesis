@@ -21,6 +21,8 @@ var jwt = require('jwt-simple');
 //Auth and model modules
 var Auth = require('./auth.js');
 var Users = require('./models/users.js');
+var Venues = require('./models/venues.js');
+var Artists = require('./models/artists.js');
 
 //db
 var knex = require('knex')(Auth.pgData);
@@ -55,17 +57,17 @@ passport.deserializeUser(function(id, done) {
 });
 
 //some middleware to log what's going on
-app.use(function(req, res, next) {
-  console.log('current user: ');
-  console.log(req.user);
-  console.log('**************');
-  console.log('current session: ');
-  console.log(req.session);
-  console.log('Current Request: ');
-  console.log(req);
-  console.log('************************');
-  next();
-});
+// app.use(function(req, res, next) {
+//   console.log('current user: ');
+//   console.log(req.user);
+//   console.log('**************');
+//   console.log('current session: ');
+//   console.log(req.session);
+//   console.log('Current Request: ');
+//   console.log(req);
+//   console.log('************************');
+//   next();
+// });
 
 /*---------------Local Sign Up Strategy ---------------------- */
 passport.use('local-signup', new LocalStrategy({
@@ -255,15 +257,26 @@ app.get('/auth/init', function(req, res) {
     response.token = jwt.encode(req.user.user_id, Auth.secret);
     Users.getUserById(req.user.user_id).then(function(user) {
       if(user[0].artist_id !== null) {
-        response.type = 'artist';
+        response.category = 'artist';
+        Artist.getArtistByUser(req.user.user_id).then(function(artist) {
+          for(var prop in artist) {
+            response[prop] = artist[prop]
+          }
+          res.json(response);
+        })
       } else if(user[0].venue_id !== null) {
-        response.type = 'venue';
+        response.category = 'venue';
+        Venues.getVenueByUser(req.user.user_id).then(function(venue) {
+          for(var prop in venue) {
+            response[prop] = venue[prop];
+          }
+          res.json(response);
+        })
       } else {
-        response.type = null;
+        response.category = null;
+        res.json(response);
       }
-    }).then(function() {
-      res.json(response);
-    });
+    })
 })
 
 require('./routes.js')(app);

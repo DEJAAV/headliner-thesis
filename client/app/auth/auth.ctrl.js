@@ -7,7 +7,7 @@
 
   .controller('AuthController', AuthController);
 
-  function AuthController ($scope, $window, $location, Auth, Global, Music) {
+  function AuthController ($scope, $window, $location, Auth, Global, Music, $rootScope) {
   $scope.venue = {};
   $scope.user = {}; // for artists
   $scope.user.member = {};
@@ -45,7 +45,8 @@
 
     $scope.signupVenue = function () {
       Auth.signupVenue($scope.venue)
-        .then(function () {
+        .then(function (data) {
+          $rootScope.currentUser = data;
           $window.localStorage.setItem('type', 'venue');
           $location.path('/homepage-venue');
         })
@@ -56,7 +57,8 @@
 
     $scope.signupArtist = function () {
       Auth.signupArtist($scope.user)
-        .then(function () {
+        .then(function (data) {
+          $rootScope.currentUser = data;
           $window.localStorage.setItem('type', 'artist');
           $location.path('/homepage-artist');
         })
@@ -81,8 +83,10 @@
         $scope.login.error = data.error;
       } else {
         if (data.type === 'venue') {
+          $rootScope.currentUser = data;
           $location.path('/homepage-venue');
         } else if (data.type === 'artist') {
+          $rootScope.currentUser = data;
           $location.path('/homepage-artist');
         } else {
           $location.path('/select');
