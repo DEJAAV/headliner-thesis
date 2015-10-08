@@ -7,7 +7,7 @@
 
   .controller('AuthController', AuthController);
 
-  function AuthController ($scope, $window, $location, Auth, Global, Music) {
+  function AuthController ($scope, $window, $location, Auth, Global, Music, $rootScope) {
   $scope.venue = {};
   $scope.user = {}; // for artists
   $scope.user.member = {};
@@ -81,8 +81,10 @@
         $scope.login.error = data.error;
       } else {
         if (data.type === 'venue') {
+          $rootScope.currentUser = data;
           $location.path('/homepage-venue');
         } else if (data.type === 'artist') {
+          $rootScope.currentUser = data;
           $location.path('/homepage-artist');
         } else {
           $location.path('/select');

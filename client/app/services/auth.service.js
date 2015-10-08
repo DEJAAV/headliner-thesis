@@ -29,8 +29,9 @@
         data: user
       })
       .then(function(resp) {
-        $window.localStorage.setItem('type', 'venue');
-        return resp.data.token;
+        $window.localStorage.setItem('type', resp.data.type);
+        $window.localStorage.setItem('id', resp.data.id);
+        return resp.data;
       });
     };
 
