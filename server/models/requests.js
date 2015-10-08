@@ -4,17 +4,16 @@ var Users = require('./users.js');
 module.exports = {
 
   getRequests: function(user_id) {
-    Users.getUserById(user_id)
+    return Users.getUserById(user_id)
     .then(function(user) {
-      console.log(user[0].band_id, 'user')
       if (user[0].band_id) {
         return knex('Requests').where({
           'band_id': user[0].band_id
-        }).select()
+        })
       } else {
         return knex('Requests').where({
           'venue_id': user[0].venue_id
-        }).select()
+        })
       }
     })
   },
