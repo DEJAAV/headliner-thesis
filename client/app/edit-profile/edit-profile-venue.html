@@ -6,7 +6,7 @@
 
   <!-- CHANGE PASSWORD  -->
   <h5>Change Password:</h5>
-   <form editable-form name="editLoginForm" onaftersave="updateVenuePswd()">
+   <form editable-form name="editLoginForm" onaftersave="updateUserPswd(user)">
       <div>
         <!-- username is not editable -->
         <span class="title">Username: </span>
@@ -90,92 +90,17 @@
           <div class="chip lime lighten-4" ng-repeat="(key,data) in venue.genre" ng-if="data">{{ key }}</div>
         </div>
   
-        <!-- START OF GENRE CHECKBOXES -->
-        <div class="row">
-          <div class="input-field col s12" ng-show="editableForm.$visible">
-            <div class="input-field col s3">
-              <input type="checkbox" id="americana" ng-model="venue.genre.americana"/>
-              <label for="americana">americana</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="blues" ng-model="venue.genre.blues"/>
-              <label for="blues">blues</label>
-            </div>
-            <div class="input-field col s3"> 
-              <input type="checkbox" id="bluegrass" ng-model="venue.genre.bluegrass"/>
-              <label for="bluegrass">bluegrass</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="classical" ng-model="venue.genre.classical"/>
-              <label for="classical">classical</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="comedy" ng-model="venue.genre.comedy"/>
-              <label for="comedy">comedy</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="country" ng-model="venue.genre.country"/>
-              <label for="country">country</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="cover" ng-model="venue.genre.cover"/>
-              <label for="cover">cover band</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="dj" ng-model="venue.genre.dj"/>
-              <label for="dj">dj</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="edm" ng-model="venue.genre.edm"/>
-              <label for="edm">edm</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="electronic" ng-model="venue.genre.electronic"/>
-              <label for="electronic">electronic</label>
-            </div>
-            <div class="input-field col s3"> 
-              <input type="checkbox" id="folk" ng-model="venue.genre.folk"/>
-              <label for="folk">folk</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="hiphop" ng-model="venue.genre.hiphop"/>
-              <label for="hiphop">hiphop</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="jazz" ng-model="venue.genre.jazz"/>
-              <label for="jazz">jazz</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="latin" ng-model="venue.genre.latin"/>
-              <label for="latin">latin</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="metal" ng-model="venue.genre.metal"/>
-              <label for="metal">metal</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="pop" ng-model="venue.genre.pop"/>
-              <label for="pop">pop</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="rnb" ng-model="venue.genre.rnb"/>
-              <label for="rnb">rnb</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="rock" ng-model="venue.genre.rock"/>
-              <label for="rock">rock</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="spoken" ng-model="venue.genre.spoken"/>
-              <label for="spoken">spoken word</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="world" ng-model="venue.genre.world"/>
-              <label for="world">world</label>
-            </div>
+        
+      <!-- GENRE CHECKBOXES --> 
+        <div class="row" ng-show="editableForm.$visible">
+          <!-- ng-repeat to make checkboxes for all genres  -->
+          <div class="input-field col s3" ng-repeat="(oneGenre,enabled) in allGenres">
+            <input type="checkbox" id="{{oneGenre}}" ng-model="venue.genre[oneGenre]"/>
+            <label for="{{oneGenre}}">{{oneGenre}}</label>
           </div>
         </div>
-        <!-- END OF GENRE CHECKBOXES  -->  
+
+      <!-- ABOUT TEXT BOX SECTION -->
         <div class="row">
           <div>
             <span class="title">About: </span>
@@ -188,80 +113,17 @@
         </div>          
 
         <!-- START OF TYPE CHECKBOXES  -->
+
+
+        <!-- VENUE TYPE CHECKBOXES -->
         <div class="row" ng-show="editableForm.$visible">
-          <div class="input-field col s12">
-            <div class="input-field col s3">
-              <input type="checkbox" id="casual" ng-model="venue.type.casual"/>
-              <label for="casual">casual</label>
-            </div>
-            <div class="input-field col s3">  
-              <input type="checkbox" id="beer" ng-model="venue.type.beer"/>
-              <label for="beer">beer</label>
-            </div>
-            <div class="input-field col s3">               
-              <input type="checkbox" id="champagne" ng-model="venue.type.champagne"/>
-              <label for="champagne">champagne</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="cocktail" ng-model="venue.type.cocktail"/>
-              <label for="cocktail">cocktail</label>
-            </div>
-            <div class="input-field col s3">          
-              <input type="checkbox" id="country" ng-model="venue.type.country"/>
-              <label for="country">country</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="dance" ng-model="venue.type.dance"/>
-              <label for="dance">dance</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="dive" ng-model="venue.type.dive"/>
-              <label for="dive">dive</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="gay" ng-model="venue.type.gay"/>
-              <label for="gay">gay</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="hookah" ng-model="venue.type.hookah"/>
-              <label for="hookah">hookah</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="irish" ng-model="venue.type.irish"/>
-              <label for="irish">irish</label>
-            </div>
-            <div class="input-field col s3">               
-              <input type="checkbox" id="jazz" ng-model="venue.type.jazz"/>
-              <label for="jazz">jazz</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="karoke" ng-model="venue.type.karoke"/>
-              <label for="karoke">karoke</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="coffee" ng-model="venue.type.coffee"/>
-              <label for="coffee">coffee</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="lounge" ng-model="venue.type.lounge"/>
-              <label for="lounge">lounge</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="music" ng-model="venue.type.music"/>
-              <label for="music">music</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="piano" ng-model="venue.type.piano"/>
-              <label for="piano">piano</label>
-            </div>
-            <div class="input-field col s3">           
-              <input type="checkbox" id="wine" ng-model="venue.type.wine"/>
-              <label for="wine">wine</label>
-            </div>
+          <!-- ng-repeat to make checkboxes for all types  -->
+          <div class="input-field col s3" ng-repeat="(oneType,enabled) in allTypes">
+            <input type="checkbox" id="{{oneType}}" ng-model="venue.type[oneType]"/>
+            <label for="{{oneType}}">{{oneType}}</label>
           </div>
-        </div>  
-        <!-- END OF TYPE CHECKBOXES  -->   
-      
+        </div>
+       
       <hr>   
       
       <h4>CONTACT INFO: </h4>
