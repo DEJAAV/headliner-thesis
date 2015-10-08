@@ -17,7 +17,9 @@ module.exports = {
               return venue.name;
             });
             if (names.indexOf(message.venue_name) === -1) {
-              venues.push({'name': message.venue_name, 'date': message.date});
+              venues.push({'name': message.venue_name,
+                           'id': message.venue_id,
+                           'date': message.date});
             } else if (message.date > venues[names.indexOf(message.venue_name)].date) {
               venues[names.indexOf(message.venue_name)].date = message.date;
             }
@@ -36,7 +38,9 @@ module.exports = {
               return artist.name;
             });
             if (names.indexOf(message.artist_name) === -1) {
-              artists.push({'name': message.artist_name, 'date': message.date});
+              artists.push({'name': message.artist_name,
+                            'id': message.artist_id,
+                            'date': message.date});
             } else if (message.date > artists[names.indexOf(message.artist_name)].date) {
               artists[names.indexOf(message.artist_name)].date = message.date;
             }
@@ -59,10 +63,9 @@ module.exports = {
           messages.forEach(function(message) {
             if (message.artist_id === user[0].artist_id) {
               venues.push({'sender': message.sender === 'venue' ? message.venue_name : message.artist_name, 
-                           'reciever': message.sender === 'venue' ? message.artist_name : message.venue_name, 
                            'date': message.date, 
-                           'message': message.message
-                         });
+                           'message': message.message,
+                           'venue_id': message.venue_id});
             }
           });
           return venues;
@@ -76,10 +79,9 @@ module.exports = {
           messages.forEach(function(message) {
             if (message.venue_id === user[0].venue_id) {
               artists.push({'sender': message.sender === 'venue' ? message.venue_name : message.artist_name, 
-                          'reciever': message.sender === 'venue' ? message.artist_name : message.venue_name, 
-                          'date': message.date, 
-                          'message': message.message
-                        });
+                            'date': message.date, 
+                            'message': message.message,
+                            'artist_id': message.artist_id});
             }
           });
           return artists;
@@ -88,14 +90,26 @@ module.exports = {
     })
   },
 
-  sendMessage: function(reqBody, reqUser) {
-    var sender = reqBody.sender + '_id'
-    return knex('Messages').insert({
-      'date': reqBody.date,
-      'message': reqBody.message,
-      'artist_id': reqBody.artist_id || reqUser[sender],
-      'venue_id': reqBody.venue_id || reqUser[sender],
-      'sender': reqBody.sender
+  sendMessage: function(reqBody, user_id) {
+    return knex('Users').where({
+      'user_id': user_id}).then(function(user) {
+      if (user[0].artist_id) {
+        return knex('Messages').insert({
+          'date': reqBody.date,
+          'message': reqBody.message,
+          'artist_id': user[0].artist_id,
+          'venue_id': reqBody.id,
+          'sender': 'artist'
+        });
+      } else if (user[0].venue_id) {
+        return knex('Messages').insert({
+          'date': reqBody.date,
+          'message': reqBody.message,
+          'artist_id': reqBody.id,
+          'venue_id': user[0].venue_id,
+          'sender': 'venue'
+        });
+      }
     });
   }
 

@@ -6,7 +6,7 @@ var Venues_Types = require('./venues_types.js')
 
 module.exports = {
 
-  create: function(reqBody, reqUser) {
+  create: function(reqBody, user_id) {
     return knex('Venues')
       .returning('venue_id')
       .insert({
@@ -38,15 +38,12 @@ module.exports = {
         }
         return venueId[0];
       }).then(function(venueId) {
-        console.log('Final promise in creating a new venue: ');
-        console.log(venueId);
-        console.log()
-        return knex('Users').where({
-          'user_id': reqUser.user_id
-        }).update({
-          'venue_id': venueId
-        });
+      return knex('Users').where({
+        'user_id': user_id
+      }).update({
+        'venue_id': venueId
       });
+    })
   },
 
   update: function(reqBody) {
