@@ -26,12 +26,8 @@ module.exports = {
   // },
 
   sendRequest: function(reqBody, user_id){
-    console.log(reqBody, 'reqBody')
     return Users.getUserById(user_id)
     .then(function(user){
-      console.log(user, "useruser")
-      console.log(user[0].artist_id, "artist_id")
-      console.log(user[0].venue_id, 'venueid')
       if (user[0].venue_id) {
         return knex('Requests').insert({
           'date': reqBody.date,
@@ -54,23 +50,12 @@ module.exports = {
     })
   },
 
-  acceptRequestArtist: function(date, artist_id, venue_id) {
+  acceptRequest: function(reqBody) {
     return knex('Requests').where({
-      'date': date,
-      'artist_id': artist_id,
-      'venue_id': venue_id
-    }).insert({
-      'artist_accept': 'true'
-    })
-  },
-
-  acceptRequestVenue: function (date, artist_id, venue_id) {
-    return knex('Requests').where({
-      'date': date,
-      'artist_id': artist_id,
-      'venue_id': venue_id
-    }).insert({
-      'venue_accept': 'true'
-    })
+      'date': reqBody.date,
+      'artist_id': reqBody.artist_id,
+      'venue_id': reqBody.venue_id
+    }).del()
   }
+
 };
