@@ -3,7 +3,10 @@
 
   function RequestsController($scope, $window, $location, $rootScope, Requests) {
     Requests.getRequests().then(function(requests){
+      console.log('requests', requests)
       $scope.requests = requests
     })
+
+    console.log($scope.requests)
   }
 })();

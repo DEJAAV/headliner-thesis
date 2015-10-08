@@ -20,7 +20,8 @@ module.exports = function (app) {
   });
 
   app.post('/api/users/artists', function(req, res, next) {
-    Artists.create(req.body, req.user).then(function(result) {
+    var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret)
+    Artists.create(req.body, user_id).then(function(result) {
       res.json('success');
     });
   });
