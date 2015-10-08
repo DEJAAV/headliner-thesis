@@ -117,15 +117,15 @@ module.exports = {
             return [genres,types];
           })
       }).then(function(genres_types) {
-        return knex('Bands')
-          .join('Shows', 'Bands.band_id', 'Shows.band_id')
-          .then(function(bands_shows) {
+        return knex('Artists')
+          .join('Shows', 'Artists.artist_id', 'Shows.artist_id')
+          .then(function(artists_shows) {
             var shows = {};
-            for (var i = 0; i < bands_shows.length; i++) {
-              if (shows[bands_shows[i].venue_id]) {
-                shows[bands_shows[i].venue_id].push({'band': bands_shows[i].band_name, 'date': bands_shows[i].date});
+            for (var i = 0; i < artists_shows.length; i++) {
+              if (shows[artists_shows[i].venue_id]) {
+                shows[artists_shows[i].venue_id].push({'artist': artists_shows[i].artist_name, 'date': artists_shows[i].date});
               } else {
-                shows[bands_shows[i].venue_id] = [{'band': bands_shows[i].band_name, 'date': bands_shows[i].date}];
+                shows[artists_shows[i].venue_id] = [{'artist': artists_shows[i].artist_name, 'date': artists_shows[i].date}];
               }
             }
             return genres_types.concat(shows);
@@ -133,14 +133,14 @@ module.exports = {
       }).then(function(genres_types_shows) {
         return knex('Venue_Reviews')
           .join('Shows', 'Venue_Reviews.show_id', 'Shows.show_id')
-          .join('Bands', 'Shows.band_id', 'Bands.band_id')
+          .join('Artists', 'Shows.artist_id', 'Artists.artist_id')
           .then(function(rsb) {
             var reviews = {};
             for (var i = 0; i < rsb.length; i++) {
               if (reviews[rsb[i].venue_id]) {
-                reviews[rsb[i].venue_id].push({'band': rsb[i].band_name, 'show_date': rsb[i].date, 'rating': rsb[i].rating, 'comment': rsb[i].comment});
+                reviews[rsb[i].venue_id].push({'artist': rsb[i].artist_name, 'show_date': rsb[i].date, 'rating': rsb[i].rating, 'comment': rsb[i].comment});
               } else {
-                reviews[rsb[i].venue_id] = [{'band': rsb[i].band_name, 'show_date': rsb[i].date, 'rating': rsb[i].rating, 'comment': rsb[i].comment}];
+                reviews[rsb[i].venue_id] = [{'artist': rsb[i].artist_name, 'show_date': rsb[i].date, 'rating': rsb[i].rating, 'comment': rsb[i].comment}];
               }
             }
             return genres_types_shows.concat(reviews);

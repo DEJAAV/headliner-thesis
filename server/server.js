@@ -184,7 +184,7 @@ app.post('/api/users/local', passport.authenticate('local-signup', {}), function
   var response = {};
   response.token = jwt.encode(req.user.user_id, Auth.secret);
   Users.getUserById(req.user.user_id).then(function(user) {
-    if(user[0].band_id !== null) {
+    if(user[0].artist_id !== null) {
       response.type = 'artist';
     } else if(user[0].venue_id !== null) {
       response.type = 'venue';
@@ -204,7 +204,7 @@ app.post('/api/users/login', passport.authenticate('local-signin', { failureRedi
     var response = {};
     response.token = jwt.encode(req.user.user_id, Auth.secret);
     Users.getUserById(req.user.user_id).then(function(user) {
-      if(user[0].band_id !== null) {
+      if(user[0].artist_id !== null) {
         response.type = 'artist';
       } else if(user[0].venue_id !== null) {
         response.type = 'venue';
@@ -254,7 +254,7 @@ app.get('/auth/init', function(req, res) {
     var response = {};
     response.token = jwt.encode(req.user.user_id, Auth.secret);
     Users.getUserById(req.user.user_id).then(function(user) {
-      if(user[0].band_id !== null) {
+      if(user[0].artist_id !== null) {
         response.type = 'artist';
       } else if(user[0].venue_id !== null) {
         response.type = 'venue';

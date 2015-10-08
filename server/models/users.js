@@ -79,7 +79,7 @@ module.exports = {
   },
 
   profile: function(req) {
-    //user_id, category, venue or band_id, shows, pending requests as sender and receiver
+    //user_id, category, venue or artist_id, shows, pending requests as sender and receiver
     var res = {};
     var userId = jwt.decode(req.headers['x-access-token'], Auth.secret);
     res.user_id = userId;
@@ -91,20 +91,20 @@ module.exports = {
       } else {
         res.local = true;
       }
-      //check if the user is a venue or band
+      //check if the user is a venue or artist
       if(user[0].venue_id !== null) {
         res.category = 'venue';
         res.venue_id = user[0].venue_id;
       } else {
-        res.category = 'band';
-        res.band_id = user[0].band_id;
+        res.category = 'artist';
+        res.artist_id = user[0].artist_id;
       }
     }).then(function() {
       //get the shows based off of the category id
-      if(res.category === 'band') {
+      if(res.category === 'artist') {
         return knex('Shows').select()
           .where({
-            'band_id': res.band_id
+            'artist_id': res.artist_id
           }).then(function(shows) {
             return shows;
           })
@@ -129,9 +129,9 @@ module.exports = {
             'venue_id': res.venue_id
           })
       } else {
-        return knex('Bands').select()
+        return knex('Artists').select()
           .where({
-            'band_id': res.band_id
+            'artist_id': res.artist_id
           })
       }
     }).then(function(result) {
@@ -169,11 +169,11 @@ module.exports = {
             'venue_id': res.venue_id
           })
       } else {
-        return knex('Band_Genres')
-          .join('Genres', 'Band_Genres.genre_id', 'Genres.genre_id')
+        return knex('Artist_Genres')
+          .join('Genres', 'Artist_Genres.genre_id', 'Genres.genre_id')
           .select('genre_name')
           .where({
-            'band_id': res.band_id
+            'artist_id': res.artist_id
           })
       }
     }).then(function(genres) {
@@ -184,8 +184,8 @@ module.exports = {
         }
       }
     }).then(function() {
-      //band members placeholder for profile builder
-      if(res.band_id) {
+      //artist members placeholder for profile builder
+      if(res.artist_id) {
 
       }
     }).then(function() {
@@ -197,7 +197,7 @@ module.exports = {
             'venue_id': res.venue_id
           })
       } else {
-        return knex('Band_Reviews')
+        return knex('Artist_Reviews')
       }
     })
   },

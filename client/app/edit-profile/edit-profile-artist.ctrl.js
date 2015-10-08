@@ -17,7 +17,7 @@
 
     $scope.user = {
       "member":{"Ellie":"drummer","Bob":"lead guitar"},
-      "band_name":"JohnnySwim",
+      "artist_name":"JohnnySwim",
       "bio":"We love all music and dancing.",
       "city":"Austin",
       "state":"TX",

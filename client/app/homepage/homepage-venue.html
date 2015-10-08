@@ -42,7 +42,7 @@
     Insert block quote.
   </blockquote>
 
-  <input type='text' ng-model='search.band_name' placeholder='search by band name' />
+  <input type='text' ng-model='search.artist_name' placeholder='search by artist name' />
 
     <div class="row">
 
@@ -235,14 +235,14 @@
               <img class="activator" src="http://i.imgur.com/ZNc1JZq.jpg">
             </div>
             <div class="card-content">
-              <span class="card-title activator grey-text text-darken-4">{{artist.band_name}}<i class="material-icons right">more_vert</i></span>
+              <span class="card-title activator grey-text text-darken-4">{{artist.artist_name}}<i class="material-icons right">more_vert</i></span>
               <p>{{ artist.city }} , {{ artist.state }}</p> 
               <div class="chip lime lighten-4" ng-repeat="(key,data) in artist.genre">{{ key }}</div>
               <hr>
-              <p><a href='{{"#/profile-artist/" + artist.band_id}}'>get more details</a></p>
+              <p><a href='{{"#/profile-artist/" + artist.artist_id}}'>get more details</a></p>
             </div>
             <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4">About {{artist.band_name}}<i class="material-icons right">close</i></span>
+              <span class="card-title grey-text text-darken-4">About {{artist.artist_name}}<i class="material-icons right">close</i></span>
                 <p class="grey-text text-lighten">{{ artist.about }}</p>
                 <h6 ng-repeat="(key,data) in artist.type">{{ key }}</h6>
             </div>
