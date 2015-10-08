@@ -36,16 +36,16 @@
   <!--  && $rootScope.currentUser.artist_id) || (request.sender === 'venue' && $rootScope.currentUser.venue_id) -->
   <div class="row" ng-model="requests">
     <div class="col-md-6"> <h4>Received Requests</h4>
-      <div ng-repeat="request in requests" ng-if="request.sender === 'venue'">
+      <div ng-repeat="request in requests" ng-if="request.sender === 'artist'">
         <p><b>From:</b> {{request.sender}}</p>
         <p><b>Date:</b> {{request.date}}</p>
         <p><b>Message:</b> {{request.message}}</p>
         <button ng-click="acceptRequest(request); addShow(request)">Accept</button>
-        <button>Reject</button>
+        <button ng-click="deleteRequest(request)">Reject</button>
       </div>
     </div>
     <div class="col-md-6"> <h4>Sent Requests</h4>
-        <div ng-repeat="request in requests" ng-if="request.sender === 'artist'">
+        <div ng-repeat="request in requests" ng-if="request.sender === 'venue'">
           <p><b>To:</b> {{request.sender}}</p>
           <p><b>Date:</b> {{request.date}}</p>
           <p><b>Message:</b> {{request.message}}</p>

@@ -10,10 +10,15 @@
       });
     });
 
-    $scope.acceptRequest = function(req){
-      Requests.acceptRequest(req);
+    $scope.acceptRequest = function(req) {
+      Requests.deleteRequest(req);
       $window.location.reload();
     };
+
+    $scope.deleteRequest = function(req) {
+      Requests.deleteRequest(req);
+      $window.location.reload();
+    }
 
     $scope.addShow = function(req){
       Requests.addShow(req);
