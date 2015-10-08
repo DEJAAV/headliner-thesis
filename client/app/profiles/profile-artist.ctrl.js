@@ -25,10 +25,14 @@
       $scope.request.band_id = Profile.id;
       $scope.request.receiver = 'band';
       $scope.request.sender = 'venue';
-      $scope.request.date = $scope.date;
       Profile.sendRequest($scope.request);
     }
 
+    $scope.init = function() {
+      $(document).ready(function(){
+        $('ul.tabs').tabs();
+      });
+    };
     $scope.minDate = new Date();
     $scope.opened = false;
 
