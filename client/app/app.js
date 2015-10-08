@@ -10,6 +10,7 @@
     'headliner.globalService',
     'headliner.messagesService',
     'headliner.requestsService',
+    'headliner.musicService',
     'headliner.auth',
     'headliner.venueHomepage',
     'headliner.artistHomepage',
@@ -100,6 +101,10 @@
         templateUrl: 'app/auth/signup-artist/signup-artist-about.html',
         url: '/about'
       })
+      .state('signup-artist.music', {
+        templateUrl: 'app/auth/signup-artist/signup-artist-music.html',
+        url: '/music'
+      })      
       .state('signup-artist.label', {
         templateUrl: 'app/auth/signup-artist/signup-artist-label.html',
         url: '/label'

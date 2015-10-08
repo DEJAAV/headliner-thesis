@@ -7,7 +7,7 @@
 
   .controller('AuthController', AuthController);
 
-  function AuthController ($scope, $window, $location, Auth, Global) {
+  function AuthController ($scope, $window, $location, Auth, Global, Music) {
   $scope.venue = {};
   $scope.user = {}; // for artists
   $scope.user.member = {};
@@ -15,6 +15,20 @@
   $scope.states = Global.states;
   $scope.allGenres = Global.allGenres;
   $scope.allTypes = Global.allTypes;
+
+  $scope.songs = [];
+
+  $scope.song = {
+    url: undefined,
+    title: undefined,
+    artist: undefined
+  }
+
+  $scope.addSongtoList = function (song) {
+    $scope.songs.push(song);
+    $scope.user.songs = $scope.songs;
+    $scope.song = null;
+  }
 
   $scope.signupGeneral = function () {
     Auth.signupGeneral($scope.user)
