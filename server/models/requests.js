@@ -6,11 +6,12 @@ module.exports = {
   getRequests: function(user_id) {
     return Users.getUserById(user_id)
     .then(function(user) {
+      console.log(user, 'user')
       if (user[0].artist_id) {
         return knex('Requests').where({
           'artist_id': user[0].artist_id
         })
-      } else {
+      } else if (user[0].venue_id){
         return knex('Requests').where({
           'venue_id': user[0].venue_id
         })
@@ -30,6 +31,7 @@ module.exports = {
     .then(function(user){
       console.log(user, "useruser")
       console.log(user[0].artist_id, "artist_id")
+      console.log(user[0].venue_id, 'venueid')
       if (user[0].venue_id) {
         return knex('Requests').insert({
           'date': reqBody.date,
@@ -39,7 +41,7 @@ module.exports = {
           'sender': 'venue',
           'venue_accept': 'true'
         })
-      } else {
+      } else if (user[0].artist_id){
         return knex('Requests').insert({
           'date': reqBody.date,
           'message': reqBody.message,

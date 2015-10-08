@@ -70,6 +70,8 @@ module.exports = function (app) {
 
   app.post('/api/request', function(req, res, next) {
     var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret);
+    console.log(req.body, 'reqBody')
+    console.log(user_id, 'userid')
     Requests.sendRequest(req.body, user_id).then(function(result) {
       res.json('success');
     });
