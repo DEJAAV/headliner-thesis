@@ -33,4 +33,12 @@
   </div><!-- /.container-fluid -->
 </nav>
 
+<div class="box">
+  <div ng-repeat="message in messages | orderBy:'-date'">
+    <h6>{{message.sender}} on {{message.date}}</h6>
+    <p>{{message.message}}</p>
+  </div>
+</div>
+
+
 </div>

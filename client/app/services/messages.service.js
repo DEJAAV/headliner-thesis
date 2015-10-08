@@ -15,7 +15,7 @@
       })
     };
 
-    function getConversations () {
+    function getConversation () {
       return $http({
         method: 'GET',
         url: '/api/conversations',
@@ -38,7 +38,7 @@
 
     return {
       getMessages: getMessages,
-      getConversations: getConversations,
+      getConversation: getConversation,
       sendMessage: sendMessage
     };
   
