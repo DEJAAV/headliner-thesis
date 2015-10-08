@@ -28,11 +28,6 @@
       Profile.sendRequest($scope.request);
     }
 
-    $scope.init = function() {
-      $(document).ready(function(){
-        $('ul.tabs').tabs();
-      });
-    };
     $scope.minDate = new Date();
     $scope.opened = false;
 
