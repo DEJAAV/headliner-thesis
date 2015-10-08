@@ -9,7 +9,7 @@
 
   function AuthController ($scope, $window, $location, Auth, Global) {
   $scope.venue = {};
-  $scope.user = {}; // for bands
+  $scope.user = {}; // for artists
   $scope.user.member = {};
 
   $scope.states = Global.states;
@@ -52,7 +52,7 @@
     };    
 
   
-    //Sets a band member's name as a property in the
+    //Sets a artist member's name as a property in the
     //member object, their role as the value
     $scope.addNewMember = function(name, role){
         $scope.user.member[name] = role;

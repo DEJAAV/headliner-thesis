@@ -12,7 +12,7 @@
     $scope.getArtistById = function(id){
       Profile.getAllArtists().then(function(artists) {
         for (var artist in artists) {
-          if (artists[artist].band_id.toString() === Profile.id) {
+          if (artists[artist].artist_id.toString() === Profile.id) {
             $scope.artist = artists[artist]
           }
         }
@@ -22,8 +22,8 @@
     $scope.getArtistById(Profile.id);
 
     $scope.sendRequest = function() {
-      $scope.request.band_id = Profile.id;
-      $scope.request.receiver = 'band';
+      $scope.request.artist_id = Profile.id;
+      $scope.request.receiver = 'artist';
       $scope.request.sender = 'venue';
       Profile.sendRequest($scope.request);
     }

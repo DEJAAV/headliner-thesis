@@ -8,7 +8,7 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('Users', function(table) {
       table.increments('user_id').primary();
       table.string('password');
-      table.integer('band_id').references('band_id').inTable('Bands');
+      table.integer('artist_id').references('artist_id').inTable('Artists');
       table.integer('venue_id').references('venue_id').inTable('Venues');
       table.string('email');
       table.string('facebook_email');
@@ -19,9 +19,9 @@ exports.up = function(knex, Promise) {
       table.string('google_id');
     }),
 
-    knex.schema.createTable('Bands', function(table) {
-      table.increments('band_id').primary();
-      table.string('band_name');
+    knex.schema.createTable('Artists', function(table) {
+      table.increments('artist_id').primary();
+      table.string('artist_name');
       table.string('onTour');
       table.string('zip');
       table.string('phone');
@@ -29,7 +29,7 @@ exports.up = function(knex, Promise) {
       table.string('facebook');
       table.string('youtube');
       table.string('soundcloud');
-      table.string('bandcamp');
+      table.string('artistcamp');
       table.string('website');
       table.string('bio');
       table.string('email');
@@ -59,13 +59,13 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('Shows', function(table) {
       table.increments('show_id').primary();
       table.integer('venue_id').references('venue_id').inTable('Venues');
-      table.integer('band_id').references('band_id').inTable('Bands');
+      table.integer('artist_id').references('artist_id').inTable('Artists');
       table.string('date');
     }),
 
-    knex.schema.createTable('Band_Reviews', function(table) {
-      table.increments('bandReview_id').primary();
-      table.integer('band_id').references('band_id').inTable('Bands');
+    knex.schema.createTable('Artist_Reviews', function(table) {
+      table.increments('artistReview_id').primary();
+      table.integer('artist_id').references('artist_id').inTable('Artists');
       table.integer('show_id').references('show_id').inTable('Shows');
       table.integer('rating');
       table.string('comment');
@@ -79,14 +79,14 @@ exports.up = function(knex, Promise) {
       table.string('comment');
     }),
 
-    knex.schema.createTable('Band_Genres', function(table) {
-      table.integer('band_id').references('band_id').inTable('Bands');
+    knex.schema.createTable('Artist_Genres', function(table) {
+      table.integer('artist_id').references('artist_id').inTable('Artists');
       table.integer('genre_id').references('genre_id').inTable('Genres');
     }),
 
-    knex.schema.createTable('Band_Members', function(table) {
+    knex.schema.createTable('Artist_Members', function(table) {
       table.increments('member_id').primary();
-      table.integer('band_id').references('band_id').inTable('Bands');
+      table.integer('artist_id').references('artist_id').inTable('Artists');
       table.string('member_name');
       table.string('title');
     }),
@@ -109,10 +109,10 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('Requests', function(table) {
       table.increments('request_id').primary();
       table.integer('venue_id').references('venue_id').inTable('Venues');
-      table.integer('band_id').references('band_id').inTable('Bands');
+      table.integer('artist_id').references('artist_id').inTable('Artists');
       table.string('date');
       table.string('message');
-      table.string('band_accept');
+      table.string('artist_accept');
       table.string('venue_accept');
       table.string('sender');
     }),
@@ -120,7 +120,7 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('Messages', function(table) {
       table.increments('message_id').primary();
       table.integer('venue_id').references('venue_id').inTable('Venues');
-      table.integer('band_id').references('band_id').inTable('Bands');
+      table.integer('artist_id').references('artist_id').inTable('Artists');
       table.string('date');
       table.string('message');
       table.string('sender');
@@ -129,7 +129,7 @@ exports.up = function(knex, Promise) {
 
     knex.schema.createTable('Songs', function(table) {
       table.increments('song_id').primary();
-      table.integer('band_id').references('band_id').inTable('Bands');
+      table.integer('artist_id').references('artist_id').inTable('Artists');
       table.string('title');
       table.string('artist');
       table.string('url');
@@ -141,13 +141,13 @@ exports.down = function(knex, Promise) {
   return Promise.all([
     knex.schema.dropTable('Genres'),
     knex.schema.dropTable('Users'),
-    knex.schema.dropTable('Bands'),
+    knex.schema.dropTable('Artists'),
     knex.schema.dropTable('Venues'),
     knex.schema.dropTable('Shows'),
-    knex.schema.dropTable('Band_Reviews'),
+    knex.schema.dropTable('Artist_Reviews'),
     knex.schema.dropTable('Venue_Reviews'),
-    knex.schema.dropTable('Band_Genres'),
-    knex.schema.dropTable('Band_Members'),
+    knex.schema.dropTable('Artist_Genres'),
+    knex.schema.dropTable('Artist_Members'),
     knex.schema.dropTable('Venue_Genres'),
     knex.schema.dropTable('Types'),
     knex.schema.dropTable('Venues_Types'),

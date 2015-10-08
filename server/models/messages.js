@@ -5,9 +5,9 @@ module.exports = {
   getMessages: function(user_id) {
     return knex('Users').where({
       'user_id': user_id}).then(function(user) {
-      if (user[0].band_id) {
+      if (user[0].artist_id) {
         return knex('Messages').where({
-          'band_id': user[0].band_id
+          'artist_id': user[0].artist_id
         })
         .join('Venues','Messages.venue_id','Venues.venue_id')
         .then(function(messages) {
@@ -28,20 +28,20 @@ module.exports = {
         return knex('Messages').where({
           'venue_id': user[0].venue_id
         })
-        .join('Bands','Messages.band_id','Bands.band_id')
+        .join('Artists','Messages.artist_id','Artists.artist_id')
         .then(function(messages) {
-          var bands = [];
+          var artists = [];
           messages.forEach(function(message) {
-            var names = bands.map(function(band) {
-              return band.name;
+            var names = artists.map(function(artist) {
+              return artist.name;
             });
-            if (names.indexOf(message.band_name) === -1) {
-              bands.push({'name': message.band_name, 'date': message.date});
-            } else if (message.date > bands[names.indexOf(message.band_name)].date) {
-              bands[names.indexOf(message.band_name)].date = message.date;
+            if (names.indexOf(message.artist_name) === -1) {
+              artists.push({'name': message.artist_name, 'date': message.date});
+            } else if (message.date > artists[names.indexOf(message.artist_name)].date) {
+              artists[names.indexOf(message.artist_name)].date = message.date;
             }
           });
-          return bands;
+          return artists;
         });
       }
     })
@@ -50,16 +50,16 @@ module.exports = {
   getConversations: function(user_id) {
     return knex('Users').where({
       'user_id': user_id}).then(function(user) {
-      if (user[0].band_id) {
-        return knex('Bands')
-        .join('Messages','Bands.band_id','Messages.band_id')
+      if (user[0].artist_id) {
+        return knex('Artists')
+        .join('Messages','Artists.artist_id','Messages.artist_id')
         .join('Venues','Messages.venue_id','Venues.venue_id')
         .then(function(messages) {
           var venues = [];
           messages.forEach(function(message) {
-            if (message.band_id === user[0].band_id) {
-              venues.push({'sender': message.sender === 'venue' ? message.venue_name : message.band_name, 
-                           'reciever': message.sender === 'venue' ? message.band_name : message.venue_name, 
+            if (message.artist_id === user[0].artist_id) {
+              venues.push({'sender': message.sender === 'venue' ? message.venue_name : message.artist_name, 
+                           'reciever': message.sender === 'venue' ? message.artist_name : message.venue_name, 
                            'date': message.date, 
                            'message': message.message
                          });
@@ -70,19 +70,19 @@ module.exports = {
       } else if (user[0].venue_id) {
         return knex('Venues')
         .join('Messages','Venues.venue_id','Messages.venue_id')
-        .join('Bands','Messages.band_id','Bands.band_id')
+        .join('Artists','Messages.artist_id','Artists.artist_id')
         .then(function(messages) {
-          var bands = [];
+          var artists = [];
           messages.forEach(function(message) {
             if (message.venue_id === user[0].venue_id) {
-              bands.push({'sender': message.sender === 'venue' ? message.venue_name : message.band_name, 
-                          'reciever': message.sender === 'venue' ? message.band_name : message.venue_name, 
+              artists.push({'sender': message.sender === 'venue' ? message.venue_name : message.artist_name, 
+                          'reciever': message.sender === 'venue' ? message.artist_name : message.venue_name, 
                           'date': message.date, 
                           'message': message.message
                         });
             }
           });
-          return bands;
+          return artists;
         });
       }
     })
@@ -93,7 +93,7 @@ module.exports = {
     return knex('Messages').insert({
       'date': reqBody.date,
       'message': reqBody.message,
-      'band_id': reqBody.band_id || reqUser[sender],
+      'artist_id': reqBody.artist_id || reqUser[sender],
       'venue_id': reqBody.venue_id || reqUser[sender],
       'sender': reqBody.sender
     });

@@ -1,7 +1,7 @@
 var Users = require('./models/users.js');
 var Genres = require('./models/genres.js');
 var Venues = require('./models/venues.js');
-var Bands = require('./models/bands.js');
+var Artists = require('./models/artists.js');
 var Shows = require('./models/shows.js');
 var Venue_Reviews = require('./models/venue_reviews.js');
 var Requests = require('./models/requests.js');
@@ -20,7 +20,7 @@ module.exports = function (app) {
   });
 
   app.post('/api/users/artists', function(req, res, next) {
-    Bands.create(req.body, req.user).then(function(result) {
+    Artists.create(req.body, req.user).then(function(result) {
       res.json('success');
     });
   });
@@ -32,7 +32,7 @@ module.exports = function (app) {
   });
 
   app.post('/api/users/artists/update', function(req, res, next) {
-    Bands.update(req.body).then(function(result) {
+    Artists.update(req.body).then(function(result) {
       res.json('success');
     });
   });
@@ -56,7 +56,7 @@ module.exports = function (app) {
   });
 
   app.get('/api/artists', function(req, res, next) {
-    Bands.getAll().then(function(result) {
+    Artists.getAll().then(function(result) {
       res.json(result);
     });
   });

@@ -16,7 +16,7 @@
       </div>
       <div class="row">
         <div class="question row col s9" ng-show="user.contact_name">
-          <h5>What is the best way to contact your band {{ user.contact_name }}?</h5>
+          <h5>What is the best way to contact your artist {{ user.contact_name }}?</h5>
           <select class="browser-default" ng-model="communication">
             <option value="" disabled selected>Select an option</option>
             <option value="Phone">Phone</option>
@@ -36,16 +36,16 @@
       <div class="row col s12">
         <h5>Your Links</h5>
         <label for="facebook">Facebook URL: </label>
-          <input name="facebook" type="text" id="userFacebook" class="form-control input-sm chat-input" placeholder="http://www.facebook.com/my-band/" ng-model="user.facebook"/>
+          <input name="facebook" type="text" id="userFacebook" class="form-control input-sm chat-input" placeholder="http://www.facebook.com/my-artist/" ng-model="user.facebook"/>
         <br>  
         <label for="soundcloud">Soundcloud: </label>
-          <input name="soundcloud" type="text" id="userSoundcloud" class="form-control input-sm chat-input" placeholder="http://www.soundcloud.com/my-band/" ng-model="user.soundcloud"/>
+          <input name="soundcloud" type="text" id="userSoundcloud" class="form-control input-sm chat-input" placeholder="http://www.soundcloud.com/my-artist/" ng-model="user.soundcloud"/>
         <br>  
         <label for="youtube">Youtube: </label>
-          <input name="youtube" type="text" id="userYoutube" class="form-control input-sm chat-input" placeholder="http://www.youtube.com/my-band" ng-model="user.youtube"/>            
+          <input name="youtube" type="text" id="userYoutube" class="form-control input-sm chat-input" placeholder="http://www.youtube.com/my-artist" ng-model="user.youtube"/>            
         <br>
         <label for="website">Website: </label>
-          <input name="website" type="text" id="userWebsite" class="form-control input-sm chat-input" placeholder="http://www.my-band.com/" ng-model="user.website"/>            
+          <input name="website" type="text" id="userWebsite" class="form-control input-sm chat-input" placeholder="http://www.my-artist.com/" ng-model="user.website"/>            
         <br>
       </div>
     </form>

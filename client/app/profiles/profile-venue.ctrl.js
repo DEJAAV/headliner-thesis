@@ -25,7 +25,7 @@
     $scope.sendRequest = function() {
       $scope.request.venue_id = Profile.id;
       $scope.request.receiver = 'venue';
-      $scope.request.sender = 'band';
+      $scope.request.sender = 'artist';
       Profile.sendRequest($scope.request);
     };
 

@@ -21,17 +21,17 @@
             <br>
             <!-- artist's name -->
             <label for="artist_name">Artist Name: </label>
-              <input name="artist name" type="text"  class="form-control input-sm chat-input" placeholder="artist name" ng-model="user.band_name" required/>
+              <input name="artist name" type="text"  class="form-control input-sm chat-input" placeholder="artist name" ng-model="user.artist_name" required/>
             <br>
-            <!-- Band Members & their roles 
+            <!-- Artist Members & their roles 
                 -Members added into array of objects, with
                 their own ID, name, and role properties--> 
-            <label for="band_members">Band Members & Roles: </label>
+            <label for="artist_members">Artist Members & Roles: </label>
             <div class="form-group" ng-repeat="member in user.members">
               <label for="member_name">Member: </label>
-                <input type="text" ng-model="member.name" name="" class="band-members" placeholder="enter member's name"  required/>
+                <input type="text" ng-model="member.name" name="" class="artist-members" placeholder="enter member's name"  required/>
               <label for="member_role">Role: </label>
-                <input type="text" ng-model="member.role" name="" class="band-members" placeholder="enter member's role"  required/>
+                <input type="text" ng-model="member.role" name="" class="artist-members" placeholder="enter member's role"  required/>
               <button class="add_member" type="button" ng-show="$last" ng-click="addNewMember()">Add Member</button>
             </div>
             <button class="remove_member" type="button" ng-click="removeMember()">Remove Member</button>            
@@ -161,7 +161,7 @@
             <!--location -->
             <div class"loc">
               <h2>Location</h2>
-              <label for="location">Where is your band located?</label>
+              <label for="location">Where is your artist located?</label>
               <br>
                 <label for="city">City: </label>
                   <input name="city" class="city-state-zip" placeholder="City" ng-model="user.city"/>
@@ -183,7 +183,7 @@
 
               <!-- Location Availability -->
               <div ng-if="localTour === 'Touring' || localTour === 'Both'">
-                <label>Where is your band available to travel?</label>
+                <label>Where is your artist available to travel?</label>
                   <label class="checkbox">
                     <input type="checkbox" name="locationArea" ng-model="user.east"/>East Coast</label>
                   <label class="checkbox">
@@ -207,7 +207,7 @@
                 <input name="contact name" type="text" class="form-control input-sm chat-input" placeholder="contact name" ng-model="user.name" required/>
               <br>
               <div class="question" ng-show="user.name">
-                <label>What is the best way to contact your band {{user.name}}?</label>
+                <label>What is the best way to contact your artist {{user.name}}?</label>
                   <select name="communicate" ng-model="communication" required>
                     <option></option>
                     <option>Phone</option>
@@ -240,12 +240,12 @@
               <label for="youtube">Youtube: </label>
                 <input name="Youtube" type="text" id="userYoutube" class="form-control input-sm chat-input" placeholder="http://www.youtube.com/my-youtube" ng-model="user.youtube"/>            
               <br>
-              <label for="website">Band Website: </label>
-                <input name="website" type="text" id="userWebsite" class="form-control input-sm chat-input" placeholder="http://www.my-band.com/" ng-model="user.website"/>            
+              <label for="website">Artist Website: </label>
+                <input name="website" type="text" id="userWebsite" class="form-control input-sm chat-input" placeholder="http://www.my-artist.com/" ng-model="user.website"/>            
               <br>
 
 
-  <!-- form sections to add in: on tour, genre, location, band name, band type, email, phone number, record label, facebook, soundcloud, youtube, website, aboutus -->
+  <!-- form sections to add in: on tour, genre, location, artist name, artist type, email, phone number, record label, facebook, soundcloud, youtube, website, aboutus -->
             
             <!-- Agreement Form to be added -->
             <label for="agree">Yes, I agree to the Terms and Conditions! (that don't exist)  </label>
