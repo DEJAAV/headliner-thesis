@@ -15,7 +15,7 @@
       });
     };
 
-    function acceptRequest(request) {
+    function deleteRequest(request) {
       return $http({
         method: 'POST',
         url: '/api/accept',
@@ -33,7 +33,7 @@
 
     return {
       getRequests: getRequests,
-      acceptRequest: acceptRequest,
+      deleteRequest: deleteRequest,
       addShow: addShow
     };
   
