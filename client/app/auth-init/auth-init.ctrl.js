@@ -6,10 +6,10 @@
   function JwtController ($scope, $rootScope, $window, $location, Auth) {
     $scope.who = function() {
       Auth.who().then(function(data) {
-        if (data.type === 'venue') {
+        if (data.category === 'venue') {
           $rootScope.currentUser = data;
           $location.path('/homepage-venue');
-        } else if (data.type === 'artist') {
+        } else if (data.category === 'artist') {
           $rootScope.currentUser = data;
           $location.path('/homepage-artist');
         } else {

@@ -45,7 +45,8 @@
 
     $scope.signupVenue = function () {
       Auth.signupVenue($scope.venue)
-        .then(function () {
+        .then(function (data) {
+          $rootScope.currentUser = data;
           $window.localStorage.setItem('type', 'venue');
           $location.path('/homepage-venue');
         })
@@ -56,7 +57,8 @@
 
     $scope.signupArtist = function () {
       Auth.signupArtist($scope.user)
-        .then(function () {
+        .then(function (data) {
+          $rootScope.currentUser = data;
           $window.localStorage.setItem('type', 'artist');
           $location.path('/homepage-artist');
         })
