@@ -42,7 +42,9 @@
       Edit.updateUserPswd(user);
       console.log('successfully updated user password');
     };  
-
+    $scope.remove = function(index){
+      $scope[yourArray].splice(index, 1) //fix this, the member property is an object, not an array..
+    };
 
   }
 })();

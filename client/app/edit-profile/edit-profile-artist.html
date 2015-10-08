@@ -59,47 +59,34 @@
 
       <hr>
 
-      <h4>ABOUT YOUR user: </h4>
-      <div class="row">
-        <div class="input-field col s6"> 
-          <span class="title">Indoor/Outdoor: {{ user.inout }}</span>
-            <div class="input-field col s9" ng-show="editableForm.$visible">
-              <input class="with-gap" name="group1" type="radio" id="indoor" value="Indoor" ng-model="user.inout"/>
-              <label for="indoor">Indoor</label>       
-              <input class="with-gap" name="group1" type="radio" id="outdoor" value="Outdoor" ng-model="user.inout" />
-              <label for="outdoor">Outdoor</label>
-              <input class="with-gap" name="group1" type="radio" id="both" value="Both" ng-model="user.inout" />
-              <label for="both">Both</label> 
-            </div> 
-          </div>  
-        <div class="input-field col s6">
-          <span class="title">Capacity: </span>
-          <span editable-number="user.capacity" e-name="capacity" e-required>{{ user.capacity }}</span>
-        </div>
-      </div>
-
+      <h4>ABOUT: </h4>
+        <div>
+          <span class="title">Members: </span>
+          <div ng-repeat="(key,data) in user.member" ng-if="data">
+            <div>{{ key }}- {{ data }}</div>
+            <button class="btn" type="button" ng-click="remove(user.member.key)">Delete</button
+          </div>
+        </div>      
         <div>
           <span class="title">Genres: </span>
           <div class="chip lime lighten-4" ng-repeat="(key,data) in user.genre" ng-if="data">{{ key }}</div>
         </div>
+        <div>
+          <span class="title">About: </span>
+          <span editable-textarea="user.bio" e-name="bio" e-required>{{ user.bio }}</span>        
+        </div>                
+      <hr>   
   
       <!-- GENRE CHECKBOXES --> 
-      <div class="row"  ng-show="editableForm.$visible">
-
+      <div class="row" ng-show="editableForm.$visible">
         <!-- ng-repeat to make checkboxes for all genres  -->
         <div class="input-field col s3" ng-repeat="(oneGenre,enabled) in allGenres">
           <input type="checkbox" id="{{ oneGenre }}" ng-model="user.genre[oneGenre]"/>
           <label for="{{ oneGenre }}">{{ oneGenre }}</label>
         </div>
-
       </div>
 
       <!-- ABOUT TEXT BOX -->
-        <div class="row">
-          <span class="title">About: </span>
-          <span editable-textarea="user.bio" e-name="bio" e-required>{{ user.bio }}</span>        
-        </div>                
-      <hr>   
       
       <h4>CONTACT INFO: </h4>
         <div>
@@ -109,11 +96,11 @@
 
         <div>
           <span class="title">Contact Phone Number: </span>
-          <span editable-text="user.contact_phone" e-name="contact_phone">{{ user.contact_phone || 'N/A' }}</span>
+          <span editable-text="user.phone" e-name="phone">{{ user.phone || 'N/A' }}</span>
         </div>    
         <div>
           <span class="title">Contact Email: </span>
-          <span editable-email="user.contact_email" e-name="contact_email">{{ user.contact_email || 'N/A' }}</span>
+          <span editable-email="user.email" e-name="email">{{ user.email || 'N/A' }}</span>
         </div> 
 
       <hr>
@@ -129,7 +116,7 @@
         </div>        
         <div>
           <span class="title">Yelp: </span>
-          <span editable-text="user.yelp" e-name="yelp" e-required>{{ user.yelp || 'N/A' }}</span>
+          <span editable-text="user.youtube" e-name="youtube" e-required>{{ user.youtube || 'N/A' }}</span>
         </div>
         <div>
           <span class="title">Website: </span>
