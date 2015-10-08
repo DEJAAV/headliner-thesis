@@ -46,7 +46,6 @@ module.exports = {
           return venueId;
         })
       });
-    })
   },
 
   update: function(reqBody) {
