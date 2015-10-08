@@ -40,8 +40,8 @@
     </thead>
     <tbody>
     <tr ng-repeat="message in messages | orderBy:'-date'">
-      <td><a href='{{"/#/conversation/" + message.name}}'>{{message.name}}</a></td>
-      <td><a href='{{"/#/conversation/" + message.name}}'>{{message.date}}</a></td>
+      <td><a href='{{"/#/conversation/" + message.id}}'>{{message.name}}</a></td>
+      <td><a href='{{"/#/conversation/" + message.id}}'>{{message.date}}</a></td>
     </tr>
     </tbody>
   </table>

@@ -33,6 +33,11 @@
   </div><!-- /.container-fluid -->
 </nav>
 
+<form name="messageForm">
+  <textarea name="message" type="text"  class="form-control input-sm chat-input" ng-model="message.message"></textarea>
+  <button class="btn btn-primary btn-block" ng-click="send()" ng-disabled="messageForm.$invalid">Send</button>
+</form>
+
 <div class="box">
   <div ng-repeat="message in messages | orderBy:'-date'">
     <h6>{{message.sender}} on {{message.date}}</h6>

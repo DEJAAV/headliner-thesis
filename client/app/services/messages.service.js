@@ -25,7 +25,7 @@
       })
     };
 
-    function sendMessage () {
+    function sendMessage (message) {
       return $http({
         method: 'POST',
         url: '/api/message', 

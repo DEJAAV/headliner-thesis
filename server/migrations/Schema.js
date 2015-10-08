@@ -124,7 +124,6 @@ exports.up = function(knex, Promise) {
       table.string('date');
       table.string('message');
       table.string('sender');
-      table.string('receiver');
     }),
 
     knex.schema.createTable('Songs', function(table) {

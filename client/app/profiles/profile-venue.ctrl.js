@@ -3,8 +3,7 @@
     ProfileController);
 
   function ProfileController($scope, $window, $location, $rootScope,
-    Profile) { // Profile is the injected service 
-
+    Profile, Messages) { // Profile is the injected service 
 
     $scope.request = {};
     $scope.request.message = "We want to play!";
@@ -27,6 +26,12 @@
       $scope.request.receiver = 'venue';
       $scope.request.sender = 'artist';
       Profile.sendRequest($scope.request);
+    };
+
+    $scope.sendMessage = function() {
+      $scope.message.date = new Date().toISOString();
+      $scope.message.id = $location.$$path.slice(15);
+      Messages.sendMessage($scope.message);
     };
 
     $scope.init = function() {

@@ -53,6 +53,7 @@
     </div>
     <div class="col">     
       <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#requestModal">Book {{artist.artist_name}}</button>
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#messageModal">Message {{artist.artist_name}}</button>
     </div>
     <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="requestModalLabel">
       <div class="modal-dialog" role="document">
@@ -79,8 +80,26 @@
         </div>
       </div>
     </div>
+
+    <div id="messageModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Send Message</h4>
+          </div>
+          <div class="modal-body">
+            <textarea name="message" type="text"  class="form-control input-sm chat-input" ng-model="message.message"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="sendMessage()" ng-disabled="messageForm.$invalid">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
-  
+
   <!-- NAV TABS -->
   <div class="row">
     <div class="col s12">
