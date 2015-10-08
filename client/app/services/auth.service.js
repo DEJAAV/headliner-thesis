@@ -29,8 +29,9 @@
         data: user
       })
       .then(function(resp) {
+        console.log('Signup venue response: ', resp);
         $window.localStorage.setItem('type', resp.data.type);
-        $window.localStorage.setItem('id', resp.data.id);
+        $window.localStorage.setItem('id', resp.data.venue_id);
         return resp.data;
       });
     };
@@ -76,6 +77,8 @@
       return $http({
         method: 'GET',
         url: '/auth/init'
+      }).then(function(res) {
+        return res.data;
       })
     }
 
