@@ -161,6 +161,7 @@ module.exports = {
   getVenueByUser: function(user_id) {
   var venue = {};
   //sync up and grab all information from Venues Table
+  console.log('Firing the getVenueByUser function...');
   return knex('Venues').join('Users', 'Users.venue_id', 'Venues.venue_id')
     .select()
     .where({
@@ -177,8 +178,10 @@ module.exports = {
           'Venue_Genres.venue_id': venue.venue_id
         })
     }).then(function(genres) {
+      console.log('Genres as a result of the genres join: ', genres);
       venue.genre = {};
       for(var i = 0; i < genres.length; i++) {
+        console.log('This is the ', i, ' in genres: ', genres[i]);
         for(var prop in genres) {
           venue.genre[prop] = true;
         }
@@ -191,6 +194,7 @@ module.exports = {
           'Venues_Types.venue_id': venue.venue_id
         })
     }).then(function(types) {
+      console.log('Types as a result of the join table: ', types);
       venue.type = {}
       for(var i = 0; i < types.length; i++) {
         for(var prop in types) {
@@ -198,6 +202,7 @@ module.exports = {
         }
       }
     }).then(function() {
+      console.log('venue inside of getVenueByUser: ', venue); 
       return venue;
     })
   }
