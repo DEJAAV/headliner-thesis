@@ -28,8 +28,19 @@
     function sendMessage (message) {
       return $http({
         method: 'POST',
-        url: '/api/message', 
+        url: '/api/message',
         data: message
+      })
+      .then(function(resp) {
+        return resp.data;
+      });
+    };
+
+    function markAsRead (id) {
+      return $http({
+        method: 'POST',
+        url: '/api/read', 
+        data: id
       })
       .then(function(resp) {
         return resp.data;
@@ -39,7 +50,8 @@
     return {
       getMessages: getMessages,
       getConversation: getConversation,
-      sendMessage: sendMessage
+      sendMessage: sendMessage,
+      markAsRead: markAsRead
     };
   
   };

@@ -19,9 +19,15 @@ module.exports = {
             if (names.indexOf(message.venue_name) === -1) {
               venues.push({'name': message.venue_name,
                            'id': message.venue_id,
-                           'date': message.date});
-            } else if (message.date > venues[names.indexOf(message.venue_name)].date) {
-              venues[names.indexOf(message.venue_name)].date = message.date;
+                           'date': message.date,
+                           'unread': !message.read && message.sender === 'venue' ? 1 : 0});
+            } else {
+              if (message.date > venues[names.indexOf(message.venue_name)].date) {
+                venues[names.indexOf(message.venue_name)].date = message.date;
+              }
+              if (!message.read && message.sender === 'venue') {
+                venues[names.indexOf(message.venue_name)].unread++;
+              }
             }
           });
           return venues;
@@ -40,9 +46,15 @@ module.exports = {
             if (names.indexOf(message.artist_name) === -1) {
               artists.push({'name': message.artist_name,
                             'id': message.artist_id,
-                            'date': message.date});
-            } else if (message.date > artists[names.indexOf(message.artist_name)].date) {
-              artists[names.indexOf(message.artist_name)].date = message.date;
+                            'date': message.date,
+                            'unread': !message.read && message.sender === 'artist' ? 1 : 0});
+            } else {
+              if (message.date > artists[names.indexOf(message.artist_name)].date) {
+                artists[names.indexOf(message.artist_name)].date = message.date;
+              }
+              if (!message.read && message.sender === 'artist') {
+                artists[names.indexOf(message.artist_name)].unread++;
+              }
             }
           });
           return artists;
@@ -99,7 +111,8 @@ module.exports = {
           'message': reqBody.message,
           'artist_id': user[0].artist_id,
           'venue_id': reqBody.id,
-          'sender': 'artist'
+          'sender': 'artist',
+          'read': false
         });
       } else if (user[0].venue_id) {
         return knex('Messages').insert({
@@ -107,7 +120,29 @@ module.exports = {
           'message': reqBody.message,
           'artist_id': reqBody.id,
           'venue_id': user[0].venue_id,
-          'sender': 'venue'
+          'sender': 'venue',
+          'read': false
+        });
+      }
+    });
+  },
+
+  markAsRead: function(reqBody, user_id) {
+    return knex('Users').where({
+      'user_id': user_id}).then(function(user) {
+      if (user[0].artist_id) {
+        return knex('Messages').where({
+          'artist_id': user[0].artist_id,
+          'venue_id': reqBody.id
+        }).update({
+          'read': true
+        });
+      } else if (user[0].venue_id) {
+        return knex('Messages').where({
+          'artist_id': reqBody.id,
+          'venue_id': user[0].venue_id
+        }).update({
+          'read': true
         });
       }
     });

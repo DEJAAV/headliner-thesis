@@ -91,6 +91,13 @@ module.exports = function (app) {
     });
   });
 
+  app.post('/api/read', function(req, res, next) {
+    var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret);
+    Messages.markAsRead(req.body, user_id).then(function(result) {
+      res.json('success');
+    });
+  });
+
   app.get('/api/messages', function(req, res, next) {
     var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret);
     Messages.getMessages(user_id).then(function(result) {
