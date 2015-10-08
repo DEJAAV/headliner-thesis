@@ -25,6 +25,7 @@
       $scope.request.artist_id = Profile.id;
       $scope.request.receiver = 'artist';
       $scope.request.sender = 'venue';
+      $scope.request.date = $scope.date
       Profile.sendRequest($scope.request);
     }
 

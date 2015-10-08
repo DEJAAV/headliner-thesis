@@ -5,8 +5,9 @@
     Requests.getRequests().then(function(requests){
       console.log('requests', requests)
       $scope.requests = requests
-    })
-
-    console.log($scope.requests)
-  }
+      $scope.requests.forEach(function(request) {
+        request.date = new Date(request.date).toLocaleString().split(',')[0]
+      });
+    });
+  };
 })();
