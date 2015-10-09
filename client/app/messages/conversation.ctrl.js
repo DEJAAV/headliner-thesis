@@ -1,7 +1,7 @@
 (function() {
   angular.module('headliner.conversation', []).controller('ConversationController', ConversationController);
 
-  function ConversationController($scope, $window, $location, $rootScope, Messages) {
+  function ConversationController($scope, $window, $location, $rootScope, Messages, Auth) {
     $scope.$watch(Auth.isAuth, function(authed) {
       if (!authed) {
         $location.path('/#/');
