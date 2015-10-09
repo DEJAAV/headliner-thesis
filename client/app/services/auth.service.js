@@ -78,6 +78,15 @@
       }).then(function(res) {
         return res.data;
       })
+    };
+
+    function getUserById () {
+      return $http({
+        method: 'GET',
+        url: '/api/getId'
+      }).then(function(res) {
+        return res.data;
+      })
     }
 
     return {
@@ -87,7 +96,8 @@
       login: login,
       isAuth: isAuth,
       signout: signout,
-      who: who
+      who: who,
+      getUserById: getUserById
     };
   };
 
