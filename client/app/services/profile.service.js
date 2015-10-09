@@ -6,7 +6,7 @@
 
   function Profile ($http, $location, $window) {
 
-    var id = $location.$$path.slice(($location.$$path).length-1)
+    var id = $location.$$path.slice(($location.$$path).lastIndexOf('/')+1)
 
     function getAllVenues () {
       return $http({
