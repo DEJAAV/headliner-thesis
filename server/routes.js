@@ -127,6 +127,13 @@ module.exports = function (app) {
     Songs.getSongsByUser(user_id).then(function(songs) {
       res.json(songs);
     })
-  })
+  });
+
+  app.get('/api/getId', function(req, res) {
+    var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret);
+    Users.getUserById(user_id).then(function(result) {
+      res.json(result);
+    })
+  });
 
 };
