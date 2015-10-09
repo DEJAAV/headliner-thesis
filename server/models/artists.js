@@ -42,8 +42,10 @@ module.exports = {
       }).update({
         'artist_id': artistId
       }).then(function() {
-        for(var i = 0; i < reqBody.songs.length; i++) {
-          Songs.addSong(song[i], artistId);
+        if (reqBody.songs) {
+          for(var i = 0; i < reqBody.songs.length; i++) {
+            Songs.addSong(reqBody.songs[i], artistId);
+          }
         }
       })
     })
