@@ -88,7 +88,7 @@ module.exports = function (app) {
   });
 
   app.get('/api/requests', function(req, res, next) {
-    var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret)
+    var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret);
     Requests.getRequests(user_id).then(function(result) {
       res.json(result);
     });
