@@ -34,7 +34,7 @@
 
     $scope.sendMessage = function() {
       $scope.message.date = new Date().toISOString();
-      $scope.message.id = $location.$$path.slice(16);
+      $scope.message.id = parseInt($location.$$path.slice(16));
       Messages.sendMessage($scope.message);
     };
 

@@ -4,7 +4,7 @@
 
   .controller('AuthController', AuthController);
 
-  function AuthController ($scope, $window, $location, Auth, Global, Music, $rootScope) {
+  function AuthController ($scope, $window, $location, Auth, Global, Music, Messages, $rootScope) {
   $scope.venue = {};
   $scope.user = {}; // for artists
   $scope.user.member = {};
@@ -111,6 +111,12 @@
   $scope.loggedIn = function() {
     return Auth.isAuth();
   };
+
+  Messages.getMessages().then(function(messages) {
+    $scope.unread = messages.reduce(function(unread, message) {
+      return message.unread + unread;
+    },0);
+  });
 
 }
 })();
