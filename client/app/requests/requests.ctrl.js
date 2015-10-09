@@ -1,7 +1,13 @@
 (function() {
   angular.module('headliner.requests', []).controller('RequestsController', RequestsController);
 
-  function RequestsController($scope, $window, $location, $rootScope, Requests) {
+  function RequestsController($scope, $window, $location, $rootScope, Requests, Auth) {
+    //redirect if the user isn't logged in
+    $scope.$watch(Auth.isAuth, function(authed) {
+      if (!authed) {
+        $location.path('/#/');
+      }
+    }, true);
 
     Requests.getRequests().then(function(requests){
       $scope.requests = requests

@@ -2,13 +2,16 @@
   angular.module('headliner.artistHomepage', []).controller('ArtistHomepageController',
     HomepageController);
 
-  function HomepageController($scope, $window, $location, $rootScope,
-    Homepage) { // Homepage is the injected service     
-    
-    console.log('rootScope current user: ', $rootScope.currentUser);
-    $scope.currentUser = $rootScope.currentUser;
-    
+  function HomepageController($scope, $window, $location, $rootScope, Homepage, Auth) { // Homepage is the injected service
     var geocoder = new google.maps.Geocoder();
+    $scope.user;
+    //redirect if the user isn't logged in
+    $scope.$watch(Auth.isAuth, function(authed) {
+      if (!authed) {
+        $location.path('/#/');
+      }
+    }, true);
+    
 
     $scope.initArtist = function() {
       console.log('initArtist is being called')

@@ -2,6 +2,11 @@
   angular.module('headliner.conversation', []).controller('ConversationController', ConversationController);
 
   function ConversationController($scope, $window, $location, $rootScope, Messages) {
+    $scope.$watch(Auth.isAuth, function(authed) {
+      if (!authed) {
+        $location.path('/#/');
+      }
+    }, true);
     
     $scope.id = parseInt($location.$$path.slice(14));
 

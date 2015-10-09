@@ -2,12 +2,17 @@
   angular.module('headliner.venueProfile', []).controller('VenueProfileController',
     ProfileController);
 
-  function ProfileController($scope, $window, $location, $rootScope,
-    Profile, Messages) { // Profile is the injected service 
-
+  // Profile is the injected service 
+  function ProfileController($scope, $window, $location, $rootScope, Profile, Messages, Auth) {
     $scope.request = {};
     $scope.request.message = "We want to play!";
 
+    //redirect if the user isn't logged in
+    $scope.$watch(Auth.isAuth, function(authed) {
+      if (!authed) {
+        $location.path('/#/');
+      }
+    }, true);
 
     $scope.getVenueById = function(id){
       Profile.getAllVenues().then(function(venues) {

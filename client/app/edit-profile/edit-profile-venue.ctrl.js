@@ -3,8 +3,14 @@
 
   .controller('EditVenueController', EditVenueController);
 
-  function EditVenueController($scope, $window, $location, $rootScope, Edit, Global) { // Edit is the injected service     
-    
+  function EditVenueController($scope, $window, $location, $rootScope, Edit, Global, Auth) { // Edit is the injected service     
+    //redirect if the user isn't logged in
+    $scope.$watch(Auth.isAuth, function(authed) {
+      if (!authed) {
+        $location.path('/#/');
+      }
+    }, true);
+
     $scope.allGenres = Global.allGenres;
     $scope.allTypes = Global.allTypes;
     $scope.states = Global.states;

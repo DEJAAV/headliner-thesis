@@ -1,6 +1,4 @@
 // 'headliner.service'
-
-
 (function(){
 
   angular.module('headliner.authService', [])
