@@ -41,11 +41,6 @@
         url: '/',
         controller: 'AuthController'
       })
-      .state('index', {
-        templateUrl: '../index.html',
-        url: '/',
-        controller: 'AuthController'
-      })
       .state('auth-init', {
         templateUrl: 'app/auth-init/auth-init.html',
         url: '/auth-init',
