@@ -2,9 +2,15 @@
   angular.module('headliner.music', ['angularSoundManager']).controller('MusicController',
     MusicController);
 
-  function MusicController($scope, $window, $location, $rootScope,
-    Profile) { 
+  function MusicController($scope, $window, $location, $rootScope, Profile, Auth) { 
     
+    //redirect if the user isn't logged in
+    $scope.$watch(Auth.isAuth, function(authed) {
+      if (!authed) {
+        $location.path('/#/');
+      }
+    }, true);
+
     $scope.songs = [
       {
         url: "https://s3-us-west-1.amazonaws.com/hr-mytunes/data/04+One+In+A+Million.mp3",

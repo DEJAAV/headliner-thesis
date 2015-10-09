@@ -3,7 +3,13 @@
 
   .controller('EditArtistController', EditArtistController);
 
-  function EditArtistController($scope, $window, $location, $rootScope, Edit, Global) { // Edit is the injected service     
+  function EditArtistController($scope, $window, $location, $rootScope, Edit, Global, Auth) { // Edit is the injected service     
+    //redirect if the user isn't logged in
+    $scope.$watch(Auth.isAuth, function(authed) {
+      if (!authed) {
+        $location.path('/#/');
+      }
+    }, true);
 
     $scope.song = {};
 

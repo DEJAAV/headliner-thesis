@@ -2,12 +2,15 @@
   angular.module('headliner.artistProfile', []).controller('ArtistProfileController',
     ProfileController);
 
-  function ProfileController($scope, $window, $location, $rootScope,
-    Profile, Messages) { // Profile is the injected service 
-
+  function ProfileController($scope, $window, $location, $rootScope, Profile, Messages, Auth) {
     $scope.request = {};
-    $scope.request.message = "We want you to play!"
-
+    $scope.request.message = "We want you to play!";
+    //redirect if the user isn't logged in
+    $scope.$watch(Auth.isAuth, function(authed) {
+      if (!authed) {
+        $location.path('/#/');
+      }
+    }, true);
 
     $scope.getArtistById = function(id){
       Profile.getAllArtists().then(function(artists) {
