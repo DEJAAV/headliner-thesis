@@ -1,6 +1,3 @@
-// 'headliner.auth'
-//AuthController
-
 (function(){
 
   angular.module('headliner.auth', [])
@@ -105,7 +102,15 @@
   $scope.signout = function() {
     Auth.signout();
     console.log('user signed out');
-  }
+  };
+
+  $scope.type = function(type) {
+    return $window.localStorage.getItem('type') === type;
+  };
+
+  $scope.loggedIn = function() {
+    return Auth.isAuth();
+  };
 
 }
 })();
