@@ -258,7 +258,7 @@ app.get('/auth/init', function(req, res) {
     Users.getUserById(req.user.user_id).then(function(user) {
       if(user[0].artist_id !== null) {
         response.category = 'artist';
-        Artist.getArtistByUser(req.user.user_id).then(function(artist) {
+        Artists.getArtistByUser(req.user.user_id).then(function(artist) {
           for(var prop in artist) {
             response[prop] = artist[prop]
           }
