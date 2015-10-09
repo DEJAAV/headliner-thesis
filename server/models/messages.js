@@ -133,14 +133,16 @@ module.exports = {
       if (user[0].artist_id) {
         return knex('Messages').where({
           'artist_id': user[0].artist_id,
-          'venue_id': reqBody.id
+          'venue_id': reqBody.id,
+          'sender': 'venue'
         }).update({
           'read': true
         });
       } else if (user[0].venue_id) {
         return knex('Messages').where({
           'artist_id': reqBody.id,
-          'venue_id': user[0].venue_id
+          'venue_id': user[0].venue_id,
+          'sender': 'artist'
         }).update({
           'read': true
         });
