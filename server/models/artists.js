@@ -197,7 +197,13 @@ module.exports = {
           }
         }
       }).then(function() {
-        artist.members = Artist_Members.getMembers(artist.artist_id);
+        artist.members = [];
+        Artist_Members.getMembers(artist.artist_id)
+          .then(function(artists) {
+            for(var i = 0; i < artists.length; i++) {
+              artist.members.push(artists[i]);
+            }
+          })
       }).then(function() {
         return artist;
       })
