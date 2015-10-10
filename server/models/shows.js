@@ -24,6 +24,12 @@ module.exports = {
     return knex('Shows').where({
       show_id: reqBody.show_id
       }).del()
+  },
+
+  deleteExpiredShows: function(date) {
+    return knex('Shows').where({
+      date: date
+    }).del()
   }
 
 };

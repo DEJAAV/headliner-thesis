@@ -48,7 +48,7 @@ module.exports = {
     return knex('Request').where({
       'date': date
     }).del()
-  }
+  },
 
   acceptRequest: function(reqBody) {
     return knex('Requests').where({
