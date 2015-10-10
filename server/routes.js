@@ -129,6 +129,13 @@ module.exports = function (app) {
     })
   });
 
+  app.get('/api/artist/shows', function(req, res) {
+    Shows.getShowsByArtistId(req.body).then(function(shows) {
+      console.log(shows, 'shows')
+      res.json(shows)
+    })
+  })
+
   app.get('/api/getId', function(req, res) {
     var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret);
     Users.getUserById(user_id).then(function(result) {
