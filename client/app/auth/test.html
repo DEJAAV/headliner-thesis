@@ -1,0 +1,57 @@
+<h1>Music Upload Test Page!</h1>
+
+  <div class="container-fluid">
+    <div class="page-header no-top-marg">
+      <h1>Artist Song Upload: </h1>
+      <p> this is using a-s3-u </p>
+    </div>
+    <div class="row">
+      <!-- AWS Details-->
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div>possible URL hack: <br> {{ url }} </div>
+          </div>
+        </div>
+      </div> 
+
+      <!-- The Upload Form -->
+      <div class="col-md-8">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <select class="fr" ng-model="sizeLimit">
+              <option value="5292880">5MB Upload Limit</option>
+              <option value="10585760">10MB Upload Limit</option>
+              <option value="15878640">15MB Upload Limit</option>              
+            </select>
+            <h3 class="panel-title">Step 2: Upload The File</h3>
+          </div>
+          <div class="panel-body">
+            <input class="bottom-marg-15" type="file" name="file" file></input>
+            <!-- Progress Bar -->
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="{{ uploadProgress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ uploadProgress }}%;">
+                {{ uploadProgress == 0 ? '' : uploadProgress + '%' }}
+              </div>
+            </div>            
+            <a class="btn btn-primary btn-block btn-lg" ng-click="upload()">Upload</a>
+            <a class="btn btn-primary btn-default btn-lg" ng-click="download()">Download</a>
+          </div>
+        </div>
+      </div>     
+    </div>
+    <div class="row">     
+      <div class="col-md-12"> 
+        <hr/>       
+
+        <hr/>
+        <h3>side note: Ellie don't forget to update the IAM policies in aws console</h3>
+        <h3>find somewhere to store the AWS creds instead of in the controller... </h3>
+
+      <hr/>
+      <p>
+        link to the original repo: <a href="https://github.com/cheynewallace/angular-s3-upload">https://github.com/cheynewallace/angular-s3-upload</a>
+      </p>
+      </div>
+    </div>
+  </div>          

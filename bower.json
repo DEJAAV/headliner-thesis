@@ -18,11 +18,13 @@
     "angular-bootstrap": "~0.13.4",
     "angular-cookies": "~1.4.7",
     "angular-route": "~1.4.5",
-    "angular-soundmanager2": "~0.5.6",    
+    "angular-soundmanager2": "~0.5.6",
     "angular-ui-router": "~0.2.15",
     "angular-xeditable": "~0.1.9",
+    "aws-sdk": "aws-sdk-js#~2.2.9",
     "bootstrap": "~3.3.5",
     "jquery": "~2.1.4",
-    "Materialize": "materialize#~0.97.1"
+    "Materialize": "materialize#~0.97.1",
+    "toastr": "~2.1.2"
   }
 }
