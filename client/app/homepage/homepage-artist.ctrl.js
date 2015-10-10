@@ -15,16 +15,29 @@
 
     $scope.initArtist = function() {
       console.log('initArtist is being called')
-      Homepage.getAllVenues().then(function(all) {
-        $scope.venues = all;   
-        geocoder.geocode({'address': '78701'}, function(c1) {         
-          var artist_coord = new google.maps.LatLng(c1[0].geometry.location.H, c1[0].geometry.location.L);
-          $scope.venues.forEach(function(venue) {
-            geocoder.geocode({'address': venue.zip}, function(c2) {
-              var venue_coord = new google.maps.LatLng(c2[0].geometry.location.H, c2[0].geometry.location.L);
-              venue.distance = google.maps.geometry.spherical.computeDistanceBetween(venue_coord, artist_coord) * 0.000621371;
+      Auth.getUserById().then(function(user) {
+        return user[0].artist_id;
+      }).then(function(artist_id) {
+        Homepage.getAllArtists().then(function(artists) {
+          for (var i = 0; i < artists.length; i++) {
+            if (artists[i].artist_id === artist_id) {
+              $scope.artist = artists[i];
+              return artists[i];
+            }
+          }
+        }).then(function(artist) {
+          Homepage.getAllVenues().then(function(all) {
+            $scope.venues = all;   
+            geocoder.geocode({'address': artist.zip}, function(c1) {         
+              var artist_coord = new google.maps.LatLng(c1[0].geometry.location.H, c1[0].geometry.location.L);
+              $scope.venues.forEach(function(venue) {
+                geocoder.geocode({'address': venue.zip}, function(c2) {
+                  var venue_coord = new google.maps.LatLng(c2[0].geometry.location.H, c2[0].geometry.location.L);
+                  venue.distance = google.maps.geometry.spherical.computeDistanceBetween(venue_coord, artist_coord) * 0.000621371;
+               });
+              }); 
             });
-          }); 
+          });
         });
       });
     };

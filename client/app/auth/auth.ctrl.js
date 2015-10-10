@@ -43,9 +43,9 @@
       $scope.signupVenue = function () {
         Auth.signupVenue($scope.venue)
           .then(function (data) {
-            $rootScope.currentUser = data;
             $window.localStorage.setItem('type', 'venue');
             $location.path('/homepage-venue');
+            $scope.init();
           })
           .catch(function(error){
             console.log(error);
@@ -55,9 +55,9 @@
       $scope.signupArtist = function () {
         Auth.signupArtist($scope.user)
           .then(function (data) {
-            $rootScope.currentUser = data;
             $window.localStorage.setItem('type', 'artist');
             $location.path('/homepage-artist');
+            $scope.init();
           })
           .catch(function(error){
             console.log(error);
@@ -80,19 +80,17 @@
           $scope.login.error = data.error;
         } else {
           if (data.type === 'venue') {
-            $rootScope.currentUser = data;
             $location.path('/homepage-venue');
           } else if (data.type === 'artist') {
-            $rootScope.currentUser = data;
             $location.path('/homepage-artist');
           } else {
             $location.path('/select');
           }
           $window.localStorage.setItem('headliner', data.token);
           $window.localStorage.setItem('type', data.type);
+          $scope.init();
         }
         console.log('dadadata', data)
-        $scope.current = data;
       })
       .catch(function (error) {
         console.log('error with login: ', error)
@@ -111,22 +109,25 @@
     $scope.loggedIn = function() {
       return Auth.isAuth();
     };
-
-    Messages.getMessages().then(function(messages) {
-      $scope.unread = messages.reduce(function(unread, message) {
-        return message.unread + unread;
-      },0);
-    });
     
-    Auth.getUserById().then(function(user) {
-      if (user[0].venue_id) {
-        $scope.id = user[0].venue_id;
-      } else if (user[0].artist_id) {
-        $scope.id =  user[0].artist_id;
-      }
-    });
+    $scope.init = function() {
+      Messages.getMessages().then(function(messages) {
+        $scope.unread = messages.reduce(function(unread, message) {
+          return message.unread + unread;
+        },0);
+      });
+      console.log($scope.unread)
+      Auth.getUserById().then(function(user) {
+        if (user[0].venue_id) {
+          $scope.id = user[0].venue_id;
+        } else if (user[0].artist_id) {
+          $scope.id =  user[0].artist_id;
+        }
+      });
 
-    $scope.type = $window.localStorage.getItem('type');
+      $scope.type = $window.localStorage.getItem('type');
+    };
+    $scope.init();
 
   }
 })();
