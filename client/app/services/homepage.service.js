@@ -12,7 +12,6 @@
         url: '/api/venues'
       })
       .then(function(resp){
-        console.log('GET:',resp.data);
         return resp.data;
       })
     };

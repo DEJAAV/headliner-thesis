@@ -7,10 +7,8 @@
     $scope.who = function() {
       Auth.who().then(function(data) {
         if (data.category === 'venue') {
-          $rootScope.currentUser = data;
           $location.path('/homepage-venue');
         } else if (data.category === 'artist') {
-          $rootScope.currentUser = data;
           $location.path('/homepage-artist');
         } else {
           $location.path('/select');
