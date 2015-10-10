@@ -18,12 +18,6 @@ module.exports = {
       }
     })
   },
-  
-  // getVenueRequests: function(venue_id) {
-  //   return knex('Requests').where({
-  //     'venue_id': venue_id
-  //   })
-  // },
 
   sendRequest: function(reqBody, user_id){
     return Users.getUserById(user_id)
@@ -49,6 +43,12 @@ module.exports = {
       }
     })
   },
+
+  deleteExpiredRequest: function(date) {
+    return knex('Request').where({
+      'date': date
+    }).del()
+  }
 
   acceptRequest: function(reqBody) {
     return knex('Requests').where({
