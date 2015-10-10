@@ -60,10 +60,23 @@
       })
     };
 
+    function getShows () {
+      return $http({
+        method: 'GET',
+        url: '/api/artist/shows'
+      })
+      .then(function(resp) {
+        return resp.data
+      })
+    }
+
     return {
       getAllVenues: getAllVenues,
       getAllArtists: getAllArtists,
+      getAllSongs: getAllSongs,
+      getMyProfile: getMyProfile,
       sendRequest: sendRequest,
+      getShows: getShows,
       id: id
     };
   }

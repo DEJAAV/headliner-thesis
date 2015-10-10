@@ -157,27 +157,11 @@
 
       <h4>CALENDAR</h4>
       <hr>
-      <ul class="collection">
+      <ul class="collection" ng-model="shows" ng-repeat="(key, value) in shows">
         <li class="collection-item avatar">
           <i class="material-icons circle blue">stars</i>
           <span class="title">Event Title</span>
-          <p>event date <br>
-             event time <br>
-             event location 
-          </p>
-        </li>
-        <li class="collection-item avatar">
-          <i class="material-icons circle blue">stars</i>
-          <span class="title">Event Title</span>
-          <p>event date <br>
-             event time <br>
-             event location 
-          </p>
-        </li>        
-        <li class="collection-item avatar">
-          <i class="material-icons circle blue">stars</i>
-          <span class="title">Event Title</span>
-          <p>event date <br>
+          <p>{{value.date}} <br>
              event time <br>
              event location 
           </p>

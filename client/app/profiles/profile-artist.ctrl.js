@@ -12,7 +12,7 @@
       }
     }, true);
 
-    $scope.getArtistById = function(id){
+    $scope.getArtistById = function(){
       Profile.getAllArtists().then(function(artists) {
         for (var artist in artists) {
           if (artists[artist].artist_id.toString() === Profile.id) {
@@ -22,7 +22,25 @@
       })
     };
 
-    $scope.getArtistById(Profile.id);
+    $scope.getArtistById();
+
+    $scope.shows = {};
+
+    $scope.getShowsById = function(){
+      Profile.getShows().then(function(shows){
+        for (var i = 0 ; i < shows.length; i++) {
+          if (shows[i].artist_id.toString() === Profile.id) {
+            $scope.shows[i] = shows[i]
+          };
+        };
+        console.log($scope.shows, 'scopeshows')
+      });
+      Profile.getAllVenues
+    }
+
+    console.log($scope.shows)
+
+    $scope.getShowsById();
 
     $scope.sendRequest = function() {
       $scope.request.artist_id = Profile.id;

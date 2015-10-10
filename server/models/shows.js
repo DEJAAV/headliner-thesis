@@ -30,6 +30,10 @@ module.exports = {
     return knex('Shows').where({
       date: date
     }).del()
+  },
+
+  getShowsByArtistId: function(reqBody) {
+    return knex('Shows');
   }
 
 };
