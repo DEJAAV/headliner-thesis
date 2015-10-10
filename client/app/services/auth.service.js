@@ -29,7 +29,6 @@
       .then(function(resp) {
         console.log('Signup venue response: ', resp);
         $window.localStorage.setItem('type', resp.data.category);
-        $window.localStorage.setItem('id', resp.data.venue_id);
         return resp.data;
       });
     };
