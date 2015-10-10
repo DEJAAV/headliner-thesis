@@ -8,7 +8,7 @@
       }
     }, true);
     
-    $scope.id = parseInt($location.$$path.slice(14));
+    $scope.id = parseInt($location.$$path.slice($location.$$path.lastIndexOf('/')+1));
 
     Messages.markAsRead({'id': $scope.id});
 

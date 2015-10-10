@@ -36,7 +36,7 @@
 
     $scope.sendMessage = function() {
       $scope.message.date = new Date().toISOString();
-      $scope.message.id = parseInt($location.$$path.slice(15));
+      $scope.message.id = parseInt($location.$$path.slice($location.$$path.lastIndexOf('/')+1));
       Messages.sendMessage($scope.message);
     };
 
@@ -58,5 +58,10 @@
         return $scope.venue.shows.map(function(show) {return show.date;}).indexOf(date.toISOString().split('T')[0]) > -1;
       }
     };
+
+    $scope.checkType = function() {
+      return $window.localStorage.getItem('type') !== $location.$$path.slice($location.$$path.lastIndexOf('-')+1,$location.$$path.lastIndexOf('/'));
+    };
+
   };
 })();
