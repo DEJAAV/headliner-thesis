@@ -181,8 +181,8 @@ module.exports = {
       venue.genre = {};
       for(var i = 0; i < genres.length; i++) {
         console.log('This is the ', i, ' in genres: ', genres[i]);
-        for(var prop in genres) {
-          venue.genre[prop] = true;
+        for(var prop in genres[i]) {
+          venue.genre[genres[i][prop]] = true;
         }
       }
     }).then(function() {
@@ -196,8 +196,8 @@ module.exports = {
       console.log('Types as a result of the join table: ', types);
       venue.type = {}
       for(var i = 0; i < types.length; i++) {
-        for(var prop in types) {
-          venue.type[prop] = true;
+        for(var prop in types[i]) {
+          venue.type[types[i][prop]] = true;
         }
       }
     }).then(function() {
