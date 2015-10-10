@@ -9,8 +9,10 @@
       }
     }, true);
 
+    $scope.type = $window.localStorage.getItem('type')
+
     Requests.getRequests().then(function(requests){
-      $scope.requests = requests
+      $scope.requests = requests;
       $scope.requests.forEach(function(request) {
         request.date = new Date(request.date).toLocaleString().split(',')[0]
       });
