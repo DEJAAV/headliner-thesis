@@ -22,9 +22,11 @@
     'headliner.music',
     'ngRoute',
     'angularSoundManager',
+    'headliner.aws',
     'ui.router',
     'ui.bootstrap',
     'xeditable',
+    'headliner.directives',
     'headliner.jwt'
   ])
 
@@ -36,6 +38,11 @@
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
+      .state('test', {
+        templateUrl: 'app/auth/test.html',
+        url: '/test',
+        controller: 'AWSController'
+      })
       .state('landing', {
         templateUrl: 'app/auth/landing.html',
         url: '/',
