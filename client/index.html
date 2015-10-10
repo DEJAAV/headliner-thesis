@@ -29,13 +29,13 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li class="active" ng-if="checkType('artist')"><a href="#/homepage-artist">Find a Venue</a></li>
-              <li class="active" ng-if="checkType('venue')"><a href="#/homepage-venue">Find an Artist</a></li>
+              <li class="active ng-cloak" ng-if="checkType('artist')" ng-cloak><a href="#/homepage-artist">Find a Venue</a></li>
+              <li class="active ng-cloak" ng-if="checkType('venue')" ng-cloak><a href="#/homepage-venue">Find an Artist</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" ng-show="loggedIn()"><b>Profile</b><span class="caret"></span></a>
+                <a class="dropdown-toggle ng-cloak" data-toggle="dropdown" ng-show="loggedIn()" ng-cloak><b>Profile</b><span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href='{{"/#/profile-" + type + "/" + id}}'>My Profile</a></li>
                   <li><a href="#/messages">Messages ({{unread}})</a></li>
@@ -45,7 +45,7 @@
               </li>  
               
               <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" ng-hide="loggedIn()"><b>Login</b> <span class="caret"></span></a>
+                <a class="dropdown-toggle ng-cloak" data-toggle="dropdown" ng-hide="loggedIn()" ng-cloak><b>Login</b> <span class="caret"></span></a>
                 <ul id="login-dp" class="dropdown-menu">
                   <li>
                     <div class="row">
