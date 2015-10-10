@@ -116,7 +116,7 @@
           return message.unread + unread;
         },0);
       });
-      
+      console.log($scope.unread)
       Auth.getUserById().then(function(user) {
         if (user[0].venue_id) {
           $scope.id = user[0].venue_id;
@@ -127,6 +127,7 @@
 
       $scope.type = $window.localStorage.getItem('type');
     };
+    $scope.init();
 
   }
 })();
