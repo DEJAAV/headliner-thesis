@@ -8,14 +8,15 @@
       Auth.who().then(function(data) {
         if (data.category === 'venue') {
           $location.path('/homepage-venue');
+          $window.localStorage.setItem('id', data.venue_id);
         } else if (data.category === 'artist') {
           $location.path('/homepage-artist');
+          $window.localStorage.setItem('id', data.artist_id);
         } else {
           $location.path('/select');
         }
         $window.localStorage.setItem('headliner', data.token);
-        $window.localStorage.setItem('type', data.type);
-        $window.localStorage.setItem('id', data.id);
+        $window.localStorage.setItem('type', data.category);
       })
     };
 

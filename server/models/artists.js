@@ -190,9 +190,10 @@ module.exports = {
             'Artist_Genres.artist_id': artist.artist_id
           })
       }).then(function(genres) {
+        console.log('Genres in getArtistByUser: ', genres);
         artist.genre = {};
         for(var i = 0; i < genres.length; i++) {
-          for(var prop in genres) {
+          for(var prop in genres[i]) {
             artist.genre[prop] = true;
           }
         }
