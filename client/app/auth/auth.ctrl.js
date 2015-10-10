@@ -45,7 +45,7 @@
           .then(function (data) {
             $window.localStorage.setItem('type', 'venue');
             $location.path('/homepage-venue');
-            $scope.init();
+            $rootScope.init();
           })
           .catch(function(error){
             console.log(error);
@@ -57,7 +57,7 @@
           .then(function (data) {
             $window.localStorage.setItem('type', 'artist');
             $location.path('/homepage-artist');
-            $scope.init();
+            $rootScope.init();
           })
           .catch(function(error){
             console.log(error);
@@ -88,7 +88,7 @@
           }
           $window.localStorage.setItem('headliner', data.token);
           $window.localStorage.setItem('type', data.type);
-          $scope.init();
+          $rootScope.init();
         }
         console.log('dadadata', data)
       })
@@ -110,7 +110,7 @@
       return Auth.isAuth();
     };
     
-    $scope.init = function() {
+    $rootScope.init = function() {
       Messages.getMessages().then(function(messages) {
         $scope.unread = messages.reduce(function(unread, message) {
           return message.unread + unread;
@@ -127,7 +127,7 @@
 
       $scope.type = $window.localStorage.getItem('type');
     };
-    $scope.init();
+    $rootScope.init();
 
   }
 })();
