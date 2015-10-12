@@ -27,8 +27,6 @@
         data: user
       })
       .then(function(resp) {
-        console.log('Signup venue response: ', resp);
-        $window.localStorage.setItem('type', resp.data.category);
         return resp.data;
       });
     };
@@ -41,21 +39,20 @@
         data: user
       })
       .then(function(resp) {
-        return resp.data.token;
+        return resp.data;
       });
     };    
 
-  var login = function (user) {
-    return $http({
-      method: 'POST',
-      url: '/api/users/login',
-      data: user
-    })
-    .then(function (res) {
-      console.log(res, 'the response')
-      return res.data;
-    });
-  };
+    var login = function (user) {
+      return $http({
+        method: 'POST',
+        url: '/api/users/login',
+        data: user
+      })
+      .then(function (res) {
+        return res.data;
+      });
+    };
 
     // check if a user is authorized when user switch pages on app
     function isAuth () {
@@ -64,10 +61,12 @@
 
     // signout user by removing token that is stored in the client's localStorage
     function signout () {
-      console.log('signout is being called in auth service')
-      $window.localStorage.removeItem('headliner');
-      $window.localStorage.removeItem('type');
-      $location.path('/');
+      return $http({
+        method: 'GET',
+        url: '/logout'
+      }).then(function(res) {
+        return res.data;
+      })
     };
 
     function who () {

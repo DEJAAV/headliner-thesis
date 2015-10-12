@@ -5,42 +5,31 @@
   function ProfileController($scope, $window, $location, $rootScope, Profile, Messages, Auth) {
     $scope.request = {};
     $scope.request.message = "We want you to play!";
+
     //redirect if the user isn't logged in
     $scope.$watch(Auth.isAuth, function(authed) {
       if (!authed) {
         $location.path('/#/');
       }
     }, true);
-
-    $scope.getArtistById = function(){
-      Profile.getAllArtists().then(function(artists) {
-        for (var artist in artists) {
-          if (artists[artist].artist_id.toString() === Profile.id) {
-            $scope.artist = artists[artist]
-          }
-        }
-      })
-    };
-
-    $scope.getArtistById();
-
-    $scope.shows = {};
-
-    $scope.getShowsById = function(){
-      Profile.getShows().then(function(shows){
-        for (var i = 0 ; i < shows.length; i++) {
-          if (shows[i].artist_id.toString() === Profile.id) {
-            $scope.shows[i] = shows[i]
-          };
-        };
-        console.log($scope.shows, 'scopeshows')
+    
+    $scope.initArtist = function() {
+      $(document).ready(function(){
+        $('ul.tabs').tabs();
       });
-      Profile.getAllVenues
-    }
-
-    console.log($scope.shows)
-
-    $scope.getShowsById();
+      Auth.getUserById().then(function(user) {
+        return user[0].artist_id;
+      }).then(function(artist_id) {
+        Profile.getAllArtists().then(function(artists) {
+          for (var i = 0; i < artists.length; i++) {
+            if (artists[i].artist_id === artist_id) {
+              $scope.artist = artists[i];
+              $scope.shows = artists[i].shows;
+            }
+          }
+        });
+      });
+    };
 
     $scope.sendRequest = function() {
       $scope.request.artist_id = Profile.id;
@@ -56,11 +45,6 @@
       Messages.sendMessage($scope.message);
     };
 
-    $scope.init = function() {
-      $(document).ready(function(){
-        $('ul.tabs').tabs();
-      });
-    };
     $scope.minDate = new Date();
     $scope.opened = false;
 
