@@ -1,26 +1,43 @@
 module.exports = function(grunt){
   // Project configuration
   grunt.initConfig({
-  	pkg: grunt.file.readJSON('package.json'),
+    pkg: grunt.file.readJSON('package.json'),
     jshint: {
-      files: [
-        'gruntfile.js', 
-        'client/app/**/*.js', 
+      options: {
+        force: true,
+        reporter: require('jshint-stylish')
+      },
+      build: [
+        'Gruntfile.js', 
+        'client/app/**/*.js',
+        'client/specs/*.js',
         'server/**/*.js',
         'test/*.js' 
-      ], 
+      ] 
     },
-/* All bower shit */
+/* Npm install/update */
+
+    'install-dependencies':{
+      options: {
+        stdout: true,
+        stderr: true,
+        failOnError: true
+      }
+    },
+
     // auto_install: {
-    //   local: {},
     //   subdir: {
-    //     cwd: '',
-    //     stdout: true,
-    //     stderr: true,
-    //     failOnError: true
+    //     options: {
+    //       cwd: './',
+    //       stdout: true,
+    //       stderr: true,
+    //       failOnError: true,
+    //       bower: false
+    //     }
     //   }
     // },
 
+/* Bower install/update */ 
     bower: {
       install: {
         options: {
@@ -36,12 +53,12 @@ module.exports = function(grunt){
       }
     },
 
-/* Bower shit ends here */
-  	uglify: {
-  		options: {
-  			banner: '/*! <%= Headliner %> <% grunt.template.today("yyyy-mm-dd") %> */\n',
+/* Minification */
+    uglify: {
+      options: {
+        banner: '/*! <%= Headliner %> <% grunt.template.today("yyyy-mm-dd") %> */\n',
         mangle: false
-  		},
+      },
       build: {
         src: [
           'client/app/**/*.js', 
@@ -51,17 +68,18 @@ module.exports = function(grunt){
         ],
         dest: 'build/<%= pkg.name %>.min.js'
       }
-  	},
+    },
 
     //  For connecting to localhost:3000 (later on)
-    // connect: {
-    //   server: {
-    //     options: {
-    //       hostname: 'localhost',
-    //       port: 3000
-    //     }
-    //   }
-    // },
+    connect: {
+      server: {
+        options: {
+          hostname: 'localhost',
+          port: 3000,
+          keepalive: true
+        }
+      }
+    },
 
     watch: {
       scripts: { 
@@ -76,35 +94,52 @@ module.exports = function(grunt){
             spawn: false
         }
       }
-    }
+    },
+
+    //run nodemon
+    nodemon: {
+      dev: {
+        script: 'server/server.js'
+      }
+    },
+
+    concurrent: {
+      dev: {
+        tasks: [
+          'jshint',
+          'nodemon',
+          'watch'
+        ],
+        options: {
+          logConcurrentOutput: true
+        }
+      }
+    },
   });
 
   // Loading plugins that provide tasks
-  grunt.loadNpmTasks('grunt-contrib-jshint');	
+  grunt.loadNpmTasks('grunt-contrib-jshint'); 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-auto-install');
   grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('grunt-install-dependencies');
 
   /*====Registering Tasks for CLI====*/
-
-  // grunt.registerTask('install', 'install and/or update front-end dependencies', function() {
-  //   var exec = require('child_process').exec, child;
-  //   var call = this.async();
-  //   child = exec('bower install', {pwd: 'client/'}, function(error, stdout, stderr) {
-  //     console.log('stdout: ' + stdout);
-  //     console.log('stderr: ' + stderr);
-  //     if(error !== null){
-  //       console.log('exec error: ' + error);
-  //     }
-  //   });
-  // });
+  //npm install (>>grunt install)
+  grunt.registerTask('install', ['install-dependencies']);
 
   //default (>> grunt)
   grunt.registerTask('default', [
-        'bower'
+        'bower',
+        'install',
+        'jshint',        
+        'connect'
   ]);
+
 
   //testing (>> grunt test) 
   //need to add mocha/karma/jasmine tests here
