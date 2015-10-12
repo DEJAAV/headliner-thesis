@@ -15,6 +15,26 @@
       });
     };
 
+    function getAllVenues () {
+      return $http({
+        method: 'GET',
+        url: '/api/venues'
+      })
+      .then(function(resp) {
+        return resp.data;
+      })
+    };
+
+    function getAllArtists () {
+      return $http({
+        method: 'GET',
+        url: '/api/artists'
+      })
+      .then(function(resp) {
+        return resp.data;
+      })
+    };
+
     function deleteRequest(request) {
       return $http({
         method: 'POST',
@@ -34,7 +54,9 @@
     return {
       getRequests: getRequests,
       deleteRequest: deleteRequest,
-      addShow: addShow
+      addShow: addShow,
+      getAllArtists: getAllArtists,
+      getAllVenues: getAllVenues
     };
   
   };
