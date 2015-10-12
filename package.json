@@ -4,7 +4,7 @@
   "description": "venue finder for artists",
   "main": "server/server.js",
   "scripts": {
-    "postinstall": "grunt && bower install"
+    "postinstall": "./node_modules/.bin/bower install"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
