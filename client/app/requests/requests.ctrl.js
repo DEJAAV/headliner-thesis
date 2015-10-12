@@ -18,6 +18,24 @@
       });
     });
 
+    Requests.getAllArtists().then(function(artists) {
+      for (var artist in artists) {
+        console.log(artists[artist], 'artists')
+        for (var request in $scope.requests) {
+          console.log($scope.requests[request], 'requests')
+          if ($scope.requests[request].artist_id === artists[artist].artist_id) {
+            $scope.requests[request].artist_name = artists[artist].artist_name
+          }
+        }
+      }
+      console.log($scope.requests, 'request')
+    })
+
+    Requests.getAllVenues().then(function(venues) {
+
+    })
+
+
     $scope.acceptRequest = function(req) {
       Requests.deleteRequest(req);
       $window.location.reload();
