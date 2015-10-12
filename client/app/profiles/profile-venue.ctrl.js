@@ -27,6 +27,30 @@
 
     $scope.getVenueById();
 
+    $scope.shows = {};
+
+    Profile.getShows().then(function(shows){
+      for (var i = 0 ; i < shows.length; i++) {
+        if (shows[i].venue_id.toString() === $scope.id) {
+          $scope.shows[i] = shows[i]
+        };
+        console.log($scope.shows, 'shows')
+      };
+    });
+
+    Profile.getAllArtists().then(function(artists) {
+      for (var show in $scope.shows) {
+        console.log($scope.shows[show], 'show')
+        var id = $scope.shows[show].artist_id;
+        for (var artist in artists) {
+          // console.log(artiss[venue], 'venue')
+          if (artists[artist].artist_id === id) {
+            $scope.shows[show].artist_name = artists[artist].artist_name
+          }
+        }
+      }
+    });
+
     $scope.sendRequest = function() {
       $scope.request.venue_id = $scope.id;
       $scope.request.receiver = 'venue';
