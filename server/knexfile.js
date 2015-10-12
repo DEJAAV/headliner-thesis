@@ -8,5 +8,16 @@ module.exports = {
     seeds: {
       directory: './seeds'
     }
+  },
+
+  production: {
+    client: 'postgresql',
+    connection: {
+      process.env.url: 'headliner'
+    },
+    seeds: {
+      directory: 'knex_migrations'
+    }
   }
+
 }
