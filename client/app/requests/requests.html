@@ -1,7 +1,5 @@
 <div class="container">
 
-  <!--  && $rootScope.currentUser.artist_id) || (request.sender === 'artist' && $rootScope.currentUser.venue_id) -->
-  <!--  && $rootScope.currentUser.artist_id) || (request.sender === 'venue' && $rootScope.currentUser.venue_id) -->
   <div class="row" ng-model="requests">
     <div class="col-md-6"> <h4>Received Requests</h4>
       <div ng-repeat="request in requests" ng-if="request.sender === 'artist' && type === 'venue'">
