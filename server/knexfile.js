@@ -1,3 +1,4 @@
+
 module.exports = {
 
   development: {
@@ -19,5 +20,4 @@ module.exports = {
       directory: 'knex_migrations'
     }
   }
-
 }
