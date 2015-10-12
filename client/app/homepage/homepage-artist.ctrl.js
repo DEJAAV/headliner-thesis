@@ -12,6 +12,7 @@
       }
     }, true);
     
+
     $scope.initArtist = function() {
       console.log('initArtist is being called')
       Auth.getUserById().then(function(user) {

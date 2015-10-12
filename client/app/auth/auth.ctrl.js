@@ -33,7 +33,6 @@
           $window.localStorage.setItem('headliner', data.token);
           $window.localStorage.setItem('type', null);
           $location.path('/select'); 
-          $rootScope.init();
         })
         .catch(function (error) {
             $scope.user.error = 'Username is already taken.'
@@ -41,39 +40,38 @@
         });
     };
 
-    $scope.signupVenue = function () {
-      Auth.signupVenue($scope.venue)
-        .then(function (data) {
-          $window.localStorage.setItem('headliner', data.token);
-          $window.localStorage.setItem('type', 'venue');
-          $location.path('/homepage-venue');
-          $rootScope.init();
-        })
-        .catch(function(error){
-          console.log(error);
-        });
-    };
+      $scope.signupVenue = function () {
+        Auth.signupVenue($scope.venue)
+          .then(function (data) {
+            $window.localStorage.setItem('type', 'venue');
+            $location.path('/homepage-venue');
+            $rootScope.init();
+          })
+          .catch(function(error){
+            console.log(error);
+          });
+      };
 
-    $scope.signupArtist = function () {
-      Auth.signupArtist($scope.user)
-        .then(function (data) {
-          $window.localStorage.setItem('headliner', data.token);
-          $window.localStorage.setItem('type', 'artist');
-          $location.path('/homepage-artist');
-          $rootScope.init();
-        })
-        .catch(function(error){
-          console.log(error);
-        });
-    };    
+      $scope.signupArtist = function () {
+        Auth.signupArtist($scope.user)
+          .then(function (data) {
+            $window.localStorage.setItem('type', 'artist');
+            $location.path('/homepage-artist');
+            $rootScope.init();
+          })
+          .catch(function(error){
+            console.log(error);
+          });
+      };    
 
-    //Sets a artist member's name as a property in the
-    //member object, their role as the value
-    $scope.addNewMember = function(name, role){
-        $scope.user.member[name] = role;
-        $scope.name = "";
-        $scope.role = "";
-     };
+    
+      //Sets a artist member's name as a property in the
+      //member object, their role as the value
+      $scope.addNewMember = function(name, role){
+          $scope.user.member[name] = role;
+          $scope.name = "";
+          $scope.role = "";
+       };
 
     $scope.login = function () {
     Auth.login($scope.user)
@@ -101,8 +99,7 @@
 
     $scope.signout = function() {
       Auth.signout();
-      $window.localStorage.removeItem('headliner');
-      $window.localStorage.removeItem('type');
+      console.log('user signed out');
     };
 
     $scope.checkType = function(type) {
@@ -115,19 +112,22 @@
     
     $rootScope.init = function() {
       Messages.getMessages().then(function(messages) {
-        $rootScope.unread = messages.reduce(function(unread, message) {
+        $scope.unread = messages.reduce(function(unread, message) {
           return message.unread + unread;
         },0);
       });
+      console.log($scope.unread)
       Auth.getUserById().then(function(user) {
         if (user[0].venue_id) {
-          $rootScope.id = user[0].venue_id;
+          $scope.id = user[0].venue_id;
         } else if (user[0].artist_id) {
-          $rootScope.id =  user[0].artist_id;
+          $scope.id =  user[0].artist_id;
         }
       });
-      $rootScope.type = $window.localStorage.getItem('type');
+
+      $scope.type = $window.localStorage.getItem('type');
     };
+    $rootScope.init();
 
   }
 })();

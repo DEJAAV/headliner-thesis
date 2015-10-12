@@ -14,23 +14,17 @@
       }
     }, true);
 
-    $scope.initVenue = function() {
-      $(document).ready(function(){
-        $('ul.tabs').tabs();
-      });
-      Auth.getUserById().then(function(user) {
-        return user[0].venue_id;
-      }).then(function(venue_id) {
-        Profile.getAllVenues().then(function(venues) {
-          for (var i = 0; i < venues.length; i++) {
-            if (venues[i].venue_id === venue_id) {
-              $scope.venue = venues[i];
-              $scope.shows = venues[i].shows;
-            }
+    $scope.getVenueById = function(id){
+      Profile.getAllVenues().then(function(venues) {
+        for (var venue in venues) {
+          if (venues[venue].venue_id.toString() === Profile.id) {
+            $scope.venue = venues[venue]
           }
-        });
-      });
+        }
+      })
     };
+
+    $scope.getVenueById(Profile.id);
 
     $scope.sendRequest = function() {
       $scope.request.venue_id = Profile.id;
@@ -45,6 +39,12 @@
       $scope.message.id = parseInt($location.$$path.slice($location.$$path.lastIndexOf('/')+1));
       Messages.sendMessage($scope.message);
     };
+
+    $scope.init = function() {
+      $(document).ready(function(){
+        $('ul.tabs').tabs();
+      });
+    }; 
 
     $scope.minDate = new Date();
     $scope.opened = false;
