@@ -127,7 +127,7 @@ module.exports = {
                 });
               } else {
                 shows[venues_shows[i].artist_id] = [{
-                  'venue': venues_shows[i].venue_name,
+                  'artist': venues_shows[i].venue_name,
                   'date': venues_shows[i].date
                 }]
               }
