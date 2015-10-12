@@ -12,7 +12,7 @@ module.exports = {
    client: 'pg',
    connection: {
      host: databasehost,
-     database: 'headliner',
+     database: process.env.DATABASE_URL,
      charset: 'utf8'
    },
    migrations: {
