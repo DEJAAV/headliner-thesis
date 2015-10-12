@@ -35,7 +35,7 @@
     ];  
     
     $scope.getAllSongs = function() {
-      Profile.getAllSongs.then(function(songs) {
+      Profile.getAllSongs().then(function(songs) {
         console.log('Object returned from GetAllSongs: ', songs);
         //grab the old length to compare if there are new songs to pushed into the player
         var oldSongs = $scope.songs.length-1;
