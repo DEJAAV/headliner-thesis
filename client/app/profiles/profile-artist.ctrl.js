@@ -33,14 +33,28 @@
             $scope.shows[i] = shows[i]
           };
         };
-        console.log($scope.shows, 'scopeshows')
       });
       Profile.getAllVenues
     }
 
-    console.log($scope.shows)
-
     $scope.getShowsById();
+
+    $scope.getVenuesById = function() {
+      Profile.getAllVenues().then(function(venues) {
+        for (var show in $scope.shows) {
+          console.log($scope.shows[show].venue_id, 'id');
+          var id = $scope.shows[show].venue_id;
+          for (var venue in venues) {
+            console.log(venues[venue], 'venue')
+            if (venues[venue].venue_id === id) {
+              $scope.shows[show].venue_name = venues[venue].venue_name
+            }
+          }
+        }
+      });
+    }
+
+    $scope.getVenuesById()
 
     $scope.sendRequest = function() {
       $scope.request.artist_id = Profile.id;
