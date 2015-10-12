@@ -88,7 +88,6 @@ module.exports = function(grunt){
     concurrent: {
       dev: {
         tasks: [
-          'jshint',
           'nodemon',
           'watch'
         ],
@@ -119,6 +118,7 @@ module.exports = function(grunt){
   grunt.registerTask('default', [
         'bower',
         'install',
+        'jshint',
         'concurrent',        
   ]);
 
