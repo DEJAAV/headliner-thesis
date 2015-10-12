@@ -6,8 +6,6 @@
 
   function Profile ($http, $location, $window) {
 
-    var id = $location.$$path.slice(($location.$$path).lastIndexOf('/')+1)
-
     function getAllVenues () {
       return $http({
         method: 'GET',
@@ -76,8 +74,7 @@
       getAllSongs: getAllSongs,
       getMyProfile: getMyProfile,
       sendRequest: sendRequest,
-      getShows: getShows,
-      id: id
+      getShows: getShows
     };
   }
 })();

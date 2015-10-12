@@ -6,6 +6,7 @@
   function ProfileController($scope, $window, $location, $rootScope, Profile, Messages, Auth) {
     $scope.request = {};
     $scope.request.message = "We want to play!";
+    $scope.id = $location.$$path.slice(($location.$$path).lastIndexOf('/')+1)
 
     //redirect if the user isn't logged in
     $scope.$watch(Auth.isAuth, function(authed) {
@@ -14,20 +15,20 @@
       }
     }, true);
 
-    $scope.getVenueById = function(id){
+    $scope.getVenueById = function(){
       Profile.getAllVenues().then(function(venues) {
         for (var venue in venues) {
-          if (venues[venue].venue_id.toString() === Profile.id) {
+          if (venues[venue].venue_id.toString() === $scope.id) {
             $scope.venue = venues[venue]
           }
         }
       })
     };
 
-    $scope.getVenueById(Profile.id);
+    $scope.getVenueById();
 
     $scope.sendRequest = function() {
-      $scope.request.venue_id = Profile.id;
+      $scope.request.venue_id = $scope.id;
       $scope.request.receiver = 'venue';
       $scope.request.sender = 'artist';
       $scope.request.date = new Date($scope.date).toLocaleString().split(',')[0]

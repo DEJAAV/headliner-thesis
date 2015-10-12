@@ -4,7 +4,7 @@
 
   function HomepageController($scope, $window, $location, $rootScope, Homepage, Auth) { // Homepage is the injected service
     var geocoder = new google.maps.Geocoder();
-    $scope.user;
+
     //redirect if the user isn't logged in
     $scope.$watch(Auth.isAuth, function(authed) {
       if (!authed) {
@@ -12,7 +12,6 @@
       }
     }, true);
     
-
     $scope.initArtist = function() {
       console.log('initArtist is being called')
       Auth.getUserById().then(function(user) {
@@ -34,7 +33,7 @@
                 geocoder.geocode({'address': venue.zip}, function(c2) {
                   var venue_coord = new google.maps.LatLng(c2[0].geometry.location.H, c2[0].geometry.location.L);
                   venue.distance = google.maps.geometry.spherical.computeDistanceBetween(venue_coord, artist_coord) * 0.000621371;
-               });
+                });
               }); 
             });
           });
