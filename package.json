@@ -4,11 +4,8 @@
   "description": "venue finder for artists",
   "main": "server/server.js",
   "engines": {
-    "node": "0.10.x",
-    "npm": "1.4.x"
-  },
-  "scripts": {
-    "postinstall": "bower install"
+    "node": "0.12.6",
+    "npm": "2.11.2"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -40,7 +37,8 @@
     "grunt-contrib-watch": "^0.6.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "preinstall": "echo asdasdas",
+    "postinstall": "bower install" 
   },
   "repository": {
     "type": "git",
