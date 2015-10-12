@@ -30,10 +30,9 @@
     $scope.signupGeneral = function () {
       Auth.signupGeneral($scope.user)
         .then(function (data) {
+          $location.path('/select'); 
           $window.localStorage.setItem('headliner', data.token);
           $window.localStorage.setItem('type', null);
-          $location.path('/select'); 
-          $scope.init();
         })
         .catch(function (error) {
             $scope.user.error = 'Username is already taken.'
@@ -44,10 +43,10 @@
     $scope.signupVenue = function () {
       Auth.signupVenue($scope.venue)
         .then(function (data) {
-          $window.localStorage.setItem('headliner', data.token);
-          $window.localStorage.setItem('type', 'venue');
           $location.path('/homepage-venue');
+          $window.localStorage.setItem('type', 'venue');
           $scope.init();
+          $window.location.reload();
         })
         .catch(function(error){
           console.log(error);
@@ -57,10 +56,10 @@
     $scope.signupArtist = function () {
       Auth.signupArtist($scope.user)
         .then(function (data) {
-          $window.localStorage.setItem('headliner', data.token);
-          $window.localStorage.setItem('type', 'artist');
           $location.path('/homepage-artist');
+          $window.localStorage.setItem('type', 'artist');
           $scope.init();
+          $window.location.reload();
         })
         .catch(function(error){
           console.log(error);
@@ -114,22 +113,24 @@
     };
     
     $scope.init = function() {
-      Messages.getMessages().then(function(messages) {
-        $scope.unread = messages.reduce(function(unread, message) {
-          return message.unread + unread;
-        },0);
-      });
-      Auth.getUserById().then(function(user) {
-        if (user[0].venue_id) {
-          $scope.id = user[0].venue_id;
-        } else if (user[0].artist_id) {
-          $scope.id =  user[0].artist_id;
-        }
-      });
-      $scope.type = $window.localStorage.getItem('type');
+      if ($scope.loggedIn()) {
+        Messages.getMessages().then(function(messages) {
+          $scope.unread = messages.reduce(function(unread, message) {
+            return message.unread + unread;
+          },0);
+        });
+        Auth.getUserById().then(function(user) {
+          if (user[0].venue_id) {
+            $scope.id = user[0].venue_id;
+          } else if (user[0].artist_id) {
+            $scope.id =  user[0].artist_id;
+          }
+        });
+        $scope.type = $window.localStorage.getItem('type');
+      }
     };
     $scope.init();
-    
+
     $rootScope.init = function() {
       $scope.init();
     };
