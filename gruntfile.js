@@ -2,6 +2,8 @@ module.exports = function(grunt){
   // Project configuration
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
+/* Linting -- Overrides over any errors/warnings */
     jshint: {
       options: {
         force: true,
@@ -15,8 +17,8 @@ module.exports = function(grunt){
         'test/*.js' 
       ] 
     },
-/* Npm install/update */
 
+/* Npm install/update */
     'install-dependencies':{
       options: {
         stdout: true,
@@ -24,18 +26,6 @@ module.exports = function(grunt){
         failOnError: true
       }
     },
-
-    // auto_install: {
-    //   subdir: {
-    //     options: {
-    //       cwd: './',
-    //       stdout: true,
-    //       stderr: true,
-    //       failOnError: true,
-    //       bower: false
-    //     }
-    //   }
-    // },
 
 /* Bower install/update */ 
     bower: {
@@ -70,17 +60,7 @@ module.exports = function(grunt){
       }
     },
 
-    //  For connecting to localhost:3000 (later on)
-    connect: {
-      server: {
-        options: {
-          hostname: 'localhost',
-          port: 3000,
-          keepalive: true
-        }
-      }
-    },
-
+/* Watches for any changes in files & runs jshint if so */
     watch: {
       scripts: { 
         files: [
@@ -91,18 +71,20 @@ module.exports = function(grunt){
         ],
         tasks: ['jshint'],
         options: {
-            spawn: false
+            spawn: false,
+            livereload: true
         }
       }
     },
 
-    //run nodemon
+/* Run nodemon to connect to localhost:3000 */
     nodemon: {
       dev: {
         script: 'server/server.js'
       }
     },
 
+/* Runs jshint, nodemon, & watch concurrently */
     concurrent: {
       dev: {
         tasks: [
@@ -117,7 +99,7 @@ module.exports = function(grunt){
     },
   });
 
-  // Loading plugins that provide tasks
+/* Loading plugins that provide tasks */
   grunt.loadNpmTasks('grunt-contrib-jshint'); 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -128,7 +110,8 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-install-dependencies');
 
-  /*====Registering Tasks for CLI====*/
+/*=======Registering Tasks for CLI=======*/
+
   //npm install (>>grunt install)
   grunt.registerTask('install', ['install-dependencies']);
 
@@ -136,8 +119,7 @@ module.exports = function(grunt){
   grunt.registerTask('default', [
         'bower',
         'install',
-        'jshint',        
-        'connect'
+        'concurrent',        
   ]);
 
 
