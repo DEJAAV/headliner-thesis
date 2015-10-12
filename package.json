@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "venue finder for artists",
   "main": "server/server.js",
-  "script": {
+  "scripts": {
     "postinstall": "./node_modules/.bin/bower install"
   },
   "dependencies": {
