@@ -1,15 +1,15 @@
-<div class="container" ng-init="initArtist()">
+<div ng-init="initArtist()">
   
   <!-- USER TABS FOR FIND AND PROFILE -->
-  <h1>Hey {{artist.artist_name}}!</h1>
+  <h3>Search Venues</h3>
   
   <hr>
 
-  <input type='text' ng-model='search.venue_name' placeholder='search by venue name' />
 
     <div class="row">
 
     <div class="col s3">
+      <input type='text' ng-model='search.venue_name' placeholder='search by venue name' />
       <div class="row">
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
           <div class="panel panel-default">
@@ -342,9 +342,9 @@
 
   
       <div class="col s9">
-        <div class="col s4" ng-repeat="venue in venues | filter:search | filter:genreFilter | filter:typeFilter | filter:capacityFilter | filter:inoutFilter |filter:bookedFilter | filter:reviewsFilter | filter:dateFilter | filter:distanceFilter">
+        <div ng-repeat="venue in venues | filter:search | filter:genreFilter | filter:typeFilter | filter:capacityFilter | filter:inoutFilter |filter:bookedFilter | filter:reviewsFilter | filter:dateFilter | filter:distanceFilter">
           <div class="card">
-            <div class="card-image waves-effect waves-block waves-light">
+            <div class="card-image waves-effect waves-block waves-light col s2">
               <img class="activator" src="http://i.imgur.com/ZNc1JZq.jpg">
             </div>
             <div class="card-content">
