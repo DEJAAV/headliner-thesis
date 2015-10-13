@@ -69,6 +69,12 @@ passport.deserializeUser(function(id, done) {
 //   next();
 // });
 
+
+// for S3 direct and pass through uploading
+var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
+var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
+var S3_BUCKET = process.env.S3_BUCKET
+
 /*---------------Local Sign Up Strategy ---------------------- */
 passport.use('local-signup', new LocalStrategy({
     usernameField : 'localEmail',
