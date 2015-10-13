@@ -115,6 +115,7 @@ exports.up = function(knex, Promise) {
       table.string('artist_accept');
       table.string('venue_accept');
       table.string('sender');
+      table.boolean('read');
     }),
 
     knex.schema.createTable('Messages', function(table) {

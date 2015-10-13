@@ -29,7 +29,8 @@ module.exports = {
           'artist_id': reqBody.artist_id,
           'venue_id': user[0].venue_id,
           'sender': 'venue',
-          'venue_accept': 'true'
+          'venue_accept': 'true',
+          'read': false
         })
       } else if (user[0].artist_id){
         return knex('Requests').insert({
@@ -38,7 +39,8 @@ module.exports = {
           'artist_id': user[0].artist_id,
           'venue_id': reqBody.venue_id,
           'sender': 'artist',
-          'artist_accept': 'true'
+          'artist_accept': 'true',
+          'read': false
         })
       }
     })
@@ -56,6 +58,27 @@ module.exports = {
       'artist_id': reqBody.artist_id,
       'venue_id': reqBody.venue_id
     }).del()
+  },
+
+  markAsRead: function(user_id) {
+    return knex('Users').where({
+      'user_id': user_id}).then(function(user) {
+      if (user[0].artist_id) {
+        return knex('Requests').where({
+          'artist_id': user[0].artist_id,
+          'sender': 'venue'
+        }).update({
+          'read': true
+        });
+      } else if (user[0].venue_id) {
+        return knex('Requests').where({
+          'venue_id': user[0].venue_id,
+          'sender': 'artist'
+        }).update({
+          'read': true
+        });
+      }
+    });
   }
 
 };
