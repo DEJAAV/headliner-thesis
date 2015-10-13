@@ -31,3 +31,6 @@ bower_components/
 
 # Grayscale Bootstrap
 client/grayscale/
+
+#local auth file
+localauth.js
