@@ -14,7 +14,7 @@ module.exports = {
     client: 'postgresql',
     connection: process.env.DATABASE_URL,
     seeds: {
-      directory: 'knex_migrations'
+      directory: './seeds'
     }
   }
 }
