@@ -3,7 +3,7 @@ module.exports = function(grunt){
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-/* Linting -- Overrides over any errors/warnings */
+/* Linting -- Overrides (force === true) over any errors/warnings */
     jshint: {
       options: {
         force: true,
@@ -42,6 +42,18 @@ module.exports = function(grunt){
         }
       }
     },
+
+/* Concatenation */
+    concat: {
+      options: {
+        separator: ";",
+        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<% grunt.template.today("yyyy-mm-dd") %> */',
+      },
+      dist: {
+        src: [],
+        dest: 'build/<%= pkg.name %>-<%= pkg.version %>.js'
+      }
+    }
 
 /* Minification */
     uglify: {
@@ -101,6 +113,7 @@ module.exports = function(grunt){
 /* Loading plugins that provide tasks */
   grunt.loadNpmTasks('grunt-contrib-jshint'); 
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-auto-install');
   grunt.loadNpmTasks('grunt-bower-task');
