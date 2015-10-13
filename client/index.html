@@ -38,8 +38,8 @@
                 <a class="dropdown-toggle ng-cloak" data-toggle="dropdown" ng-show="loggedIn()" ng-cloak><b>Profile</b><span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href='{{"/#/profile-" + type + "/" + id}}'>My Profile</a></li>
-                  <li><a href="#/messages">Messages ({{unread}})</a></li>
-                  <li><a href="#/requests">Pending Requests</a></li>
+                  <li><a href="#/messages">Messages ({{unreadMessages}})</a></li>
+                  <li><a href="#/requests">Pending Requests ({{unreadRequests}})</a></li>
                   <li><a href="#/" ng-click="signout()">Signout</a></li>
                 </ul>
               </li>  

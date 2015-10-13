@@ -10,6 +10,8 @@
     }, true);
 
     $scope.type = $window.localStorage.getItem('type')
+    
+    Requests.markAsRead();
 
     Requests.getRequests().then(function(requests){
       $scope.requests = requests;

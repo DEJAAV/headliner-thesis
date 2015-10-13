@@ -51,12 +51,23 @@
       });
     };
 
+    function markAsRead() {
+      return $http({
+        method: 'POST',
+        url: '/api/requests/read'
+      })
+      .then(function(resp) {
+        return resp.data;
+      });
+    };
+
     return {
       getRequests: getRequests,
       deleteRequest: deleteRequest,
       addShow: addShow,
       getAllArtists: getAllArtists,
-      getAllVenues: getAllVenues
+      getAllVenues: getAllVenues,
+      markAsRead: markAsRead
     };
   
   };

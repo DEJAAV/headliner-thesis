@@ -39,7 +39,7 @@
     function markAsRead (id) {
       return $http({
         method: 'POST',
-        url: '/api/read', 
+        url: '/api/messages/read', 
         data: id
       })
       .then(function(resp) {

@@ -94,6 +94,13 @@ module.exports = function (app) {
     });
   })
 
+  app.post('/api/requests/read', function(req, res, next) {
+    var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret);
+    Requests.markAsRead(user_id).then(function(result) {
+      res.json('success');
+    });
+  });
+
   app.post('/api/message', function(req, res, next) {
     var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret);
     Messages.sendMessage(req.body, user_id).then(function(result) {
@@ -101,7 +108,7 @@ module.exports = function (app) {
     });
   });
 
-  app.post('/api/read', function(req, res, next) {
+  app.post('/api/messages/read', function(req, res, next) {
     var user_id = jwt.decode(req.headers['x-access-token'], Auth.secret);
     Messages.markAsRead(req.body, user_id).then(function(result) {
       res.json('success');

@@ -4,7 +4,7 @@
 
   .controller('AuthController', AuthController);
 
-  function AuthController ($scope, $window, $location, Auth, Global, Music, Messages, $rootScope) {
+  function AuthController ($scope, $window, $location, Auth, Global, Music, Messages, Requests, $rootScope) {
     $scope.venue = {};
     $scope.user = {}; // for artists
     $scope.user.member = {};
@@ -114,9 +114,15 @@
     
     $scope.init = function() {
       if ($scope.loggedIn()) {
+        $scope.type = $window.localStorage.getItem('type');
         Messages.getMessages().then(function(messages) {
-          $scope.unread = messages.reduce(function(unread, message) {
-            return message.unread + unread;
+          $scope.unreadMessages = messages.reduce(function(unreadMessages, message) {
+            return message.unread + unreadMessages;
+          },0);
+        });
+        Requests.getRequests().then(function(requests) {
+          $scope.unreadRequests = requests.reduce(function(unreadRequests, request) {
+            return !request.read && request.sender !== $scope.type ? unreadRequests + 1 : unreadRequests;
           },0);
         });
         Auth.getUserById().then(function(user) {
@@ -126,7 +132,6 @@
             $scope.id =  user[0].artist_id;
           }
         });
-        $scope.type = $window.localStorage.getItem('type');
       }
     };
     $scope.init();
