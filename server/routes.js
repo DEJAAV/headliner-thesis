@@ -7,7 +7,7 @@ var Venue_Reviews = require('./models/venue_reviews.js');
 var Requests = require('./models/requests.js');
 var Messages = require('./models/messages.js');
 var jwt = require('jwt-simple');
-var Auth = process.env.HOST ? require('./auth.js') : require('./localauth.js');
+var Auth = (process.env.NODE_ENV === 'production') ? require('./auth.js') : require('./localauth.js');
 var Songs = require('./models/songs.js');
 
 module.exports = function (app) {
