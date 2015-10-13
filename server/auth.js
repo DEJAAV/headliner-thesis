@@ -9,12 +9,8 @@ module.exports = {
   'callbackURL': process.env.FACEBOOK_CALLBACK_URL 
 },
 'pgData': {
-   client: 'pg',
-   connection: {
-     host: databasehost,
-     database: process.env.DATABASE_URL,
-     charset: 'utf8'
-   },
+   client: 'postgresql',
+   connection:  process.env.DATABASE_URL,
    migrations: {
      tableName: 'knex_migrations'
    }
