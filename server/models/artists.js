@@ -6,6 +6,7 @@ var knex = require('../db/db.js');
 module.exports = {
 
   create: function(reqBody, userId) {
+    console.log('We are creating an artist...')
     return knex('Artists')
       .returning('artist_id')
       .insert({
@@ -25,6 +26,7 @@ module.exports = {
         state: reqBody.state, 
         contact_name: reqBody.contact_name 
       }).then(function(artist_id) {
+        console.log('This is the artist id...   ', artist_id);
         for(var genre in reqBody.genre) {
           if (reqBody.genre[genre]) {
             Artist_Genres.addGenre(artist_id[0], genre);
@@ -32,6 +34,7 @@ module.exports = {
         }
       return artist_id
     }).then(function(artist_id) {
+      console.log('Adding members...');
       for (var member in reqBody.members) {
         Artist_Members.addMember(artist_id[0], member, reqBody.members[member] )
       }
