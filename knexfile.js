@@ -13,7 +13,7 @@ module.exports = {
   production: {
     client: 'postgresql',
     connection: {
-      database: process.env.DATABASE_URL
+      process.env.url: process.env.DATABASE_URL
     },
     seeds: {
       directory: 'knex_migrations'

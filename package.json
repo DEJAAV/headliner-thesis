@@ -6,8 +6,9 @@
   "engines": {
     "node": "0.12.6",
     "npm": "2.11.2"
-  },  
+  },
   "dependencies": {
+    "aws-sdk": "^2.2.9",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^2.10.1",
     "body-parser": "^1.14.0",
