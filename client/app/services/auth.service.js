@@ -14,8 +14,8 @@
         url: '/api/users/local', 
         data: user
       })
-      .then(function(resp) {
-        return resp.data;
+      .then(function(res) {
+        return res.data;
       });
     };
 
@@ -26,8 +26,8 @@
         url: '/api/users/venues', 
         data: user
       })
-      .then(function(resp) {
-        return resp.data;
+      .then(function(res) {
+        return res.data;
       });
     };
 
@@ -38,18 +38,18 @@
         url: '/api/users/artists', 
         data: user
       })
-      .then(function(resp) {
-        return resp.data;
+      .then(function(res) {
+        return res.data.token;
       });
     };    
 
-    var login = function (user) {
+    var login = function(user) {
       return $http({
         method: 'POST',
         url: '/api/users/login',
         data: user
       })
-      .then(function (res) {
+      .then(function(res) {
         return res.data;
       });
     };
@@ -60,7 +60,7 @@
     };
 
     // signout user by removing token that is stored in the client's localStorage
-    function signout () {
+    function signout() {
       return $http({
         method: 'GET',
         url: '/logout'
@@ -69,7 +69,7 @@
       })
     };
 
-    function who () {
+    function who() {
       return $http({
         method: 'GET',
         url: '/auth/init'
@@ -78,7 +78,7 @@
       })
     };
 
-    function getUserById () {
+    function getUserById() {
       return $http({
         method: 'GET',
         url: '/api/getId'
