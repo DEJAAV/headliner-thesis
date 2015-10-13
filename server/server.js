@@ -19,7 +19,7 @@ var passport = require('passport');
 var jwt = require('jwt-simple');
 
 //Auth and model modules
-var Auth = require('./auth.js');
+var Auth = process.env.PORT ? require('./auth.js') : require('./localauth.js');
 var Users = require('./models/users.js');
 var Venues = require('./models/venues.js');
 var Artists = require('./models/artists.js');
