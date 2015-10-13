@@ -25,3 +25,7 @@ module.exports = {
   'callbackURL': process.env.GOOGLE_CALLBACK_URL 
   }
 }
+
+if (process.env.NODE_ENV === 'production') {
+  exports.pgData.connection = process.env.DATABASE_URL
+}
