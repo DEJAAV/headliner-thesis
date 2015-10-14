@@ -12,8 +12,8 @@
 
       <!-- ng-repeat to make checkboxes for all genres  -->
       <div class="input-field col s3" ng-repeat="(oneGenre,enabled) in allGenres">
-        <input type="checkbox" id="{{oneGenre}}" ng-model="venue.genre[oneGenre]"/>
-        <label for="{{oneGenre}}">{{oneGenre}}</label>
+        <input type="checkbox" id="{{oneGenre + 'g'}}" ng-model="venue.genre[oneGenre]"/>
+        <label for="{{oneGenre + 'g'}}">{{oneGenre}}</label>
       </div>
 
     </div>

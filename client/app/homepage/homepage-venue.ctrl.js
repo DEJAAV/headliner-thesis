@@ -2,8 +2,11 @@
   angular.module('headliner.venueHomepage', []).controller('VenueHomepageController',
     HomepageController);
 
-  function HomepageController($scope, $window, $location, $rootScope, Homepage, Auth) { // Homepage is the injected service
+  function HomepageController($scope, $window, $location, $rootScope, Homepage, Auth, Global) { // Homepage is the injected service
     var geocoder = new google.maps.Geocoder();
+
+    $scope.allGenres = Global.allGenres;
+    $scope.genre = {};
 
     //redirect if the user isn't logged in
     $scope.$watch(Auth.isAuth, function(authed) {
@@ -28,10 +31,10 @@
           Homepage.getAllArtists().then(function(all) {
             $scope.artists = all;
             geocoder.geocode({'address': venue.zip}, function(c1) {         
-              var venue_coord = new google.maps.LatLng(c1[0].geometry.location.H, c1[0].geometry.location.L);
+              var venue_coord = new google.maps.LatLng(c1[0].geometry.viewport.Pa.I, c1[0].geometry.viewport.La.I);
               $scope.artists.forEach(function(artist) {
                 geocoder.geocode({'address': artist.zip}, function(c2) {
-                  var artist_coord = new google.maps.LatLng(c2[0].geometry.location.H, c2[0].geometry.location.L);
+                  var artist_coord = new google.maps.LatLng(c2[0].geometry.viewport.Pa.I, c2[0].geometry.viewport.La.I);
                   artist.distance = google.maps.geometry.spherical.computeDistanceBetween(venue_coord, artist_coord) * 0.000621371;
                 });
               }); 
