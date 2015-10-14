@@ -1,165 +1,88 @@
- <div>
-
-  <hr>
-
-  <!-- CHANGE PASSWORD  -->
-  <h5>Change Password:</h5>
-   <form editable-form name="editLoginForm" onaftersave="updateUserPswd(currentUser)">
-      <div ng-show="editLoginForm.$visible">
-        <!-- editable password -->
-        <span class="title">Password: </span>
-        <input ng-model="currentUser.password" type="password"/>
-      </div> 
-
-      <div>
-        <!-- button to show form -->
-        <button type="button" class="btn btn-default" ng-click="editLoginForm.$show()" ng-show="!editLoginForm.$visible">
-          Change Password
-        </button>
-        <!-- buttons to submit / cancel form -->
-        <span ng-show="editLoginForm.$visible">
-          <button type="submit" class="btn btn-primary" ng-disabled="editLoginForm.$waiting">
-            Save
-          </button>
-          <button type="button" class="btn btn-default" ng-disabled="editLoginForm.$waiting" ng-click="editLoginForm.$cancel()">
-            Cancel
-          </button>
-        </span>
-      </div>
-    </form> 
-
-    <hr>
-    
-    <!-- CHANGE PROFILE INFORMATION -->
-    <form editable-form name="editableForm" onaftersave="updateArtistInfo(user)">
-
-      <h4>LOCATION: </h4>
-        <div>
-          <div>
-            <span class="title">City: </span>
-            <span editable-text="user.city" e-name="city" e-required>{{ user.city }}</span>              
-          </div>
-
-          <div>
-            <span class="title">State: </span>
-            <span>{{ user.state }}</span>
-            <select class="browser-default" ng-model="user.state" ng-show="editableForm.$visible">
-                <option disabled selected value="">Select a State</option>
-                <option ng-repeat="state in states" value="{{state.abbrev}}">{{ state.abbrev }}</option>
-            </select>
-          </div>                        
-        </div>
-
-      <hr>
-
-      <h4>ABOUT: </h4>
-        <div>
-          <span class="title">Members: </span>
-          <div ng-repeat="(key,data) in user.member" ng-if="data">
-            <div>{{ key }}- {{ data }}</div>
-            <button class="btn" type="button" ng-click="remove(user.member.key)">Delete</button
-          </div>
-        </div>      
-        <div>
-          <span class="title">Genres: </span>
-          <div class="chip lime lighten-4" ng-repeat="(key,data) in user.genre" ng-if="data">{{ key }}</div>
-        </div>
-        <div>
-          <span class="title">About: </span>
-          <span editable-textarea="user.bio" e-name="bio" e-required>{{ user.bio }}</span>        
-        </div>                
-      <hr>   
+<!-- CHANGE PASSWORD -->
+<form ng-show="currentUser.password" editable-form shown="true" onaftersave="updateUserPswd(currentUser)">
   
-      <!-- GENRE CHECKBOXES --> 
-      <div class="row" ng-show="editableForm.$visible">
-        <!-- ng-repeat to make checkboxes for all genres  -->
-        <div class="input-field col s3" ng-repeat="(oneGenre,enabled) in allGenres">
-          <input type="checkbox" id="{{ oneGenre }}" ng-model="user.genre[oneGenre]"/>
-          <label for="{{ oneGenre }}">{{ oneGenre }}</label>
-        </div>
-      </div>
+  <h5>Change Password:</h5>
+  
+  <input ng-model="currentUser.password" type="password"/>
+  <button type="submit" class="btn btn-primary" ng-disabled="editLoginForm.$waiting">Save</button>
 
-      <!-- ABOUT TEXT BOX -->
-      
-      <h4>CONTACT INFO: </h4>
-        <div>
-          <span class="title">Contact Name: </span>
-          <span editable-text="user.contact_name" e-name="contact_name" e-required>{{ user.contact_name }}</span>           
-        </div>
+</form> 
+  
+<!-- CHANGE PROFILE INFORMATION -->
+<form editable-form shown="true" onaftersave="updateArtistInfo(user)">
 
-        <div>
-          <span class="title">Contact Phone Number: </span>
-          <span editable-text="user.phone" e-name="phone">{{ user.phone || 'N/A' }}</span>
-        </div>    
-        <div>
-          <span class="title">Contact Email: </span>
-          <span editable-email="user.email" e-name="email">{{ user.email || 'N/A' }}</span>
-        </div> 
+  <h5>Update Profile:</h5>
 
-      <hr>
+  <span class="title">City: </span> 
+  <span editable-text="user.city" e-name="city" e-required></span> 
 
-      <h4>ABOUT YOUR user: </h4>
-        <div>
-          <span class="title">Facebook: </span>
-          <span editable-text="user.facebook" e-name="facebook" e-required>{{ user.facebook || 'N/A' }}</span>
-        </div>
-        <div>
-          <span class="title">Facebook: </span>
-          <span editable-text="user.soundcloud" e-name="soundcloud" e-required>{{ user.soundcloud || 'N/A' }}</span>
-        </div>        
-        <div>
-          <span class="title">Yelp: </span>
-          <span editable-text="user.youtube" e-name="youtube" e-required>{{ user.youtube || 'N/A' }}</span>
-        </div>
-        <div>
-          <span class="title">Website: </span>
-          <span editable-text="user.website" e-name="website" e-required>{{ user.website || 'N/A' }}</span>
-        </div>                                                                              
-      <hr>
+  <span class="title">State: </span>
+  <select class="browser-default" ng-model="user.state">
+    <option disabled selected value="">Select a State</option>
+    <option ng-repeat="state in states" value="{{state.abbrev}}">{{ state.abbrev }}</option>
+  </select>           
+  
+  <span class="zip">Zip: </span> 
+  <span editable-text="user.zip" e-name="zip" e-required></span>           
+  
+  <span class="title">About: </span>
+  <span editable-textarea="user.bio" e-name="bio" e-required></span> 
+  
+  <span class="title">On Tour: </span>       
+  <select class="browser-default" ng-model="user.onTour">
+    <option value="" disabled selected>Choose your option</option>
+    <option value="Local">Local</option>
+    <option value="Touring">Touring</option>
+    <option value="Both">Both</option>
+  </select>
 
-      <!-- BUTTON OPTIONS -->
-      <div>
-        <!-- button to show form -->
-        <button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
-          Edit
-        </button>
-        <!-- buttons to submit / cancel form -->
-        <span ng-show="editableForm.$visible">
-          <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
-            Save Changes
-          </button>
-          <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
-            Cancel
-          </button>
-        </span>
-      </div>
-
-    </form> 
-
-</div>
-
-
-<!-- ADD THIS AFTER SONG FIELD IS ADDED INTO ARTIST FORM  -->
-<p>Add another song!</p>
-
-<div class="row">
-  <h5>Song Info: {{ song }}</h5>
-    <form class="col s12">
-      <div class="row">
-        <div class="input-field col s6">
-          <input id="url" ng-model="song.url" type="url" class="validate">
-          <label data-error="must be a valid url" for="url">Audio File URL</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="title" ng-model="song.title" type="text" class="validate">
-          <label for="title">Song Title</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="artist" ng-model="song.artist" type="text" class="validate">
-          <label for="artist">Artist</label>
-        </div>
-      </div>
-    </form>
+  <span class="title">Label: </span>
+  <select class="browser-default" ng-model="user.signed">
+    <option value="" disabled selected>Choose your option</option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+  </select>
+  <div ng-if="user.signed === 'Yes'">
+    <span editable-text="user.record_label" e-name="label" e-required></span>
   </div>
+
+  <div>
+    <span class="title">Members: </span>
+    <div ng-repeat="(key,data) in user.member" ng-if="data">
+      <div>{{ key }}- {{ data }}</div>
+      <button class="btn" type="button" ng-click="remove(user.member.key)">Delete</button>
+    </div>
+  </div>      
+
+  <span class="title">Genres: </span>
+  <div class="row">
+    <div class="input-field col s3" ng-repeat="(oneGenre,enabled) in allGenres">
+      <input type="checkbox" id="{{oneGenre + 'g'}}" ng-model="user.genre[oneGenre]"/>
+      <label for="{{oneGenre + 'g'}}">{{oneGenre}}</label>
+    </div>
+  </div>
+
+  <span class="title">Contact Name: </span>
+  <span editable-text="user.contact_name" e-name="contact_name" e-required></span>           
+
+  <span class="title">Contact Phone Number: </span>
+  <span editable-text="user.phone" e-name="phone"></span>
+
+  <span class="title">Contact Email: </span>
+  <span editable-email="user.email" e-name="email"></span>
+
+  <span class="title">Facebook: </span>
+  <span editable-text="user.facebook" e-name="facebook" e-required></span>
+
+  <span class="title">Soundcloud: </span>
+  <span editable-text="user.soundcloud" e-name="soundcloud" e-required></span>
+
+  <span class="title">Youtube: </span>
+  <span editable-text="user.youtube" e-name="youtube" e-required></span>
+
+  <span class="title">Website: </span>
+  <span editable-text="user.website" e-name="website" e-required></span>
+
+  <button type="submit" class="btn btn-primary">Save Changes</button>
+
+</form>
