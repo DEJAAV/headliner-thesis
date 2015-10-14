@@ -158,7 +158,6 @@ module.exports = function(grunt){
   //default (>> grunt)
   grunt.registerTask('default', [
         'bower',
-        'install',
         'jshint',
         'minify',
         'concurrent'
