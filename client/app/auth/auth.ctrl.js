@@ -17,8 +17,7 @@
 
     $scope.song = {
       url: undefined,
-      title: undefined,
-      artist: undefined
+      title: undefined
     }
 
     $scope.addSongtoList = function (song) {
