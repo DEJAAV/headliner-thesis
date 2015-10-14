@@ -134,6 +134,30 @@ exports.up = function(knex, Promise) {
       table.string('title');
       table.string('artist');
       table.string('url');
+    }),
+
+    knex.schema.createTable('Artist_Gallery', function(table) {
+      table.increments('picture_id').primary();
+      table.integer('artist_id').references('artist_id').inTable('Artists');
+      table.string('url');
+    }),
+
+    knex.schema.createTable('Venue_Gallery', function(table) {
+      table.increments('picture_id').primary();
+      table.integer('venue_id').references('venue_id').inTable('Venues');
+      table.string('url');
+    }),
+
+    knex.schema.createTable('Artist_Profile_Pictures', function(table) {
+      table.increments('picture_id').primary();
+      table.integer('artist_id').references('artist_id').inTable('Artists');
+      table.string('url');
+    }),
+
+    knex.schema.createTable('Venue_Profile_Pictures', function(table) {
+      table.increments('picture_id').primary();
+      table.integer('venue_id').references('venue_id').inTable('Venues');
+      table.string('url');
     })
   ]);
 };
@@ -154,6 +178,10 @@ exports.down = function(knex, Promise) {
     knex.schema.dropTable('Venues_Types'),
     knex.schema.dropTable('Requests'),
     knex.schema.dropTable('Messages'),
-    knex.schema.dropTable('Songs')
+    knex.schema.dropTable('Songs'),
+    knex.schema.dropTable('Artist_Gallery'),
+    knex.schema.dropTable('Venue_Gallery'),
+    knex.schema.dropTable('Artist_Profile_Pictures'),
+    knex.schema.dropTable('Venue_Profile_Pictures')
   ]);
 };
