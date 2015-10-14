@@ -31,7 +31,13 @@
     })
 
     Requests.getAllVenues().then(function(venues) {
-
+      for (var venue in venues) {
+        for (var request in $scope.requests) {
+          if ($scope.requests[request].venue_id === venues[venue].venue_id) {
+            $scope.requests[request].venue_name = venues[venue].venue_name
+          }
+        }
+      }
     })
 
 
