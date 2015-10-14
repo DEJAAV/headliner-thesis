@@ -206,9 +206,9 @@
         templateUrl: 'app/auth/landing.html',
         url: '/signout',
         controller: 'AuthController',
-        resolve: {function (Auth) {
+        resolve: (function (Auth) {
           Auth.signout();
-        }}
+        })
       })
 
       // MESSAGES

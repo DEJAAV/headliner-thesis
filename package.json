@@ -34,10 +34,12 @@
     "grunt-bower-task": "^0.4.0",
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-connect": "^0.11.2",
+    "grunt-contrib-cssmin": "^0.14.0",
     "grunt-contrib-jshint": "^0.11.3",
     "grunt-contrib-uglify": "^0.9.2",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-install-dependencies": "^0.2.0",
+    "grunt-ng-annotate": "^1.0.1",
     "jshint-stylish": "^2.0.1"
   },
   "scripts": {
