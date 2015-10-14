@@ -46,33 +46,59 @@ module.exports = function(grunt){
 /* Concatenation */
     concat: {
       options: {
-        separator: ";",
-        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<% grunt.template.today("yyyy-mm-dd") %> */',
+        separator: ";\n",
+        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> */\n',
       },
       dist: {
-        src: [],
-        dest: 'build/<%= pkg.name %>-<%= pkg.version %>.js'
-      }
-    }
-
-/* Minification */
-    uglify: {
-      options: {
-        banner: '/*! <%= Headliner %> <% grunt.template.today("yyyy-mm-dd") %> */\n',
-        mangle: false
-      },
-      build: {
-        src: [
-          'client/app/**/*.js', 
-          'client/specs/**/*.js',
-          'server/**/*.js',
-          'test/**/*.js'
-        ],
-        dest: 'build/<%= pkg.name %>.min.js'
+        src: ['client/app/**/*.js', 'client/specs/**/*.js'],
+        dest: 'dist/<%= pkg.name %>-<%= pkg.version %>.js'
       }
     },
 
-/* Watches for any changes in files & runs jshint if so */
+/* Angluar Annotation for Minifying */
+    ngAnnotate: {
+      options: {
+        singleQuotes: true,
+        add: true,
+        force: true
+      },
+      dist: {
+        files: [
+          { 
+            expand: true,
+            src: ['dist/<%= pkg.name %>-<%= pkg.version %>.js'],
+            ext: '.annotated.js',
+            extDot: 'last'
+          }
+        ]
+      }
+    },
+
+/* JS Minification */
+    uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+        mangle: false,
+      },
+      target: {
+        src: 'dist/*.annotated.js',
+        dest: 'dist/<%= pkg.name %>.min.js'
+      }
+    },
+
+    cssmin: {
+      target: {
+        files: [{
+          expand: true, 
+          cwd: 'client/',
+          src: ['*.css', '!*.min.css'],
+          dest: 'dist/',
+          ext: '.min.css'
+        }]
+      }
+    },
+
+/* Watches for any changes from any files, runs jshint if so */
     watch: {
       scripts: { 
         files: [
@@ -114,6 +140,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-jshint'); 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-auto-install');
   grunt.loadNpmTasks('grunt-bower-task');
@@ -121,6 +148,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-install-dependencies');
+  grunt.loadNpmTasks('grunt-ng-annotate');
 
 /*=======Registering Tasks for CLI=======*/
 
@@ -130,9 +158,9 @@ module.exports = function(grunt){
   //default (>> grunt)
   grunt.registerTask('default', [
         'bower',
-        'install',
         'jshint',
-        'concurrent',        
+        'minify',
+        'concurrent'
   ]);
 
 
@@ -147,8 +175,10 @@ module.exports = function(grunt){
   //minification (>> grunt minify) 
   //can add to default task once app is up & running
   grunt.registerTask('minify', [
-        'bower',
         'jshint',
-        'uglify'
+        'concat',
+        'ngAnnotate',
+        'uglify',
+        'cssmin'
     ]);
 };
