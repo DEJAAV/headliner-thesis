@@ -18,6 +18,9 @@ var flash = require('connect-flash')
 var passport = require('passport');
 var jwt = require('jwt-simple');
 
+// s3 file upload
+var aws = require('aws-sdk');
+
 //Auth and model modules
 var Auth = (process.env.NODE_ENV === 'production') ? require('./auth.js') : require('./localauth.js');
 var Users = require('./models/users.js');
@@ -26,6 +29,7 @@ var Artists = require('./models/artists.js');
 
 //db
 var knex = require('knex')(Auth.pgData);
+
 
 //middleware setup
 app.use(express.static(__dirname + '/../client'));
@@ -41,6 +45,9 @@ app.use(session({ secret: Auth.secret,
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());  //used to set a property in req.session
+
+// s3 urls 
+// app.use(bodyParser.urlencoded());
 
 passport.serializeUser(function(user, done) {
   if(user) {
@@ -69,11 +76,58 @@ passport.deserializeUser(function(id, done) {
 //   next();
 // });
 
-
+/*--------------- AWS S3 File Upload aws-sdk ---------------------- */
 // for S3 direct and pass through uploading
-var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
-var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
-var S3_BUCKET = process.env.S3_BUCKET
+var AWS_ACCESS_KEY = "AKIAIL5EBHCGCNHI7KXA" || process.env.AWS_ACCESS_KEY;
+var AWS_SECRET_KEY = "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" || process.env.AWS_SECRET_KEY;
+var S3_BUCKET = "headliner" || process.env.S3_BUCKET
+
+app.get('/sign_s3', function(req, res){
+    aws.config.update({
+      accessKeyId: AWS_ACCESS_KEY, 
+      secretAccessKey: AWS_SECRET_KEY
+    });
+    aws.config.update({
+      region: 'Oregon', 
+      signatureVersion: 'v4' 
+    });
+
+    var s3 = new aws.S3();
+    var s3_params = {
+        Bucket: S3_BUCKET,
+        Key: req.query.file_name,
+        Expires: 60,
+        ContentType: req.query.file_type,
+        ACL: 'public-read'
+    };
+
+    s3.getSignedUrl('putObject', s3_params, function(err, data){
+        if(err){
+            console.log(err);
+        }
+        else{
+            var return_data = {
+                signed_request: data,
+                url: 'https://s3-us-west-2.amazonaws.com/'+ S3_BUCKET + req.query.file_name // check if this is the right url. Does bucket come first?
+            };
+            console.log('the url', return_data.url)
+            res.write(JSON.stringify(return_data));
+            res.end();
+        }
+    });
+});
+
+app.post('/submit_form', function(req, res){
+    profile_pic_url = req.body.profile_pic_url;
+    console.log('req.body', req)
+    var update_account = function (url) {
+      console.log('this is the url', url);
+    }
+    update_account(profile_pic_url); 
+    // TODO: Return something useful or redirect
+    console.log("shut the fuck up this worked")
+    res.send('success');
+});
 
 /*---------------Local Sign Up Strategy ---------------------- */
 passport.use('local-signup', new LocalStrategy({
