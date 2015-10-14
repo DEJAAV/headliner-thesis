@@ -27,12 +27,16 @@
 
     $scope.getVenueById();
 
-    $scope.shows = {};
+    //the date to filter which shows are elligible for review
+    $scope.today = new Date().toLocaleString().split(',')[0];
 
+    //sets the shows object for the events tab, formatted as an array to utilize the orderBy function
     Profile.getShows().then(function(shows){
+      $scope.shows = [];
       for (var i = 0 ; i < shows.length; i++) {
         if (shows[i].venue_id.toString() === $scope.id) {
-          $scope.shows[i] = shows[i]
+          // $scope.shows[i] = shows[i]
+          $scope.shows.push(shows[i]);
         };
         console.log($scope.shows, 'shows')
       };

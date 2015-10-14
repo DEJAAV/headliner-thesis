@@ -148,12 +148,13 @@
     <!-- EVENTS TAB -->
     <div id="events" class="col s12">
 
-      <h4>EVENTS</h4>
+      <h4>EVENTS</h4><span>  {{}}</span>
       <hr>
-      <ul class="collection" ng-repeat="show in shows">
+      <ul class="collection" ng-repeat="show in shows | orderBy:'-date':true">
         <li class="collection-item avatar">
           <i class="material-icons circle blue">stars</i>
           <span class="title">{{show.artist_name}}</span>
+          <a type="button" class="btn btn-primary btn-large right" ng-if="today > show.date" ng-click"console.log(this)"><i class="material-icons right">stars</i>Review {{show.artist_name}} </a>
           <p>{{show.date}}</p>
         </li>
       </ul>
