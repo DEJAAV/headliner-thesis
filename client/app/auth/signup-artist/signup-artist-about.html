@@ -33,8 +33,10 @@
         <label for="city">City</label>
       </div>
       <div class="input-field col s2">
-        <input ng-model="user.state" type="text" class="validate">
-        <label for="state">State</label>
+        <select class="browser-default" ng-model="user.state">
+            <option disabled selected value="">Select a State</option>
+            <option ng-repeat="state in states" value="{{state.abbrev}}" >{{state.abbrev}}</option>
+        </select>
       </div>
       <div class="input-field col s2">
         <input ng-model="user.zip" type="text" class="validate">
