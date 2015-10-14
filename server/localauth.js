@@ -21,5 +21,10 @@ module.exports = {
  'clientID': '1048726055905-t7tngt9q3vp3firc3ncn8kmo89iipiip.apps.googleusercontent.com',
  'clientSecret': 'G9pbDg_QzHHlD9OTc0OFH4jp',
  'callbackURL': '/auth/google/callback' 
- }
+ },
+  'AWS': {
+   'accessKey': 'AKIAIL5EBHCGCNHI7KXA',
+   'secretKey': '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',
+   'bucket': 'headliner'
+  }
 }

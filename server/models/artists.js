@@ -35,8 +35,8 @@ module.exports = {
       return artist_id
     }).then(function(artist_id) {
       console.log('Adding members...');
-      for (var member in reqBody.members) {
-        Artist_Members.addMember(artist_id[0], member, reqBody.members[member] )
+      for (var member in reqBody.member) {
+        Artist_Members.addMember(artist_id[0], member, reqBody.member[member] )
       }
       return artist_id[0]
     }).then(function(artistId) {
