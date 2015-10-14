@@ -18,7 +18,7 @@
       </div>
 
     </div>
-    <div class="col-md-6"> <h4>Sent Requests</h4>
+    <div class="col-md-6"> <h4>Pending Requests</h4>
         <div ng-repeat="request in requests" ng-if="request.sender === 'artist' && type === 'artist'">
           <p><b>To:</b> {{request.venue_name}}</p>
           <p><b>Date:</b> {{request.date}}</p>
