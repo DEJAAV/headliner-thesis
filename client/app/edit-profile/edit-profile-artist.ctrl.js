@@ -3,7 +3,7 @@
 
   .controller('EditArtistController', EditArtistController);
 
-  function EditArtistController($scope, $window, $location, $rootScope, Edit, Global, Auth) { // Edit is the injected service     
+  function EditArtistController($scope, $window, $location, $rootScope, Edit, Global, Auth, Profile) { // Edit is the injected service     
     //redirect if the user isn't logged in
     $scope.$watch(Auth.isAuth, function(authed) {
       if (!authed) {
@@ -16,28 +16,16 @@
     $scope.allGenres = Global.allGenres;
     $scope.states = Global.states;
 
-    $scope.currentUser = {
-      username: "ellie.matsusaka@gmail.com",
-      password: '9854376054673657'
-    }
-
-    $scope.user = {
-      "member":{"Ellie":"drummer","Bob":"lead guitar"},
-      "artist_name":"JohnnySwim",
-      "bio":"We love all music and dancing.",
-      "city":"Austin",
-      "state":"TX",
-      "zip":"78751",
-      "onTour":"Touring",
-      "record_label":"Def Jam Records",
-      "genre":{"Comedy":true,"Blues":true,"Coverband":true},
-      "contact_name":"Ellie Matsusaka",
-      "phone":"8327944795",
-      "facebook":"http://www.facebook.com/ellie",
-      "soundcloud":"http://www.soundcloud.com/ellie",
-      "youtube":"http://www.youtube.com/ellie",
-      "website":"http://www.website.com/ellie"
-      };    
+    Auth.getUserById().then(function(user) {
+      $scope.currentUser = user[0];
+      Profile.getAllArtists().then(function(artists) {
+        for (var i = 0; i < artists.length; i++) {
+          if (artists[i].artist_id === user[0].artist_id) {
+            $scope.user = artists[i];
+          }
+        }
+      });
+    });
     
     $scope.updateArtistInfo = function(artist) {
       Edit.updateArtistInfo(artist);
