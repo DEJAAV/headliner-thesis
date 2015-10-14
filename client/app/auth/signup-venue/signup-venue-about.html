@@ -14,8 +14,8 @@
 
       <!-- ng-repeat to make checkboxes for all types  -->
       <div class="input-field col s3" ng-repeat="(oneType,enabled) in allTypes">
-        <input type="checkbox" id="{{oneType}}" ng-model="venue.type[oneType]"/>
-        <label for="{{oneType}}">{{oneType}}</label>
+        <input type="checkbox" id="{{oneType + 't'}}" ng-model="venue.type[oneType]"/>
+        <label for="{{oneType + 't'}}">{{oneType}}</label>
       </div>
 
     </div>
