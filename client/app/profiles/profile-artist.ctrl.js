@@ -18,12 +18,14 @@
         for (var artist in artists) {
           if (artists[artist].artist_id.toString() === $scope.id) {
             $scope.artist = artists[artist]
+            $window.document.getElementById('profpic').src = $scope.artist.profile_pic || 'https://c2.staticflickr.com/6/5481/11725796704_fb2b9e84f6.jpg';
           }
         }
       })
     };
 
     $scope.getArtistById();
+
 
     $scope.shows = {};
 
