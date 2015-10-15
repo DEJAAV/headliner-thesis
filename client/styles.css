@@ -202,13 +202,38 @@ nav {
 }
 
 body {
-    margin: 0;
-    padding-top: 70px;
+    padding-top: 60px;
 }
 
-
 .landing {
-    padding-top: 65px;
+    padding-top: 60px;
+}
+
+#title {
+    color: #677077;
+    left: 34%;
+    line-height: 200px;
+    margin: auto;
+    margin-top: -19px;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    font-size: 100%;
+}
+
+.title {
+    font-size: 400%;
+    color: black;
+}
+
+.navbar-inverse {
+    padding-bottom: 40px;
+    background-color:;
+}
+
+.poiret {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 12px
 }
 
 .z-depth-4,#requestModal{box-shadow:0 16px 28px 0 rgba(0,0,0,0),0 25px 55px 0 rgba(0,0,0,0)}
