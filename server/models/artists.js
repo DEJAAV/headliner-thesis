@@ -199,7 +199,7 @@ module.exports = {
                 }]
               }
             }
-            return genres_artistMembers_shows_reviews.concat(songs);
+            return genres_artistMembers_shows_reviews_pictures.concat(songs);
           })
       }).then(function(genres_artistMembers_shows_reviews_pictures_songs) {
         return knex('Artists').then(function(artists) {
