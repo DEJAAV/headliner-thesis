@@ -154,11 +154,28 @@
         <li class="collection-item avatar">
           <i class="material-icons circle blue">stars</i>
           <span class="title">{{show.artist_name}}</span>
-          <a type="button" class="btn btn-primary btn-large right" ng-if="today > show.date" ng-click"console.log(this)"><i class="material-icons right">stars</i>Review {{show.artist_name}} </a>
+          <a type="button" class="btn btn-primary btn-large right" ng-if="today > show.date" data-toggle="modal" data-target="#reviewModal"><i class="material-icons right">stars</i>Review {{show.artist_name}} </a>
           <p>{{show.date}}</p>
         </li>
       </ul>
 
+    </div>
+    <!-- REVIEW MODAL -->
+    <div id="reviewModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Review</h4>
+          </div>
+          <div class="modal-body">
+            <textarea name="message" type="text"  class="form-control input-sm chat-input" ng-model="message.message"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="sendMessage()" ng-disabled="messageForm.$invalid">Send</button>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- REVIEWS TAB -->
     <div id="reviews" class="col s12">

@@ -85,7 +85,45 @@
       }).then(function(res) {
         return res.data;
       })
-    }
+    };
+
+    function getSignedRequest(file) {
+      return $http({
+        method: 'GET',
+        url: '/sign_s3?file_name='+file.name+'&file_type='+file.type
+      }).then(function(res) {
+        return res.data;
+      })
+    };
+
+    function uploadFile(file, signed_request) {
+      return $http({
+        method: 'PUT',
+        url: signed_request,
+        headers: {
+          'x-amz-acl': 'public-read',
+          'content-type': file.type
+        },
+        data: file
+      }).then(function(res) {
+        return res;
+      }, function(err) {
+        if(err) {
+          $window.alert('Could not upload file');
+        }
+      })
+    };
+
+    function sendFile(url) {
+      return $http({
+        method: 'POST',
+        url: '/submit_form',
+        data: url
+      }).then(function(res) {
+        console.log('the response from sendFile: ', res);
+        return res;
+      })
+    };
 
     return {
       signupGeneral: signupGeneral,
@@ -95,7 +133,10 @@
       isAuth: isAuth,
       signout: signout,
       who: who,
-      getUserById: getUserById
+      getUserById: getUserById,
+      getSignedRequest: getSignedRequest,
+      uploadFile: uploadFile,
+      sendFile: sendFile
     };
   };
 

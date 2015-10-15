@@ -27,6 +27,9 @@ var Artists = require('./models/artists.js');
 //db
 var knex = require('knex')(Auth.pgData);
 
+// s3 file upload
+var aws = require('aws-sdk');
+
 //middleware setup
 app.use(express.static(__dirname + '/../client'));
 app.use(cookieParser());
@@ -56,24 +59,48 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-//some middleware to log what's going on
-// app.use(function(req, res, next) {
-//   console.log('current user: ');
-//   console.log(req.user);
-//   console.log('**************');
-//   console.log('current session: ');
-//   console.log(req.session);
-//   console.log('Current Request: ');
-//   console.log(req);
-//   console.log('************************');
-//   next();
-// });
+//end points for s3 testing
+app.get('/sign_s3', function(req, res){
+    aws.config.update({
+      accessKeyId: Auth.AWS.accessKey, 
+      secretAccessKey: Auth.AWS.secretKey
+    });
+    aws.config.update({
+      region: 'us-west-2', 
+      signatureVersion: 'v4' 
+    });
 
+    var s3 = new aws.S3();
+    var s3_params = {
+        Bucket: Auth.AWS.bucket,
+        Key: req.query.file_name,
+        Expires: 60,
+        ContentType: req.query.file_type,
+        ACL: 'public-read'
+    };
 
-// for S3 direct and pass through uploading
-var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
-var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
-var S3_BUCKET = process.env.S3_BUCKET
+    s3.getSignedUrl('putObject', s3_params, function(err, data){
+        if(err){
+            console.log(err);
+        }
+        else{
+          console.log('req.query inside of getSignedUrl: ', req.query);
+            var return_data = {
+                signed_request: data,
+                url: 'https://s3-us-west-2.amazonaws.com/'+ Auth.AWS.bucket + req.query.file_name // check if this is the right url. Does bucket come first?
+            };
+            console.log('the url inside of getSignedUrl: ', return_data.url)
+            res.json(return_data);
+        }
+    });
+});
+
+app.post('/submit_form', function(req, res){
+  console.log('req body on submit form: ', req.body);
+  // TODO: Return something useful or redirect
+  console.log("shut the fuck up this worked")
+  res.send('success');
+});
 
 /*---------------Local Sign Up Strategy ---------------------- */
 passport.use('local-signup', new LocalStrategy({

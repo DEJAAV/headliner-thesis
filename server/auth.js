@@ -19,7 +19,12 @@ module.exports = {
   'clientID': process.env.GOOGLE_CLIENT_ID,
   'clientSecret': process.env.GOOGLE_CLIENT_SECRET,
   'callbackURL': process.env.GOOGLE_CALLBACK_URL 
-  }
+  },
+ 'AWS': {
+  'accessKey': process.env.AWS_ACCESS_KEY,
+  'secretKey': process.env.AWS_SECRET_KEY,
+  'bucket': process.env.S3_BUCKET
+ }
 }
 
 // if (process.env.NODE_ENV === 'production') {
