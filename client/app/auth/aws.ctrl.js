@@ -4,7 +4,7 @@
 
   .controller('AWSController', AWSController);
 
-  function AWSController ($scope, $window, Auth) {
+  function AWSController ($scope, $window, Auth, $location) {
 
     $scope.user.songs = [];
     var song = {};
@@ -25,7 +25,11 @@
           } else {
           //sets the src for the img tag based off of the fixed url
             $window.document.getElementById('preview').src = fixedUrl;
-            $scope.user.profile_pic = fixedUrl;
+            if ($location.$$path === "/signup-venue/basic") {
+              $scope.venue.profile_pic = fixedUrl
+            } else {
+              $scope.user.profile_pic = fixedUrl
+            }
           }
         })
     };
