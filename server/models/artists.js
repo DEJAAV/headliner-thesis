@@ -35,8 +35,8 @@ module.exports = {
       return artist_id
     }).then(function(artist_id) {
       console.log('Adding members...');
-      for (var member in reqBody.member) {
-        Artist_Members.addMember(artist_id[0], member, reqBody.member[member] )
+      for (var member in reqBody.members) {
+        Artist_Members.addMember(artist_id[0], member, reqBody.members[member] )
       }
       return artist_id[0]
     }).then(function(artistId) {
@@ -91,8 +91,8 @@ module.exports = {
           }
         });
         Artist_Members.removeAll(artist_id[0]).then(function() {
-          for (var member in reqBody.member) {
-            Artist_Members.addMember(artist_id[0], member, reqBody.member[member]);
+          for (var member in reqBody.members) {
+            Artist_Members.addMember(artist_id[0], member, reqBody.members[member]);
           }
         });
       });

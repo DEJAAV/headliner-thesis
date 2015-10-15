@@ -76,13 +76,13 @@
       <span class="title">Member Role: </span>
     </div>
   </div>
-  <div ng-repeat="(name,role) in artist.member" ng-if="role">
+  <div ng-repeat="(name,role) in artist.members" ng-if="role">
     <div class="form-group row">
       <div class="col s5">
         <span editable-text="name" e-name="name" e-required></span>
       </div>
       <div class="col s5">
-        <span editable-text="artist.member[name]" e-name="role" e-required></span>
+        <span editable-text="artist.members[name]" e-name="role" e-required></span>
       </div>
       <div class="col s2">
         <a class="btn-floating btn-medium waves-effect waves-light blue" ng-click="remove(name)"><i class="material-icons">remove</i></a>
