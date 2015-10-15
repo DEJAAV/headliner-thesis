@@ -20,7 +20,7 @@
     console.log('updateVenueInfo POST: ', venue);
     return $http({
       method: 'POST',
-      url: '/api/users/venues', 
+      url: '/api/users/venues/update', 
       data: venue
     })
     .then(function(resp) {
@@ -32,7 +32,7 @@
     console.log('updateArtistInfo POST: ', artist);
     return $http({
       method: 'POST',
-      url: '/api/users/artists', 
+      url: '/api/users/artists/update', 
       data: artist
     })
     .then(function(resp) {

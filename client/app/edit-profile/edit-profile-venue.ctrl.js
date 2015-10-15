@@ -3,10 +3,10 @@
 
   .controller('EditVenueController', EditVenueController);
 
-  function EditVenueController($scope, $window, $location, $rootScope, Edit, Global, Auth) { // Edit is the injected service     
+  function EditVenueController($scope, $window, $location, $rootScope, Edit, Global, Auth, Profile) { // Edit is the injected service     
     //redirect if the user isn't logged in
     $scope.$watch(Auth.isAuth, function(authed) {
-      if (!authed) {
+      if (!authed || localStorage.getItem('type') === 'artist') {
         $location.path('/#/');
       }
     }, true);
@@ -15,34 +15,25 @@
     $scope.allTypes = Global.allTypes;
     $scope.states = Global.states;
 
-    $scope.user = {
-      username: "ellie.matsusaka@gmail.com",
-      password: '9854376054673657'
-    }
-    
-    $scope.venue = {"venue_name":"Bob's Bar",
-      "street":"4613 KINGLET ST",
-      "city":"HOUSTON",
-      "zip":"77035-5035",
-      "state":"MO",
-      "genre":{"americana":true,"metal":true,"bluegrass":true},
-      "inout":"Outdoor",
-      "capacity":100,
-      "type":{"casual":true,"dive":true},
-      "about":"John draw real poor on call my from. May she mrs furnished discourse extremely. Ask doubt noisy shade guest did built her him. Ignorant repeated hastened it do. Consider bachelor he yourself expenses no. Her itself active giving for expect vulgar months. Discovery commanded fat mrs remaining son she principle middleton neglected. Be miss he in post sons held.",
-      "contact_name":"Ellie Matsusaka",
-      "contact_phone":"8327944795",
-      "facebook":"http://www.facebook.com/elliematsusaka",
-      "yelp":"http://www.yelp.com/elliematsusaka",
-      "website":"http://www.google.com/elliematsusaka"
-    };
+    Auth.getUserById().then(function(user) {
+      $scope.user = user[0];
+      Profile.getAllVenues().then(function(venues) {
+        for (var i = 0; i < venues.length; i++) {
+          if (venues[i].venue_id === user[0].venue_id) {
+            $scope.venue = venues[i];
+          }
+        }
+      });
+    });
 
     $scope.updateVenueInfo = function(venue) {
       Edit.updateVenueInfo(venue);
+      window.location.reload();
     };
 
     $scope.updateUserPswd = function(user) {
       Edit.updateUserPswd(user);
+      window.location.reload();
     }; 
   }
 })();

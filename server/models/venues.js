@@ -14,7 +14,7 @@ module.exports = {
         capacity: reqBody.capacity,
         website: reqBody.website,
         street: reqBody.street,
-        bio: reqBody.about,
+        bio: reqBody.bio,
         city: reqBody.city,
         state: reqBody.state,
         zip: reqBody.zip,
@@ -23,7 +23,7 @@ module.exports = {
         contact_name: reqBody.contact_name,
         contact_phone: reqBody.contact_phone,
         contact_email: reqBody.contact_email,
-        in_out: reqBody.inout
+        in_out: reqBody.in_out
       })
       .then(function(venueId) {
         for(var genre in reqBody.genre) {
@@ -57,7 +57,7 @@ module.exports = {
         capacity: reqBody.capacity,
         website: reqBody.website,
         street: reqBody.street,
-        bio: reqBody.about,
+        bio: reqBody.bio,
         city: reqBody.city,
         state: reqBody.state,
         zip: reqBody.zip,
@@ -66,7 +66,7 @@ module.exports = {
         contact_name: reqBody.contact_name,
         contact_phone: reqBody.contact_phone,
         contact_email: reqBody.contact_email,
-        in_out: reqBody.inout
+        in_out: reqBody.in_out
       })
       .then(function(venueId) {
         Venue_Genres.removeAll(venueId[0]).then(function() {

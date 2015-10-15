@@ -6,7 +6,7 @@
   function EditArtistController($scope, $window, $location, $rootScope, Edit, Global, Auth, Profile) { // Edit is the injected service     
     //redirect if the user isn't logged in
     $scope.$watch(Auth.isAuth, function(authed) {
-      if (!authed) {
+      if (!authed || localStorage.getItem('type') === 'venue') {
         $location.path('/#/');
       }
     }, true);
@@ -30,13 +30,13 @@
     $scope.updateArtistInfo = function(artist) {
       Edit.updateArtistInfo(artist);
       window.location.reload();
-      console.log('successfully updated artist info');
     };
 
     $scope.updateUserPswd = function(user) {
       Edit.updateUserPswd(user);
-      console.log('successfully updated user password');
+      window.location.reload();
     };  
+    
     $scope.remove = function(member){
       delete $scope.artist.member[member];
     };

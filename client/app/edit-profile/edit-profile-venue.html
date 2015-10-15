@@ -1,184 +1,146 @@
- <div class="container">
+<!-- CHANGE PASSWORD -->
+<form ng-show="user.password" editable-form shown="true" onaftersave="updateUserPswd(user)">
+  
+  <h5>Change Password</h5>
+  
+  <div class="form-group row">
+    <div class="col s4">
+      <input ng-model="user.password" type="password"/>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </div>
 
-  <h4>{{ venue.venue_name }} Profile:</h4>
+</form> 
+
+<hr>
+  
+<!-- CHANGE PROFILE INFORMATION -->
+<form editable-form shown="true" onaftersave="updateVenueInfo(venue)">
+
+  <h5>Update Profile</h5>
 
   <hr>
 
-  <!-- CHANGE PASSWORD  -->
-  <h5>Change Password:</h5>
-   <form editable-form name="editLoginForm" onaftersave="updateUserPswd(user)">
-      <div>
-        <!-- username is not editable -->
-        <span class="title">Username: </span>
-        <span e-name="username">{{ user.username }}</span>
-      </div> 
-      <div ng-show="editLoginForm.$visible">
-        <!-- editable password -->
-        <span class="title">Password: </span>
-        <input ng-model="user.password" type="password"/>
-      </div> 
+  <div class="form-group row">
+    <div class="col s6">
+      <span class="title">Street: </span> 
+      <span editable-text="venue.street" e-name="street" e-required></span> 
+    </div>
+    <div class="col s2">
+      <span class="title">City: </span> 
+      <span editable-text="venue.city" e-name="city" e-required></span> 
+    </div>
+    <div class="col s2">
+      <span class="title">State: </span>
+      <select class="browser-default" ng-model="venue.state">
+        <option disabled selected value="">Select a State</option>
+        <option ng-repeat="state in states" value="{{state.abbrev}}">{{ state.abbrev }}</option>
+      </select>           
+    </div>
+    <div class="col s2">
+      <span class="zip">Zip: </span> 
+      <span editable-text="venue.zip" e-name="zip" e-required></span>
+    </div>  
+  </div> 
 
-      <div>
-        <!-- button to show form -->
-        <button type="button" class="btn btn-default" ng-click="editLoginForm.$show()" ng-show="!editLoginForm.$visible">
-          Change Password
-        </button>
-        <!-- buttons to submit / cancel form -->
-        <span ng-show="editLoginForm.$visible">
-          <button type="submit" class="btn btn-primary" ng-disabled="editLoginForm.$waiting">
-            Save
-          </button>
-          <button type="button" class="btn btn-default" ng-disabled="editLoginForm.$waiting" ng-click="editLoginForm.$cancel()">
-            Cancel
-          </button>
-        </span>
+  <hr>
+
+  <div class="form-group row">
+      <div class="col s3">
+        <br>
+        <input class="with-gap" name="group1" type="radio" id="indoor" value="Indoor" ng-model="venue.in_out"/>
+        <label for="indoor">Indoor</label>      
       </div>
-    </form> 
-
-    <hr>
-    
-    <!-- CHANGE PROFILE INFORMATION -->
-    <form editable-form name="editableForm" onaftersave="updateVenueInfo()">
-
-      <h4>ADDRESS: </h4>
-        <div>
-          <div>
-            <span class="title">Street: </span>
-            <span editable-text="venue.street" e-name="street" e-required>{{ venue.street }}</span>              
-          </div>
-        <div>
-          <span class="title">City: </span>
-          <span editable-text="venue.city" e-name="city" e-required>{{ venue.city }}</span>              
-        </div>
-        <div>
-          <span class="title">State: </span>
-          <span>{{ venue.state }}</span>
-          <select class="browser-default" ng-model="venue.state" ng-show="editableForm.$visible">
-              <option disabled selected value="">Select a State</option>
-              <option ng-repeat="state in states" value="{{state.abbrev}}" >{{ state.abbrev }}</option>
-          </select>
-        </div>                        
-        <div>
-          <span class="title">Zip: </span>
-          <span editable-text="venue.zip" e-name="zip" e-required>{{ venue.zip }}</span>              
-        </div>
+      <div class="col s3">
+        <br>
+        <input class="with-gap" name="group1" type="radio" id="outdoor" value="Outdoor" ng-model="venue.in_out" />
+        <label for="outdoor">Outdoor</label>
+      </div>
+      <div class="col s3">
+        <br>
+        <input class="with-gap" name="group1" type="radio" id="both" value="Both" ng-model="venue.in_out" />
+        <label for="both">Both</label>
       </div>
 
-      <hr>
+    <div class="col s3">
+      <span class="capacity">Capacity: </span> 
+      <span editable-text="venue.capacity" e-name="capacity" e-required></span>
+    </div>  
+  </div>    
 
-      <h4>ABOUT YOUR VENUE: </h4>
+  <hr>
+
+  <div class="form-group row">
+    <div class="col s12">
+      <span class="title">About: </span>
+      <span editable-textarea="venue.bio" e-name="bio" e-required e-style="height: 200px;"></span> 
+    </div>
+  </div>
+
+  <hr>   
+
+  <div class="form-group row">
+    <div class="col s12">
+      <span class="title">Types: </span>
       <div class="row">
-        <div class="input-field col s6"> 
-          <span class="title">Indoor/Outdoor: {{ venue.inout }}</span>
-            <div class="input-field col s9" ng-show="editableForm.$visible">
-              <input class="with-gap" name="group1" type="radio" id="indoor" value="Indoor" ng-model="venue.inout"/>
-              <label for="indoor">Indoor</label>       
-              <input class="with-gap" name="group1" type="radio" id="outdoor" value="Outdoor" ng-model="venue.inout" />
-              <label for="outdoor">Outdoor</label>
-              <input class="with-gap" name="group1" type="radio" id="both" value="Both" ng-model="venue.inout" />
-              <label for="both">Both</label> 
-            </div> 
-          </div>  
-        <div class="input-field col s6">
-          <span class="title">Capacity: </span>
-          <span editable-number="venue.capacity" e-name="capacity" e-required>{{ venue.capacity }}</span>
+        <div class="input-field col s3" ng-repeat="(oneType,enabled) in allTypes">
+          <input type="checkbox" id="{{oneType + 't'}}" ng-model="venue.type[oneType]"/>
+          <label for="{{oneType + 't'}}">{{oneType}}</label>
         </div>
       </div>
+    </div>
+  </div>
 
-        <div>
-          <span class="title">Genres: </span>
-          <div class="chip lime lighten-4" ng-repeat="(key,data) in venue.genre" ng-if="data">{{ key }}</div>
+  <hr> 
+
+  <div class="form-group row">
+    <div class="col s12">
+      <span class="title">Genres: </span>
+      <div class="row">
+        <div class="input-field col s3" ng-repeat="(oneGenre,enabled) in allGenres">
+          <input type="checkbox" id="{{oneGenre + 'g'}}" ng-model="venue.genre[oneGenre]"/>
+          <label for="{{oneGenre + 'g'}}">{{oneGenre}}</label>
         </div>
-  
-        
-      <!-- GENRE CHECKBOXES --> 
-        <div class="row" ng-show="editableForm.$visible">
-          <!-- ng-repeat to make checkboxes for all genres  -->
-          <div class="input-field col s3" ng-repeat="(oneGenre,enabled) in allGenres">
-            <input type="checkbox" id="{{oneGenre}}" ng-model="venue.genre[oneGenre]"/>
-            <label for="{{oneGenre}}">{{oneGenre}}</label>
-          </div>
-        </div>
-
-      <!-- ABOUT TEXT BOX SECTION -->
-        <div class="row">
-          <div>
-            <span class="title">About: </span>
-            <span editable-textarea="venue.about" e-name="about" e-required>{{ venue.about }}</span>              
-          </div>
-          <div>
-            <span class="title">Type: </span>
-            <div class="chip red lighten-4" ng-repeat="(key,data) in venue.type" ng-if="data">{{ key }}</div>
-          </div> 
-        </div>          
-
-        <!-- START OF TYPE CHECKBOXES  -->
-
-
-        <!-- VENUE TYPE CHECKBOXES -->
-        <div class="row" ng-show="editableForm.$visible">
-          <!-- ng-repeat to make checkboxes for all types  -->
-          <div class="input-field col s3" ng-repeat="(oneType,enabled) in allTypes">
-            <input type="checkbox" id="{{oneType}}" ng-model="venue.type[oneType]"/>
-            <label for="{{oneType}}">{{oneType}}</label>
-          </div>
-        </div>
-       
-      <hr>   
-      
-      <h4>CONTACT INFO: </h4>
-        <div>
-          <span class="title">Contact Name: </span>
-          <span editable-text="venue.contact_name" e-name="contact_name" e-required>{{ venue.contact_name }}</span>           
-        </div>
-
-        <div>
-          <span class="title">Contact Phone Number: </span>
-          <span editable-text="venue.contact_phone" e-name="contact_phone">{{ venue.contact_phone || 'N/A' }}</span>
-        </div>    
-        <div>
-          <span class="title">Contact Email: </span>
-          <span editable-email="venue.contact_email" e-name="contact_email">{{ venue.contact_email || 'N/A' }}</span>
-        </div> 
-
-      <hr>
-
-      <h4>ABOUT YOUR VENUE: </h4>
-        <div>
-          <span class="title">Facebook: </span>
-          <span editable-text="venue.facebook" e-name="facebook" e-required>{{ venue.facebook || 'N/A' }}</span>
-        </div>
-        <div>
-          <span class="title">Yelp: </span>
-          <span editable-text="venue.yelp" e-name="yelp" e-required>{{ venue.yelp || 'N/A' }}</span>
-        </div>
-        <div>
-          <span class="title">Website: </span>
-          <span editable-text="venue.website" e-name="website" e-required>{{ venue.website || 'N/A' }}</span>
-        </div>                                                                              
-      <hr>
-
-      <!-- BUTTON OPTIONS -->
-      <div>
-        <!-- button to show form -->
-        <button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
-          Edit
-        </button>
-        <!-- buttons to submit / cancel form -->
-        <span ng-show="editableForm.$visible">
-          <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
-            Save Changes
-          </button>
-          <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
-            Cancel
-          </button>
-        </span>
       </div>
+    </div>
+  </div>
 
-    </form> 
+  <hr>
 
-<h3>For Testing:</h3>
-<div>USER LOGIN INFO: {{ user }}</div>
-<div>VENUE INFO: {{ venue }}</div>
+  <div class="form-group row">
+    <div class="col s4">
+      <span class="title">Contact Name: </span>
+      <span editable-text="venue.contact_name" e-name="contact_name" e-required></span>           
+    </div>
+    <div class="col s4">
+      <span class="title">Phone Number: </span>
+      <span editable-text="venue.contact_phone" e-name="phone"></span>
+    </div>
+    <div class="col s4">
+      <span class="title">Email: </span>
+      <span editable-email="venue.contact_email" e-name="email"></span>
+    </div>
+  </div>
 
-</div>
+  <hr>
+
+  <div class="form-group row">
+    <div class="col s4">
+      <span class="title">Facebook: </span>
+      <span editable-text="venue.facebook" e-name="facebook" e-required></span>
+    </div>
+    <div class="col s4">
+      <span class="title">Yelp: </span>
+      <span editable-text="venue.yelp" e-name="yelp" e-required></span>
+    </div>
+    <div class="col s4">
+      <span class="title">Website: </span>
+      <span editable-text="venue.website" e-name="website" e-required></span>
+    </div>
+  </div>
+
+  <hr>
+
+  <button type="submit" class="btn btn-primary">Save Changes</button>
+
+</form>
