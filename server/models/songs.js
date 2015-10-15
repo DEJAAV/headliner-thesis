@@ -15,12 +15,18 @@ module.exports = {
       .where({'Users.user_id': user_id})
   },
 
-  addSong: function(song, artistId) {
+  addSong: function(song, artist_id) {
     return knex('Songs').insert({
-      'artist_id': artistId,
+      'artist_id': artist_id,
       'title': song.title,
-      'artist': song.artist,
       'url': song.url
     })
+  },
+
+  removeSong: function(artist_id, url) {
+    return knex('Songs').where({
+      'artist_id': artist_id,
+      'url': url
+    }).del()
   }
 }
