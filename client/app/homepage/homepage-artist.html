@@ -1,5 +1,4 @@
 <div ng-init="initArtist()">
-<div class="container">
   
   <!-- USER TABS FOR FIND AND PROFILE -->
   <h3>Search Venues</h3>
@@ -201,7 +200,7 @@
       </div> -->
 
   
-      <div class="col s9">
+      <div class="col s8">
         <div ng-repeat="venue in venues | filter:search | filter:genreFilter | filter:typeFilter | filter:capacityFilter | filter:inoutFilter |filter:bookedFilter | filter:reviewsFilter | filter:dateFilter | filter:distanceFilter">
           <div class="card col s10 offset-s1">
             <div class="card-image waves-effect waves-block waves-light col s3">
@@ -221,7 +220,6 @@
             </div>
           </div>
         </div>  
-      </div>
       </div>
 
 </div>
