@@ -209,6 +209,10 @@ body {
     padding-top: 60px;
 }
 
+.messages {
+    padding-top: 20px;
+}
+
 #title {
     color: #677077;
     left: 34%;
