@@ -5,17 +5,16 @@
   <div class="col s12">
           <div class="row">
         <div class="input-field col s6">
-          <input type="text" id="song_title" ng-model="user.song[0][title]">
-   <input type="file" id="file_input" data-ng-controller="AWSController" ng-model="user.song[0][url]"/>
+          <input type="text" id="song_title" ng-model="title">
+   <input type="file" id="file_input" data-ng-controller="AWSController"/>
   <p id="status">Please select a file</p>
 </div>
 <div class="input-field col s6">
-  <form id="fileupload" class="form" name="uploadForm" ng-submit="sendFile(profilePic)">
+  <form id="fileupload" class="form" name="uploadForm" ng-submit="sendFile(audioFile)">
     <img style="border:1px solid gray;width:300px;"  id="preview" src="" />
     <input type="submit" value="Update profile"/>
   </form>
 </div>
-
 
   <div class="row">
     <div class="col s6">
