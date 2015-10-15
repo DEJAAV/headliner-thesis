@@ -132,7 +132,6 @@ exports.up = function(knex, Promise) {
       table.increments('song_id').primary();
       table.integer('artist_id').references('artist_id').inTable('Artists');
       table.string('title');
-      table.string('artist');
       table.string('url');
     }),
 
