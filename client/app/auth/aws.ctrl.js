@@ -16,8 +16,6 @@
           //this is a syntax fix for a working url
           var fixedUrl = url.replace('headliner', 'headliner/');
           fixedUrl = fixedUrl.split(' ').join('+');
-          //sets the src for the img tag based off of the fixed url
-          $window.document.getElementById('preview').src = fixedUrl;
           if(file.type === 'audio/mp3' || file.type === 'audio/x-m4a') {
             var song = {
               url: fixedUrl,
@@ -25,6 +23,8 @@
             }
             $scope.user.songs.push(song)
           } else {
+          //sets the src for the img tag based off of the fixed url
+            $window.document.getElementById('preview').src = fixedUrl;
             $scope.user.profile_pic = fixedUrl;
           }
         })
