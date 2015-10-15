@@ -45,10 +45,18 @@ module.exports = {
       }).update({
         'artist_id': artistId
       }).then(function() {
-        if (reqBody.songs) {
+        if(reqBody.songs) {
           for(var i = 0; i < reqBody.songs.length; i++) {
             Songs.addSong(reqBody.songs[i], artistId);
           }
+        }
+      }).then(function() {
+        if(reqBody.profile_pic) {
+          return knex('Artist_Profile_Pictures')
+            .insert({
+              'artist_id': artistId,
+              'url': reqBody.profile_pic
+            })
         }
       })
     })
@@ -89,7 +97,8 @@ module.exports = {
         });
       });
   },
-
+  
+  //builds an array of all artists
   getAll: function() {
     return knex('Genres')
       .join('Artist_Genres','Genres.genre_id','Artist_Genres.genre_id')
@@ -163,12 +172,44 @@ module.exports = {
             return genres_artistMembers_shows.concat(reviews);
           })
       }).then(function(genres_artistMembers_shows_reviews) {
+        return knex('Artist_Profile_Pictures')
+          .join('Artists', 'Artist_Profile_Pictures.artist_id', 'Artists.artist_id')
+          .then(function(pics) {
+            var pictures = {};
+            for (var i = 0; i < pics.length; i++) {
+              pictures[pics[i].artist_id] = pics[i].url;
+            }
+            return genres_artistMembers_shows_reviews.concat(pictures);
+          })
+      }).then(function(genres_artistMembers_shows_reviews_pictures) {
+        return knex('Songs')
+          .join('Artists', 'Artists.artist_id', 'Songs.artist_id')
+          .then(function(playlist) {
+            var songs = {};
+            for(var i = 0; i < playlist.length; i++) {
+              if(songs[playlist[i].artist_id]) {
+                songs[playlist[i].artist_id].push({
+                  'title': playlist[i].title,
+                  'url': playlist[i].url
+                })
+              } else {
+                songs[playlist[i].artist_id] = [{
+                  'title': playlist[i].title,
+                  'url': playlist[i].url
+                }]
+              }
+            }
+            return genres_artistMembers_shows_reviews.concat(songs);
+          })
+      }).then(function(genres_artistMembers_shows_reviews_pictures_songs) {
         return knex('Artists').then(function(artists) {
           return artists.map(function(artist) {
-            artist.genre = genres_artistMembers_shows_reviews[0][artist.artist_id];
-            artist.member = genres_artistMembers_shows_reviews[1][artist.artist_id];
-            artist.shows = genres_artistMembers_shows_reviews[2][artist.artist_id];
-            artist.reviews = genres_artistMembers_shows_reviews[3][artist.artist_id];
+            artist.genre = genres_artistMembers_shows_reviews_pictures_songs[0][artist.artist_id];
+            artist.members = genres_artistMembers_shows_reviews_pictures_songs[1][artist.artist_id];
+            artist.shows = genres_artistMembers_shows_reviews_pictures_songs[2][artist.artist_id];
+            artist.reviews = genres_artistMembers_shows_reviews_pictures_songs[3][artist.artist_id];
+            artist.profile_pic = genres_artistMembers_shows_reviews_pictures_songs[4][artist.artist_id];
+            artist.songs = genres_artistMembers_shows_reviews_pictures_songs[5][artist.artist_id];
             return artist;
           })
         })
