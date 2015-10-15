@@ -38,12 +38,12 @@
     };  
     
     $scope.remove = function(member){
-      delete $scope.artist.member[member];
+      delete $scope.artist.members[member];
     };
 
     $scope.addNewMember = function(name, role){
-      $scope.artist.member = $scope.artist.member || {};
-      $scope.artist.member[name] = role;
+      $scope.artist.members = $scope.artist.members || {};
+      $scope.artist.members[name] = role;
       $scope.name = "";
       $scope.role = "";
     };
