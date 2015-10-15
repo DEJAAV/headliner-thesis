@@ -5,20 +5,28 @@
   .controller('AWSController', AWSController);
 
   function AWSController ($scope, $window, Auth) {
+
+    $scope.user.songs = [];
+    var song = {};
     $scope.uploadFile = function(file, signed_request, url) {
-      console.log('These are your arguments...');
-      console.log('file: ', file);
-      console.log('signed_request: ', signed_request);
-      console.log('url: ', url);
       //this is the PUT request using the signed request allowing us to upload something to our bucket on s3
       Auth.uploadFile(file, signed_request)
         .then(function() {
+          console.log('file type', file.type)
           //this is a syntax fix for a working url
           var fixedUrl = url.replace('headliner', 'headliner/');
           fixedUrl = fixedUrl.split(' ').join('+');
+          if(file.type === 'audio/mp3' || file.type === 'audio/x-m4a') {
+            var song = {
+              url: fixedUrl,
+              title: $scope.title
+            }
+            $scope.user.songs.push(song)
+          } else {
           //sets the src for the img tag based off of the fixed url
-          $window.document.getElementById('preview').src = fixedUrl;
-          $scope.profilePic = fixedUrl;
+            $window.document.getElementById('preview').src = fixedUrl;
+            $scope.user.profile_pic = fixedUrl;
+          }
         })
     };
 
