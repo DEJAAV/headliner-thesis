@@ -78,6 +78,18 @@ module.exports = {
     })
   },
 
+  updateLocal: function(reqBody) {
+    return this.hashPassword(reqBody.password).then(function(hash) {
+      return knex('Users')
+        .where({
+          'user_id': reqBody.user_id
+        })
+        .update({
+          'password': hash
+        })
+    })
+  },
+
   profile: function(req) {
     //user_id, category, venue or artist_id, shows, pending requests as sender and receiver
     var res = {};

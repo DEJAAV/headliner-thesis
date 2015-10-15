@@ -8,7 +8,7 @@
     console.log('updateUserPswd POST: ', user);
     return $http({
       method: 'POST',
-      url: '/api/users/local', 
+      url: '/api/users/local/update', 
       data: user
     })
     .then(function(resp) {
