@@ -43,6 +43,12 @@ module.exports = function (app) {
     });
   });
 
+  app.post('/api/users/local/update', function(req, res, next) {
+    Users.updateLocal(req.body).then(function(result) {
+      res.json('success');
+    });
+  });
+
   app.post('/api/shows', function(req, res, next) {
     Shows.addShow(req.body).then(function(result) {
       res.json('success');
