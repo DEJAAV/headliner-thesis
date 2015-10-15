@@ -5,8 +5,8 @@
   <div class="col s12">
           <div class="row">
         <div class="input-field col s6">
-          <input type="text" id="song_title">
-   <input type="file" id="file_input" data-ng-controller="AWSController" ng-model="song"/>
+          <input type="text" id="song_title" ng-model="user.song[0][title]">
+   <input type="file" id="file_input" data-ng-controller="AWSController" ng-model="user.song[0][url]"/>
   <p id="status">Please select a file</p>
 </div>
 <div class="input-field col s6">
