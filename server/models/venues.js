@@ -45,7 +45,15 @@ module.exports = {
         }).then(function() {
           return venueId;
         })
-      });
+      }).then(function(venueId) {
+        if(reqBody.profile_pic) {
+          return knex('Venue_Profile_Pictures')
+            .insert({
+              'venue_id': venueId,
+              'url': reqBody.profile_pic
+            })
+        }
+      })
   },
 
   update: function(reqBody) {
@@ -69,21 +77,23 @@ module.exports = {
         in_out: reqBody.in_out
       })
       .then(function(venueId) {
-        Venue_Genres.removeAll(venueId[0]).then(function() {
+        return Venue_Genres.removeAll(venueId[0]).then(function() {
           for(var genre in reqBody.genre) {
             if (reqBody.genre[genre]) {
               Venue_Genres.addGenre(venueId[0], genre);
             }
           }
-        });
-        Venues_Types.removeAll(venueId[0]).then(function() {
+        })
+      })
+      .then(function() {
+        return Venues_Types.removeAll(reqBody.venue_id).then(function() {
           for(var type in reqBody.type) {
             if (reqBody.type[type]) {
-              Venues_Types.addType(venueId[0], type);
+              Venues_Types.addType(reqBody.venue_id, type);
             }
           }
-        });
-      });
+        })
+      })
   },
 
   getAll: function() {
@@ -145,12 +155,39 @@ module.exports = {
             return genres_types_shows.concat(reviews);
           })
       }).then(function(genres_types_shows_reviews) {
+        return knex('Venue_Profile_Pictures')
+          .join('Venues', 'Venues.venue_id', 'Venue_Profile_Pictures.venue_id')
+          .then(function(pics) {
+            var pictures = {};
+            for (var i = 0; i < pics.length; i++) {
+              pictures[pics[i].venue_id] = pics[i].url
+            }
+            return genres_types_shows_reviews.concat(pictures);
+          })
+      }).then(function(genres_types_shows_reviews_pictures) {
+        return knex('Venue_Gallery')
+          .join('Venues', 'Venues.venue_id', 'Venue_Gallery.venue_id')
+          .then(function(pics) {
+            var gallery = {};
+            for(var i = 0; i < pics.length; i++) {
+              if(gallery[pics[i].venue_id]) {
+                gallery[pics[i].venue_id].push(pics[i].url);
+              } else {
+                gallery[pics[i].venue_id] = [pics[i].url]
+              }
+            }
+            return genres_types_shows_reviews_pictures.concat(gallery);
+          })
+      })
+      .then(function(genres_types_shows_reviews_pictures_gallery) {
         return knex('Venues').then(function(venues) {
           return venues.map(function(venue) {
-            venue.genre = genres_types_shows_reviews[0][venue.venue_id];
-            venue.type = genres_types_shows_reviews[1][venue.venue_id];
-            venue.shows = genres_types_shows_reviews[2][venue.venue_id];
-            venue.reviews = genres_types_shows_reviews[3][venue.venue_id];
+            venue.genre = genres_types_shows_reviews_pictures_gallery[0][venue.venue_id];
+            venue.type = genres_types_shows_reviews_pictures_gallery[1][venue.venue_id];
+            venue.shows = genres_types_shows_reviews_pictures_gallery[2][venue.venue_id];
+            venue.reviews = genres_types_shows_reviews_pictures_gallery[3][venue.venue_id];
+            venue.profile_pic = genres_types_shows_reviews_pictures_gallery[4][venue.venue_id];
+            venue.gallery = genres_types_shows_reviews_pictures_gallery[5][venue.venue_id];
             return venue;
           });
         });

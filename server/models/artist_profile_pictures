@@ -1,0 +1,18 @@
+var knex = require('../db/db.js');
+
+module.exports = {
+  addPicture: function(artist_id, url) {
+    return knex('Artist_Profile_Pictures')
+      .insert({
+        'artist_id': artist_id,
+        'url': url
+      })
+  },
+
+  removeAll: function(artist_id) {
+    return knex('Artist_Profile_Pictures')
+      .where({
+        'artist_id': artist_id
+      }).del()
+  }
+}
