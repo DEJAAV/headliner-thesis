@@ -166,7 +166,7 @@ module.exports = {
         return knex('Artists').then(function(artists) {
           return artists.map(function(artist) {
             artist.genre = genres_artistMembers_shows_reviews[0][artist.artist_id];
-            artist.members = genres_artistMembers_shows_reviews[1][artist.artist_id];
+            artist.member = genres_artistMembers_shows_reviews[1][artist.artist_id];
             artist.shows = genres_artistMembers_shows_reviews[2][artist.artist_id];
             artist.reviews = genres_artistMembers_shows_reviews[3][artist.artist_id];
             return artist;
