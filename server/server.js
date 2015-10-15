@@ -99,7 +99,7 @@ app.post('/submit_form', function(req, res){
   console.log('req body on submit form: ', req.body);
   // TODO: Return something useful or redirect
   console.log("shut the fuck up this worked")
-  res.send('success');
+  res.json('success');
 });
 
 /*---------------Local Sign Up Strategy ---------------------- */
