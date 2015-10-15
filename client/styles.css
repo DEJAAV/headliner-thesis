@@ -254,6 +254,16 @@ body {
     font-size: 200%;
 }
 
+hr.style-four {
+    height: 12px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+}
+
+.request {
+    border
+}
+
 .noise {
     font-family: 'Montserrat', sans-serif;
     color: black;
