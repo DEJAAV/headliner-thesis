@@ -118,7 +118,10 @@
       return $http({
         method: 'POST',
         url: '/submit_form',
-        data: url
+        data: url,
+        headers: {
+          'content-type': 'application/json'
+        }
       }).then(function(res) {
         console.log('the response from sendFile: ', res);
         return res;
