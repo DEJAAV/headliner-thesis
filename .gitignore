@@ -1,6 +1,6 @@
 ### node etc ###
 .DS_Store
-
+server/localauth
 # Logs
 logs
 *.log
@@ -32,5 +32,7 @@ bower_components/
 # Grayscale Bootstrap
 client/grayscale/
 
-#local auth file
+# local auth
+localauth
 localauth.js
+server/localauth.js

@@ -21,5 +21,4 @@ module.exports = {
       'artist_id': artist_id
     }).del()
   }
-
 };
