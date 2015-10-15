@@ -23,11 +23,11 @@
 
   <div class="form-group row">
     <div class="col s4">
-      <span class="title">City: </span> 
+      <span>City: </span> 
       <span editable-text="artist.city" e-name="city" e-required></span> 
     </div>
     <div class="col s4">
-      <span class="title">State: </span>
+      <span>State: </span>
       <select class="browser-default" ng-model="artist.state">
         <option disabled selected value="">Select a State</option>
         <option ng-repeat="state in states" value="{{state.abbrev}}">{{ state.abbrev }}</option>
@@ -43,7 +43,7 @@
   
   <div class="form-group row">
     <div class="col s6">
-      <span class="title">On Tour: </span>       
+      <span>On Tour: </span>       
       <select class="browser-default" ng-model="artist.onTour">
         <option value="" disabled selected>Choose your option</option>
         <option value="Local">Local</option>
@@ -52,7 +52,7 @@
       </select>
     </div>
     <div class="col s6">
-      <span class="title">Label: </span>
+      <span>Label: </span>
       <span editable-text="artist.record_label" e-name="label"></span>
     </div>
   </div>
@@ -61,7 +61,7 @@
 
   <div class="form-group row">
     <div class="col s12">
-      <span class="title">About: </span>
+      <span>About: </span>
       <span editable-textarea="artist.bio" e-name="bio" e-required e-style="height: 200px;"></span> 
     </div>
   </div>
@@ -70,10 +70,10 @@
 
   <div class="form-group row">
     <div class="col s5">
-      <span class="title">Member Name: </span>
+      <span>Member Name: </span>
     </div>
     <div class="col s5">
-      <span class="title">Member Role: </span>
+      <span>Member Role: </span>
     </div>
   </div>
   <div ng-repeat="(name,role) in artist.members" ng-if="role">
@@ -105,7 +105,7 @@
 
   <div class="form-group row">
     <div class="col s12">
-      <span class="title">Genres: </span>
+      <span>Genres: </span>
       <div class="row">
         <div class="input-field col s3" ng-repeat="(oneGenre,enabled) in allGenres">
           <input type="checkbox" id="{{oneGenre + 'g'}}" ng-model="artist.genre[oneGenre]"/>
@@ -119,15 +119,15 @@
 
   <div class="form-group row">
     <div class="col s4">
-      <span class="title">Contact Name: </span>
+      <span>Contact Name: </span>
       <span editable-text="artist.contact_name" e-name="contact_name" e-required></span>           
     </div>
     <div class="col s4">
-      <span class="title">Phone Number: </span>
+      <span>Phone Number: </span>
       <span editable-text="artist.phone" e-name="phone"></span>
     </div>
     <div class="col s4">
-      <span class="title">Email: </span>
+      <span>Email: </span>
       <span editable-email="artist.email" e-name="email"></span>
     </div>
   </div>
@@ -136,19 +136,19 @@
 
   <div class="form-group row">
     <div class="col s3">
-      <span class="title">Facebook: </span>
+      <span>Facebook: </span>
       <span editable-text="artist.facebook" e-name="facebook" e-required></span>
     </div>
     <div class="col s3">
-      <span class="title">Soundcloud: </span>
+      <span>Soundcloud: </span>
       <span editable-text="artist.soundcloud" e-name="soundcloud" e-required></span>
     </div>
     <div class="col s3">
-      <span class="title">Youtube: </span>
+      <span>Youtube: </span>
       <span editable-text="artist.youtube" e-name="youtube" e-required></span>
     </div>
     <div class="col s3">
-      <span class="title">Website: </span>
+      <span>Website: </span>
       <span editable-text="artist.website" e-name="website" e-required></span>
     </div>
   </div>
