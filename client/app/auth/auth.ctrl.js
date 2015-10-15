@@ -110,6 +110,10 @@
     $scope.loggedIn = function() {
       return Auth.isAuth();
     };
+
+    $scope.signingUp = function() {
+      return $location.$$path.slice(1,7) === 'select' || $location.$$path.slice(1,7) === 'signup'; 
+    };
     
     $scope.init = function() {
       if ($scope.loggedIn()) {

@@ -25,9 +25,12 @@
               <span class="icon-bar"></span>
             </button>
             <ul class="nav navbar-nav">
-              <li class="ng-cloak poiret" ng-if="!loggedIn()" ng-cloak><a href="#/"><h6><b>H</b><h6></a></li>
-              <li class="ng-cloak poiret" ng-if="checkType('artist')" ng-cloak><a href="#/homepage-artist"><b>H</b></a></li>
-              <li class="ng-cloak poiret" ng-if="checkType('venue')" ng-cloak><a href="#/homepage-venue"><b>H</b></a></li>
+              <li class="ng-cloak" ng-if="checkType('artist') && !signingUp()" ng-cloak><a href="#/homepage-artist"><b>Find Venues</b></a></li>
+              <li class="ng-cloak" ng-if="checkType('venue') && !signingUp()" ng-cloak><a href="#/homepage-venue"><b>Find Artists</b></a></li>
+              <li><a class="ng-cloak" ng-if="loggedIn() && !signingUp()" ng-cloak>|</a></li>
+              <li><a href="#/messages" class="ng-cloak" ng-if="loggedIn() && !signingUp()" ng-cloak><b>Messages ({{unreadMessages}})</b></a></li>
+              <li><a class="ng-cloak" ng-if="loggedIn() && !signingUp()" ng-cloak>|</a></li>
+              <li><a href="#/requests" class="ng-cloak" ng-if="loggedIn() && !signingUp()" ng-cloak><b>Pending Requests ({{unreadRequests}})</b></a></li>
             </ul>
           </div>
 
@@ -35,17 +38,13 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
-                <a class="dropdown-toggle ng-cloak" data-toggle="dropdown" ng-show="loggedIn()" ng-cloak><b>Profile</b><span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href='{{"/#/profile-" + type + "/" + id}}'>My Profile</a></li>
-                  <li><a href='{{"/#/edit-profile-" + type}}'>Edit Profile</a></li>
-                  <li><a href="#/messages">Messages ({{unreadMessages}})</a></li>
-                  <li><a href="#/requests">Pending Requests ({{unreadRequests}})</a></li>
-                  <li><a href="#/" ng-click="signout()">Signout</a></li>
-                </ul>
-              </li>  
-              
+
+              <li><a href='{{"/#/profile-" + type + "/" + id}}' class="ng-cloak" ng-if="loggedIn() && !signingUp()" ng-cloak><b>My Profile</b></a></li>
+              <li><a class="ng-cloak" ng-if="loggedIn() && !signingUp()" ng-cloak>|</a></li>
+              <li><a href='{{"/#/edit-profile-" + type}}' class="ng-cloak" ng-if="loggedIn() && !signingUp()" ng-cloak><b>Edit Profile</b></a></li>
+              <li><a class="ng-cloak" ng-if="loggedIn() && !signingUp()" ng-cloak>|</a></li>
+              <li><a href="#/" ng-click="signout()" class="ng-cloak" ng-if="loggedIn()" ng-cloak><b>Sign Out</b></a></li>
+
               <li class="dropdown">
                 <a class="dropdown-toggle ng-cloak" data-toggle="dropdown" ng-hide="loggedIn()" ng-cloak><b>Login</b> <span class="caret"></span></a>
                 <ul id="login-dp" class="dropdown-menu">
