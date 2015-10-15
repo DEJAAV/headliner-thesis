@@ -23,15 +23,15 @@
 
   <div class="form-group row">
     <div class="col s6">
-      <span class="title">Street: </span> 
+      <span>Street: </span> 
       <span editable-text="venue.street" e-name="street" e-required></span> 
     </div>
     <div class="col s2">
-      <span class="title">City: </span> 
+      <span>City: </span> 
       <span editable-text="venue.city" e-name="city" e-required></span> 
     </div>
     <div class="col s2">
-      <span class="title">State: </span>
+      <span>State: </span>
       <select class="browser-default" ng-model="venue.state">
         <option disabled selected value="">Select a State</option>
         <option ng-repeat="state in states" value="{{state.abbrev}}">{{ state.abbrev }}</option>
@@ -72,7 +72,7 @@
 
   <div class="form-group row">
     <div class="col s12">
-      <span class="title">About: </span>
+      <span>About: </span>
       <span editable-textarea="venue.bio" e-name="bio" e-required e-style="height: 200px;"></span> 
     </div>
   </div>
@@ -81,7 +81,7 @@
 
   <div class="form-group row">
     <div class="col s12">
-      <span class="title">Types: </span>
+      <span>Types: </span>
       <div class="row">
         <div class="input-field col s3" ng-repeat="(oneType,enabled) in allTypes">
           <input type="checkbox" id="{{oneType + 't'}}" ng-model="venue.type[oneType]"/>
@@ -95,7 +95,7 @@
 
   <div class="form-group row">
     <div class="col s12">
-      <span class="title">Genres: </span>
+      <span>Genres: </span>
       <div class="row">
         <div class="input-field col s3" ng-repeat="(oneGenre,enabled) in allGenres">
           <input type="checkbox" id="{{oneGenre + 'g'}}" ng-model="venue.genre[oneGenre]"/>
@@ -109,15 +109,15 @@
 
   <div class="form-group row">
     <div class="col s4">
-      <span class="title">Contact Name: </span>
+      <span>Contact Name: </span>
       <span editable-text="venue.contact_name" e-name="contact_name" e-required></span>           
     </div>
     <div class="col s4">
-      <span class="title">Phone Number: </span>
+      <span>Phone Number: </span>
       <span editable-text="venue.contact_phone" e-name="phone"></span>
     </div>
     <div class="col s4">
-      <span class="title">Email: </span>
+      <span>Email: </span>
       <span editable-email="venue.contact_email" e-name="email"></span>
     </div>
   </div>
@@ -126,15 +126,15 @@
 
   <div class="form-group row">
     <div class="col s4">
-      <span class="title">Facebook: </span>
+      <span>Facebook: </span>
       <span editable-text="venue.facebook" e-name="facebook" e-required></span>
     </div>
     <div class="col s4">
-      <span class="title">Yelp: </span>
+      <span>Yelp: </span>
       <span editable-text="venue.yelp" e-name="yelp" e-required></span>
     </div>
     <div class="col s4">
-      <span class="title">Website: </span>
+      <span>Website: </span>
       <span editable-text="venue.website" e-name="website" e-required></span>
     </div>
   </div>
