@@ -76,8 +76,7 @@
       })  
       .state('signup-venue.basic', {
         templateUrl: 'app/auth/signup-venue/signup-venue-basic.html',
-        url: '/basic',
-        controller: 'AWSController'
+        url: '/basic'
       })
       .state('signup-venue.more', {
         templateUrl: 'app/auth/signup-venue/signup-venue-more.html',
