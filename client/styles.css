@@ -215,14 +215,14 @@ body {
 
 #title {
     color: #677077;
-    left: 34%;
+    left: 12%;
     line-height: 200px;
     margin: auto;
-    margin-top: -19px;
+    margin-top: -240px;
     position: absolute;
     top: 50%;
     width: 100%;
-    font-size: 100%;
+    font-size: 200%;
 }
 
 .title {
@@ -237,7 +237,26 @@ body {
 
 .poiret {
     font-family: 'Montserrat', sans-serif;
-    letter-spacing: 12px
+    color: white;
+    text-shadow: 10px 10px black, 10px 10px black;
+    letter-spacing: 40px
+}
+
+#subtitle {
+    color: #677077;
+    left: 42%;
+    line-height: 200px;
+    margin: auto;
+    margin-top: 20px;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    font-size: 200%;
+}
+
+.noise {
+    font-family: 'Montserrat', sans-serif;
+    color: black;
 }
 
 .z-depth-4,#requestModal{box-shadow:0 16px 28px 0 rgba(0,0,0,0),0 25px 55px 0 rgba(0,0,0,0)}
