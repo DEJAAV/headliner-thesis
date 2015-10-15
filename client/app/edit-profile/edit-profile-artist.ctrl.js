@@ -17,11 +17,11 @@
     $scope.states = Global.states;
 
     Auth.getUserById().then(function(user) {
-      $scope.currentUser = user[0];
+      $scope.user = user[0];
       Profile.getAllArtists().then(function(artists) {
         for (var i = 0; i < artists.length; i++) {
           if (artists[i].artist_id === user[0].artist_id) {
-            $scope.user = artists[i];
+            $scope.artist = artists[i];
           }
         }
       });
@@ -29,6 +29,7 @@
     
     $scope.updateArtistInfo = function(artist) {
       Edit.updateArtistInfo(artist);
+      window.location.reload();
       console.log('successfully updated artist info');
     };
 
@@ -36,8 +37,15 @@
       Edit.updateUserPswd(user);
       console.log('successfully updated user password');
     };  
-    $scope.remove = function(index){
-      $scope[yourArray].splice(index, 1) //fix this, the member property is an object, not an array..
+    $scope.remove = function(member){
+      delete $scope.artist.member[member];
+    };
+
+    $scope.addNewMember = function(name, role){
+      $scope.artist.member = $scope.artist.member || {};
+      $scope.artist.member[name] = role;
+      $scope.name = "";
+      $scope.role = "";
     };
 
   }

@@ -1,87 +1,159 @@
 <!-- CHANGE PASSWORD -->
-<form ng-show="currentUser.password" editable-form shown="true" onaftersave="updateUserPswd(currentUser)">
+<form ng-show="user.password" editable-form shown="true" onaftersave="updateUserPswd(user)">
   
-  <h5>Change Password:</h5>
+  <h5>Change Password</h5>
   
-  <input ng-model="currentUser.password" type="password"/>
-  <button type="submit" class="btn btn-primary" ng-disabled="editLoginForm.$waiting">Save</button>
+  <div class="form-group row">
+    <div class="col s4">
+      <input ng-model="user.password" type="password"/>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </div>
 
 </form> 
+
+<hr>
   
 <!-- CHANGE PROFILE INFORMATION -->
-<form editable-form shown="true" onaftersave="updateArtistInfo(user)">
+<form editable-form shown="true" onaftersave="updateArtistInfo(artist)">
 
-  <h5>Update Profile:</h5>
+  <h5>Update Profile</h5>
 
-  <span class="title">City: </span> 
-  <span editable-text="user.city" e-name="city" e-required></span> 
+  <hr>
 
-  <span class="title">State: </span>
-  <select class="browser-default" ng-model="user.state">
-    <option disabled selected value="">Select a State</option>
-    <option ng-repeat="state in states" value="{{state.abbrev}}">{{ state.abbrev }}</option>
-  </select>           
-  
-  <span class="zip">Zip: </span> 
-  <span editable-text="user.zip" e-name="zip" e-required></span>           
-  
-  <span class="title">About: </span>
-  <span editable-textarea="user.bio" e-name="bio" e-required></span> 
-  
-  <span class="title">On Tour: </span>       
-  <select class="browser-default" ng-model="user.onTour">
-    <option value="" disabled selected>Choose your option</option>
-    <option value="Local">Local</option>
-    <option value="Touring">Touring</option>
-    <option value="Both">Both</option>
-  </select>
-
-  <span class="title">Label: </span>
-  <select class="browser-default" ng-model="user.signed">
-    <option value="" disabled selected>Choose your option</option>
-    <option value="Yes">Yes</option>
-    <option value="No">No</option>
-  </select>
-  <div ng-if="user.signed === 'Yes'">
-    <span editable-text="user.record_label" e-name="label" e-required></span>
-  </div>
-
-  <div>
-    <span class="title">Members: </span>
-    <div ng-repeat="(key,data) in user.member" ng-if="data">
-      <div>{{ key }}- {{ data }}</div>
-      <button class="btn" type="button" ng-click="remove(user.member.key)">Delete</button>
+  <div class="form-group row">
+    <div class="col s4">
+      <span class="title">City: </span> 
+      <span editable-text="artist.city" e-name="city" e-required></span> 
     </div>
-  </div>      
+    <div class="col s4">
+      <span class="title">State: </span>
+      <select class="browser-default" ng-model="artist.state">
+        <option disabled selected value="">Select a State</option>
+        <option ng-repeat="state in states" value="{{state.abbrev}}">{{ state.abbrev }}</option>
+      </select>           
+    </div>
+    <div class="col s4">
+      <span class="zip">Zip: </span> 
+      <span editable-text="artist.zip" e-name="zip" e-required></span>
+    </div>  
+  </div> 
 
-  <span class="title">Genres: </span>
-  <div class="row">
-    <div class="input-field col s3" ng-repeat="(oneGenre,enabled) in allGenres">
-      <input type="checkbox" id="{{oneGenre + 'g'}}" ng-model="user.genre[oneGenre]"/>
-      <label for="{{oneGenre + 'g'}}">{{oneGenre}}</label>
+  <hr>        
+  
+  <div class="form-group row">
+    <div class="col s6">
+      <span class="title">On Tour: </span>       
+      <select class="browser-default" ng-model="artist.onTour">
+        <option value="" disabled selected>Choose your option</option>
+        <option value="Local">Local</option>
+        <option value="Touring">Touring</option>
+        <option value="Both">Both</option>
+      </select>
+    </div>
+    <div class="col s6">
+      <span class="title">Label: </span>
+      <span editable-text="artist.record_label" e-name="label"></span>
     </div>
   </div>
 
-  <span class="title">Contact Name: </span>
-  <span editable-text="user.contact_name" e-name="contact_name" e-required></span>           
+  <hr>
 
-  <span class="title">Contact Phone Number: </span>
-  <span editable-text="user.phone" e-name="phone"></span>
+  <div class="form-group row">
+    <div class="col s12">
+      <span class="title">About: </span>
+      <span editable-textarea="artist.bio" e-name="bio" e-required e-style="height: 200px;"></span> 
+    </div>
+  </div>
 
-  <span class="title">Contact Email: </span>
-  <span editable-email="user.email" e-name="email"></span>
+  <hr>
 
-  <span class="title">Facebook: </span>
-  <span editable-text="user.facebook" e-name="facebook" e-required></span>
+  <div class="form-group row">
+    <div class="col s5">
+      <span class="title">Member Name: </span>
+    </div>
+    <div class="col s5">
+      <span class="title">Member Role: </span>
+    </div>
+  </div>
+  <div ng-repeat="(name,role) in artist.member" ng-if="role">
+    <div class="form-group row">
+      <div class="col s5">
+        <span editable-text="name" e-name="name" e-required></span>
+      </div>
+      <div class="col s5">
+        <span editable-text="artist.member[name]" e-name="role" e-required></span>
+      </div>
+      <div class="col s2">
+        <a class="btn-floating btn-medium waves-effect waves-light blue" ng-click="remove(name)"><i class="material-icons">remove</i></a>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="input-field col s5">
+      <input ng-model="name" id="member_name" type="text" class="validate">
+    </div>      
+    <div class="input-field col s5">
+      <input ng-model="role" id="member_role" type="text" class="validate">
+    </div>
+    <div class="input-field col s2">
+      <a class="btn-floating btn-medium waves-effect waves-light blue" ng-click="addNewMember(name, role)"><i class="material-icons">add</i></a>
+    </div>
+  </div>
 
-  <span class="title">Soundcloud: </span>
-  <span editable-text="user.soundcloud" e-name="soundcloud" e-required></span>
+  <hr>    
 
-  <span class="title">Youtube: </span>
-  <span editable-text="user.youtube" e-name="youtube" e-required></span>
+  <div class="form-group row">
+    <div class="col s12">
+      <span class="title">Genres: </span>
+      <div class="row">
+        <div class="input-field col s3" ng-repeat="(oneGenre,enabled) in allGenres">
+          <input type="checkbox" id="{{oneGenre + 'g'}}" ng-model="artist.genre[oneGenre]"/>
+          <label for="{{oneGenre + 'g'}}">{{oneGenre}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <span class="title">Website: </span>
-  <span editable-text="user.website" e-name="website" e-required></span>
+  <hr>
+
+  <div class="form-group row">
+    <div class="col s4">
+      <span class="title">Contact Name: </span>
+      <span editable-text="artist.contact_name" e-name="contact_name" e-required></span>           
+    </div>
+    <div class="col s4">
+      <span class="title">Phone Number: </span>
+      <span editable-text="artist.phone" e-name="phone"></span>
+    </div>
+    <div class="col s4">
+      <span class="title">Email: </span>
+      <span editable-email="artist.email" e-name="email"></span>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="form-group row">
+    <div class="col s3">
+      <span class="title">Facebook: </span>
+      <span editable-text="artist.facebook" e-name="facebook" e-required></span>
+    </div>
+    <div class="col s3">
+      <span class="title">Soundcloud: </span>
+      <span editable-text="artist.soundcloud" e-name="soundcloud" e-required></span>
+    </div>
+    <div class="col s3">
+      <span class="title">Youtube: </span>
+      <span editable-text="artist.youtube" e-name="youtube" e-required></span>
+    </div>
+    <div class="col s3">
+      <span class="title">Website: </span>
+      <span editable-text="artist.website" e-name="website" e-required></span>
+    </div>
+  </div>
+
+  <hr>
 
   <button type="submit" class="btn btn-primary">Save Changes</button>
 
