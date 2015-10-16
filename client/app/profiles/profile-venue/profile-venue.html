@@ -169,10 +169,15 @@
             <h4 class="modal-title">Review</h4>
           </div>
           <div class="modal-body">
-            <textarea name="message" type="text"  class="form-control input-sm chat-input" ng-model="message.message"></textarea>
+            <textarea name="review" type="text"  class="form-control input-sm chat-input" ng-model="review.message"></textarea>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="sendMessage()" ng-disabled="messageForm.$invalid">Send</button>
+            <i class="material-icons left review-rating" id="rate_1" ng-click="rate($event)">star_rate</i>
+            <i class="material-icons left review-rating" id="rate_2" ng-click="rate($event)">star_rate</i>
+            <i class="material-icons left review-rating" id="rate_3" ng-click="rate($event)">star_rate</i>
+            <i class="material-icons left review-rating" id="rate_4" ng-click="rate($event)">star_rate</i>
+            <i class="material-icons left review-rating" id="rate_5" ng-click="rate($event)">star_rate</i>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="sendReview()" ng-disabled="messageForm.$invalid">Send</button>
           </div>
         </div>
       </div>

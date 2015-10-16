@@ -7,6 +7,7 @@
     $scope.request = {};
     $scope.request.message = "We want to play!";
     $scope.id = $location.$$path.slice(($location.$$path).lastIndexOf('/')+1)
+    $scope.review = {};
 
     //redirect if the user isn't logged in
     $scope.$watch(Auth.isAuth, function(authed) {
@@ -55,6 +56,20 @@
         }
       }
     });
+    
+    $scope.rate = function($event) {
+      $scope.review.rating = angular.element($event.currentTarget).attr('id')[5];
+      console.log('I am rating!');
+      // for(var i = 0; i < $window.document.getElementsByClassName('review-rating').length; i++) {
+      //   if($window.document.getElementsByClassName('review-rating')[i].id[5] <= $scope.review.rating) {
+      //     $window.document.getElementsByClassName('review-rating')[i].class = 'material-icons left review-rating blue accent-2' 
+      //   } else {
+      //     $window.document.getElementsByClassName('review-rating')[i].class = 'material-icons left review-rating blue lighten-5'
+      //   }
+      // }
+      var test = angular.element(document);
+      console.log('test: ', test);
+    }
 
     $scope.sendRequest = function() {
       $scope.request.venue_id = $scope.id;
