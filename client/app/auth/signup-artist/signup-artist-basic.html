@@ -1,50 +1,46 @@
-<h3>Basic Artist Info</h3>
-<div> {{ user }} {{member_name}} </div>
-
-<!--   
-  <p id="status">Please select a file</p>
-  
- -->
-
-  <h2>Your information</h2>
-
-  <div class="col s12">
+<div class="row">
+  <h5>Tell us your names!</h5>
+  <form class="col s12">
     <div class="row">
-    <div class="input-field col s6">
-      <input type="file" id="file_input" data-ng-controller="AWSController" ng-model="user.profile_pic"/>
-    </div>
-    <div class="input-field col s6">
-      <form id="fileupload" class="form" name="uploadForm" ng-submit="sendFile(profilePic)">
-        <img style="border:1px solid gray;width:300px;"  id="preview" src="" />
-      </form>
-    </div>
-  </div>
-
-  <div class="row">
-    <form class="col s12">
-      <div class="row">
-        <div class="input-field col s12">
-          <input ng-model="user.artist_name" id="artist_name" type="text" class="validate">
-          <label for="artist_name">Artist Name</label>
-        </div>
+      <div class="input-field col s11">
+        <input ng-model="user.artist_name" id="artist_name" type="text" class="validate">
+        <label for="artist_name">Artist/Band Name</label>
       </div>
-      <h5>Members & Roles</h5>
-      <div class="form-group row">
-        <div class="input-field col s6">
-          <input ng-model="$parent.name" id="member_name" type="text" class="validate" required>
-          <label for="member_name">Member</label>
-        </div>      
-        <div class="input-field col s6">
-          <input ng-model="$parent.role" id="member_role" type="text" class="validate">
-          <label for="member_role">Role</label>
-        </div>
-      <a class="btn-floating btn-medium waves-effect waves-light blue" ng-click="addNewMember(name, role)" onclick="Materialize.toast('Member Added!', 4000)" ><i class="material-icons">add</i></a>
-      </div>   
     </div>
     <div class="form-group row">
-      <div class="col-xs-6 col-xs-offset-3">
-        <a ui-sref="signup-artist.about" class="btn btn-block btn-info">
-          Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
-        </a>
-    </div>
+      <div class="input-field col s6">
+        <input ng-model="$parent.name" id="member_name" type="text" class="validate" required>
+        <label for="member_name">Member Name</label>
+      </div>      
+      <div class="input-field col s5">
+        <input ng-model="$parent.role" id="member_role" type="text" class="validate">
+        <label for="member_role">Member Role</label>
+      </div>
+      <div class="input-field col s1">
+        <a class="btn-floating btn-medium waves-effect waves-light blue" ng-click="addNewMember(name, role)" onclick="Materialize.toast('Member Added!', 4000)" ><i class="material-icons">add</i></a>
+      </div>
+    </div> 
+  </form>  
+</div>
+
+
+<div class="col s12">
+  <h5>Upload a profile picture!</h5>
+  <div class="row">
+  <div class="input-field col s6">
+    <input type="file" id="file_input" data-ng-controller="AWSController" ng-model="user.profile_pic"/>
+  </div>
+  <div class="input-field col s6">
+    <form id="fileupload" class="form" name="uploadForm" ng-submit="sendFile(profilePic)">
+      <img id="preview" src="" />
+    </form>
+  </div>
+</div>
+
+<div class="form-group row">
+  <div class="col-xs-6 col-xs-offset-3">
+    <a ui-sref="signup-artist.about" class="btn btn-block btn-info">
+      Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    </a>
+  </div>
 </div>

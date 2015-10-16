@@ -1,58 +1,49 @@
 <!-- includes: contact name, contact phone or email, possib set the other to null in new form controller, links -->
 
-<label>Contact</label>
-<div class="form-group">
-
-  <br>
-  <div>{{ venue }}</div>
-  <hr>
+    <h5>Who is your point of contact?</h5>
 
     <div class="input-field col s12">
       <input ng-model="venue.contact_name" id="contact_name" name="contact_name" type="text" class="validate" required />
       <label for="contact_name">Contact Name</label>
       <span ng-show="venueForm.contact_name.$dirty && venueForm.contact_name.$error.required" class="help-block">* required</span>
     </div>
-
-    <label>Do you prefer to be contacted by phone or email?</label>
-    <select class="browser-default" ng-model="communication">
-      <option value="" disabled selected>Choose your option</option>
-      <option value="Phone">Phone</option>
-      <option value="Email">Email</option>
-    </select>
+    
+    <div class="question row col s9" ng-show="venue.contact_name">
+      <label>Do you prefer to be contacted by phone or email?</label>
+      <select class="browser-default" ng-model="communication">
+        <option value="" disabled selected>Choose your option</option>
+        <option value="Phone">Phone</option>
+        <option value="Email">Email</option>
+      </select>
+    </div>
 
     <!-- drop down options depending on what venue selects as their communication preference -->
-    <div ng-show="communication === 'Phone'">
-      <label for="phone">Contact Phone Number: </label>
+    <div class="question row col s9" ng-show="communication === 'Phone'">
       <input name="phone" type="text" class="form-control input-sm chat-input" placeholder="Phone Number" ng-model="venue.contact_phone" required />
       <span ng-show="venueForm.phone.$dirty && venueForm.phone.$error.required" class="help-block">* required</span>
     </div>
     <br>
-    <div ng-show="communication === 'Email'">
-      <label for="email">Contact Email Address: </label>
+    <div class="question row col s9" ng-show="communication === 'Email'">
       <input name="email" type="email"  class="form-control input-sm chat-input" placeholder="Email" ng-model="venue.contact_email" required />
       <span ng-show="venueForm.email.$dirty && venueForm.email.$error.required" class="help-block">* required</span>
     </div>
     <br> 
 
-    <hr>
-
-    <h3>Your Links: </h3>
-    <label for="facebook">Facebook URL: </label>
-      <input name="facebook" type="text" class="form-control input-sm chat-input" placeholder="http://www.facebook.com/my-venue/" ng-model="venue.facebook"/>
-    <br>  
-    <label for="yelp">Venue Yelp URL: </label>
-      <input name="yelp" type="text" id="venueYelp" class="form-control input-sm chat-input" placeholder="http://www.yelp.com/my-venue/" ng-model="venue.yelp"/>
-    <br>  
-    <label for="website">Venue Website: </label>
-      <input name="website" type="text" id="venueWebsite" class="form-control input-sm chat-input" placeholder="http://www.my-venue.com/" ng-model="venue.website"/>            
-    <br>
-
-</div>
+    <div class="row col s12">
+      <h5>Share Your Links!</h5>
+      <label for="facebook">Facebook:</label>
+        <input name="facebook" type="text" class="form-control input-sm chat-input" placeholder="http://www.facebook.com/my-venue/" ng-model="venue.facebook"/>
+      <br>  
+      <label for="yelp">Venue Yelp URL: </label>
+        <input name="yelp" type="text" id="venueYelp" class="form-control input-sm chat-input" placeholder="http://www.yelp.com/my-venue/" ng-model="venue.yelp"/>
+      <br>  
+      <label for="website">Venue Website: </label>
+        <input name="website" type="text" id="venueWebsite" class="form-control input-sm chat-input" placeholder="http://www.my-venue.com/" ng-model="venue.website"/>            
+      <br>
+    </div>
 
 <div class="form-group row">
-<div class="col-xs-6 col-xs-offset-3">
-    <a ui-sref="signup-venue.terms" class="btn btn-block btn-info">
-    Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
-    </a>
+<div class="col-xs-12 col-xs-offset-5">
+    <button type="submit" class="btn">Submit</button>
 </div>
 </div>
