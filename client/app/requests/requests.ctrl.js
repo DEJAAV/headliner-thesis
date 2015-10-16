@@ -9,53 +9,59 @@
       }
     }, true);
 
-    $scope.type = $window.localStorage.getItem('type')
-    
-    Requests.markAsRead().then(function() {
-      $rootScope.init();
-    });
+    $scope.init = function() {
 
-    Requests.getRequests().then(function(requests){
-      $scope.requests = requests;
-      $scope.requests.forEach(function(request) {
-        request.date = new Date(request.date).toLocaleString().split(',')[0]
+      $scope.type = $window.localStorage.getItem('type')
+      
+      Requests.markAsRead().then(function() {
+        $rootScope.init();
       });
-    });
 
-    Requests.getAllArtists().then(function(artists) {
-      for (var artist in artists) {
-        for (var request in $scope.requests) {
-          if ($scope.requests[request].artist_id === artists[artist].artist_id) {
-            $scope.requests[request].artist_name = artists[artist].artist_name
+      Requests.getRequests().then(function(requests){
+        $scope.requests = requests;
+        $scope.requests.forEach(function(request) {
+          request.date = new Date(request.date).toLocaleString().split(',')[0]
+        });
+      });
+
+      Requests.getAllArtists().then(function(artists) {
+        for (var artist in artists) {
+          for (var request in $scope.requests) {
+            if ($scope.requests[request].artist_id === artists[artist].artist_id) {
+              $scope.requests[request].artist_name = artists[artist].artist_name
+            }
           }
         }
-      }
-    })
+      });
 
-    Requests.getAllVenues().then(function(venues) {
-      for (var venue in venues) {
-        for (var request in $scope.requests) {
-          if ($scope.requests[request].venue_id === venues[venue].venue_id) {
-            $scope.requests[request].venue_name = venues[venue].venue_name
+      Requests.getAllVenues().then(function(venues) {
+        for (var venue in venues) {
+          for (var request in $scope.requests) {
+            if ($scope.requests[request].venue_id === venues[venue].venue_id) {
+              $scope.requests[request].venue_name = venues[venue].venue_name
+            }
           }
         }
-      }
-    })
-
+      });
+    };
+    
+    $scope.init();
 
     $scope.acceptRequest = function(req) {
-      Requests.deleteRequest(req);
-      $window.location.reload();
+      Requests.deleteRequest(req).then(function() {
+        $scope.init();
+      });
     };
 
     $scope.deleteRequest = function(req) {
-      Requests.deleteRequest(req);
-      $window.location.reload();
-    }
+      Requests.deleteRequest(req).then(function() {
+        $scope.init();
+      });
+    };
 
     $scope.addShow = function(req){
       Requests.addShow(req);
-    }
+    };
 
   };
 })();
