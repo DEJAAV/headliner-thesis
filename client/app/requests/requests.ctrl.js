@@ -11,7 +11,9 @@
 
     $scope.type = $window.localStorage.getItem('type')
     
-    Requests.markAsRead();
+    Requests.markAsRead().then(function() {
+      $rootScope.init();
+    });
 
     Requests.getRequests().then(function(requests){
       $scope.requests = requests;

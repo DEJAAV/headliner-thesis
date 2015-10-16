@@ -10,7 +10,9 @@
     
     $scope.id = parseInt($location.$$path.slice($location.$$path.lastIndexOf('/')+1));
 
-    Messages.markAsRead({'id': $scope.id});
+    Messages.markAsRead({'id': $scope.id}).then(function() {
+      $rootScope.init();
+    });
 
     $scope.getMessages = function() {
       Messages.getConversation().then(function(messages) {
