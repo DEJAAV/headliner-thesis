@@ -1,41 +1,32 @@
 <!-- includes: contact name, phone || email, social media -->
-<label>Contact</label>
-<div class="form-group">
-
-  <div>{{ user }}</div>
-  <br>
-
   <div class="row">
     <form class="col s12">
       <div class="row">
-        <h5>Contact Name</h5>
+        <h5>Who is your point of contact?</h5>
         <div class="input-field col s12">
           <input ng-model="user.contact_name" id="contact_name" type="text" class="validate"/>
-          <label for="contact_name">Name</label>
+          <label for="contact_name">Contact Name</label>
         </div>
       </div>
       <div class="row">
         <div class="question row col s9" ng-show="user.contact_name">
-          <h5>What is the best way to contact your artist {{ user.contact_name }}?</h5>
+          <h5>What is your preferred method of contact?</h5>
           <select class="browser-default" ng-model="communication">
             <option value="" disabled selected>Select an option</option>
             <option value="Phone">Phone</option>
             <option value="Email">Email</option>
           </select>
         </div>
-        <div ng-if="communication === 'Phone'"> 
-           <input ng-model="user.phone" id="phone" type="text" class="validate"/>
-           <label for="phone">Contact Phone Number</label>
+        <div class="question row col s9" ng-if="communication === 'Phone'"> 
+           <input ng-model="user.phone" id="phone" type="text" class="validate" placeholder="Phone Number"/>
         </div>
-        <div ng-if="communication === 'Email'"> 
-           <input ng-model="user.email" id="email" type="text" class="validate"/>
-           <label for="email">Contact Email Address</label>
+        <div class="question row col s9" ng-if="communication === 'Email'"> 
+           <input ng-model="user.email" id="email" type="text" class="validate" placeholder="Email"/>
         </div>
       </div>
-      <hr>
       <div class="row col s12">
-        <h5>Your Links</h5>
-        <label for="facebook">Facebook URL: </label>
+        <h5>Share Your Links!</h5>
+        <label for="facebook">Facebook:</label>
           <input name="facebook" type="text" id="userFacebook" class="form-control input-sm chat-input" placeholder="http://www.facebook.com/my-artist/" ng-model="user.facebook"/>
         <br>  
         <label for="soundcloud">Soundcloud: </label>
@@ -52,9 +43,7 @@
   </div>
 </div>
 <div class="form-group row">
-  <div class="col-xs-6 col-xs-offset-3">
-      <a ui-sref="signup-artist.terms" class="btn btn-block btn-info">
-      Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
-      </a>
+  <div class="col-xs-12 col-xs-offset-5">
+      <button type="submit" class="btn">Submit</button>
   </div>
 </div>
