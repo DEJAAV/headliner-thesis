@@ -45,7 +45,6 @@
           $location.path('/homepage-venue');
           $window.localStorage.setItem('type', 'venue');
           $rootScope.init();
-          $window.location.reload();
         })
         .catch(function(error){
           console.log(error);
@@ -58,7 +57,6 @@
           $location.path('/homepage-artist');
           $window.localStorage.setItem('type', 'artist');
           $rootScope.init();
-          $window.location.reload();
         })
         .catch(function(error){
           console.log(error);
