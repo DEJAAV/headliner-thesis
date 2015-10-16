@@ -116,26 +116,24 @@
     };
     
     $rootScope.init = function() {
-     // if ($scope.loggedIn()) {
-        $rootScope.type = $window.localStorage.getItem('type');
-        Messages.getMessages().then(function(messages) {
-          $rootScope.unreadMessages = messages.reduce(function(unreadMessages, message) {
-            return message.unread + unreadMessages;
-          },0);
-        });
-        Requests.getRequests().then(function(requests) {
-          $rootScope.unreadRequests = requests.reduce(function(unreadRequests, request) {
-            return !request.read && request.sender !== $rootScope.type ? unreadRequests + 1 : unreadRequests;
-          },0);
-        });
-        Auth.getUserById().then(function(user) {
-          if (user[0].venue_id) {
-            $rootScope.id = user[0].venue_id;
-          } else if (user[0].artist_id) {
-            $rootScope.id =  user[0].artist_id;
-          }
-        });
-    //  }
+      $rootScope.type = $window.localStorage.getItem('type');
+      Messages.getMessages().then(function(messages) {
+        $rootScope.unreadMessages = messages.reduce(function(unreadMessages, message) {
+          return message.unread + unreadMessages;
+        },0);
+      });
+      Requests.getRequests().then(function(requests) {
+        $rootScope.unreadRequests = requests.reduce(function(unreadRequests, request) {
+          return !request.read && request.sender !== $rootScope.type ? unreadRequests + 1 : unreadRequests;
+        },0);
+      });
+      Auth.getUserById().then(function(user) {
+        if (user[0].venue_id) {
+          $rootScope.id = user[0].venue_id;
+        } else if (user[0].artist_id) {
+          $rootScope.id =  user[0].artist_id;
+        }
+      });
     };
     $rootScope.init();
 
