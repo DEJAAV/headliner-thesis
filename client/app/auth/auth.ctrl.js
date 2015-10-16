@@ -44,7 +44,7 @@
         .then(function (data) {
           $location.path('/homepage-venue');
           $window.localStorage.setItem('type', 'venue');
-          $scope.init();
+          $rootScope.init();
           $window.location.reload();
         })
         .catch(function(error){
@@ -57,7 +57,7 @@
         .then(function (data) {
           $location.path('/homepage-artist');
           $window.localStorage.setItem('type', 'artist');
-          $scope.init();
+          $rootScope.init();
           $window.location.reload();
         })
         .catch(function(error){
@@ -88,7 +88,7 @@
           }
           $window.localStorage.setItem('headliner', data.token);
           $window.localStorage.setItem('type', data.type);
-          $scope.init();
+          $rootScope.init();
         }
         console.log('dadadata', data)
       })
@@ -115,33 +115,29 @@
       return $location.$$path.slice(1,7) === 'select' || $location.$$path.slice(1,7) === 'signup'; 
     };
     
-    $scope.init = function() {
-      if ($scope.loggedIn()) {
-        $scope.type = $window.localStorage.getItem('type');
+    $rootScope.init = function() {
+     // if ($scope.loggedIn()) {
+        $rootScope.type = $window.localStorage.getItem('type');
         Messages.getMessages().then(function(messages) {
-          $scope.unreadMessages = messages.reduce(function(unreadMessages, message) {
+          $rootScope.unreadMessages = messages.reduce(function(unreadMessages, message) {
             return message.unread + unreadMessages;
           },0);
         });
         Requests.getRequests().then(function(requests) {
-          $scope.unreadRequests = requests.reduce(function(unreadRequests, request) {
-            return !request.read && request.sender !== $scope.type ? unreadRequests + 1 : unreadRequests;
+          $rootScope.unreadRequests = requests.reduce(function(unreadRequests, request) {
+            return !request.read && request.sender !== $rootScope.type ? unreadRequests + 1 : unreadRequests;
           },0);
         });
         Auth.getUserById().then(function(user) {
           if (user[0].venue_id) {
-            $scope.id = user[0].venue_id;
+            $rootScope.id = user[0].venue_id;
           } else if (user[0].artist_id) {
-            $scope.id =  user[0].artist_id;
+            $rootScope.id =  user[0].artist_id;
           }
         });
-      }
+    //  }
     };
-    $scope.init();
-
-    $rootScope.init = function() {
-      $scope.init();
-    };
+    $rootScope.init();
 
   }
 })();

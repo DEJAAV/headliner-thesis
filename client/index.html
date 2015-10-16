@@ -28,9 +28,9 @@
               <li class="ng-cloak" ng-if="checkType('artist') && !signingUp()" ng-cloak><a href="#/homepage-artist"><b>Find Venues</b></a></li>
               <li class="ng-cloak" ng-if="checkType('venue') && !signingUp()" ng-cloak><a href="#/homepage-venue"><b>Find Artists</b></a></li>
               <li><a class="ng-cloak" ng-if="loggedIn() && !signingUp()" ng-cloak>|</a></li>
-              <li><a href="#/messages" class="ng-cloak" ng-if="loggedIn() && !signingUp()" ng-cloak><b>Messages ({{unreadMessages}})</b></a></li>
+              <li><a href="#/messages" class="ng-cloak" ng-if="loggedIn() && !signingUp()" ng-cloak><b>Messages ({{$root.unreadMessages}})</b></a></li>
               <li><a class="ng-cloak" ng-if="loggedIn() && !signingUp()" ng-cloak>|</a></li>
-              <li><a href="#/requests" class="ng-cloak" ng-if="loggedIn() && !signingUp()" ng-cloak><b>Pending Requests ({{unreadRequests}})</b></a></li>
+              <li><a href="#/requests" class="ng-cloak" ng-if="loggedIn() && !signingUp()" ng-cloak><b>Requests ({{$root.unreadRequests}})</b></a></li>
             </ul>
           </div>
 
@@ -39,9 +39,9 @@
 
             <ul class="nav navbar-nav navbar-right">
 
-              <li><a href='{{"/#/profile-" + type + "/" + id}}' class="ng-cloak" ng-if="loggedIn() && !signingUp()" ng-cloak><b>My Profile</b></a></li>
+              <li><a href='{{"/#/profile-" + $root.type + "/" + $root.id}}' class="ng-cloak" ng-if="loggedIn() && !signingUp()" ng-cloak><b>My Profile</b></a></li>
               <li><a class="ng-cloak" ng-if="loggedIn() && !signingUp()" ng-cloak>|</a></li>
-              <li><a href='{{"/#/edit-profile-" + type}}' class="ng-cloak" ng-if="loggedIn() && !signingUp()" ng-cloak><b>Edit Profile</b></a></li>
+              <li><a href='{{"/#/edit-profile-" + $root.type}}' class="ng-cloak" ng-if="loggedIn() && !signingUp()" ng-cloak><b>Edit Profile</b></a></li>
               <li><a class="ng-cloak" ng-if="loggedIn() && !signingUp()" ng-cloak>|</a></li>
               <li><a href="#/" ng-click="signout()" class="ng-cloak" ng-if="loggedIn()" ng-cloak><b>Sign Out</b></a></li>
 
