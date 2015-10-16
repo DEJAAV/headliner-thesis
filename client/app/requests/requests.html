@@ -2,34 +2,37 @@
 
   <div class="row" ng-model="requests">
     <div class="col-md-6"> <h4>Received Requests</h4>
-      <div ng-repeat="request in requests" ng-if="request.sender === 'artist' && type === 'venue'">
-        <p><b>From:</b> {{request.artist_name}}</p>
-        <p><b>Date:</b> {{request.date}}</p>
-        <p><b>Message:</b> {{request.message}}</p>
-        <button ng-click="acceptRequest(request); addShow(request)">Accept</button>
-        <button ng-click="deleteRequest(request)">Reject</button>
+      <div class="requests">
+        <div ng-repeat="request in requests" ng-if="request.sender === 'artist' && type === 'venue'">
+          <p><b>From:</b> {{request.artist_name}}</p>
+          <p><b>Date:</b> {{request.date}}</p>
+          <p><b>Message:</b> {{request.message}}</p>
+          <button class="btn" ng-click="acceptRequest(request); addShow(request)">Accept</button>
+          <button class="btn" ng-click="deleteRequest(request)">Reject</button>
+          <hr class="style-four">
+        </div>
+        <div ng-repeat="request in requests" ng-if="request.sender === 'venue' && type === 'artist'">
+          <p><b>From:</b> {{request.venue_name}}</p>
+          <p><b>Date:</b> {{request.date}}</p>
+          <p><b>Message:</b> {{request.message}}</p>
+          <button class="btn" ng-click="acceptRequest(request); addShow(request)">Accept</button>
+          <button class="btn" ng-click="deleteRequest(request)">Reject</button>
+          <hr class="style-four">
+        </div>
       </div>
-      <div ng-repeat="request in requests" ng-if="request.sender === 'venue' && type === 'artist'">
-        <p><b>From:</b> {{request.venue_name}}</p>
-        <p><b>Date:</b> {{request.date}}</p>
-        <p><b>Message:</b> {{request.message}}</p>
-        <button ng-click="acceptRequest(request); addShow(request)">Accept</button>
-        <button ng-click="deleteRequest(request)">Reject</button>
-      </div>
-
     </div>
-    <div class="col-md-6"> <h4>Pending Requests</h4>
+    <div class="col-md-6 request"> <h4>Pending Requests</h4>
         <div ng-repeat="request in requests" ng-if="request.sender === 'artist' && type === 'artist'">
           <p><b>To:</b> {{request.venue_name}}</p>
           <p><b>Date:</b> {{request.date}}</p>
           <p><b>Message:</b> {{request.message}}</p>
-          <hr>
+          <hr class="style-four">
         </div>
         <div ng-repeat="request in requests" ng-if="request.sender === 'venue' && type === 'venue'">
           <p><b>To:</b> {{request.artist_name}}</p>
           <p><b>Date:</b> {{request.date}}</p>
           <p><b>Message:</b> {{request.message}}</p>
-          <hr>
+          <hr class="style-four">
         </div>
     </div>
     <!-- <div class="col-md-6">{{request.artist_accept}}</div> -->
