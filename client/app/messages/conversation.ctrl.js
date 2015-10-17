@@ -26,6 +26,7 @@
         $scope.messages.forEach(function(message) {
           message.date = new Date(message.date).toLocaleString();
         });
+        console.log($scope.messages, 'messages')
       });
     };
     $scope.getMessages();
@@ -33,9 +34,11 @@
     $scope.send = function() {
       $scope.message.date = new Date().toISOString();
       $scope.message.id = $scope.id;
+      console.log($scope.message, 'message')
       Messages.sendMessage($scope.message).then(function(){
         $scope.getMessages();
       });
+      $scope.message = ''
     };
     
   }
