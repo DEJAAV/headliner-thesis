@@ -21,7 +21,7 @@
         for (var venue in venues) {
           if (venues[venue].venue_id.toString() === $scope.id) {
             $scope.venue = venues[venue];
-            $window.document.getElementById('profpic').src = $scope.venue.profile_pic || 'https://c2.staticflickr.com/4/3022/2294449993_44cef7f4a6.jpg';
+            // $window.document.getElementById('profpic').src = $scope.venue.profile_pic || 'https://c2.staticflickr.com/4/3022/2294449993_44cef7f4a6.jpg';
           }
         }
       })
