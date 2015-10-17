@@ -307,6 +307,13 @@
  opacity: 1;
 }
 
+.turntable .frame {
+  background-color: black;
+  background: url(https://s3-us-west-2.amazonaws.com/headliner/turntable_images/wood_pattern_dark_color.png);
+    /*optional: alternate background in our headliner aws acct: 'https://s3-us-west-2.amazonaws.com/headliner/turntable_images/pinstriped_suit_vertical.png'*/
+  background-size: 250px 250px;
+}
+
 @-webkit-keyframes flicker {
  from { opacity: 0.85; }
  to { opacity: 1; }
@@ -336,4 +343,3 @@
  from { transform: rotate(0deg); }
  to { transform: rotate(0.33deg); }
 }
-</style>

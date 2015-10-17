@@ -206,78 +206,90 @@
     </div>
 
 <!-- MUSIC TAB -->
-<div class="container" id="music" ng-controller="MusicController">
-  <div class="row">
-    <div class="col-md-12">
+<div class="container" id="music" align="center" style="position:relative" ng-controller="MusicController">
 
-      <h5>Songs</h5>
-      <ul>
-        <li ng-repeat="song in songs">
-          <button music-player="play" add-song="song">{{ song.title }}</button>
-          <button music-player add-song="song">+</button>
-        </li>
-      </ul>
-
-      <button play-all="songs">Play all</button>
-      <button play-all="songs" data-play="false">Add all</button>
-
-    </div>
+  <div>
+   <h1>TEST TURNTABLE</h1>  
   </div>
 
-  <hr>
+  <!-- start turntable -->
 
-  <div class="row">
-    <div class="col-md-12">
-      <!-- init soundManager2 player -->
-      <sound-manager></sound-manager>
+  <div style="position:relative; text-align:center; width:50%">
 
-      <p>
-          Currently Playing: {{ currentPlaying.title }} by {{ currentPlaying.artist }} ({{ currentPostion }} / {{ currentDuration }})
-      </p>
+    <div id="turntable-medium" class="turntable has-slipmat" style="display:inline-block">
 
-      <div class="seekBase" seek-track>
-          <div class="seekLoad" ng-style="{width : ( progress + '%' ) }"></div>
-      </div>
-      <br />
-      <button play-music>Play</button>
-      -
-      <button pause-music>Pause</button>
-      -
-      <button stop-music>Stop</button>
-      -
-      <button repeat-music>Repeat ({{ repeat }})</button>
-      -
-      <button play-pause-toggle data-play="Play!" data-pause="Pause!">Play Toggle</button>
+       <div class="frame"></div>
 
-      Is Playing: {{ isPlaying }}
-      <br/>
-      <br/>Volume: {{ volume }} -
-      <button music-volume data-type="increase">+</button>
-      -
-      <button music-volume data-type="decrease">-</button>
-      -
-      <button mute-music>Mute ({{ mute }})</button>
-      <br/>
-      <br/>
-      <button prev-track>Prev Track</button>
-      -
-      <button next-track>Next Track</button>
-      -
-      <button clear-playlist>Clear Playlist</button>
-      <br/>
-      <br/>
-      <h5>Playlist</h5>
-      <ul>
-          <li ng-repeat="song in playlist">
-              <a play-from-playlist="song">{{ song.title }}</a>
-              -
-              <a remove-from-playlist="song" data-index="{{$index}}">
-                  <small>(remove)</small>
-              </a>
-              <span ng-if="currentPlaying.id == song.id"> - (current)</span>
-          </li>
-      </ul>
+       <div class="table-bg"></div>
+
+       <!-- this png just sets the size for the other inputs -->
+       <img src="https://s3-us-west-2.amazonaws.com/headliner/turntable_images/tt_case_and_lighting.png" alt="" class="stub" />
+
+       <div class="bd">
+
+        <div class="platter"></div>
+        
+        <div class="slipmat-holder">
+         <div class="slipmat"></div>
+        </div>
+
+        <div class="record-holder">
+         <div class="record"></div>
+         <div class="record-grooves"></div>
+         <div class="label"></div>
+        </div>
+
+        <div class="spindle"></div>
+        <div class="power-light"></div>
+        <a href="#" class="power-dial" data-method="powerToggle"></a>
+        <a href="#" class="button start-stop" data-method="toggle"></a>
+        <a href="#" class="button speed-33 on"></a>
+        <a href="#" class="button speed-45"></a>
+        <div class="light light-on"></div>
+        <a href="#" class="button light"></a>
+        <div class="tonearm-holder">
+         <div class="tonearm"></div>
+        </div>
+       </div>
+
     </div>
+
+  </div>
+  <!-- end of turntable build -->
+
+  <!-- start of artists playlist -->
+  <div align="center">
+    <h3 class="indent">ARTIST PLAYLIST: </h3>
+    <h4 style="color:red">Note to DEJAAV: </h4>
+      <p>Don't click these links yet. JS files aren't set to handle playing audio yet.</p>
+
+    <ul> <!-- list of all songs to import data into [ this will have the aws links to the artists songs with ng-repeat ] -->
+      <li>
+        <a href="https://s3-us-west-2.amazonaws.com/headliner/01+Jerk+Ribs.m4a"  
+        data-turntable="turntable-medium" 
+        data-artwork="">
+        <b>Jerk Ribs</b> - Kelis
+        </a>
+      </li>
+      <li>
+        <a href="https://s3-us-west-2.amazonaws.com/headliner/10+Home.m4a" 
+        data-turntable="turntable-medium" 
+        data-artwork="">
+        <b>Home</b> - JohnnySwim
+      </a>
+      </li>
+
+      <li>
+        <a href="https://s3-us-west-2.amazonaws.com/headliner/02+Hot+N_gga.m4a" 
+        data-turntable="turntable-medium" 
+        data-artwork="">
+        <b>Hot Ninjaaaa</b> - Bobby Shmurda
+      </a>
+      </li>
+
+    </ul>
+  </div> 
+  <!-- end of artists playlist -->
   </div>
 </div>
 

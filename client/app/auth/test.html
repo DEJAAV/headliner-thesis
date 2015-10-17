@@ -1,21 +1,9 @@
-<link rel="stylesheet" href="./turntable.css"/>
-
 <script type="text/javascript" src="../../script/soundmanager2.js"></script>
 <script src="script/turntable.js"></script>
 <script src="script/turntable-app.js"></script>
 </head>
 
 <body>
-
-  <!-- this style tag can stay in this doc (or be moved over to styles.css) -->
-  <style>
-    .turntable .frame {
-      background-color: black;
-      background: url(https://s3-us-west-2.amazonaws.com/headliner/turntable_images/wood_pattern_dark_color.png);
-        /*optional: alternate background in our headliner aws acct: 'https://s3-us-west-2.amazonaws.com/headliner/turntable_images/pinstriped_suit_vertical.png'*/
-      background-size: 250px 250px;
-      }
-  </style>
 
 <div class="container" align="center" style="position:relative">
 
@@ -27,7 +15,7 @@
 
   <!-- start turntable: centered and scales up to a predetermined max-width (based on image size) -->
 
-  <div style="position:relative;text-align:center; width:50%">
+  <div style="position:relative; text-align:center; width:50%">
 
     <div id="turntable-medium" class="turntable has-slipmat" style="display:inline-block">
 
@@ -77,22 +65,18 @@
       <p>Don't click these links yet. JS files aren't set to handle playing audio yet.</p>
 
     <ul> <!-- list of all songs to import data into [ this will have the aws links to the artists songs with ng-repeat ] -->
-
       <li>
         <a href="https://s3-us-west-2.amazonaws.com/headliner/01+Jerk+Ribs.m4a"  
         data-turntable="turntable-medium" 
         data-artwork="">
-        <b>Jerk Ribs
-        </b> - Kelis
+        <b>Jerk Ribs</b> - Kelis
         </a>
       </li>
-
       <li>
         <a href="https://s3-us-west-2.amazonaws.com/headliner/10+Home.m4a" 
         data-turntable="turntable-medium" 
         data-artwork="">
-        <b>Home
-        </b> - JohnnySwim
+        <b>Home</b> - JohnnySwim
       </a>
       </li>
 
@@ -100,33 +84,12 @@
         <a href="https://s3-us-west-2.amazonaws.com/headliner/02+Hot+N_gga.m4a" 
         data-turntable="turntable-medium" 
         data-artwork="">
-        <b>Hot Ninjaaaa
-        </b> - Bobby Shmurda
+        <b>Hot Ninjaaaa</b> - Bobby Shmurda
       </a>
       </li>
 
     </ul>
   </div> 
   <!-- end of artists playlist -->
-
   </div>
 
-</body>
-</html>
-
-
-
-<div class="container">
-  <h1>TEST FILE UPLOADER: </h1>
-  <hr>
-
-  <input type="file" id="file_input"/>
-  <p id="status">Please select a file</p>
-  <img style="border:1px solid gray;width:300px;"  id="preview" src="" />
-
-  <h2>Your information</h2>
-
-  <form id="fileupload" class="form" name="uploadForm" ng-submit="sendFile(profilePic)">
-    <input type="submit" value="Update profile"/>
-  </form>
-</div>
