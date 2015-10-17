@@ -4,6 +4,7 @@
     <div class="col-md-5"> <h4>Received Requests</h4>
       <hr>
       <div class="requests">
+      <hr>
         <div ng-repeat="request in requests" ng-if="request.sender === 'artist' && type === 'venue'">
           <p><b>From:</b> {{request.artist_name}}</p>
           <p><b>Date:</b> {{request.date}}</p>

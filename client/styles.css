@@ -205,6 +205,10 @@ body {
   padding-top: 60px;
 }
 
+.chip {
+    background-color: #dddfd4;
+}
+
 .landing {
   padding-top: 60px;
 }
@@ -223,6 +227,22 @@ body {
   top: 50%;
   width: 100%;
   font-size: 200%;
+}
+
+.btn {
+    background-color: #3fb0ac;
+}
+
+.verticalLine {
+    border-left: thick solid #ff0000;
+}
+
+.card {
+    border-radius: 5px;
+    background-color: #f5f5f5;
+}
+.panel-group .panel {
+    background-color: white;
 }
 
 .title {
