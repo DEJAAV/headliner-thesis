@@ -39,6 +39,9 @@ body {
   border-top-left-radiuss:5px; 
   border-top-right-radius:5px; 
 }
+.material-icons {
+    background-color: #dddfd4;
+}
 
 /* numbered buttons */
 #status-buttons {  
@@ -57,7 +60,7 @@ body {
 
 /* style the span as the circled number */
 #status-buttons span { 
-  background: orange; 
+  background: #dddfd4; 
   display:block; 
   height:30px; 
   margin:0 auto 10px; 
@@ -68,7 +71,7 @@ body {
 
 /* active buttons */
 #status-buttons a.active span { 
-  background: red; 
+  background: black; 
 }
 
 .artistTitle {
