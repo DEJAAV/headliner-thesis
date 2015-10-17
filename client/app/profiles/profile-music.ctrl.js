@@ -1,6 +1,6 @@
 (function() {
-  angular.module('headliner.music', ['angularSoundManager']).controller('MusicController',
-    MusicController);
+  angular.module('headliner.music', [])
+  .controller('MusicController', MusicController);
 
   function MusicController($scope, $window, $location, $rootScope, Profile, Auth) { 
     
@@ -10,27 +10,24 @@
         $location.path('/#/');
       }
     }, true);
-
+    
+    // hard coded songs TB removed. Songs array ret from getAllSongs()
     $scope.songs = [
       {
-        url: "https://s3-us-west-1.amazonaws.com/hr-mytunes/data/04+One+In+A+Million.mp3",
-        title: "One In A Million",
-        artist: "Aaliyah",
+        url: "https://s3-us-west-2.amazonaws.com/headliner/01+Wherever+Is+Your+Heart.m4a",
+        title: "Wherever is Your Heart"
       },
       {
-        url: "https://s3-us-west-1.amazonaws.com/hr-mytunes/data/03+Age+Ain%27t+Nothing+But+A+Number.mp3",
-        title: "Age Ain't Nothing But A Number",
-        artist: "Aaliyah",
+        url: "https://s3-us-west-2.amazonaws.com/headliner/02+Hot+N_gga.m4a",
+        title: "Bobby Shmurda duh you love it"
       },
       {
-        url: "https://s3-us-west-1.amazonaws.com/hr-mytunes/data/05+Hot+Like+Fire.mp3",
-        title: "Hot Like Fire",
-        artist: "Aaliyah",
+        url: "https://s3-us-west-2.amazonaws.com/headliner/03+-+Drunk+in+Love+(Explicit+Version)+%5BExplicit%5D.mp3",
+        title: "A little Beyonce (4 Vahags)"
       },
       {
-        url: "https://s3-us-west-1.amazonaws.com/hr-mytunes/data/06+If+Your+Girl+Only+Knew.mp3",
-        title: "If Your Girl Only Knew",
-        artist: "Aaliyah",
+        url: "https://s3-us-west-2.amazonaws.com/headliner/07+Peace+Train.m4a",
+        title: "Peace Train"
       }
     ];  
     

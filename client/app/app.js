@@ -21,7 +21,6 @@
     'headliner.requests',
     'headliner.music',
     'ngRoute',
-    'angularSoundManager',
     'headliner.aws',
     'ui.router',
     'ui.bootstrap',
