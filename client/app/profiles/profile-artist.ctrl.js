@@ -17,8 +17,8 @@
       Profile.getAllArtists().then(function(artists) {
         for (var artist in artists) {
           if (artists[artist].artist_id.toString() === $scope.id) {
-            $scope.artist = artists[artist]
-            $window.document.getElementById('profpic').src = $scope.artist.profile_pic || 'https://c2.staticflickr.com/6/5481/11725796704_fb2b9e84f6.jpg';
+            $scope.artist = artists[artist];
+            $scope.profilePicture = $scope.artist.profile_pic || 'https://c2.staticflickr.com/4/3022/2294449993_44cef7f4a6.jpg';
           }
         }
       })
