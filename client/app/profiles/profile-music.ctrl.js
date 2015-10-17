@@ -1,6 +1,6 @@
 (function() {
-  angular.module('headliner.music', ['angularSoundManager']).controller('MusicController',
-    MusicController);
+  angular.module('headliner.music', [])
+  .controller('MusicController', MusicController);
 
   function MusicController($scope, $window, $location, $rootScope, Profile, Auth) { 
     
