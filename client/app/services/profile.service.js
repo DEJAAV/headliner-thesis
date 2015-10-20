@@ -66,6 +66,19 @@
       .then(function(resp) {
         return resp.data
       })
+    };
+
+    function sendReview(review) {
+      return $http({
+        method: 'POST'.
+        url: '/api/reviews',
+        data: review
+      }).then(function(resp) {
+        return resp;
+      }).catch(function(err) {
+        console.log(err);
+        return err;
+      })
     }
 
     return {
@@ -74,7 +87,8 @@
       getAllSongs: getAllSongs,
       getMyProfile: getMyProfile,
       sendRequest: sendRequest,
-      getShows: getShows
+      getShows: getShows,
+      sendReview: sendReview
     };
   }
 })();

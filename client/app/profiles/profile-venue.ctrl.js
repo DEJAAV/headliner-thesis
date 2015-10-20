@@ -71,6 +71,10 @@
       var test = angular.element(document);
       console.log('test: ', test);
     }
+    
+    $scope.reviewShow = function(show) {
+      $scope.review = show;
+    }
 
     $scope.sendRequest = function() {
       $scope.request.venue_id = $scope.id;
