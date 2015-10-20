@@ -6,7 +6,7 @@
   <!-- TOP HEADING -->
   <div class="row">
     <div class="col s3">
-      <img id="profpic" src="" />
+      <img id="profpic" ng-src="{{profilePicture}}" />
     </div>
     <div class="col s9">
       <h3>{{ venue.venue_name }}</h3>
@@ -154,7 +154,7 @@
         <li class="collection-item avatar">
           <i class="material-icons circle blue">stars</i>
           <span class="title">{{show.artist_name}}</span>
-          <a type="button" class="btn btn-primary btn-large right" ng-if="today > show.date" data-toggle="modal" data-target="#reviewModal"><i class="material-icons right">stars</i>Review {{show.artist_name}} </a>
+          <a type="button" class="btn btn-primary btn-large right" ng-if="today > show.date" data-toggle="modal" data-target="#reviewModal" ng-click="reviewShow(show)"><i class="material-icons right">stars</i>Review {{show.artist_name}} </a>
           <p>{{show.date}}</p>
         </li>
       </ul>
@@ -169,10 +169,16 @@
             <h4 class="modal-title">Review</h4>
           </div>
           <div class="modal-body">
-            <textarea name="message" type="text"  class="form-control input-sm chat-input" ng-model="message.message"></textarea>
+            <textarea name="review" type="text"  class="form-control input-sm chat-input" ng-model="review.message"></textarea>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="sendMessage()" ng-disabled="messageForm.$invalid">Send</button>
+            <span class="left">Rate {{review.artist_name}}:</span>
+            <i class="material-icons review-rating left" id="rate_1" ng-click="rate($event)">star_rate</i>
+            <i class="material-icons review-rating left" id="rate_2" ng-click="rate($event)">star_rate</i>
+            <i class="material-icons review-rating left" id="rate_3" ng-click="rate($event)">star_rate</i>
+            <i class="material-icons review-rating left" id="rate_4" ng-click="rate($event)">star_rate</i>
+            <i class="material-icons review-rating left" id="rate_5" ng-click="rate($event)">star_rate</i>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="sendReview()" ng-disabled="messageForm.$invalid">Send</button>
           </div>
         </div>
       </div>

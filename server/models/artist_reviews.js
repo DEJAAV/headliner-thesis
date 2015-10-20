@@ -23,7 +23,7 @@ module.exports = {
   },
 
   deleteReview: function(reqBody) {
-    return knex.('Artist_Reviews').where({
+    return knex('Artist_Reviews').where({
       artistReview_id: reqBody.artistReview_id
     }).del()
   }

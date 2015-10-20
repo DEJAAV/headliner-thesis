@@ -7,8 +7,6 @@ function findExpired() {
 
   Requests.deleteExpiredRequests(today);
 
-  Shows.deleteExpiredShows(today);
-
 }
 
 setInterval(function() {

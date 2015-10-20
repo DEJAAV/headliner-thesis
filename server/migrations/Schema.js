@@ -31,7 +31,7 @@ exports.up = function(knex, Promise) {
       table.string('soundcloud');
       table.string('artistcamp');
       table.string('website');
-      table.string('bio');
+      table.string('bio', 6000);
       table.string('email');
       table.string('city');
       table.string('state');
@@ -42,7 +42,7 @@ exports.up = function(knex, Promise) {
       table.increments('venue_id').primary();
       table.string('venue_name');
       table.integer('capacity');
-      table.string('bio');
+      table.string('bio', 6000);
       table.string('website');
       table.string('yelp');
       table.string('contact_name');

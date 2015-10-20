@@ -3,6 +3,7 @@ var Genres = require('./models/genres.js');
 var Venues = require('./models/venues.js');
 var Artists = require('./models/artists.js');
 var Shows = require('./models/shows.js');
+var Artist_Reviews = require('./models/artist_reviews');
 var Venue_Reviews = require('./models/venue_reviews.js');
 var Requests = require('./models/requests.js');
 var Messages = require('./models/messages.js');
@@ -155,6 +156,10 @@ module.exports = function (app) {
       res.json(result);
     })
   });
+
+  app.post('/api/reviews', function(req, res) {
+
+  })
 
   app.get('/logout', function(req, res) {
     req.logout();
