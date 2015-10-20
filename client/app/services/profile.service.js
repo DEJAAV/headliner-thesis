@@ -70,7 +70,7 @@
 
     function sendReview(review) {
       return $http({
-        method: 'POST'.
+        method: 'POST',
         url: '/api/reviews',
         data: review
       }).then(function(resp) {
@@ -79,7 +79,7 @@
         console.log(err);
         return err;
       })
-    }
+    };
 
     return {
       getAllVenues: getAllVenues,
