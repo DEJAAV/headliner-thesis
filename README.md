@@ -86,7 +86,7 @@ See Headliner in action by visiting:
 ### Links
 *** 
 
-- [Headliner Website](http://www.headliner-thesis.heroku-app.com)
+- [Headliner Website](http://headliner-thesis.heroku-app.com)
 
 - [Issue Tracker](https://github.com/DEJAAV/Headliner/issues)
  
