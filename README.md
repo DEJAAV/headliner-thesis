@@ -12,7 +12,7 @@ Headliner makes it easy for both parties to get the information they're looking 
 ***
 See Headliner in action by visiting:
 
-<http://www.headliner-thesis.heroku-app.com>
+<http://headliner-thesis.heroku-app.com>
 
 ## Table of Contents 
 ***
