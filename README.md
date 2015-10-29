@@ -3,7 +3,6 @@
 **HEADLINER** is a way for **artists** and **venues** to easily connect and find each other online. 
 
 
-![headliner](https://s3-us-west-2.amazonaws.com/headliner/Screen+Shot+2015-10-16+at+12.08.42+PM.png)
 
 Headliner makes it easy for both parties to get the information they're looking for when they want to book their next show. 
 
@@ -12,7 +11,7 @@ Headliner makes it easy for both parties to get the information they're looking 
 ***
 See Headliner in action by visiting:
 
-<http://headliner-thesis.heroku-app.com>
+<https://headliner-thesis.heroku-app.com>
 
 ## Table of Contents 
 ***
@@ -71,9 +70,6 @@ See Headliner in action by visiting:
 - Node
 - Express
 
-### Database Structure
-***
--- fill this in 
 
 ## Development Team 
 ***
